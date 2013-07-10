@@ -1,0 +1,26 @@
+BEGIN;
+CREATE TABLE `Server_user` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `username` varchar(50) NOT NULL,
+    `user_id` varchar(50) NOT NULL,
+    `balance` integer UNSIGNED NOT NULL,
+    `count_scan` smallint UNSIGNED NOT NULL,
+    `count_rescan` smallint UNSIGNED NOT NULL
+)
+;
+CREATE TABLE `Server_scan_users` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `scan_id` integer NOT NULL,
+    `user_id` integer NOT NULL,
+    UNIQUE (`scan_id`, `user_id`)
+)
+;
+ALTER TABLE `Server_scan_users` ADD CONSTRAINT `user_id_refs_id_aae39087` FOREIGN KEY (`user_id`) REFERENCES `Server_user` (`id`);
+CREATE TABLE `Server_scan` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `code` varchar(50) NOT NULL
+)
+;
+ALTER TABLE `Server_scan_users` ADD CONSTRAINT `scan_id_refs_id_36c91e10` FOREIGN KEY (`scan_id`) REFERENCES `Server_scan` (`id`);
+
+COMMIT;
