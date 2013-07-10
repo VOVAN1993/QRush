@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/not_active_quest_bkg"
+    android:orientation="vertical" >
+    
+<!--       <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#aaaaaa"
+        android:gravity="center_horizontal"
+        android:text="Вы получили:"
+        android:textColor="@color/black" /> -->
+
+</LinearLayout>

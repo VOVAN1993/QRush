@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textview_height">25dp</dimen>
+    <dimen name="textview_width">150dp</dimen>
+    <dimen name="profile_frames_width">94dp</dimen>
+    <dimen name="profile_frames_height">94dp</dimen>
+    <dimen name="profile_tv_width">86dp</dimen>
+    <dimen name="profile_tv_height">70dp</dimen>
+    <dimen name="profile_margin_top">4dp</dimen>
+    <dimen name="profile_nums_font_size">46sp</dimen>
+    <dimen name="profile_name_font_size">20sp</dimen>
+    <dimen name="profile_city_font_size">16sp</dimen>
+</resources>
