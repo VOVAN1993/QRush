@@ -1,11 +1,14 @@
 BEGIN;
 CREATE TABLE `Server_user` (
     `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    `username` varchar(50) NOT NULL,
-    `user_id` varchar(50) NOT NULL,
+    `username` varchar(50),
+    `user_id` varchar(50),
     `balance` integer UNSIGNED NOT NULL,
     `count_scan` smallint UNSIGNED NOT NULL,
-    `count_rescan` smallint UNSIGNED NOT NULL
+    `count_rescan` smallint UNSIGNED NOT NULL,
+    `password` varchar(50),
+    `device_id` varchar(50) NOT NULL,
+    `token` varchar(50)
 )
 ;
 CREATE TABLE `Server_scan_users` (
