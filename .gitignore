@@ -1,0 +1,8 @@
+bin
+*.class
+out
+*.idea
+*.pyc
+*~
+*.swp
+*.rss
