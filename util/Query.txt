@@ -1,0 +1,29 @@
+				Запросы
+
+1) '^add&what=user&username=(.+)&password=(.+)&deviceid=(.+)/$'  - 
+	- {"report" : "error", "explanation" : "User already exists"} - пользователь с таким ником уже существует
+	- {"report" : "success" , "explanation": "New user was added"} - пользователь удачно добавлен
+
+2) '^add&what=user&userid=(.+)&token=(.+)&deviceid=(.+)/$' - 
+	- '{"report" : "success", "explanation" : "New user was added"}' - пользователь
+
+3) ^check&what=username&username=(.+)/$ - 
+	- {"report" : "success","explanation" : "User already exists"} - пользователь с таким нком уже существует
+	- {"report" : "success","explanation" : "Login is vacant"} - такой ник свободен
+
+4) ^add&what=scan&username=(.+)&password=(.+)&code=(.+)
+	- {"report":"error" ,"explanation" : "The user with such name doesn\'t exist"} - такого пользователя не существует
+	- {"report" : "error","explanation" : "Invalid password"} - левый пароль
+	- {"report" : "success","explanation" : "New scan was added"} - скан оказался новым и он добавлен
+	- {"report" : "error", "explanation" : "This user has this scan"} - пользователь уже имеет данный скан
+	- {"report" : "success", "explanation" : "This scan is added to the user"} -скан оказался "старым" и был добавлен пользователю
+
+5) ^get&what=status&username=(.+)&password=(.+) - 
+	- {"report" : "error", "explanation" : "The user with such name doesn\'t exist"} -такого пользователя не существует
+	- {"report" : "error","explanation" : "Invalid password"} - левый пароль
+	- {"report" : "success", "money":"$money", "count_scan":"$count_scan", "count_rescan":"$count_rescan" }
+
+6) ^update&what=money&username=(.+)&password=(.+)&count=(\d+)/$ - 
+	-{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}
+	-{"report": "error", "explanation" : "Invalid password"}'
+	-{"report" : "success", "explanation" : "Balance is changed"} - баланс был изменен (максимум на 50 копеек)
