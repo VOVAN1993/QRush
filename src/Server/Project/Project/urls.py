@@ -18,5 +18,7 @@ urlpatterns = patterns('',
     url(r'^add&what=user&username=(.+)&password=(.+)&deviceid=(.+)/$',addUser),
     url(r'^add&what=user&userid=(.+)&token=(.+)&deviceid=(.+)/$',addUserVK),
     url(r'^check&what=username&username=(.+)/$',checkUsername),
-    url(r'^add&what=scan&username=(.+)&password=(.+)&code=(.+)',addScan)
+    url(r'^add&what=scan&username=(.+)&password=(.+)&code=(.+)',addScan),
+    url(r'^get&what=status&username=(.+)&password=(.+)',getStatus),
+    url(r'^update&what=money&username=(.+)&password=(.+)&count=(\d+)/$',updateMoney),
 )
