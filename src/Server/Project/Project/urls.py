@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
-from Server.views import hello
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+#from django.conf.urls import patterns, include, url
+from Server.views import *
+from django.contrib import admin
+from django.conf.urls.defaults import *
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,7 +13,10 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-    ('^hello/$',hello),
-
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^hello/$',hello),
+    url(r'^add&what=user&username=(.+)&password=(.+)&deviceid=(.+)/$',addUser),
+    url(r'^add&what=user&userid=(.+)&token=(.+)&deviceid=(.+)/$',addUserVK),
+    url(r'^check&what=username&username=(.+)/$',checkUsername),
+    url(r'^add&what=scan&username=(.+)&password=(.+)&code=(.+)',addScan)
 )
