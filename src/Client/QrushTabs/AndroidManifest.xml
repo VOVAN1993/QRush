@@ -9,23 +9,32 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application>
-        <activity
-            android:name="MainActivity"
-            android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan" >
-            <intent-filter>
+          <activity
+            android:name="MainMainActivity">
+             
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="MainActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme">
+           
+        </activity>
+        <activity
+            android:name="EnterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" />
+         
         <activity
             android:name="CameraActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
