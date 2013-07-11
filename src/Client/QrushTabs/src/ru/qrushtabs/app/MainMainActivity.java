@@ -27,7 +27,14 @@ public class MainMainActivity extends Activity {
 
 		if (ServerAPI.isOnline(getBaseContext())) {
 			 
-				(new CheckTask()).execute("azat");
+			if(auth())
+				(new CheckTask()).execute(ProfileInfo.userID);
+			else
+			{
+				Intent intent = new Intent(MainMainActivity.this, EnterActivity.class);
+				finish();
+				startActivity(intent);
+			}
 			 
 
 		} else {
@@ -39,7 +46,7 @@ public class MainMainActivity extends Activity {
 
 	}
 
-	private void auth() {
+	private boolean auth() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ProfileInfo.userID = prefs.getString("userID", null);
@@ -47,6 +54,17 @@ public class MainMainActivity extends Activity {
 		ProfileInfo.setScansCount(prefs.getInt("scansCount", 0));
 		ProfileInfo.setMoneyCount(prefs.getInt("moneyCount", 0));
 		ProfileInfo.setRescansCount(prefs.getInt("rescansCount", 0));
+		
+		if(ProfileInfo.userID!=null)
+		{
+			Log.d("http", "onAuth yes");
+			return true;
+		}
+		else
+		{
+			Log.d("http", "onAuth no");
+			return false;
+		}
  
 	}
 
@@ -61,11 +79,13 @@ public class MainMainActivity extends Activity {
 
 			if(objResult.equals("true"))
 			{
-				
+				ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
 			}
 			else
 			{
-				
+				Intent intent = new Intent(MainMainActivity.this, EnterActivity.class);
+				finish();
+				startActivity(intent);
 			}
 		}
 

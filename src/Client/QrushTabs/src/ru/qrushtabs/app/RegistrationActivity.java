@@ -4,6 +4,7 @@ package ru.qrushtabs.app;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class RegistrationActivity extends Activity 
@@ -26,7 +28,13 @@ public class RegistrationActivity extends Activity
 
 		@Override
 		public void onClick(View arg0) {
-			(new CheckTask()).execute(userID);
+			
+			EditText ed = (EditText)RegistrationActivity.this.findViewById(R.id.signinAcc);
+			userID = ed.getText().toString();
+			ed = (EditText)RegistrationActivity.this.findViewById(R.id.signinPass);
+			userPass = ed.getText().toString();
+			(new CheckTask()).execute(userID,userPass);
+			 
 			
 		}
 		
@@ -35,7 +43,7 @@ public class RegistrationActivity extends Activity
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.checkUser(args[0]);
+			return ServerAPI.loadProfileInfo(args[0],args[1]);
 		}
 
 		protected void onPostExecute(String objResult) 
@@ -47,11 +55,15 @@ public class RegistrationActivity extends Activity
 			    tv.setText("Вы успешно вошли");
 			    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
 		        Editor editor=prefs.edit();
-		        editor.putString("pass", userPass);
-		        editor.putString("user_id", userID);
+		        editor.putString("userPass", userPass);
+		        editor.putString("userID", userID);
 		        ProfileInfo.userID = userID;
 		        ProfileInfo.userPass = userPass;
+		        
 		        editor.commit();
+		       
+			   // ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
+				 
 			}
 		}
 
@@ -62,7 +74,7 @@ public class RegistrationActivity extends Activity
 		@Override
 		public void onClick(View arg0) {
 			 TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
- 			(new CheckTask()).execute(userID,userPass,tm.getDeviceId());
+ 			(new SignUpTask()).execute(userID,userPass,tm.getDeviceId());
 			
 		}
 		
@@ -81,8 +93,8 @@ public class RegistrationActivity extends Activity
 			    tv.setText("Вы успешно зарегистрировались");
 			    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
 		        Editor editor=prefs.edit();
-		        editor.putString("pass", userPass);
-		        editor.putString("user_id", userID);
+		        editor.putString("userPass", userPass);
+		        editor.putString("userID", userID);
 		        ProfileInfo.userID = userID;
 		        ProfileInfo.userPass = userPass;
 		        editor.commit();
@@ -95,7 +107,7 @@ public class RegistrationActivity extends Activity
 		setContentView(R.layout.registration);
 		Button btn = (Button)findViewById(R.id.signinBtn);
 		btn.setOnClickListener(onSignIn);
-		btn = (Button)findViewById(R.id.signupAcc);
+		btn = (Button)findViewById(R.id.signupBtn);
 		btn.setOnClickListener(onSignUp);
 	}
 

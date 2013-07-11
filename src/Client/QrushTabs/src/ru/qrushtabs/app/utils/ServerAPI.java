@@ -10,6 +10,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.*;
+
+import ru.qrushtabs.app.ProfileInfo;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
@@ -86,15 +88,43 @@ public class ServerAPI {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.d("http", success);
+		Log.d("http on reg", success);
 		if (success.equals("success"))
 			return "true";
 		else
 			return "false";
 	}
-	public static String loadProfileInfo() {
-		return null;
-	}
+	public static String loadProfileInfo(String userID,String userPass) {
+		String req = "get&what=status&username="+userID+"&password="+userPass;
+		Log.d("http load req", req);
+		String resp = executeHttpResponse(req);
+		String success = "";
+		String money = "";
+		String scans = "";
+		String rescans = "";
+		try {
+			Log.d("http load resp", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			success = (String) jsonObj.get("report");
+			money = (String) jsonObj.get("money");
+			scans = (String) jsonObj.get("count_scan");
+			rescans = (String) jsonObj.get("count_rescan");
+			ProfileInfo.setScansCount(Integer.valueOf(scans));
+			ProfileInfo.setMoneyCount( Integer.valueOf(money));
+			ProfileInfo.setRescansCount(Integer.valueOf(rescans));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("http loadIngo", success);
+		if (success.equals("success"))
+		{
+			Log.d("http money", money );
+			return "true";
+		}
+		else
+			return "false";
+ 	}
 
 	public static String loadFriendsInfo() {
 		return null;

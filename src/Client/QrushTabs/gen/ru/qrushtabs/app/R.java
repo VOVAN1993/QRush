@@ -149,7 +149,6 @@ containing a value of this type.
         public static final int vkloginbtn_pressed=0x7f02005c;
     }
     public static final class id {
-        public static final int Button01=0x7f090006;
         public static final int aim=0x7f090002;
         public static final int avatar=0x7f090017;
         public static final int avatar_place=0x7f090016;
@@ -164,6 +163,7 @@ containing a value of this type.
         public static final int header_back_btn=0x7f090005;
         public static final int icon=0x7f09001d;
         public static final int label=0x7f09001e;
+        public static final int loginbtn=0x7f090006;
         public static final int money_ratings_list1=0x7f09000c;
         public static final int money_ratings_list2=0x7f09000d;
         public static final int name_tv=0x7f090018;

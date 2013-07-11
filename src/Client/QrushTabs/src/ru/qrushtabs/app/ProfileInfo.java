@@ -4,9 +4,9 @@ import ru.qrushtabs.app.utils.OnInfoLoadListener;
 
 public class ProfileInfo {
 
-	private static int scansCount = 4;
-	private static int rescansCount = 4;
-	private static float moneyCount = 34.50f ; 
+	private static int scansCount = 0;
+	private static int rescansCount = 0;
+	private static float moneyCount = 0 ; 
 	private static boolean loaded = true;
 	public static String userID = "0";
 	public static String userPass = "0";
@@ -14,6 +14,13 @@ public class ProfileInfo {
 	{
 		if(loaded)
 		    return scansCount;
+		else
+			return 0;
+	}
+	public static int getRescansCount()
+	{
+		if(loaded)
+		    return rescansCount;
 		else
 			return 0;
 	}

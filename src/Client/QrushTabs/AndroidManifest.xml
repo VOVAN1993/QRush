@@ -34,6 +34,10 @@
             android:name="EnterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="RegistrationActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" />
          
         <activity
             android:name="CameraActivity"
