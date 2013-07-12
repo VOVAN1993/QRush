@@ -10,6 +10,7 @@ public class ProfileInfo {
 	private static boolean loaded = true;
 	public static String userID = "0";
 	public static String userPass = "0";
+	public static String userToken = "0";
 	public static int getScansCount()
 	{
 		if(loaded)

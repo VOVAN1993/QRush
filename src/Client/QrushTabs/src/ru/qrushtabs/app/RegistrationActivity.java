@@ -43,7 +43,7 @@ public class RegistrationActivity extends Activity
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo(args[0],args[1]);
+			return ServerAPI.loadProfileInfo(args[0]);
 		}
 
 		protected void onPostExecute(String objResult) 

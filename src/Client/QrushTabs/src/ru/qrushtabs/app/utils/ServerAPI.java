@@ -87,10 +87,13 @@ public class ServerAPI {
 		String req = "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
 		String resp = executeHttpResponse(req);
 		String success = "";
+		String token = "";
 		try {
 			Log.d("http", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
+			token = (String) jsonObj.get("atoken");
+			ProfileInfo.userToken = token;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,14 +108,41 @@ public class ServerAPI {
 		else
 			return "false";
 	}
-	public static String loadProfileInfo(String userID,String userPass) {
-		String req = "get&what=status&username="+userID+"&password="+userPass;
+public static String getToken(String userID,String userPass,String deviceID) {
+		
+		String req = "get&what=atoken&username="+userID+"&password="+userPass;
+		String resp = executeHttpResponse(req);
+		String success = "";
+		String token = "";
+		try {
+			Log.d("http", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			success = (String) jsonObj.get("report");
+			token = (String) jsonObj.get("new_token");
+			ProfileInfo.userToken = token;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("http on reg", success);
+		if (success.equals("success"))
+		{
+
+			return "true";
+			
+		}
+		else
+			return "false";
+	}
+	public static String loadProfileInfo(String userID) {
+		String req = "get&what=status&username="+userID+"&atoken="+ProfileInfo.userToken;
 		Log.d("http load req", req);
 		String resp = executeHttpResponse(req);
 		String success = "";
 		String money = "";
 		String scans = "";
 		String rescans = "";
+		String token = "";
 		try {
 			Log.d("http load resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
@@ -120,6 +150,10 @@ public class ServerAPI {
 			money = (String) jsonObj.get("money");
 			scans = (String) jsonObj.get("count_scan");
 			rescans = (String) jsonObj.get("count_rescan");
+			if(jsonObj.has("atoken"))
+			{
+				ProfileInfo.userToken = (String) jsonObj.get("atoken");
+			}
 			ProfileInfo.setScansCount(Integer.valueOf(scans));
 			ProfileInfo.setMoneyCount( Integer.valueOf(money));
 			ProfileInfo.setRescansCount(Integer.valueOf(rescans));
@@ -139,7 +173,7 @@ public class ServerAPI {
  	}
 
 	public static String tryAddScan(String userID,String userPass,String scan) {
-		String req = "add&what=scan&username="+userID+"&password="+userPass+"&code="+scan;
+		String req = "add&what=scan&username="+userID+"&atoken="+ProfileInfo.userToken+"&code="+scan;
 		Log.d("http load req", req);
 		String resp = executeHttpResponse(req);
 		String success = "";
@@ -147,7 +181,10 @@ public class ServerAPI {
 			Log.d("http load resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			
+			if(jsonObj.has("atoken"))
+			{
+				ProfileInfo.userToken = (String) jsonObj.get("atoken");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,7 +198,7 @@ public class ServerAPI {
 			return "false";
 	}
 	public static String addMoney(String userID,String userPass,int count) {
-		String req = "update&what=money&username="+userID+"&password="+userPass+"&count="+count;
+		String req = "update&what=money&username="+userID+"&atoken="+ProfileInfo.userToken+"&count="+count;
 		Log.d("http addmony req", req);
 		String resp = executeHttpResponse(req);
 		String success = "";
@@ -169,7 +206,10 @@ public class ServerAPI {
 			Log.d("http   addmony resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			
+			if(jsonObj.has("atoken"))
+			{
+				ProfileInfo.userToken = (String) jsonObj.get("atoken");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,6 +236,8 @@ public class ServerAPI {
 	        Editor editor=prefs.edit();
 	        editor.putString("userPass", ProfileInfo.userPass);
 	        editor.putString("userID", ProfileInfo.userID);
+	        editor.putString("userID", ProfileInfo.userID);
+	        editor.putString("userToken", ProfileInfo.userToken);
 	        editor.putInt("scansCount", ProfileInfo.getScansCount());
 	        editor.putInt("rescanCount", ProfileInfo.getRescansCount());
 	        editor.putInt("moneyCount", ProfileInfo.getMoneyCount());

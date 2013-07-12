@@ -53,6 +53,7 @@ public class MainMainActivity extends Activity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ProfileInfo.userID = prefs.getString("userID", null);
+		ProfileInfo.userToken = prefs.getString("userToken", null);
 		ProfileInfo.userPass = prefs.getString("userPass", null);
 		ProfileInfo.setScansCount(prefs.getInt("scansCount", 0));
 		ProfileInfo.setMoneyCount(prefs.getInt("moneyCount", 0));
@@ -75,7 +76,7 @@ public class MainMainActivity extends Activity {
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
+			return ServerAPI.loadProfileInfo(ProfileInfo.userID);
 		}
 
 		protected void onPostExecute(String objResult) {
