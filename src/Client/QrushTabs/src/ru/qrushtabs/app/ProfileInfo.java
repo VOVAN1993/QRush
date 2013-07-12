@@ -6,7 +6,7 @@ public class ProfileInfo {
 
 	private static int scansCount = 0;
 	private static int rescansCount = 0;
-	private static float moneyCount = 0 ; 
+	private static int moneyCount = 0 ; 
 	private static boolean loaded = true;
 	public static String userID = "0";
 	public static String userPass = "0";
@@ -24,7 +24,7 @@ public class ProfileInfo {
 		else
 			return 0;
 	}
-	public static float getMoneyCount()
+	public static int getMoneyCount()
 	{
 		if(loaded)
 		    return moneyCount;
@@ -49,6 +49,11 @@ public class ProfileInfo {
 	public static void setMoneyCount(int moneyCount)
 	{
 		ProfileInfo.moneyCount = moneyCount;
+		//добавление на сервер и в склайт
+	}
+	public static void addMoneyCount(int moneyCount)
+	{
+		ProfileInfo.moneyCount += moneyCount;
 		//добавление на сервер и в склайт
 	}
 	

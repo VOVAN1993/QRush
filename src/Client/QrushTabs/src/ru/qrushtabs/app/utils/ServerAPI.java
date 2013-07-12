@@ -11,30 +11,37 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.*;
 
+import ru.qrushtabs.app.PrizeActivity;
 import ru.qrushtabs.app.ProfileInfo;
+import ru.qrushtabs.app.QrushTabsApp;
+import ru.qrushtabs.app.RegistrationActivity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class ServerAPI {
-	public static String checkUser(String userName) {
-		String req = "check&what=username&username=" + userName;
-		String resp = executeHttpResponse(req);
-		String success = "";
-		try {
-			Log.d("http", resp);
-			JSONObject jsonObj = new JSONObject(resp);
-			success = (String) jsonObj.get("report");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Log.d("http", success);
-		if (success.equals("success"))
-			return "true";
-		else
-			return "false";
-	}
+	public static boolean offlineMod = true;
+//	public static String checkUser(String userName) {
+//		String req = "check&what=username&username=" + userName;
+//		String resp = executeHttpResponse(req);
+//		String success = "";
+//		try {
+//			Log.d("http", resp);
+//			JSONObject jsonObj = new JSONObject(resp);
+//			success = (String) jsonObj.get("report");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		Log.d("http", success);
+//		if (success.equals("success"))
+//			return "true";
+//		else
+//			return "false";
+//	}
 
 	private static String executeHttpResponse(String str) {
 		HttpClient client = new DefaultHttpClient();
@@ -90,7 +97,11 @@ public class ServerAPI {
 		}
 		Log.d("http on reg", success);
 		if (success.equals("success"))
+		{
+
 			return "true";
+			
+		}
 		else
 			return "false";
 	}
@@ -112,6 +123,7 @@ public class ServerAPI {
 			ProfileInfo.setScansCount(Integer.valueOf(scans));
 			ProfileInfo.setMoneyCount( Integer.valueOf(money));
 			ProfileInfo.setRescansCount(Integer.valueOf(rescans));
+			ServerAPI.saveProfileInfo();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,6 +138,50 @@ public class ServerAPI {
 			return "false";
  	}
 
+	public static String tryAddScan(String userID,String userPass,String scan) {
+		String req = "add&what=scan&username="+userID+"&password="+userPass+"&code="+scan;
+		Log.d("http load req", req);
+		String resp = executeHttpResponse(req);
+		String success = "";
+		try {
+			Log.d("http load resp", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			success = (String) jsonObj.get("report");
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("http loadScan", success);
+		if (success.equals("success"))
+		{
+ 			return "true";
+		}
+		else
+			return "false";
+	}
+	public static String addMoney(String userID,String userPass,int count) {
+		String req = "update&what=money&username="+userID+"&password="+userPass+"&count="+count;
+		Log.d("http addmony req", req);
+		String resp = executeHttpResponse(req);
+		String success = "";
+		try {
+			Log.d("http   addmony resp", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			success = (String) jsonObj.get("report");
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("http http addmony", success);
+		if (success.equals("success"))
+		{
+			return "true";
+		}
+		else
+			return "false";
+	}
 	public static String loadFriendsInfo() {
 		return null;
 	}
@@ -134,7 +190,19 @@ public class ServerAPI {
 		return null;
 	}
 
-	public static boolean isOnline(Context c) {
+	public static void saveProfileInfo()
+	{
+		    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
+	        Editor editor=prefs.edit();
+	        editor.putString("userPass", ProfileInfo.userPass);
+	        editor.putString("userID", ProfileInfo.userID);
+	        editor.putInt("scansCount", ProfileInfo.getScansCount());
+	        editor.putInt("rescanCount", ProfileInfo.getRescansCount());
+	        editor.putInt("moneyCount", ProfileInfo.getMoneyCount());
+ 	        editor.commit();
+	}
+	public static boolean isOnline() {
+		Context c =  QrushTabsApp.getAppContext();
 		ConnectivityManager cm = (ConnectivityManager) c
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 

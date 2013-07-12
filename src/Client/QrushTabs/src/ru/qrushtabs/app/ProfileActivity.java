@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class ProfileActivity extends Activity
 {
@@ -68,19 +69,32 @@ public class ProfileActivity extends Activity
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ProfileActivity.this,GetMoneyActivity.class);
-				startActivity(intent);
-				Rect r = ivPeakOver.getDrawable().getBounds();
-				Log.d(null, r.top+" " + r.left + " " + r.bottom + " " + r.right);
- 				Log.d(null,ivPeakOver.getTop()+" " + ivPeakOver.getLeft() + " " + ivPeakOver.getBottom() + " " +ivPeakOver.getRight());
-				
+				startActivity(intent);	
 			}
  			
  		});
+ 		TextView tv = (TextView)findViewById(R.id.scansTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
+ 		
+ 		tv = (TextView)findViewById(R.id.rescansTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
+ 		
+ 		tv = (TextView)findViewById(R.id.moneyTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
+ 		
 	}
 	@Override
 	public void onResume()
 	{
 		super.onResume();
+		TextView tv = (TextView)findViewById(R.id.scansTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
+ 		
+ 		tv = (TextView)findViewById(R.id.rescansTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
+ 		
+ 		tv = (TextView)findViewById(R.id.moneyTV);
+ 		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		
  		//Log.d(null, r.top+" " + r.left + " " + r.bottom + " " + r.right);
  		//Log.d(null,ivPeakOver.getTop()+" " + ivPeakOver.getLeft() + " " + ivPeakOver.getBottom() + " " +ivPeakOver.getRight());

@@ -52,16 +52,13 @@ public class RegistrationActivity extends Activity
 			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-			    tv.setText("‚ы успешно вошли");
-			    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
-		        Editor editor=prefs.edit();
-		        editor.putString("userPass", userPass);
-		        editor.putString("userID", userID);
-		        ProfileInfo.userID = userID;
+			    tv.setText("Вы успешно вошли");
+			    
+				ProfileInfo.userID = userID;
 		        ProfileInfo.userPass = userPass;
 		        
-		        editor.commit();
-		       
+
+		        ServerAPI.saveProfileInfo();
 			   // ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
 				 
 			}
@@ -90,14 +87,11 @@ public class RegistrationActivity extends Activity
 			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-			    tv.setText("‚ы успешно зарегистрировались");
+			    tv.setText("Вы успешно зарегистрировались");
 			    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
-		        Editor editor=prefs.edit();
-		        editor.putString("userPass", userPass);
-		        editor.putString("userID", userID);
-		        ProfileInfo.userID = userID;
+			    ProfileInfo.userID = userID;
 		        ProfileInfo.userPass = userPass;
-		        editor.commit();
+		        ServerAPI.saveProfileInfo();
 			}
 		}
 

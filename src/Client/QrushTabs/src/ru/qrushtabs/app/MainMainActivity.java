@@ -25,8 +25,10 @@ public class MainMainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (ServerAPI.isOnline(getBaseContext())) {
+		
+		if (ServerAPI.isOnline()) {
 			 
+			ServerAPI.offlineMod = false;
 			if(auth())
 				(new CheckTask()).execute(ProfileInfo.userID);
 			else
@@ -38,6 +40,7 @@ public class MainMainActivity extends Activity {
 			 
 
 		} else {
+			ServerAPI.offlineMod = true;
 			auth();
 			Intent intent = new Intent(this, MainActivity.class);
 			finish();
@@ -72,14 +75,16 @@ public class MainMainActivity extends Activity {
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.checkUser(args[0]);
+			return ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
 		}
 
 		protected void onPostExecute(String objResult) {
 
 			if(objResult.equals("true"))
 			{
-				ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
+				Intent intent = new Intent(MainMainActivity.this, MainActivity.class);
+				finish();
+				startActivity(intent);
 			}
 			else
 			{

@@ -7,8 +7,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PrizeActivity extends Activity {
+	
+	public static int currentPrize = 0;//лучше передачу в активити сделать
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -24,5 +27,9 @@ public class PrizeActivity extends Activity {
 		    finish();
 		  }
 		});
+		
+		TextView tv = (TextView)findViewById(R.id.prizeCountTV);
+		
+		tv.setText(""+currentPrize);
 	}
 }

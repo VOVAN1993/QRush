@@ -1,6 +1,11 @@
 package ru.qrushtabs.app;
 
 import ru.qrushtabs.app.CameraPreview;
+import ru.qrushtabs.app.dialogs.LoseDialog;
+import ru.qrushtabs.app.dialogs.MyDialog;
+import ru.qrushtabs.app.dialogs.OnDialogClickListener;
+import ru.qrushtabs.app.dialogs.ToTwiceDialog;
+import ru.qrushtabs.app.games.RouletteRenderer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +15,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +36,7 @@ import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends FragmentActivity {
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	private Handler autoFocusHandler;
@@ -180,17 +186,49 @@ public class CameraActivity extends Activity {
 				     str =  sym.getData();
 				
 				 }
-				 ScanBox.addScan(str);
-				camIsNotBusy = true;
-				stopScan();
-				//showDialog(DIALOG_EXIT);
-				Intent intent = new Intent(CameraActivity.this,GamesActivity.class);
-				startActivity(intent);
+				 int scanStatus = ScanBox.addScan(str);
+				  camIsNotBusy = true;
+				    stopScan();
+				 if(scanStatus==2)
+				 {
+				  
+				    //showDialog(DIALOG_EXIT);
+				    Intent intent = new Intent(CameraActivity.this,GamesActivity.class);
+				    startActivity(intent);
+				 }
+				 else
+				 {
+					 LoseDialog newFragment;
+ 					 newFragment = new LoseDialog();
+ 					 if(scanStatus==1)
+ 						 newFragment.setLabelText("Сохранен в сундук");
+ 					 else
+ 					 {
+ 						newFragment.setLabelText("Такой скан уже был");
+ 					 }
+ 					 newFragment.show(getSupportFragmentManager(), "missiles");
+ 					 newFragment.setOnDialogClickListener(onDialogClick);
+				 }
 				
 			}
 		}
 	};
+	OnDialogClickListener onDialogClick = new OnDialogClickListener()
+	{
 
+		@Override
+		public void onOkClick() 
+		{
+			 
+			
+		}
+
+		@Override
+		public void onCancelClick() {
+			startScan();
+		}
+		
+	};
 	protected Dialog onCreateDialog(int id) {
 		if (id == DIALOG_EXIT) {
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);

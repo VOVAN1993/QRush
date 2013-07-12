@@ -8,6 +8,7 @@ import ru.qrushtabs.app.games.GameRenderer;
 import ru.qrushtabs.app.games.MatchesRenderer;
 import ru.qrushtabs.app.games.OnGameEndListener;
 import ru.qrushtabs.app.games.RouletteRenderer;
+import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -41,7 +42,18 @@ public class GamesActivity extends FragmentActivity {
 
 		@Override
 		public void onCancelClick() {
+			PrizeActivity.currentPrize = 50;//лучше передачу в активити сделать
 			GamesActivity.this.finish();
+			if(ServerAPI.addMoney(ProfileInfo.userID, ProfileInfo.userPass, 50).equals("true"))
+			{
+				PrizeActivity.currentPrize = 50;
+			}
+			else
+			{
+				PrizeActivity.currentPrize = 0;
+			}
+			ProfileInfo.addMoneyCount(PrizeActivity.currentPrize);
+			ServerAPI.saveProfileInfo();
 			Intent intent = new Intent(GamesActivity.this,PrizeActivity.class);
 			startActivity(intent);
 			
