@@ -186,6 +186,7 @@ public class CameraActivity extends FragmentActivity {
 				     str =  sym.getData();
 				
 				 }
+				 str = String.valueOf((int)(Math.random()*10000000));
 				 int scanStatus = ScanBox.addScan(str);
 				  camIsNotBusy = true;
 				    stopScan();

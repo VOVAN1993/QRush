@@ -96,8 +96,7 @@ public class ProfileActivity extends Activity
  		tv = (TextView)findViewById(R.id.moneyTV);
  		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		
- 		//Log.d(null, r.top+" " + r.left + " " + r.bottom + " " + r.right);
- 		//Log.d(null,ivPeakOver.getTop()+" " + ivPeakOver.getLeft() + " " + ivPeakOver.getBottom() + " " +ivPeakOver.getRight());
+ 
 	}
 	
 }

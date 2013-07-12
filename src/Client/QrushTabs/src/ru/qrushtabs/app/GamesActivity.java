@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -24,85 +25,105 @@ public class GamesActivity extends FragmentActivity {
 
 	GameRenderer game;
 	LinearLayout gamesLayout;
-	OnDialogClickListener onDialogClick = new OnDialogClickListener()
-	{
+	int currentPrize = 0;
+	OnDialogClickListener onDialogClick = new OnDialogClickListener() {
 
 		@Override
-		public void onOkClick() 
-		{
-			//GamesActivity.this.finish();
+		public void onOkClick() {
+			// GamesActivity.this.finish();
 			game.pause();
 			GamesActivity g = GamesActivity.this;
 			g.gamesLayout.removeAllViews();
 			game = RouletteRenderer.getInstance(g);
 			g.gamesLayout.addView(game);
+			game.setOnGameEndListener(l);
 			game.resume();
-			
+
 		}
 
 		@Override
 		public void onCancelClick() {
-			PrizeActivity.currentPrize = 50;//лучше передачу в активити сделать
 			GamesActivity.this.finish();
-			if(ServerAPI.addMoney(ProfileInfo.userID, ProfileInfo.userPass, 50).equals("true"))
-			{
-				PrizeActivity.currentPrize = 50;
-			}
-			else
-			{
-				PrizeActivity.currentPrize = 0;
-			}
+			if (currentPrize > 0)
+				if (ServerAPI.addMoney(ProfileInfo.userID,
+						ProfileInfo.userPass, currentPrize).equals("true")) {
+					PrizeActivity.currentPrize = currentPrize;
+				} else {
+					PrizeActivity.currentPrize = 0;
+				}
 			ProfileInfo.addMoneyCount(PrizeActivity.currentPrize);
 			ServerAPI.saveProfileInfo();
-			Intent intent = new Intent(GamesActivity.this,PrizeActivity.class);
+			Intent intent = new Intent(GamesActivity.this, PrizeActivity.class);
 			startActivity(intent);
-			
+
 		}
-		
+
 	};
- 	public void onCreate(Bundle savedInstanceState) {
+
+	OnGameEndListener l = new OnGameEndListener() {
+
+		@Override
+		public void onGameEnd(boolean isWin) {
+
+			game.pause();
+			// gamesLayout.removeView(gameRenderer);
+			MyDialog newFragment;
+			if (isWin) {
+				currentPrize += 50;
+				if (currentPrize < 100) {
+					newFragment = new ToTwiceDialog();
+					newFragment.setOnDialogClickListener(onDialogClick);
+					newFragment.show(getSupportFragmentManager(), "missiles");
+				} else {
+
+					if (ServerAPI.addMoney(ProfileInfo.userID,ProfileInfo.userPass, currentPrize).equals("true")) {
+						PrizeActivity.currentPrize = currentPrize;
+					} else {
+						PrizeActivity.currentPrize = 0;
+					}
+					 
+					gamesLayout.removeView(game);
+					 
+					gamesLayout.removeAllViews();
+					finish();
+					ProfileInfo.addMoneyCount(PrizeActivity.currentPrize);
+					ServerAPI.saveProfileInfo();
+					Intent intent = new Intent(GamesActivity.this,
+							PrizeActivity.class);
+					startActivity(intent);
+				}
+			} else {
+				currentPrize = 0;
+				newFragment = new LoseDialog();
+				newFragment.setOnDialogClickListener(onDialogClick);
+				newFragment.show(getSupportFragmentManager(), "missiles");
+			}
+
+		}
+
+	};
+
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-//		
-//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-//				R.layout.custom_title_back);
+		// requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		//
+		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+		// R.layout.custom_title_back);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		game = MatchesRenderer.getInstance(this);
 		setContentView(R.layout.games);
-		gamesLayout = (LinearLayout)findViewById(R.id.games_layout);
-			
-		OnGameEndListener l = new OnGameEndListener()
-		{
+		gamesLayout = (LinearLayout) findViewById(R.id.games_layout);
 
-			@Override
-			public void onGameEnd(boolean isWin) {
-				
-				
- 				game.pause();
-				//gamesLayout.removeView(gameRenderer);
- 				 MyDialog newFragment;
-				 if(isWin)
-					 newFragment = new ToTwiceDialog();
-				 else
-					 newFragment = new LoseDialog();
-				 
-				 newFragment.setOnDialogClickListener(onDialogClick);
- 				 newFragment.show(getSupportFragmentManager(), "missiles");
-				
-			}
-			
-		};
 		game.setOnGameEndListener(l);
- 		//gamesLayout.addView(gameRenderer);
-		
-		
-//		if(gameRenderer.getParent()!=null)
-//			gamesLayout.removeView(gameRenderer);
-//		setContentView(gameRenderer);
-		//gamesLayout.removeAllViews();
+		// gamesLayout.addView(gameRenderer);
+
+		// if(gameRenderer.getParent()!=null)
+		// gamesLayout.removeView(gameRenderer);
+		// setContentView(gameRenderer);
+		// gamesLayout.removeAllViews();
 		//
 		// addView(gameRenderer);
 	}
@@ -114,10 +135,11 @@ public class GamesActivity extends FragmentActivity {
 	}
 
 	protected void onPause() {
+		Log.d("games", "gamesactivity pause");
 		super.onPause();
 		game.pause();
 		gamesLayout.removeView(game);
-		
+
 	}
 
 }

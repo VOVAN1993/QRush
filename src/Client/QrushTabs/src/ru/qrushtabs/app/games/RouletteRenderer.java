@@ -1,8 +1,16 @@
 package ru.qrushtabs.app.games;
 
+import ru.qrushtabs.app.GamesActivity;
+import ru.qrushtabs.app.PrizeActivity;
+import ru.qrushtabs.app.ProfileInfo;
 import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.dialogs.LoseDialog;
+import ru.qrushtabs.app.dialogs.MyDialog;
+import ru.qrushtabs.app.dialogs.OnDialogClickListener;
 import ru.qrushtabs.app.dialogs.ToTwiceDialog;
+import ru.qrushtabs.app.utils.ServerAPI;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,7 +40,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	private static RouletteRenderer instance;
  	private int rouletteX;
 	private int rouletteY;
-	
+	private boolean isEnd = false;
 	private int roulArrowX;
 	private int roulArrowY;
 	private float roulAngPreVel = 0.2f;
@@ -41,8 +49,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	private float roulAngVel = 0.2f;
 	private float midPath = 360.0f;
 	private int rx;
-	int firstPositionY = 0;
-	
+ 	
 	private GestureDetector gestureScanner;
 	
 	private OnGameEndListener onGameEndListener;
@@ -68,10 +75,45 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	float currentRotation = 0.0f;
 	boolean isTwisting = false;
 	boolean isStoping = false;
-	
+	int choosedColor = 0;
+	OnDialogClickListener onDialogClick = new OnDialogClickListener()//выбор цвета по идее, но мы прослушиваем как ок и отмена
+	{
+
+		@Override
+		public void onOkClick() 
+		{
+		 
+			choosedColor = 1;
+		}
+
+		@Override
+		public void onCancelClick() {
+		 choosedColor = 2;
+			
+		}
+		 
+		
+	};
+//	@Override
+//	public void onDraw(Canvas canvas)
+//	{
+//		super.onDraw(canvas);
+//		if(running==true)
+//		invalidate();
+//		else
+//		{
+//			if(isEnd)
+//			{
+//				 
+//			 
+//			   
+//			}
+//		}
+//		
+//	}
 	public RouletteRenderer(Context context) {
 		super(context);
-		
+		setWillNotDraw(false);
 		rotateMatrix = new Matrix();
 		holder = getHolder();
 		instance = this;
@@ -117,14 +159,18 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN: 
 		{
-			
-			
-		 Log.d(VIEW_LOG_TAG, "onDown "+ positionY);
-		 firstPositionY = positionY;
-		 currentTime = System.currentTimeMillis();
-		 touching = true;
-		 if(isTwisting&&stopTouched(positionX,positionY))
+			if(isEnd)
+			{
+				 boolean r = (((int)currentRotation+18)/36)%2==0;
+				  this.onGameEndListener.onGameEnd(r);
+				  isEnd = false;
+				  return true;
+			}
+	 
+		 if(stopTouched(positionX,positionY))
+		 if(isTwisting)
 		 {
+			
 			 isStoping = true;
 			 int needed = 0;
 			 int f = ((int)currentRotation+(int)midPath+18)/36;
@@ -134,46 +180,33 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 			    roulAngAcc = roulAngPreVel*roulAngPreVel/(2.0f*midPath);
 			 else
 			 {
-				 int rp ;
-				 if(m>18)
+ 				 if(m>18)
 					 roulAngAcc = roulAngPreVel*roulAngPreVel/(2.0f*(midPath+22));
 				 else
 					 roulAngAcc = roulAngPreVel*roulAngPreVel/(2.0f*(midPath-22));
 					 
 			 }
+			  
 			 Log.d(VIEW_LOG_TAG, "Stop  " + roulAngAcc );
 
+		 }
+		 else
+		 {
+			    currentTime = System.currentTimeMillis();
+				isTwisting = true;
+				roulAngVel = roulAngPreVel;
+				Log.d(VIEW_LOG_TAG, "Twist  " );
 		 }
 		}
 			break;
 
 		case MotionEvent.ACTION_MOVE: {
 			
-			if(isTwisting)
-				return true;
-			if(touching)
-			{
-				long deltaTime = System.currentTimeMillis() - currentTime;
- 				int deltaY = positionY - firstPositionY;
-				
- 				float veloc = (float)deltaY/(float)deltaTime;
- 				Log.d(VIEW_LOG_TAG,"vel "+ veloc);
- 				 
- 				if(veloc > 0.4)
- 				{
- 					currentTime = System.currentTimeMillis();
- 					isTwisting = true;
- 					roulAngPreVel = Math.min(1.0f, veloc - 0.2f);
- 					roulAngVel = roulAngPreVel;//roulAngPreVel;
- 					Log.d(VIEW_LOG_TAG, "Twist  " );
- 					//isStoping = true;
- 				}
-			}
+			 
 			 
 		}
 			break;
 		case MotionEvent.ACTION_UP:
-			touching = false;
 			break;
 		}
 		return true;
@@ -183,6 +216,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	{
 		return tX < roulArrowX + roulArrow.getWidth() && tX > roulArrowX && tY > roulArrowY && tY < roulArrowY + roulArrow.getHeight();
  	}
+	 
 	public void resume() {
 
  
@@ -217,17 +251,25 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 					
 					if(roulAngVel<0)
 					{
-						Log.d(VIEW_LOG_TAG, "color "+((int)(currentRotation+18)/36)%2);
+						
 						isStoping = false;
 						isTwisting = false;
+						
+						pause();
+						 
+						    isEnd = true;
+						 
+						
+						 
 					}
 				}
 			}
-			
+		
  			canvas.drawBitmap(roulette, rotateMatrix, null);
 			canvas.drawBitmap(roulArrow, roulArrowX, roulArrowY, null);
 			holder.unlockCanvasAndPost(canvas);
-			 
+			
+			
 
 		}
 		
@@ -238,18 +280,18 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	public void pause() {
 
 		running = false;
-		// boolean flag = true;
-		// while (flag) {
-		// try {
-		// Log.d(VIEW_LOG_TAG, "before join");
-		// renderThread.join();
-		// Log.d(VIEW_LOG_TAG, "after join");
-		// flag = false;
-		// } catch (InterruptedException e) {
-		// Log.d(VIEW_LOG_TAG, "thread not paused");
-		// }
-		// }
-		Log.d(VIEW_LOG_TAG, "thread paused");
+//		 boolean flag = true;
+//		 while (flag) {
+//		 try {
+//		 Log.d(VIEW_LOG_TAG, "before join");
+//		 renderThread.join();
+//		 Log.d(VIEW_LOG_TAG, "after join");
+//		 flag = false;
+//		 } catch (InterruptedException e) {
+//		 Log.d(VIEW_LOG_TAG, "thread not paused");
+//		 }
+//		 }
+//		Log.d(VIEW_LOG_TAG, "thread paused");
 	}
 
 	public static RouletteRenderer getInstance(Context context) {
