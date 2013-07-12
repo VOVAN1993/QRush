@@ -27,3 +27,8 @@
 	-{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}
 	-{"report": "error", "explanation" : "Invalid token"}'
 	-{"report" : "success", "explanation" : "Balance is changed"[,"atoken":"$token"]} - баланс был изменен (максимум на 200 копеек)
+
+7) '^get&what=atoken&username=(.+)&password=(.+)/$ - получение токена по паролю
+	- '{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}'
+	- '{"report":"error","explanation":"Password is invalid"}'
+	- '{"report":"success","new_token":"$atoken"}' 
