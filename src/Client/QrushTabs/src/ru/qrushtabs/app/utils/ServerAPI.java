@@ -108,19 +108,22 @@ public class ServerAPI {
 		else
 			return "false";
 	}
-public static String getToken(String userID,String userPass,String deviceID) {
+public static String getToken(String userID,String userPass) {
 		
 		String req = "get&what=atoken&username="+userID+"&password="+userPass;
 		String resp = executeHttpResponse(req);
 		String success = "";
 		String token = "";
 		try {
-			Log.d("http", resp);
+			Log.d("http", "getToken");
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
 			token = (String) jsonObj.get("new_token");
 			ProfileInfo.userToken = token;
 
+			
+			loadProfileInfo(userID);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,22 +145,35 @@ public static String getToken(String userID,String userPass,String deviceID) {
 		String money = "";
 		String scans = "";
 		String rescans = "";
+		String explanation = "";
 		String token = "";
 		try {
-			Log.d("http load resp", resp);
+			Log.d("http load profile", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			money = (String) jsonObj.get("money");
-			scans = (String) jsonObj.get("count_scan");
-			rescans = (String) jsonObj.get("count_rescan");
-			if(jsonObj.has("atoken"))
+			explanation = (String) jsonObj.get("explanation");
+			if(success.equals("success"))
 			{
-				ProfileInfo.userToken = (String) jsonObj.get("atoken");
+				money = (String) jsonObj.get("money");
+				scans = (String) jsonObj.get("count_scan");
+				rescans = (String) jsonObj.get("count_rescan");
+				if(jsonObj.has("atoken"))
+				{
+					ProfileInfo.userToken = (String) jsonObj.get("atoken");
+				}
+				ProfileInfo.setScansCount(Integer.valueOf(scans));
+				ProfileInfo.setMoneyCount( Integer.valueOf(money));
+				ProfileInfo.setRescansCount(Integer.valueOf(rescans));
+				ServerAPI.saveProfileInfo();
 			}
-			ProfileInfo.setScansCount(Integer.valueOf(scans));
-			ProfileInfo.setMoneyCount( Integer.valueOf(money));
-			ProfileInfo.setRescansCount(Integer.valueOf(rescans));
-			ServerAPI.saveProfileInfo();
+			else
+			{
+				if(explanation.equals("Invalid token"))
+				{
+					return getToken(ProfileInfo.userID,ProfileInfo.userPass);
+				}
+				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
