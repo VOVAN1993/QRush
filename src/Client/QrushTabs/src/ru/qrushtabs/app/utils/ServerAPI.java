@@ -3,12 +3,21 @@ package ru.qrushtabs.app.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.*;
 
 import ru.qrushtabs.app.PrizeActivity;
@@ -24,28 +33,11 @@ import android.util.Log;
 
 public class ServerAPI {
 	public static boolean offlineMod = true;
-//	public static String checkUser(String userName) {
-//		String req = "check&what=username&username=" + userName;
-//		String resp = executeHttpResponse(req);
-//		String success = "";
-//		try {
-//			Log.d("http", resp);
-//			JSONObject jsonObj = new JSONObject(resp);
-//			success = (String) jsonObj.get("report");
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		Log.d("http", success);
-//		if (success.equals("success"))
-//			return "true";
-//		else
-//			return "false";
-//	}
 
-	private static String executeHttpResponse(String str) {
+
+	private static String executeHttpResponse(String query,List <NameValuePair> values) {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet("http://188.120.235.179/"+str);
+		HttpGet request = new HttpGet("http://188.120.235.179/"+query+"/");
 		HttpResponse response = null;
 		try {
 			response = client.execute(request);
@@ -57,35 +49,88 @@ public class ServerAPI {
 			e1.printStackTrace();
 		}
 
-		// Get the response
-		BufferedReader rd = null;
+ 		BufferedReader rd = null;
+		StringBuilder sb = new StringBuilder("");
 		try {
 			rd = new BufferedReader(new InputStreamReader(response.getEntity()
 					.getContent()));
+			
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+
+			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		String line = "";
-		StringBuilder sb = new StringBuilder("");
-		try {
-			while ((line = rd.readLine()) != null) {
-				sb.append(line);
-
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		 
 
 		return sb.toString();
 	}
+	private static String executeHttpPostResponse(String query,List <NameValuePair> values) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost("http://188.120.235.179/"+query+"/");
+		HttpResponse response = null;
+		
 
+	        try {
+				httpost.setEntity(new UrlEncodedFormEntity(values, HTTP.ASCII));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	        try {
+				response = httpclient.execute(httpost);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        HttpEntity entity = response.getEntity();
+	        Log.d("http", "Login form get: " + response.getStatusLine());
+	        
+	        BufferedReader rd = null;
+	        StringBuilder sb  = new StringBuilder("");
+			try {
+				rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				 String line = "";
+				while ((line = rd.readLine()) != null) {
+					  Log.d("http", line);
+					  sb.append(line);
+				}
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+			httpclient.getConnectionManager().shutdown();  
+		
+		 
+
+		return sb.toString();
+	}
 	public static String signUp(String userID,String userPass,String deviceID) {
 		
-		String req = "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
-		String resp = executeHttpResponse(req);
+		//String req = "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
+		//String resp = executeHttpResponse(req);
+		String req = "add";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair("what", "user"));
+        nvps.add(new BasicNameValuePair("username", "user1"));
+        nvps.add(new BasicNameValuePair("password", "password"));
+        nvps.add(new BasicNameValuePair("deviceid", "device_id"));
+	
+        String resp = executeHttpPostResponse(req,nvps);
 		String success = "";
 		String token = "";
 		try {
@@ -101,7 +146,6 @@ public class ServerAPI {
 		Log.d("http on reg", success);
 		if (success.equals("success"))
 		{
-
 			return "true";
 			
 		}
@@ -110,15 +154,23 @@ public class ServerAPI {
 	}
 public static String getToken(String userID,String userPass) {
 		
-		String req = "get&what=atoken&username="+userID+"&password="+userPass;
-		String resp = executeHttpResponse(req);
+//		String req = "get&what=atoken&username="+userID+"&password="+userPass;
+//		String resp = executeHttpResponse(req);
+	String req = "get";
+	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+    nvps.add(new BasicNameValuePair("what", "atoken"));
+    nvps.add(new BasicNameValuePair("username", userID));
+    nvps.add(new BasicNameValuePair("password", userPass));
+    
+
+    String resp = executeHttpPostResponse(req,nvps);
 		String success = "";
 		String token = "";
 		try {
 			Log.d("http", "getToken");
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			token = (String) jsonObj.get("new_token");
+			token = (String) jsonObj.get("atoken");
 			ProfileInfo.userToken = token;
 
 			
@@ -138,9 +190,16 @@ public static String getToken(String userID,String userPass) {
 			return "false";
 	}
 	public static String loadProfileInfo(String userID) {
-		String req = "get&what=status&username="+userID+"&atoken="+ProfileInfo.userToken;
-		Log.d("http load req", req);
-		String resp = executeHttpResponse(req);
+//		String req = "get&what=status&username="+userID+"&atoken="+ProfileInfo.userToken;
+//		Log.d("http load req", req);
+//		String resp = executeHttpResponse(req);
+		String req = "get";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair("what", "status"));
+        nvps.add(new BasicNameValuePair("username", userID));
+        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+	
+        String resp = executeHttpPostResponse(req,nvps);
 		String success = "";
 		String money = "";
 		String scans = "";
@@ -157,9 +216,9 @@ public static String getToken(String userID,String userPass) {
 				money = (String) jsonObj.get("money");
 				scans = (String) jsonObj.get("count_scan");
 				rescans = (String) jsonObj.get("count_rescan");
-				if(jsonObj.has("atoken"))
+				if(jsonObj.has("new_atoken"))
 				{
-					ProfileInfo.userToken = (String) jsonObj.get("atoken");
+					ProfileInfo.userToken = (String) jsonObj.get("new_atoken");
 				}
 				ProfileInfo.setScansCount(Integer.valueOf(scans));
 				ProfileInfo.setMoneyCount( Integer.valueOf(money));
@@ -189,9 +248,17 @@ public static String getToken(String userID,String userPass) {
  	}
 
 	public static String tryAddScan(String userID,String userPass,String scan) {
-		String req = "add&what=scan&username="+userID+"&atoken="+ProfileInfo.userToken+"&code="+scan;
-		Log.d("http load req", req);
-		String resp = executeHttpResponse(req);
+//		String req = "add&what=scan&username="+userID+"&atoken="+ProfileInfo.userToken+"&code="+scan;
+//		Log.d("http load req", req);
+//		String resp = executeHttpResponse(req);
+		String req = "add";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair("what", "scan"));
+        nvps.add(new BasicNameValuePair("username", userID));
+        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+        nvps.add(new BasicNameValuePair("code", scan));
+	
+        String resp = executeHttpPostResponse(req,nvps);
 		String success = "";
 		try {
 			Log.d("http load resp", resp);
@@ -214,9 +281,17 @@ public static String getToken(String userID,String userPass) {
 			return "false";
 	}
 	public static String addMoney(String userID,String userPass,int count) {
-		String req = "update&what=money&username="+userID+"&atoken="+ProfileInfo.userToken+"&count="+count;
-		Log.d("http addmony req", req);
-		String resp = executeHttpResponse(req);
+//		String req = "update&what=money&username="+userID+"&atoken="+ProfileInfo.userToken+"&count="+count;
+//		Log.d("http addmony req", req);
+//		String resp = executeHttpResponse(req);
+		String req = "update";
+		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair("what", "money"));
+        nvps.add(new BasicNameValuePair("username", userID));
+        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+        nvps.add(new BasicNameValuePair("count", ""+count));
+	
+        String resp = executeHttpPostResponse(req,nvps);
 		String success = "";
 		try {
 			Log.d("http   addmony resp", resp);
