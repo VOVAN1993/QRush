@@ -45,8 +45,7 @@ public class GamesActivity extends FragmentActivity {
 		public void onCancelClick() {
 			GamesActivity.this.finish();
 			if (currentPrize > 0)
-				if (ServerAPI.addMoney(ProfileInfo.userID,
-						ProfileInfo.userPass, currentPrize).equals("true")) {
+				if (ServerAPI.addMoney(currentPrize).equals("true")) {
 					PrizeActivity.currentPrize = currentPrize;
 				} else {
 					PrizeActivity.currentPrize = 0;
@@ -76,7 +75,7 @@ public class GamesActivity extends FragmentActivity {
 					newFragment.show(getSupportFragmentManager(), "missiles");
 				} else {
 
-					if (ServerAPI.addMoney(ProfileInfo.userID,ProfileInfo.userPass, currentPrize).equals("true")) {
+					if (ServerAPI.addMoney(currentPrize).equals("true")) {
 						PrizeActivity.currentPrize = currentPrize;
 					} else {
 						PrizeActivity.currentPrize = 0;
