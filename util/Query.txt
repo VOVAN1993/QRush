@@ -1,4 +1,66 @@
-				Запросы
+1) ^add/
+	а) "what" = "user"
+		{"username","password","deviceid"}or{"userid","deviceid"}
+		
+	Может возвратить:
+	-'{"report" : "error", "explanation" : "User already exists"}'
+	-'{"report" : "success" , "explanation": "New user was added","atoken":"$atoken"}'
+
+	b) "what" = "scan"
+		{"username","atoken","code"}or {"userid","atoken","code"}
+	Может возвратить
+	-'{"report":"error" ,"explanation" : "The user with such name doesn\'t exist"}'
+	- '{"report" : "success","explanation" : "New scan was added[,atoken=$atoken]"}
+	- '{"report" : "error", "explanation" : "This user has this scan"[,atoken=$atoken]}'
+
+2)^update
+	a)"what"="money"
+		{"username","atoken","count"}or{"userid","atoken","count"}
+	Может возвратить:
+	-'{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}'
+	-'{"report" : "success", "explanation" : "Balance is changed"[,atoken=$atoken]}'
+3)^check
+	a)"what"="username"
+		{"username"}or{"userid"}
+	Может возвратить
+	-'{"report" : "success","explanation" : "User already exists"}'
+	-'{"report" : "success","explanation" : "Login is vacant"}'
+4)^get
+	a)"what"="status"
+		{"username","atoken"}or{"userid","atoken"}
+		
+	Может возвратить
+	-'{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}'
+	-'{"report" : "success", "money":"$money", "count_scan":"$countscan"
+             , "count_rescan":"count_rescan"[,atoken=$atoken]}'
+	b)"what"="atoken"
+		{"username","password"}or{"userid","atokenvk"}				
+	Может возвратить
+	-'{"report" : "error", "explanation" : "The user with such name doesn\'t exist"}'
+	-'{"report":"error","explanation":"Password is invalid"}'
+	-'{"report":"success","atoken":"$atoken"}'
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Запросы
 
 1) '^add&what=user&username=(.+)&password=(.+)&deviceid=(.+)/$'  - 
 	- {"report" : "error", "explanation" : "User already exists"} - пользователь с таким ником уже существует
