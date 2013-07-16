@@ -8,9 +8,13 @@ public class ProfileInfo {
 	private static int rescansCount = 0;
 	private static int moneyCount = 0 ; 
 	private static boolean loaded = true;
+	public static String loginType = "def";
 	public static String userID = "0";
 	public static String userPass = "0";
 	public static String userToken = "0";
+	public static String userVKID = "0";
+ 	public static String userVKToken = "0";
+ 	public static String deviceID = "0";
 	public static int getScansCount()
 	{
 		if(loaded)

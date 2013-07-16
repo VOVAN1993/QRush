@@ -19,8 +19,7 @@ public class ScanBox {
 
 	public static int addScan(String scanInfo) {
 		if (!ServerAPI.offlineMod && ServerAPI.isOnline()) {
-			if (ServerAPI.tryAddScan(ProfileInfo.userID, ProfileInfo.userPass,
-					scanInfo).equals("true")) {
+			if (ServerAPI.tryAddScan(scanInfo).equals("true")) {
 				ProfileInfo.addScan(scanInfo);
 				ServerAPI.saveProfileInfo();
 				return 2;

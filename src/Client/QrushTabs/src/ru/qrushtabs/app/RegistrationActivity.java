@@ -33,7 +33,9 @@ public class RegistrationActivity extends Activity
 			userID = ed.getText().toString();
 			ed = (EditText)RegistrationActivity.this.findViewById(R.id.signinPass);
 			userPass = ed.getText().toString();
-			(new CheckTask()).execute(userID,userPass);
+			ProfileInfo.userID = userID;
+			ProfileInfo.userPass = userPass;
+			(new CheckTask()).execute();
 			 
 			
 		}
@@ -43,7 +45,7 @@ public class RegistrationActivity extends Activity
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo(args[0]);
+			return ServerAPI.loadProfileInfo();
 		}
 
 		protected void onPostExecute(String objResult) 
@@ -59,9 +61,19 @@ public class RegistrationActivity extends Activity
 		        
 
 		        ServerAPI.saveProfileInfo();
+		        
+		        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+				finish();
+				startActivity(intent);
 			   // ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
 				 
 			}
+			else
+			{
+				TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
+			    tv.setText("Не получилось войти");
+			}
+		
 		}
 
 	}
@@ -79,7 +91,7 @@ public class RegistrationActivity extends Activity
 	private class SignUpTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.signUp(args[0],args[1],args[2]);
+			return ServerAPI.signUp();
 		}
 
 		protected void onPostExecute(String objResult) {
@@ -87,11 +99,20 @@ public class RegistrationActivity extends Activity
 			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-			    tv.setText("¬ы успешно зарегистрировались");
+			    tv.setText("Вы успешно зарегистрировались");
 			    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
 			    ProfileInfo.userID = userID;
 		        ProfileInfo.userPass = userPass;
 		        ServerAPI.saveProfileInfo();
+		        
+		        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+				finish();
+				startActivity(intent);
+			}
+			else
+			{
+				TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
+			    tv.setText("Не получилось зарегестрирваться");
 			}
 		}
 

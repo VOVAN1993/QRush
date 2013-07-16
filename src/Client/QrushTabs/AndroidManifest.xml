@@ -15,7 +15,7 @@
 
     <application android:name=".QrushTabsApp">
           <activity
-            android:name="MainMainActivity">
+            android:name="PreloadActivity">
              
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +32,10 @@
         </activity>
         <activity
             android:name="EnterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="LoginActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait" />
         <activity

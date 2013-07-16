@@ -34,10 +34,10 @@ import android.util.Log;
 public class ServerAPI {
 	public static boolean offlineMod = true;
 
-
-	private static String executeHttpResponse(String query,List <NameValuePair> values) {
+	private static String executeHttpResponse(String query,
+			List<NameValuePair> values) {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet("http://188.120.235.179/"+query+"/");
+		HttpGet request = new HttpGet("http://188.120.235.179/" + query + "/");
 		HttpResponse response = null;
 		try {
 			response = client.execute(request);
@@ -49,12 +49,12 @@ public class ServerAPI {
 			e1.printStackTrace();
 		}
 
- 		BufferedReader rd = null;
+		BufferedReader rd = null;
 		StringBuilder sb = new StringBuilder("");
 		try {
 			rd = new BufferedReader(new InputStreamReader(response.getEntity()
 					.getContent()));
-			
+
 			String line = "";
 			while ((line = rd.readLine()) != null) {
 				sb.append(line);
@@ -66,71 +66,73 @@ public class ServerAPI {
 			e.printStackTrace();
 		}
 
-		
-		 
-
 		return sb.toString();
 	}
-	private static String executeHttpPostResponse(String query,List <NameValuePair> values) {
+
+	private static String executeHttpPostResponse(String query,
+			List<NameValuePair> values) {
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httpost = new HttpPost("http://188.120.235.179/"+query+"/");
+		HttpPost httpost = new HttpPost("http://188.120.235.179/" + query + "/");
 		HttpResponse response = null;
-		
 
-	        try {
-				httpost.setEntity(new UrlEncodedFormEntity(values, HTTP.ASCII));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (ProfileInfo.loginType.equals("vk")) {
+			Log.d("http", "sending vk userid");
+			values.add(new BasicNameValuePair("userid", ProfileInfo.userVKID));
+		} else {
+			Log.d("http", "sending def username");
+			values.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		}
+		values.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
 
-	        try {
-				response = httpclient.execute(httpost);
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			httpost.setEntity(new UrlEncodedFormEntity(values, HTTP.ASCII));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			response = httpclient.execute(httpost);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Log.d("http", "Login form get: " + response.getStatusLine());
+
+		BufferedReader rd = null;
+		StringBuilder sb = new StringBuilder("");
+		try {
+			rd = new BufferedReader(new InputStreamReader(response.getEntity()
+					.getContent()));
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				Log.d("http", line);
+				sb.append(line);
 			}
-	        HttpEntity entity = response.getEntity();
-	        Log.d("http", "Login form get: " + response.getStatusLine());
-	        
-	        BufferedReader rd = null;
-	        StringBuilder sb  = new StringBuilder("");
-			try {
-				rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-				 String line = "";
-				while ((line = rd.readLine()) != null) {
-					  Log.d("http", line);
-					  sb.append(line);
-				}
-			} catch (IllegalStateException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		
-			httpclient.getConnectionManager().shutdown();  
-		
-		 
+		} catch (IllegalStateException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		httpclient.getConnectionManager().shutdown();
 
 		return sb.toString();
 	}
-	public static String signUp(String userID,String userPass,String deviceID) {
-		
-		//String req = "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
-		//String resp = executeHttpResponse(req);
+
+	public static String signUp() {
+
+		// String req =
+		// "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
+		// String resp = executeHttpResponse(req);
 		String req = "add";
-		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-        nvps.add(new BasicNameValuePair("what", "user"));
-        nvps.add(new BasicNameValuePair("username", "user1"));
-        nvps.add(new BasicNameValuePair("password", "password"));
-        nvps.add(new BasicNameValuePair("deviceid", "device_id"));
-	
-        String resp = executeHttpPostResponse(req,nvps);
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "user"));
+//		nvps.add(new BasicNameValuePair("username", userID));
+//		nvps.add(new BasicNameValuePair("password", userPass));
+		nvps.add(new BasicNameValuePair("deviceid", ProfileInfo.deviceID));
+
+		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		String token = "";
 		try {
@@ -144,26 +146,30 @@ public class ServerAPI {
 			e.printStackTrace();
 		}
 		Log.d("http on reg", success);
-		if (success.equals("success"))
-		{
+		if (success.equals("success")) {
 			return "true";
-			
-		}
-		else
+		} else
 			return "false";
 	}
-public static String getToken(String userID,String userPass) {
-		
-//		String req = "get&what=atoken&username="+userID+"&password="+userPass;
-//		String resp = executeHttpResponse(req);
-	String req = "get";
-	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-    nvps.add(new BasicNameValuePair("what", "atoken"));
-    nvps.add(new BasicNameValuePair("username", userID));
-    nvps.add(new BasicNameValuePair("password", userPass));
-    
 
-    String resp = executeHttpPostResponse(req,nvps);
+	public static String getToken() {
+
+		// String req =
+		// "get&what=atoken&username="+userID+"&password="+userPass;
+		// String resp = executeHttpResponse(req);
+		String req = "get";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "atoken"));
+		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		if (ProfileInfo.loginType.equals("vk")) {
+			nvps.add(new BasicNameValuePair("atokenvk", ProfileInfo.userVKToken));
+
+		} else {
+			nvps.add(new BasicNameValuePair("password", ProfileInfo.userPass));
+
+		}
+
+		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		String token = "";
 		try {
@@ -172,34 +178,30 @@ public static String getToken(String userID,String userPass) {
 			success = (String) jsonObj.get("report");
 			token = (String) jsonObj.get("atoken");
 			ProfileInfo.userToken = token;
+			loadProfileInfo();
 
-			
-			loadProfileInfo(userID);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Log.d("http on reg", success);
-		if (success.equals("success"))
-		{
-
+		if (success.equals("success")) {
 			return "true";
-			
-		}
-		else
+		} else
 			return "false";
 	}
-	public static String loadProfileInfo(String userID) {
-//		String req = "get&what=status&username="+userID+"&atoken="+ProfileInfo.userToken;
-//		Log.d("http load req", req);
-//		String resp = executeHttpResponse(req);
+
+	public static String loadProfileInfo() {
+		// String req =
+		// "get&what=status&username="+userID+"&atoken="+ProfileInfo.userToken;
+		// Log.d("http load req", req);
+		// String resp = executeHttpResponse(req);
 		String req = "get";
-		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-        nvps.add(new BasicNameValuePair("what", "status"));
-        nvps.add(new BasicNameValuePair("username", userID));
-        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
-	
-        String resp = executeHttpPostResponse(req,nvps);
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "status"));
+		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		// nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+
+		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		String money = "";
 		String scans = "";
@@ -211,61 +213,54 @@ public static String getToken(String userID,String userPass) {
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
 			explanation = (String) jsonObj.get("explanation");
-			if(success.equals("success"))
-			{
+			if (success.equals("success")) {
 				money = (String) jsonObj.get("money");
 				scans = (String) jsonObj.get("count_scan");
 				rescans = (String) jsonObj.get("count_rescan");
-				if(jsonObj.has("new_atoken"))
-				{
-					ProfileInfo.userToken = (String) jsonObj.get("new_atoken");
+				if (jsonObj.has("atoken")) {
+					ProfileInfo.userToken = (String) jsonObj.get("atoken");
 				}
 				ProfileInfo.setScansCount(Integer.valueOf(scans));
-				ProfileInfo.setMoneyCount( Integer.valueOf(money));
+				ProfileInfo.setMoneyCount(Integer.valueOf(money));
 				ProfileInfo.setRescansCount(Integer.valueOf(rescans));
 				ServerAPI.saveProfileInfo();
-			}
-			else
-			{
-				if(explanation.equals("Invalid token"))
-				{
-					return getToken(ProfileInfo.userID,ProfileInfo.userPass);
+			} else {
+				if (explanation.equals("Invalid token")) {
+					return getToken();
 				}
-				
+
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Log.d("http loadIngo", success);
-		if (success.equals("success"))
-		{
-			Log.d("http money", money );
+		if (success.equals("success")) {
+			Log.d("http money", money);
 			return "true";
-		}
-		else
+		} else
 			return "false";
- 	}
+	}
 
-	public static String tryAddScan(String userID,String userPass,String scan) {
-//		String req = "add&what=scan&username="+userID+"&atoken="+ProfileInfo.userToken+"&code="+scan;
-//		Log.d("http load req", req);
-//		String resp = executeHttpResponse(req);
+	public static String tryAddScan(String scan) {
+		// String req =
+		// "add&what=scan&username="+userID+"&atoken="+ProfileInfo.userToken+"&code="+scan;
+		// Log.d("http load req", req);
+		// String resp = executeHttpResponse(req);
 		String req = "add";
-		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-        nvps.add(new BasicNameValuePair("what", "scan"));
-        nvps.add(new BasicNameValuePair("username", userID));
-        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
-        nvps.add(new BasicNameValuePair("code", scan));
-	
-        String resp = executeHttpPostResponse(req,nvps);
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "scan"));
+		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		// nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+		nvps.add(new BasicNameValuePair("code", scan));
+
+		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		try {
 			Log.d("http load resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			if(jsonObj.has("atoken"))
-			{
+			if (jsonObj.has("atoken")) {
 				ProfileInfo.userToken = (String) jsonObj.get("atoken");
 			}
 
@@ -273,32 +268,31 @@ public static String getToken(String userID,String userPass) {
 			e.printStackTrace();
 		}
 		Log.d("http loadScan", success);
-		if (success.equals("success"))
-		{
- 			return "true";
-		}
-		else
+		if (success.equals("success")) {
+			return "true";
+		} else
 			return "false";
 	}
-	public static String addMoney(String userID,String userPass,int count) {
-//		String req = "update&what=money&username="+userID+"&atoken="+ProfileInfo.userToken+"&count="+count;
-//		Log.d("http addmony req", req);
-//		String resp = executeHttpResponse(req);
+
+	public static String addMoney(int count) {
+		// String req =
+		// "update&what=money&username="+userID+"&atoken="+ProfileInfo.userToken+"&count="+count;
+		// Log.d("http addmony req", req);
+		// String resp = executeHttpResponse(req);
 		String req = "update";
-		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-        nvps.add(new BasicNameValuePair("what", "money"));
-        nvps.add(new BasicNameValuePair("username", userID));
-        nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
-        nvps.add(new BasicNameValuePair("count", ""+count));
-	
-        String resp = executeHttpPostResponse(req,nvps);
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "money"));
+		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		// nvps.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
+		nvps.add(new BasicNameValuePair("count", "" + count));
+
+		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		try {
 			Log.d("http   addmony resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
-			if(jsonObj.has("atoken"))
-			{
+			if (jsonObj.has("atoken")) {
 				ProfileInfo.userToken = (String) jsonObj.get("atoken");
 			}
 
@@ -306,13 +300,12 @@ public static String getToken(String userID,String userPass) {
 			e.printStackTrace();
 		}
 		Log.d("http http addmony", success);
-		if (success.equals("success"))
-		{
+		if (success.equals("success")) {
 			return "true";
-		}
-		else
+		} else
 			return "false";
 	}
+
 	public static String loadFriendsInfo() {
 		return null;
 	}
@@ -321,21 +314,24 @@ public static String getToken(String userID,String userPass) {
 		return null;
 	}
 
-	public static void saveProfileInfo()
-	{
-		    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
-	        Editor editor=prefs.edit();
-	        editor.putString("userPass", ProfileInfo.userPass);
-	        editor.putString("userID", ProfileInfo.userID);
-	        editor.putString("userID", ProfileInfo.userID);
-	        editor.putString("userToken", ProfileInfo.userToken);
-	        editor.putInt("scansCount", ProfileInfo.getScansCount());
-	        editor.putInt("rescanCount", ProfileInfo.getRescansCount());
-	        editor.putInt("moneyCount", ProfileInfo.getMoneyCount());
- 	        editor.commit();
+	public static void saveProfileInfo() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
+		Editor editor = prefs.edit();
+		editor.putString("userPass", ProfileInfo.userPass);
+		editor.putString("userID", ProfileInfo.userID);
+		editor.putString("userToken", ProfileInfo.userToken);
+		editor.putString("userVKID", ProfileInfo.userVKID);
+		editor.putString("userVKToken", ProfileInfo.userVKToken);
+		editor.putString("loginType", ProfileInfo.loginType);
+		editor.putInt("scansCount", ProfileInfo.getScansCount());
+		editor.putInt("rescanCount", ProfileInfo.getRescansCount());
+		editor.putInt("moneyCount", ProfileInfo.getMoneyCount());
+		editor.commit();
 	}
+
 	public static boolean isOnline() {
-		Context c =  QrushTabsApp.getAppContext();
+		Context c = QrushTabsApp.getAppContext();
 		ConnectivityManager cm = (ConnectivityManager) c
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 

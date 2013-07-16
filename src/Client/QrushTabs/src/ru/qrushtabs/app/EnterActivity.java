@@ -39,12 +39,28 @@ public class EnterActivity extends Activity {
 		
 		
 	};
+	OnClickListener vl = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View arg0) {
+			 
+			Intent intent = new Intent(EnterActivity.this, LoginActivity.class);
+			finish();
+			startActivity(intent);
+			
+		}
+		
+		
+	};
 	  public void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           
           this.setContentView(R.layout.enter);
           Button bt = (Button)findViewById(R.id.loginbtn);
           bt.setOnClickListener(l);
+          bt = (Button)findViewById(R.id.vkloginbtn);
+          bt.setOnClickListener(vl);
         
   }
 
