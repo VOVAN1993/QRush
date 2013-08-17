@@ -19,6 +19,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class EnterActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			 
+			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, RegistrationActivity.class);
 			finish();
 			startActivity(intent);
@@ -45,7 +48,23 @@ public class EnterActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			 
-			Intent intent = new Intent(EnterActivity.this, LoginActivity.class);
+			ProfileInfo.signInType = "vk";
+			Intent intent = new Intent(EnterActivity.this, VkLoginActivity.class);
+			finish();
+			startActivity(intent);
+			
+		}
+		
+		
+	};
+	OnClickListener ll = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View arg0) {
+			 
+			ProfileInfo.signInType = "def";
+			Intent intent = new Intent(EnterActivity.this, SignInActivity.class);
 			finish();
 			startActivity(intent);
 			
@@ -56,12 +75,19 @@ public class EnterActivity extends Activity {
 	  public void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           
+          
+          //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
           this.setContentView(R.layout.enter);
-          Button bt = (Button)findViewById(R.id.loginbtn);
+//          getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_empty);
+          //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+          
+          Button bt = (Button)findViewById(R.id.regbtn);
           bt.setOnClickListener(l);
           bt = (Button)findViewById(R.id.vkloginbtn);
           bt.setOnClickListener(vl);
         
+          bt = (Button)findViewById(R.id.signinBtn);
+          bt.setOnClickListener(ll);
   }
 
 }

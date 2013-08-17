@@ -7,6 +7,7 @@ import android.os.Handler;
  
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -91,7 +92,7 @@ public class MainActivity extends TabActivity {
  		tabSpec = tabHost.newTabSpec("tag4");
 		tabSpec.setIndicator("",
 				getResources().getDrawable(R.drawable.raiting_tab_selector));
-		 tabSpec.setContent(new Intent(this, RatingsActivity.class));
+		 tabSpec.setContent(new Intent(this, MoneyRatingsActivity.class));
 		tabHost.addTab(tabSpec);
  		tabSpec = tabHost.newTabSpec("tag5");
 		tabSpec.setIndicator("",
@@ -99,8 +100,12 @@ public class MainActivity extends TabActivity {
 		 tabSpec.setContent(new Intent(this, QuestsActivity.class));
 		tabHost.addTab(tabSpec);
  		for (int i = 0; i < 5; i++)
-			tabHost.getTabWidget().getChildTabViewAt(i)
-					.setBackgroundDrawable(null);
+ 		{
+ 			 View v = tabHost.getTabWidget().getChildTabViewAt(i);
+			v.setBackgroundDrawable(null);
+			 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+		        params.setMargins(-4, -4, -4, -4);
+ 		}
 
  		tabHost.setCurrentTabByTag("tag3");
 

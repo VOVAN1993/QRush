@@ -7,9 +7,12 @@ public class ProfileInfo {
 	private static int scansCount = 0;
 	private static int rescansCount = 0;
 	private static int moneyCount = 0 ; 
+	
 	private static boolean loaded = true;
-	public static String loginType = "def";
-	public static String userID = "0";
+	public static String sex = "M";
+	public static String mail = "mail@mail.com";
+	public static String signInType = "def";
+	public static String username = "0";
 	public static String userPass = "0";
 	public static String userToken = "0";
 	public static String userVKID = "0";

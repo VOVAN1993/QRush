@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@color/gray">
+    android:background="@drawable/ratingsbkg">
 
     <TabHost
         android:id="@+id/rating_type_tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp" >
+        android:layout_marginTop="170dp"
+        android:background="@color/transparent" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,14 +22,17 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tabStripEnabled="false" >
+                android:tabStripEnabled="false"
+                android:background="@color/transparent" >
+                
             </TabWidget>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_below="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:background="@color/white" >
 
                 <ListView
                     android:id="@+id/money_ratings_list1"

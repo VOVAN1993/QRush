@@ -1,8 +1,15 @@
 package ru.qrushtabs.app;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import ru.qrushtabs.app.custom.DateActivity;
 import ru.qrushtabs.app.utils.ServerAPI;
 
+import com.perm.kate.api.Api;
 import com.perm.kate.api.Auth;
+import com.perm.kate.api.User;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,11 +28,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class LoginActivity extends Activity {
+public class VkLoginActivity extends Activity {
     private static final String TAG = "Kate.LoginActivity";
 
     WebView webview;
-    
+    Api api;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,21 +71,18 @@ public class LoginActivity extends Activity {
             {
                 if(!url.contains("error=")){
                     String[] auth=Auth.parseRedirectUrl(url);
-                    //Intent intent=new Intent();
-                   // intent.putExtra("token", auth[0]);
-                    //intent.putExtra("user_id", Long.parseLong(auth[1]));
                     ProfileInfo.userVKID = auth[1];
                     ProfileInfo.userVKToken = auth[0];
-                    ProfileInfo.loginType="vk";
+                    ProfileInfo.signInType="vk";
                     Log.d("vk", "user_id "+ Long.parseLong(auth[1]));
                     
                     ServerAPI.saveProfileInfo();
     		        
-                    (new CheckTask()).execute();
-//    		        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//    				finish();
-//    				startActivity(intent);
-                    //setResult(Activity.RESULT_OK, intent);
+//                  Intent intent = new Intent(this, RegistrationActivity.class);
+//        			finish();
+//        			startActivity(intent);
+                    //(new SignUpTask()).execute();
+        			(new SignInTask()).execute();
                 }
                 finish();
             }
@@ -87,10 +91,10 @@ public class LoginActivity extends Activity {
         }
     }
     
-    private class CheckTask extends AsyncTask<String,String,String> {
+    private class SignInTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo();
+			return ServerAPI.signin();
 		}
 
 		protected void onPostExecute(String objResult) 
@@ -99,64 +103,76 @@ public class LoginActivity extends Activity {
 			if(objResult.equals("true"))
 			{
 				Log.d("vk", "OnCheck");
-//			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-//			    tv.setText("¬ы успешно вошли");
-//			    
-//				ProfileInfo.userID = userID;
-//		        ProfileInfo.userPass = userPass;
-//		        
-//
-//		        ServerAPI.saveProfileInfo();
-//		        
-		        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+		        Intent intent = new Intent(VkLoginActivity.this, MainActivity.class);
 				finish();
 				startActivity(intent);
-			   // ServerAPI.loadProfileInfo(ProfileInfo.userID,ProfileInfo.userPass);
 				 
 			}
 			else
 			{
-				Log.d("vk", "OnNotCheck");
-				(new SignUpTask()).execute();
-//				TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-//			    tv.setText("Не получилось войти");
+				Log.d("vk", "OnNotLogin");
+                Intent intent = new Intent(VkLoginActivity.this, RegistrationActivity.class);
+    			finish();
+    			startActivity(intent);
+				///(new SignUpTask()).execute();
 			}
 		
 		}
 
 	}
-	OnClickListener onSignUp = new OnClickListener()
-	{
-
-		@Override
-		public void onClick(View arg0) {
-  			(new SignUpTask()).execute();
-			
-		}
-		
-	};
-	private class SignUpTask extends AsyncTask<String,String,String> {
-
-		protected String doInBackground(String... args) {
-			return ServerAPI.signUp();
-		}
-
-		protected void onPostExecute(String objResult) {
-
-			if(objResult.equals("true"))
-			{
-				Log.d("vk", "OnSignUp");
-		        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-				finish();
-				startActivity(intent);
-				
-			}
-			else
-			{
-				Log.d("vk", "OnNotSignUp");
-			}
-		 
-		}
+//	OnClickListener onSignUp = new OnClickListener()
+//	{
+//
+//		@Override
+//		public void onClick(View arg0) {
+//  			(new SignUpTask()).execute();
+//			
+//		}
+//		
+//	};
+//	private class SignUpTask extends AsyncTask<String,String,String> {
+//
+//		protected String doInBackground(String... args) {
+//			return ServerAPI.signUp();
+//		}
+//
+//		protected void onPostExecute(String objResult) {
+//
+//			if(objResult.equals("true"))
+//			{
+//				Log.d("vk", "OnSignUp");
+//		        Intent intent = new Intent(VkLoginActivity.this, MainActivity.class);
+//				finish();
+//				  try {
+//					  ArrayList<Long> uids = new ArrayList<Long>();
+//					  ArrayList<User> info;
+//					  api=new Api(ProfileInfo.userVKToken, Constants.API_ID);
+//					  uids.add(Long.valueOf(ProfileInfo.userVKID));
+// 					  info = api.getProfiles(uids, null, null, null, null, null);
+// 					  
+// 					  User u = info.get(0);
+// 					  Log.d("vk", u.first_name);
+// 					 Log.d("vk", u.last_name);
+// 					 Log.d("vk", ""+u.city);
+// 					 Log.d("vk", ""+u.country);
+// 					 Log.d("vk", u.mobile_phone);
+//  	                    //Показать сообщение в UI потоке 
+// 					 Intent formIntent = new Intent(VkLoginActivity.this,DateActivity.class);
+// 					formIntent.putExtra("nickname", u.nickname);
+// 					formIntent.putExtra("birthdate", u.birthdate);
+// 					formIntent.putExtra("phone_number", u.mobile_phone);
+// 					startActivity(formIntent);
+// 	                } catch (Exception e) {
+//	                    e.printStackTrace();
+//	                }
+//				//startActivity(intent);
+//				
+//			}
+//			else
+//			{
+//				Log.d("vk", "OnNotSignUp");
+//			}
+//		 
+//		}
 
 	}
-}

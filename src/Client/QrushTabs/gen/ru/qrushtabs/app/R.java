@@ -13,6 +13,244 @@ public final class R {
         public static final int in=0x7f040001;
         public static final int out=0x7f040002;
     }
+    public static final class array {
+        public static final int city1=0x7f0600a1;
+        public static final int city10=0x7f060055;
+        public static final int city100=0x7f06005d;
+        public static final int city101=0x7f06005e;
+        public static final int city102=0x7f06005f;
+        public static final int city103=0x7f060060;
+        public static final int city104=0x7f060061;
+        public static final int city105=0x7f060062;
+        public static final int city106=0x7f060065;
+        public static final int city107=0x7f060067;
+        public static final int city108=0x7f060068;
+        public static final int city109=0x7f060069;
+        public static final int city11=0x7f060063;
+        public static final int city110=0x7f06006a;
+        public static final int city111=0x7f06006c;
+        public static final int city112=0x7f06006d;
+        public static final int city113=0x7f06006e;
+        public static final int city114=0x7f06006f;
+        public static final int city115=0x7f060070;
+        public static final int city116=0x7f060071;
+        public static final int city117=0x7f060072;
+        public static final int city118=0x7f060073;
+        public static final int city119=0x7f060074;
+        public static final int city12=0x7f060066;
+        public static final int city120=0x7f060075;
+        public static final int city121=0x7f060076;
+        public static final int city122=0x7f060077;
+        public static final int city123=0x7f060078;
+        public static final int city124=0x7f060079;
+        public static final int city125=0x7f06007a;
+        public static final int city126=0x7f06007b;
+        public static final int city127=0x7f06007c;
+        public static final int city128=0x7f06007d;
+        public static final int city129=0x7f06007f;
+        public static final int city13=0x7f06006b;
+        public static final int city130=0x7f060080;
+        public static final int city131=0x7f060081;
+        public static final int city132=0x7f060082;
+        public static final int city133=0x7f060083;
+        public static final int city134=0x7f060084;
+        public static final int city135=0x7f060085;
+        public static final int city136=0x7f060086;
+        public static final int city137=0x7f060087;
+        public static final int city138=0x7f060064;
+        public static final int city139=0x7f060088;
+        public static final int city14=0x7f0600e5;
+        public static final int city140=0x7f060089;
+        public static final int city141=0x7f06008a;
+        public static final int city142=0x7f06008b;
+        public static final int city143=0x7f06008c;
+        public static final int city144=0x7f06008d;
+        public static final int city145=0x7f06008e;
+        public static final int city146=0x7f06008f;
+        public static final int city147=0x7f060090;
+        public static final int city148=0x7f060091;
+        public static final int city149=0x7f060092;
+        public static final int city15=0x7f06007e;
+        public static final int city150=0x7f060093;
+        public static final int city151=0x7f060094;
+        public static final int city152=0x7f060095;
+        public static final int city153=0x7f060096;
+        public static final int city154=0x7f060097;
+        public static final int city155=0x7f060098;
+        public static final int city156=0x7f060099;
+        public static final int city157=0x7f06009a;
+        public static final int city158=0x7f06009b;
+        public static final int city159=0x7f06009c;
+        public static final int city16=0x7f0600bf;
+        public static final int city160=0x7f06009d;
+        public static final int city161=0x7f06009e;
+        public static final int city162=0x7f06009f;
+        public static final int city163=0x7f0600a0;
+        public static final int city164=0x7f0600a2;
+        public static final int city165=0x7f0600a3;
+        public static final int city166=0x7f0600a5;
+        public static final int city167=0x7f0600a6;
+        public static final int city168=0x7f0600a7;
+        public static final int city169=0x7f0600a8;
+        public static final int city17=0x7f0600c9;
+        public static final int city170=0x7f0600a9;
+        public static final int city171=0x7f0600aa;
+        public static final int city172=0x7f0600ab;
+        public static final int city173=0x7f0600ac;
+        public static final int city174=0x7f0600ad;
+        public static final int city175=0x7f0600ae;
+        public static final int city176=0x7f0600af;
+        public static final int city177=0x7f0600b0;
+        public static final int city178=0x7f0600b1;
+        public static final int city179=0x7f0600b2;
+        public static final int city18=0x7f0600cc;
+        public static final int city180=0x7f0600b3;
+        public static final int city181=0x7f0600b4;
+        public static final int city182=0x7f0600b5;
+        public static final int city183=0x7f0600b7;
+        public static final int city184=0x7f0600b8;
+        public static final int city185=0x7f0600b9;
+        public static final int city186=0x7f0600ba;
+        public static final int city187=0x7f0600bb;
+        public static final int city188=0x7f0600bc;
+        public static final int city189=0x7f0600bd;
+        public static final int city19=0x7f060002;
+        public static final int city190=0x7f0600be;
+        public static final int city191=0x7f0600c0;
+        public static final int city192=0x7f0600c1;
+        public static final int city193=0x7f0600c2;
+        public static final int city194=0x7f0600c3;
+        public static final int city195=0x7f0600c4;
+        public static final int city196=0x7f0600c5;
+        public static final int city197=0x7f0600c6;
+        public static final int city198=0x7f0600c7;
+        public static final int city199=0x7f0600c8;
+        public static final int city2=0x7f0600cd;
+        public static final int city20=0x7f060003;
+        public static final int city200=0x7f0600ca;
+        public static final int city201=0x7f0600cb;
+        public static final int city202=0x7f0600ce;
+        public static final int city203=0x7f0600cf;
+        public static final int city204=0x7f0600d0;
+        public static final int city205=0x7f0600d1;
+        public static final int city206=0x7f0600d2;
+        public static final int city207=0x7f0600d3;
+        public static final int city208=0x7f0600d4;
+        public static final int city209=0x7f0600d5;
+        public static final int city21=0x7f060005;
+        public static final int city210=0x7f0600d6;
+        public static final int city211=0x7f0600d7;
+        public static final int city212=0x7f0600d8;
+        public static final int city213=0x7f0600d9;
+        public static final int city214=0x7f0600da;
+        public static final int city215=0x7f0600dc;
+        public static final int city216=0x7f0600dd;
+        public static final int city217=0x7f0600de;
+        public static final int city218=0x7f0600df;
+        public static final int city219=0x7f0600e0;
+        public static final int city22=0x7f060006;
+        public static final int city220=0x7f0600e1;
+        public static final int city221=0x7f0600e2;
+        public static final int city222=0x7f0600e3;
+        public static final int city223=0x7f0600e4;
+        public static final int city224=0x7f0600e6;
+        public static final int city226=0x7f0600e7;
+        public static final int city227=0x7f0600e8;
+        public static final int city228=0x7f0600ea;
+        public static final int city229=0x7f0600eb;
+        public static final int city23=0x7f060007;
+        public static final int city230=0x7f0600db;
+        public static final int city231=0x7f06003f;
+        public static final int city232=0x7f0600e9;
+        public static final int city233=0x7f060024;
+        public static final int city234=0x7f0600b6;
+        public static final int city235=0x7f06001b;
+        public static final int city24=0x7f060008;
+        public static final int city25=0x7f060009;
+        public static final int city26=0x7f06000a;
+        public static final int city27=0x7f06000b;
+        public static final int city28=0x7f06000c;
+        public static final int city29=0x7f06000e;
+        public static final int city3=0x7f060014;
+        public static final int city30=0x7f06000f;
+        public static final int city31=0x7f060010;
+        public static final int city32=0x7f060011;
+        public static final int city33=0x7f060012;
+        public static final int city34=0x7f060013;
+        public static final int city35=0x7f060015;
+        public static final int city36=0x7f060016;
+        public static final int city37=0x7f060017;
+        public static final int city38=0x7f060018;
+        public static final int city39=0x7f060019;
+        public static final int city4=0x7f060052;
+        public static final int city40=0x7f06001a;
+        public static final int city41=0x7f06001c;
+        public static final int city42=0x7f06001d;
+        public static final int city43=0x7f06001e;
+        public static final int city44=0x7f06001f;
+        public static final int city45=0x7f060020;
+        public static final int city46=0x7f060021;
+        public static final int city47=0x7f060022;
+        public static final int city48=0x7f060023;
+        public static final int city49=0x7f060025;
+        public static final int city5=0x7f060004;
+        public static final int city50=0x7f060026;
+        public static final int city51=0x7f060027;
+        public static final int city52=0x7f060028;
+        public static final int city53=0x7f060029;
+        public static final int city54=0x7f06002a;
+        public static final int city55=0x7f06002b;
+        public static final int city56=0x7f06002c;
+        public static final int city57=0x7f06002d;
+        public static final int city58=0x7f06002e;
+        public static final int city59=0x7f06002f;
+        public static final int city6=0x7f06000d;
+        public static final int city60=0x7f060030;
+        public static final int city61=0x7f060031;
+        public static final int city62=0x7f060032;
+        public static final int city63=0x7f060033;
+        public static final int city64=0x7f060034;
+        public static final int city65=0x7f060035;
+        public static final int city66=0x7f060036;
+        public static final int city67=0x7f060037;
+        public static final int city68=0x7f060038;
+        public static final int city69=0x7f060039;
+        public static final int city7=0x7f06003c;
+        public static final int city70=0x7f06003a;
+        public static final int city71=0x7f06003b;
+        public static final int city72=0x7f06003d;
+        public static final int city73=0x7f06003e;
+        public static final int city74=0x7f060040;
+        public static final int city75=0x7f060041;
+        public static final int city76=0x7f060042;
+        public static final int city77=0x7f060043;
+        public static final int city78=0x7f060044;
+        public static final int city79=0x7f060045;
+        public static final int city8=0x7f060046;
+        public static final int city80=0x7f060047;
+        public static final int city81=0x7f060048;
+        public static final int city82=0x7f060049;
+        public static final int city83=0x7f06004a;
+        public static final int city84=0x7f06004b;
+        public static final int city85=0x7f06004c;
+        public static final int city86=0x7f06004d;
+        public static final int city87=0x7f06004e;
+        public static final int city88=0x7f06004f;
+        public static final int city89=0x7f060050;
+        public static final int city9=0x7f0600a4;
+        public static final int city90=0x7f060051;
+        public static final int city91=0x7f060053;
+        public static final int city92=0x7f060054;
+        public static final int city93=0x7f060056;
+        public static final int city94=0x7f060057;
+        public static final int city95=0x7f060058;
+        public static final int city96=0x7f060059;
+        public static final int city97=0x7f06005a;
+        public static final int city98=0x7f06005b;
+        public static final int city99=0x7f06005c;
+        public static final int countries_array=0x7f060000;
+        public static final int countries_cid=0x7f060001;
+    }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -22,6 +260,30 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int customFont=0x7f010000;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorFocused=0x7f010002;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorNotFocused=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColorPressed=0x7f010003;
     }
     public static final class color {
         public static final int article_title=0x7f05000a;
@@ -42,16 +304,18 @@ containing a value of this type.
         public static final int white=0x7f050001;
     }
     public static final class dimen {
-        public static final int profile_city_font_size=0x7f060009;
-        public static final int profile_frames_height=0x7f060003;
-        public static final int profile_frames_width=0x7f060002;
-        public static final int profile_margin_top=0x7f060006;
-        public static final int profile_name_font_size=0x7f060008;
-        public static final int profile_nums_font_size=0x7f060007;
-        public static final int profile_tv_height=0x7f060005;
-        public static final int profile_tv_width=0x7f060004;
-        public static final int textview_height=0x7f060000;
-        public static final int textview_width=0x7f060001;
+        public static final int profile_black_height=0x7f070003;
+        public static final int profile_black_width=0x7f070002;
+        public static final int profile_city_font_size=0x7f07000b;
+        public static final int profile_frames_height=0x7f070005;
+        public static final int profile_frames_width=0x7f070004;
+        public static final int profile_margin_top=0x7f070008;
+        public static final int profile_name_font_size=0x7f07000a;
+        public static final int profile_nums_font_size=0x7f070009;
+        public static final int profile_tv_height=0x7f070007;
+        public static final int profile_tv_width=0x7f070006;
+        public static final int textview_height=0x7f070000;
+        public static final int textview_width=0x7f070001;
     }
     public static final class drawable {
         public static final int active_quest_bkg=0x7f020000;
@@ -59,155 +323,218 @@ containing a value of this type.
         public static final int backbtn=0x7f020002;
         public static final int backbtn_normal=0x7f020003;
         public static final int backbtn_pressed=0x7f020004;
-        public static final int banner=0x7f020005;
-        public static final int bluebtn=0x7f020006;
-        public static final int bluebtn_normal=0x7f020007;
-        public static final int bluebtn_pressed=0x7f020008;
-        public static final int camerabkg=0x7f020009;
-        public static final int coins_icon=0x7f02000a;
-        public static final int continuebtn=0x7f02000b;
-        public static final int continuebtn_normal=0x7f02000c;
-        public static final int continuebtn_pressed=0x7f02000d;
-        public static final int earned=0x7f02000e;
-        public static final int earned_off=0x7f02000f;
-        public static final int earned_on=0x7f020010;
-        public static final int earned_tab_selector=0x7f020011;
-        public static final int exitbtn=0x7f020012;
-        public static final int exitbtn_normal=0x7f020013;
-        public static final int exitbtn_pressed=0x7f020014;
-        public static final int friendbtn=0x7f020015;
-        public static final int friendbtn_normal=0x7f020016;
-        public static final int friendbtn_pressed=0x7f020017;
-        public static final int getmoneybtn=0x7f020018;
-        public static final int getmoneybtn_normal=0x7f020019;
-        public static final int getmoneybtn_pressed=0x7f02001a;
-        public static final int greenbtn=0x7f02001b;
-        public static final int greenbtn_normal=0x7f02001c;
-        public static final int greenbtn_pressed=0x7f02001d;
-        public static final int level_progress_bar=0x7f02001e;
-        public static final int login_bkg=0x7f02001f;
-        public static final int loginbtn=0x7f020020;
-        public static final int loginbtn_normal=0x7f020021;
-        public static final int loginbtn_pressed=0x7f020022;
-        public static final int longspich=0x7f020023;
-        public static final int money_place=0x7f020024;
-        public static final int not_active_quest_bkg=0x7f020025;
-        public static final int not_twicebtn=0x7f020026;
-        public static final int not_twicebtn_normal=0x7f020027;
-        public static final int not_twicebtn_pressed=0x7f020028;
-        public static final int note_tab_selector=0x7f020029;
-        public static final int notebtn_normal=0x7f02002a;
-        public static final int notebtn_pressed=0x7f02002b;
-        public static final int profil=0x7f02002c;
-        public static final int profile_tab_selector=0x7f02002d;
-        public static final int profilebtn_normal=0x7f02002e;
-        public static final int profilebtn_pressed=0x7f02002f;
-        public static final int raiting_tab_selector=0x7f020030;
-        public static final int raitingbtn_normal=0x7f020031;
-        public static final int raitingbtn_pressed=0x7f020032;
-        public static final int rescan=0x7f020033;
-        public static final int rescan_arrows=0x7f020034;
-        public static final int rescanbtn=0x7f020035;
-        public static final int rescanbtn_normal=0x7f020036;
-        public static final int rescanbtn_pressed=0x7f020037;
-        public static final int roulette=0x7f020038;
-        public static final int roulette_arrow=0x7f020039;
-        public static final int savebtn_normal=0x7f02003a;
-        public static final int savebtn_pressed=0x7f02003b;
-        public static final int scan=0x7f02003c;
-        public static final int scan_tab_selector=0x7f02003d;
-        public static final int scanboxbtn=0x7f02003e;
-        public static final int scanboxbtn_normal=0x7f02003f;
-        public static final int scanboxbtn_pressed=0x7f020040;
-        public static final int scanbtn_normal=0x7f020041;
-        public static final int scanbtn_pressed=0x7f020042;
-        public static final int scanned_off=0x7f020043;
-        public static final int scanned_on=0x7f020044;
-        public static final int scanned_tab_selector=0x7f020045;
-        public static final int settingbtn=0x7f020046;
-        public static final int settingbtn_normal=0x7f020047;
-        public static final int settingbtn_pressed=0x7f020048;
-        public static final int settingsbtn=0x7f020049;
-        public static final int settingsbtn_normal=0x7f02004a;
-        public static final int settingsbtn_pressed=0x7f02004b;
-        public static final int shortspich=0x7f02004c;
-        public static final int spich_text=0x7f02004d;
-        public static final int spichbox=0x7f02004e;
-        public static final int star_tab_selector=0x7f02004f;
-        public static final int starbtn_normal=0x7f020050;
-        public static final int starbtn_pressed=0x7f020051;
-        public static final int tell_friendsbtn=0x7f020052;
-        public static final int tell_friendsbtn_normal=0x7f020053;
-        public static final int tell_friendsbtn_pressed=0x7f020054;
-        public static final int title=0x7f020055;
-        public static final int to_phonebtn=0x7f020056;
-        public static final int to_phonebtn_normal=0x7f020057;
-        public static final int to_phonebtn_pressed=0x7f020058;
-        public static final int to_twice_back=0x7f020059;
-        public static final int to_twicebtn=0x7f02005a;
-        public static final int to_twicebtn_normal=0x7f02005b;
-        public static final int to_twicebtn_pressed=0x7f02005c;
-        public static final int to_ymbtn=0x7f02005d;
-        public static final int to_ymbtn_normal=0x7f02005e;
-        public static final int to_ymbtn_pressed=0x7f02005f;
-        public static final int vkloginbtn=0x7f020060;
-        public static final int vkloginbtn_normal=0x7f020061;
-        public static final int vkloginbtn_pressed=0x7f020062;
+        public static final int badgesbtn=0x7f020005;
+        public static final int badgesbtn_normal=0x7f020006;
+        public static final int badgesbtn_pressed=0x7f020007;
+        public static final int banner=0x7f020008;
+        public static final int bluebtn=0x7f020009;
+        public static final int bluebtn_normal=0x7f02000a;
+        public static final int bluebtn_pressed=0x7f02000b;
+        public static final int camerabkg=0x7f02000c;
+        public static final int coins_icon=0x7f02000d;
+        public static final int continuebtn=0x7f02000e;
+        public static final int continuebtn_normal=0x7f02000f;
+        public static final int continuebtn_pressed=0x7f020010;
+        public static final int earned=0x7f020011;
+        public static final int earned_off=0x7f020012;
+        public static final int earned_on=0x7f020013;
+        public static final int earned_tab_selector=0x7f020014;
+        public static final int exitbtn=0x7f020015;
+        public static final int exitbtn_normal=0x7f020016;
+        public static final int exitbtn_pressed=0x7f020017;
+        public static final int frb=0x7f020018;
+        public static final int friendbtn=0x7f020019;
+        public static final int friendbtn_normal=0x7f02001a;
+        public static final int friendbtn_pressed=0x7f02001b;
+        public static final int fsexrb_normal=0x7f02001c;
+        public static final int fsexrb_pressed=0x7f02001d;
+        public static final int getmoneybtn=0x7f02001e;
+        public static final int getmoneybtn_normal=0x7f02001f;
+        public static final int getmoneybtn_pressed=0x7f020020;
+        public static final int greenbtn=0x7f020021;
+        public static final int greenbtn_normal=0x7f020022;
+        public static final int greenbtn_pressed=0x7f020023;
+        public static final int layout_bg=0x7f020024;
+        public static final int left_tab_selector=0x7f020025;
+        public static final int lefttab_normal=0x7f020026;
+        public static final int lefttab_pressed=0x7f020027;
+        public static final int level_progress_bar=0x7f020028;
+        public static final int login_bkg=0x7f020029;
+        public static final int loginbtn=0x7f02002a;
+        public static final int loginbtn_normal=0x7f02002b;
+        public static final int loginbtn_pressed=0x7f02002c;
+        public static final int longspich=0x7f02002d;
+        public static final int mail_et=0x7f02002e;
+        public static final int mail_icon=0x7f02002f;
+        public static final int mail_pass_bkg=0x7f020030;
+        public static final int money_place=0x7f020031;
+        public static final int mrb=0x7f020032;
+        public static final int msexrb_normal=0x7f020033;
+        public static final int msexrb_pressed=0x7f020034;
+        public static final int not_active_quest_bkg=0x7f020035;
+        public static final int not_twicebtn=0x7f020036;
+        public static final int not_twicebtn_normal=0x7f020037;
+        public static final int not_twicebtn_pressed=0x7f020038;
+        public static final int note_tab_selector=0x7f020039;
+        public static final int notebtn_normal=0x7f02003a;
+        public static final int notebtn_pressed=0x7f02003b;
+        public static final int pass_et=0x7f02003c;
+        public static final int pass_icon=0x7f02003d;
+        public static final int polaroid=0x7f02003e;
+        public static final int preload=0x7f02003f;
+        public static final int profil=0x7f020040;
+        public static final int profile_bkg=0x7f020041;
+        public static final int profile_tab_selector=0x7f020042;
+        public static final int profilebtn_normal=0x7f020043;
+        public static final int profilebtn_pressed=0x7f020044;
+        public static final int qrcat=0x7f020045;
+        public static final int raiting_tab_selector=0x7f020046;
+        public static final int raitingbtn_normal=0x7f020047;
+        public static final int raitingbtn_pressed=0x7f020048;
+        public static final int ratingsbkg=0x7f020049;
+        public static final int reg_avatar=0x7f02004a;
+        public static final int rescan=0x7f02004b;
+        public static final int rescan_arrows=0x7f02004c;
+        public static final int rescanbtn=0x7f02004d;
+        public static final int rescanbtn_normal=0x7f02004e;
+        public static final int rescanbtn_pressed=0x7f02004f;
+        public static final int right_tab_selector=0x7f020050;
+        public static final int righttab_normal=0x7f020051;
+        public static final int righttab_pressed=0x7f020052;
+        public static final int roulette=0x7f020053;
+        public static final int roulette_arrow=0x7f020054;
+        public static final int savebtn_normal=0x7f020055;
+        public static final int savebtn_pressed=0x7f020056;
+        public static final int scan_tab_selector=0x7f020057;
+        public static final int scanboxbtn=0x7f020058;
+        public static final int scanboxbtn_normal=0x7f020059;
+        public static final int scanboxbtn_pressed=0x7f02005a;
+        public static final int scanbtn_normal=0x7f02005b;
+        public static final int scanbtn_pressed=0x7f02005c;
+        public static final int scanned_off=0x7f02005d;
+        public static final int scanned_on=0x7f02005e;
+        public static final int scanned_tab_selector=0x7f02005f;
+        public static final int scansbtn=0x7f020060;
+        public static final int scansbtn_normal=0x7f020061;
+        public static final int scansbtn_pressed=0x7f020062;
+        public static final int settingbtn=0x7f020063;
+        public static final int settingbtn_normal=0x7f020064;
+        public static final int settingbtn_pressed=0x7f020065;
+        public static final int settingsbtn=0x7f020066;
+        public static final int settingsbtn_normal=0x7f020067;
+        public static final int settingsbtn_pressed=0x7f020068;
+        public static final int shortspich=0x7f020069;
+        public static final int spich_text=0x7f02006a;
+        public static final int spichbox=0x7f02006b;
+        public static final int star_tab_selector=0x7f02006c;
+        public static final int starbtn_normal=0x7f02006d;
+        public static final int starbtn_pressed=0x7f02006e;
+        public static final int tab_text_selector=0x7f02006f;
+        public static final int tedown1=0x7f020070;
+        public static final int tedown3=0x7f020071;
+        public static final int tell_friendsbtn=0x7f020072;
+        public static final int tell_friendsbtn_normal=0x7f020073;
+        public static final int tell_friendsbtn_pressed=0x7f020074;
+        public static final int teup1=0x7f020075;
+        public static final int teup3=0x7f020076;
+        public static final int title=0x7f020077;
+        public static final int to_phonebtn=0x7f020078;
+        public static final int to_phonebtn_normal=0x7f020079;
+        public static final int to_phonebtn_pressed=0x7f02007a;
+        public static final int to_twice_back=0x7f02007b;
+        public static final int to_twicebtn=0x7f02007c;
+        public static final int to_twicebtn_normal=0x7f02007d;
+        public static final int to_twicebtn_pressed=0x7f02007e;
+        public static final int to_ymbtn=0x7f02007f;
+        public static final int to_ymbtn_normal=0x7f020080;
+        public static final int to_ymbtn_pressed=0x7f020081;
+        public static final int vkloginbtn=0x7f020082;
+        public static final int vkloginbtn_normal=0x7f020083;
+        public static final int vkloginbtn_pressed=0x7f020084;
+        public static final int wheel_bg=0x7f020085;
+        public static final int wheel_val=0x7f020086;
     }
     public static final class id {
-        public static final int aim=0x7f090002;
-        public static final int avatar=0x7f09001d;
-        public static final int avatar_place=0x7f09001c;
-        public static final int banner=0x7f090000;
-        public static final int bluebtn=0x7f090005;
-        public static final int cameraPreview=0x7f090001;
-        public static final int city_tv=0x7f09001f;
-        public static final int coins_img=0x7f090003;
-        public static final int continue_btn=0x7f09001a;
-        public static final int exit_btn=0x7f090032;
-        public static final int games_layout=0x7f09000c;
-        public static final int get_money_btn=0x7f090023;
-        public static final int green_btn=0x7f090004;
-        public static final int header_back_btn=0x7f090008;
-        public static final int icon=0x7f090026;
-        public static final int label=0x7f090027;
-        public static final int loginbtn=0x7f090009;
-        public static final int moneyTV=0x7f090022;
-        public static final int money_ratings_list1=0x7f090011;
-        public static final int money_ratings_list2=0x7f090012;
-        public static final int name_tv=0x7f09001e;
-        public static final int news_content_iv=0x7f090018;
-        public static final int news_content_place=0x7f090017;
-        public static final int news_list=0x7f090019;
-        public static final int news_tv=0x7f090013;
-        public static final int not_twice_btn=0x7f090034;
-        public static final int offlinebtn=0x7f09000b;
-        public static final int okBtn=0x7f09000f;
-        public static final int okLabel=0x7f09000e;
-        public static final int prizeCountTV=0x7f09001b;
-        public static final int progressBar=0x7f090024;
-        public static final int quests_list=0x7f090025;
-        public static final int rating_type_tabhost=0x7f090010;
-        public static final int reportView=0x7f09002e;
-        public static final int rescan_arrows_icon=0x7f090016;
-        public static final int rescan_btn=0x7f090015;
-        public static final int rescan_btn_layout=0x7f090014;
-        public static final int rescansTV=0x7f090021;
-        public static final int scan_box_button=0x7f090007;
-        public static final int scan_box_list=0x7f09002f;
-        public static final int scan_ratings_list1=0x7f090030;
-        public static final int scan_ratings_list2=0x7f090031;
-        public static final int scansTV=0x7f090020;
-        public static final int settings_btn=0x7f090006;
-        public static final int signinAcc=0x7f090028;
-        public static final int signinBtn=0x7f09002a;
-        public static final int signinPass=0x7f090029;
-        public static final int signupAcc=0x7f09002b;
-        public static final int signupBtn=0x7f09002d;
-        public static final int signupPass=0x7f09002c;
-        public static final int to_twice_btn=0x7f090033;
-        public static final int vkloginbtn=0x7f09000a;
-        public static final int vkontakteview=0x7f09000d;
+        public static final int aim=0x7f0a0002;
+        public static final int avatar=0x7f0a0036;
+        public static final int avatar_place=0x7f0a0035;
+        public static final int banner=0x7f0a0000;
+        public static final int bluebtn=0x7f0a0005;
+        public static final int cameraPreview=0x7f0a0001;
+        public static final int citySpinner=0x7f0a001c;
+        public static final int city_tv=0x7f0a0038;
+        public static final int coins_img=0x7f0a0003;
+        public static final int continueBtn=0x7f0a0021;
+        public static final int continue_btn=0x7f0a0032;
+        public static final int countries_list=0x7f0a000c;
+        public static final int countrySpinner=0x7f0a001a;
+        public static final int day=0x7f0a0009;
+        public static final int daySpinner=0x7f0a0020;
+        public static final int exit_btn=0x7f0a004a;
+        public static final int fnameET=0x7f0a0011;
+        public static final int games_layout=0x7f0a0022;
+        public static final int get_money_btn=0x7f0a003a;
+        public static final int green_btn=0x7f0a0004;
+        public static final int header_back_btn=0x7f0a0008;
+        public static final int icon=0x7f0a003d;
+        public static final int label=0x7f0a003e;
+        public static final int mailET=0x7f0a0013;
+        public static final int moneyTV=0x7f0a0039;
+        public static final int money_ratings_list1=0x7f0a0029;
+        public static final int money_ratings_list2=0x7f0a002a;
+        public static final int month=0x7f0a000a;
+        public static final int monthSpinner=0x7f0a001f;
+        public static final int name_tv=0x7f0a0037;
+        public static final int news_content_iv=0x7f0a0030;
+        public static final int news_content_place=0x7f0a002f;
+        public static final int news_list=0x7f0a0031;
+        public static final int news_tv=0x7f0a002b;
+        public static final int not_twice_btn=0x7f0a004f;
+        public static final int okBtn=0x7f0a0027;
+        public static final int okLabel=0x7f0a0026;
+        public static final int phoneET=0x7f0a0015;
+        public static final int prizeCountTV=0x7f0a0033;
+        public static final int progressBar=0x7f0a003b;
+        public static final int quests_list=0x7f0a003c;
+        public static final int radio0=0x7f0a0018;
+        public static final int radioFemale=0x7f0a0042;
+        public static final int radioMale=0x7f0a0041;
+        public static final int rating_type_tabhost=0x7f0a0028;
+        public static final int reg_avatar=0x7f0a003f;
+        public static final int regbtn=0x7f0a000d;
+        public static final int reportView=0x7f0a0046;
+        public static final int rescan_arrows_icon=0x7f0a002e;
+        public static final int rescan_btn=0x7f0a002d;
+        public static final int rescan_btn_layout=0x7f0a002c;
+        public static final int scan_box_button=0x7f0a0007;
+        public static final int scan_box_list=0x7f0a0047;
+        public static final int scan_ratings_list1=0x7f0a0048;
+        public static final int scan_ratings_list2=0x7f0a0049;
+        public static final int scroll=0x7f0a0034;
+        public static final int settings_btn=0x7f0a0006;
+        public static final int sexRadioGroup=0x7f0a0017;
+        public static final int signinAcc=0x7f0a004b;
+        public static final int signinBtn=0x7f0a000f;
+        public static final int signinPass=0x7f0a004c;
+        public static final int signupAcc=0x7f0a0043;
+        public static final int signupBtn=0x7f0a0045;
+        public static final int signupPass=0x7f0a0044;
+        public static final int submitBtn=0x7f0a004d;
+        public static final int tabsLayout=0x7f0a0023;
+        public static final int tabsText=0x7f0a0024;
+        public static final int textView1=0x7f0a0010;
+        public static final int textView2=0x7f0a0012;
+        public static final int textView3=0x7f0a0019;
+        public static final int textView4=0x7f0a001b;
+        public static final int textView5=0x7f0a001d;
+        public static final int textView6=0x7f0a0016;
+        public static final int textView7=0x7f0a0014;
+        public static final int to_twice_btn=0x7f0a004e;
+        public static final int username_te=0x7f0a0040;
+        public static final int vkloginbtn=0x7f0a000e;
+        public static final int vkontakteview=0x7f0a0025;
+        public static final int year=0x7f0a000b;
+        public static final int yearSpinner=0x7f0a001e;
     }
     public static final class layout {
         public static final int active_quest=0x7f030000;
@@ -216,45 +543,111 @@ containing a value of this type.
         public static final int choose_color_dialog=0x7f030003;
         public static final int custom_title=0x7f030004;
         public static final int custom_title_back=0x7f030005;
-        public static final int enter=0x7f030006;
-        public static final int games=0x7f030007;
-        public static final int get_money=0x7f030008;
-        public static final int login=0x7f030009;
-        public static final int lose_dialog=0x7f03000a;
-        public static final int main_tabs=0x7f03000b;
-        public static final int money_rating=0x7f03000c;
-        public static final int news_place=0x7f03000d;
-        public static final int news_tab=0x7f03000e;
-        public static final int not_active_quest=0x7f03000f;
-        public static final int prize=0x7f030010;
-        public static final int profile_tab=0x7f030011;
-        public static final int quests_tab=0x7f030012;
-        public static final int rating_field=0x7f030013;
-        public static final int ratings=0x7f030014;
-        public static final int registration=0x7f030015;
-        public static final int scan_box=0x7f030016;
-        public static final int scans_rating=0x7f030017;
-        public static final int settings=0x7f030018;
-        public static final int simple_title=0x7f030019;
-        public static final int to_twice_dialog=0x7f03001a;
+        public static final int custom_title_empty=0x7f030006;
+        public static final int date_layout=0x7f030007;
+        public static final int enter=0x7f030008;
+        public static final int form=0x7f030009;
+        public static final int games=0x7f03000a;
+        public static final int get_money=0x7f03000b;
+        public static final int left_tab_bg=0x7f03000c;
+        public static final int login=0x7f03000d;
+        public static final int lose_dialog=0x7f03000e;
+        public static final int main_tabs=0x7f03000f;
+        public static final int money_rating=0x7f030010;
+        public static final int news_place=0x7f030011;
+        public static final int news_tab=0x7f030012;
+        public static final int not_active_quest=0x7f030013;
+        public static final int preloader=0x7f030014;
+        public static final int prize=0x7f030015;
+        public static final int profile_tab=0x7f030016;
+        public static final int quests_tab=0x7f030017;
+        public static final int rating_field=0x7f030018;
+        public static final int ratings_tab=0x7f030019;
+        public static final int registration=0x7f03001a;
+        public static final int right_tab_bg=0x7f03001b;
+        public static final int scan_box=0x7f03001c;
+        public static final int scans_rating=0x7f03001d;
+        public static final int settings=0x7f03001e;
+        public static final int signin=0x7f03001f;
+        public static final int simple_title=0x7f030020;
+        public static final int to_twice_dialog=0x7f030021;
     }
     public static final class string {
-        public static final int app_name=0x7f070000;
-        public static final int cancel=0x7f070007;
-        public static final int contin=0x7f070004;
-        public static final int exit=0x7f070001;
-        public static final int got_money=0x7f070003;
-        public static final int no=0x7f070006;
-        public static final int saved=0x7f070008;
-        public static final int scanned=0x7f070002;
-        public static final int yes=0x7f070005;
+        public static final int app_name=0x7f080000;
+        public static final int cancel=0x7f080007;
+        public static final int contin=0x7f080004;
+        public static final int exit=0x7f080001;
+        public static final int got_money=0x7f080003;
+        public static final int no=0x7f080006;
+        public static final int saved=0x7f080008;
+        public static final int scanned=0x7f080002;
+        public static final int yes=0x7f080005;
     }
     public static final class style {
-        public static final int MyDialog=0x7f080001;
-        public static final int MyTheme=0x7f080002;
-        public static final int WindowTitleBackground=0x7f080000;
+        public static final int MyDialog=0x7f090001;
+        public static final int MyTheme=0x7f090002;
+        public static final int WindowTitleBackground=0x7f090000;
     }
     public static final class styleable {
+        /** Attributes that can be used with a TextOnlyButton.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TextOnlyButton_textColorFocused ru.qrushtabs.app:textColorFocused}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextOnlyButton_textColorNotFocused ru.qrushtabs.app:textColorNotFocused}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextOnlyButton_textColorPressed ru.qrushtabs.app:textColorPressed}</code></td><td></td></tr>
+           </table>
+           @see #TextOnlyButton_textColorFocused
+           @see #TextOnlyButton_textColorNotFocused
+           @see #TextOnlyButton_textColorPressed
+         */
+        public static final int[] TextOnlyButton = {
+            0x7f010001, 0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link ru.qrushtabs.app.R.attr#textColorFocused}
+          attribute's value can be found in the {@link #TextOnlyButton} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:textColorFocused
+        */
+        public static final int TextOnlyButton_textColorFocused = 1;
+        /**
+          <p>This symbol is the offset where the {@link ru.qrushtabs.app.R.attr#textColorNotFocused}
+          attribute's value can be found in the {@link #TextOnlyButton} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:textColorNotFocused
+        */
+        public static final int TextOnlyButton_textColorNotFocused = 0;
+        /**
+          <p>This symbol is the offset where the {@link ru.qrushtabs.app.R.attr#textColorPressed}
+          attribute's value can be found in the {@link #TextOnlyButton} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:textColorPressed
+        */
+        public static final int TextOnlyButton_textColorPressed = 2;
         /** Attributes that can be used with a TextViewPlus.
            <p>Includes the following attributes:</p>
            <table>

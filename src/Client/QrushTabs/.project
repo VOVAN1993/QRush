@@ -36,5 +36,15 @@
 			<type>2</type>
 			<location>/Users/azat/Downloads/Android-VKontakte-SDK-master/AndroidVkSdk/src</location>
 		</link>
+		<link>
+			<name>wheel</name>
+			<type>2</type>
+			<location>/Users/azat/android-wheel-read-only/wheel</location>
+		</link>
+		<link>
+			<name>wheelsrc</name>
+			<type>2</type>
+			<location>/Users/azat/android-wheel-read-only/wheel/src</location>
+		</link>
 	</linkedResources>
 </projectDescription>

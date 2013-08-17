@@ -20,6 +20,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import ru.qrushtabs.app.custom.DateActivity;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
@@ -43,21 +44,21 @@ public class PreloadActivity extends Activity {
 			 
 			Log.d("http", "isOnline");
 			ServerAPI.offlineMod = false;
-			if(auth())
-				(new CheckTask()).execute(ProfileInfo.userID);
-			else
-			{
-				Intent intent = new Intent(PreloadActivity.this, EnterActivity.class);
+//			if(auth())
+//				(new CheckTask()).execute();
+//			else
+//			{
+				Intent intent = new Intent(PreloadActivity.this, DateActivity.class);
 				finish();
 				startActivity(intent);
-			}
+//			}
 			 
 
 		} else {
 			Log.d("http", "isNotOnline");
 			ServerAPI.offlineMod = true;
 			auth();
-			Intent intent = new Intent(this, MainActivity.class);
+			Intent intent = new Intent(this, DateActivity.class);
 			finish();
 			startActivity(intent);
 		}
@@ -67,18 +68,17 @@ public class PreloadActivity extends Activity {
 	private boolean auth() {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
-		ProfileInfo.userID = prefs.getString("userID", null);
+		ProfileInfo.username = prefs.getString("userID", null);
 		ProfileInfo.userToken = prefs.getString("userToken", null);
 		ProfileInfo.userVKID = prefs.getString("userVKID", null);
-		ProfileInfo.loginType = prefs.getString("loginType", "def");
+		ProfileInfo.signInType = prefs.getString("loginType", "def");
 		ProfileInfo.userVKToken = prefs.getString("userVKToken", null);
 		ProfileInfo.userPass = prefs.getString("userPass", null);
 		ProfileInfo.setScansCount(prefs.getInt("scansCount", 0));
 		ProfileInfo.setMoneyCount(prefs.getInt("moneyCount", 0));
 		ProfileInfo.setRescansCount(prefs.getInt("rescansCount", 0));
 		
-		Log.d("http", ProfileInfo.loginType);
-		if(ProfileInfo.userID!=null||ProfileInfo.userVKID!=null)
+ 		if(ProfileInfo.username!=null||ProfileInfo.userVKID!=null)
 		{
 			Log.d("http", "onAuth yes");
 			return true;
@@ -88,14 +88,13 @@ public class PreloadActivity extends Activity {
 			Log.d("http", "onAuth no");
 			return false;
 		}
- 
 	}
 
  
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo();
+			return ServerAPI.signin();
 		}
 
 		protected void onPostExecute(String objResult) {

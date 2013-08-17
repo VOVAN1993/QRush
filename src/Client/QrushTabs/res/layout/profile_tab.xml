@@ -1,100 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:foo="http://schemas.android.com/apk/res/ru.qrushtabs.app"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-         >
-
-        <FrameLayout
-            android:id="@+id/avatar_place"
-            android:layout_width="@dimen/profile_frames_width"
-            android:layout_height="@dimen/profile_frames_height"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp"
-            android:background="@color/white" >
-
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="@dimen/profile_tv_width"
-                android:layout_height="@dimen/profile_tv_width"
-                android:layout_gravity="center"
-                android:src="@drawable/profil" />
-        </FrameLayout>
-
-        <ru.qrushtabs.app.custom.TextViewPlus
-            android:id="@+id/name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/avatar_place"
-            android:textColor="@color/black" 
-            android:textSize="@dimen/profile_name_font_size"
-            android:text="Мария Садчикова"
-            foo:customFont="fonts/lobster.ttf" >
-        </ru.qrushtabs.app.custom.TextViewPlus>
-        
-        <ru.qrushtabs.app.custom.TextViewPlus
-            android:id="@+id/city_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/avatar_place"
-             android:layout_marginLeft="10dp"
-            android:layout_below="@id/name_tv" 
-            android:text="Санкт - Петербург"
-            android:textColor="@color/black" 
-            android:textSize="@dimen/profile_city_font_size"
-            foo:customFont="fonts/lobster.ttf" >
-        </ru.qrushtabs.app.custom.TextViewPlus>
-    </RelativeLayout>
+    android:id="@+id/scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal" >
+        android:background="#dad7d0"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="@dimen/profile_frames_width"
-            android:layout_height="@dimen/profile_frames_width"
-            android:background="@color/white"
-            android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_black_height"
+            android:layout_marginTop="0dp"
+            android:background="#343434" >
 
-            <ru.qrushtabs.app.custom.ButtonPlus
-                android:layout_width="@dimen/profile_tv_width"
-                android:layout_height="@dimen/profile_tv_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/profile_margin_top"
-                android:background="@drawable/friendbtn"
-                android:text="4"
-                android:textColor="@color/white"
-                android:textSize="@dimen/profile_nums_font_size"
-                foo:customFont="fonts/lobster.ttf" />
+            <FrameLayout
+                android:id="@+id/avatar_place"
+                android:layout_width="@dimen/profile_frames_width"
+                android:layout_height="@dimen/profile_frames_height"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:background="@color/white" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Друзья"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="@dimen/profile_frames_width"
-            android:layout_height="@dimen/profile_frames_width"
-            android:layout_marginLeft="10dp"
-            android:background="@color/white"
-            android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="@dimen/profile_tv_width"
+                    android:layout_height="@dimen/profile_tv_width"
+                    android:layout_gravity="center"
+                    android:src="@drawable/qrcat" />
+            </FrameLayout>
 
             <ru.qrushtabs.app.custom.TextViewPlus
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/avatar_place"
+                android:text="Мария Садчикова"
+                android:textColor="@color/black"
+                android:textSize="@dimen/profile_name_font_size"
+                foo:customFont="fonts/lobster.ttf" >
+            </ru.qrushtabs.app.custom.TextViewPlus>
+
+            <ru.qrushtabs.app.custom.TextViewPlus
+                android:id="@+id/city_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/avatar_place"
+                android:text="Санкт - Петербург"
+                android:textColor="@color/black"
+                android:textSize="@dimen/profile_city_font_size"
+                foo:customFont="fonts/lobster.ttf" >
+            </ru.qrushtabs.app.custom.TextViewPlus>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="@dimen/profile_frames_width"
+                android:layout_height="@dimen/profile_frames_width"
+                android:background="@drawable/polaroid"
+                android:orientation="vertical" >
+
+                <ru.qrushtabs.app.custom.ButtonPlus
+                    android:layout_width="@dimen/profile_tv_width"
+                    android:layout_height="@dimen/profile_tv_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/profile_margin_top"
+                    android:background="@drawable/friendbtn"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_nums_font_size"
+                    foo:customFont="fonts/lobster.ttf" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Друзья"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/profile_frames_width"
+                android:layout_height="@dimen/profile_frames_width"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/polaroid"
+                android:orientation="vertical" >
+
+                <ru.qrushtabs.app.custom.ButtonPlus
+                    android:layout_width="@dimen/profile_tv_width"
+                    android:layout_height="@dimen/profile_tv_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/profile_margin_top"
+                    android:background="@drawable/scansbtn"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_nums_font_size"
+                    foo:customFont="fonts/lobster.ttf" />
+                <!--
+                 <ru.qrushtabs.app.custom.TextViewPlus
                 android:id="@+id/scansTV"
                 android:layout_width="@dimen/profile_tv_width"
                 android:layout_height="@dimen/profile_tv_height"
@@ -106,23 +123,35 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/profile_nums_font_size"
                 foo:customFont="fonts/lobster.ttf" />
+                -->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Сканы"
-                android:textColor="@color/black" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Сканы"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="@dimen/profile_frames_width"
-            android:layout_height="@dimen/profile_frames_width"
-            android:layout_marginLeft="10dp"
-            android:background="@color/white"
-            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="@dimen/profile_frames_width"
+                android:layout_height="@dimen/profile_frames_width"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/polaroid"
+                android:orientation="vertical" >
 
-            <ru.qrushtabs.app.custom.TextViewPlus
+                <ru.qrushtabs.app.custom.ButtonPlus
+                    android:layout_width="@dimen/profile_tv_width"
+                    android:layout_height="@dimen/profile_tv_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/profile_margin_top"
+                    android:background="@drawable/badgesbtn"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_nums_font_size"
+                    foo:customFont="fonts/lobster.ttf" />
+                <!--
+                 <ru.qrushtabs.app.custom.TextViewPlus
                 android:id="@+id/rescansTV"
                 android:layout_width="@dimen/profile_tv_width"
                 android:layout_height="@dimen/profile_tv_height"
@@ -134,104 +163,105 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/profile_nums_font_size"
                 foo:customFont="fonts/lobster.ttf" />
+                -->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ресканы"
-                android:textColor="@color/black" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="197dp"
-            android:layout_height="@dimen/profile_frames_height"
-            android:background="@color/white"
-            android:orientation="vertical" >
-
-            <ru.qrushtabs.app.custom.TextViewPlus
-                android:id="@+id/moneyTV"
-                android:layout_width="187dp"
-                android:layout_height="@dimen/profile_tv_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/profile_margin_top"
-                android:background="@drawable/earned"
-                android:gravity="center"
-                android:text="34,00 Р."
-                android:textColor="@color/white"
-                android:textSize="@dimen/profile_nums_font_size"
-                foo:customFont="fonts/lobster.ttf" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Заработано"
-                android:textColor="@color/black" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Награды"
+                    android:textColor="@color/black" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="@dimen/profile_frames_width"
-            android:layout_height="@dimen/profile_frames_height"
-            android:layout_marginLeft="10dp"
-            android:background="@color/white"
-            android:orientation="vertical" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/get_money_btn"
-                android:layout_width="@dimen/profile_tv_width"
-                android:layout_height="@dimen/profile_tv_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/profile_margin_top"
-                android:background="@drawable/getmoneybtn"
-                 />
+            <LinearLayout
+                android:layout_width="197dp"
+                android:layout_height="@dimen/profile_frames_height"
+                android:background="@color/white"
+                android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Вывести"
-                android:textColor="@color/black" />
+                <ru.qrushtabs.app.custom.TextViewPlus
+                    android:id="@+id/moneyTV"
+                    android:layout_width="187dp"
+                    android:layout_height="@dimen/profile_tv_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/profile_margin_top"
+                    android:background="@drawable/earned"
+                    android:gravity="center"
+                    android:text="34,00 Р."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/profile_nums_font_size"
+                    foo:customFont="fonts/lobster.ttf" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Заработано"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/profile_frames_width"
+                android:layout_height="@dimen/profile_frames_height"
+                android:layout_marginLeft="10dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/get_money_btn"
+                    android:layout_width="@dimen/profile_tv_width"
+                    android:layout_height="@dimen/profile_tv_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/profile_margin_top"
+                    android:background="@drawable/getmoneybtn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Вывести"
+                    android:textColor="@color/black" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <FrameLayout
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:layout_height="60dp"
-        android:layout_width="300dp"
-        android:layout_gravity="center_horizontal">
-
-        <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="Уровень 1"
-                android:textColor="@color/black"
-            />
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@android:attr/progressBarStyleHorizontal"
-            android:layout_width="280dp"
-            android:layout_height="18dip"
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:indeterminateOnly="false"
-            android:max="100"
-            android:progressDrawable="@drawable/level_progress_bar" >
-        </ProgressBar>
-    </FrameLayout>
+            android:layout_marginTop="20dp"
+            android:background="@color/white" >
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Уровень 1"
+                android:textColor="@color/black" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:attr/progressBarStyleHorizontal"
+                android:layout_width="280dp"
+                android:layout_height="18dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progressDrawable="@drawable/level_progress_bar" >
+            </ProgressBar>
+        </FrameLayout>
+    </LinearLayout>
+
+</ScrollView>

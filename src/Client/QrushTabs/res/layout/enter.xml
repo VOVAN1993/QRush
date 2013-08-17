@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pj="http://schemas.android.com/apk/res/ru.qrushtabs.app"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bkg"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/loginbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="350dp"
-        android:background="@drawable/loginbtn"
-        android:text="Вход" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:gravity="bottom"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/vkloginbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/vkloginbtn"
-        android:text="Авторизация VK" />
+        <Button
+            android:id="@+id/regbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/loginbtn"
+            android:text="Регистрация" />
 
-    <Button
-        android:id="@+id/offlinebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/loginbtn"
-        android:text="Offline режим" />
+        <Button
+            android:id="@+id/vkloginbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/vkloginbtn"
+            android:text="Авторизация VK" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Уже зарегистрирован? "
+                android:textColor="@color/black" />
+
+            <ru.qrushtabs.app.custom.TextOnlyButton
+                android:id="@+id/signinBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/transparent"
+                android:text="Вход"
+                android:textStyle="bold"
+                pj:textColorFocused="@color/blue"
+                pj:textColorNotFocused="@color/blue"
+                pj:textColorPressed="@color/red" >
+            </ru.qrushtabs.app.custom.TextOnlyButton>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

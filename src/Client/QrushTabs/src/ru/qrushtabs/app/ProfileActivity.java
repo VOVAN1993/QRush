@@ -49,15 +49,19 @@ public class ProfileActivity extends Activity
  		int pixelsh = (int) (dph * scale + 0.5f);
 
  		
- 		Bitmap bmp=BitmapFactory.decodeResource(getResources(), R.drawable.profil);
+ 		Bitmap bmp=BitmapFactory.decodeResource(getResources(), R.drawable.qrcat);
  		int minsize = Math.min(bmp.getWidth(), bmp.getHeight());
  		float scaling = (float)minsize/(float)pixelsw;
  		float neededw =  (float)bmp.getWidth() / scaling;
  		float neededh =  (float)bmp.getHeight() / scaling;
  		Bitmap bmp2 = Bitmap.createScaledBitmap(bmp, (int)neededw, (int)neededh,true);
  		
+ 		int neededx = (int)neededw/2 - pixelsw/2;
+ 		int neededy = (int)neededh/2 - pixelsh/2;
  		 
- 		Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, 0, 0, Math.min(pixelsw,(int)neededw), Math.min(pixelsh,(int)neededh));
+ 		Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, neededx, neededy, pixelsw, pixelsh);
+ 	//	Bitmap resizedbitmap=Bitmap.createBitmap(bmp,0,0, pixelsh, pixelsw);
+ 	//	Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, 0, 0, (int)neededw, (int)neededh);
  		//Bitmap resizedbitmap=Bitmap.createBitmap(bmp,0,0, pixelsh, pixelsw);
  		ivPeakOver.setImageBitmap(croppedBitmap);
  		
@@ -73,13 +77,13 @@ public class ProfileActivity extends Activity
 			}
  			
  		});
- 		TextView tv = (TextView)findViewById(R.id.scansTV);
- 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
- 		
- 		tv = (TextView)findViewById(R.id.rescansTV);
- 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
- 		
- 		tv = (TextView)findViewById(R.id.moneyTV);
+// 		TextView tv = (TextView)findViewById(R.id.scansTV);
+// 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
+// 		
+// 		tv = (TextView)findViewById(R.id.rescansTV);
+// 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
+// 		
+ 		TextView tv = (TextView)findViewById(R.id.moneyTV);
  		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		
 	}
@@ -87,13 +91,13 @@ public class ProfileActivity extends Activity
 	public void onResume()
 	{
 		super.onResume();
-		TextView tv = (TextView)findViewById(R.id.scansTV);
- 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
+//		TextView tv = (TextView)findViewById(R.id.scansTV);
+// 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
+// 		
+// 		tv = (TextView)findViewById(R.id.rescansTV);
+// 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
  		
- 		tv = (TextView)findViewById(R.id.rescansTV);
- 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
- 		
- 		tv = (TextView)findViewById(R.id.moneyTV);
+		TextView tv = (TextView)findViewById(R.id.moneyTV);
  		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		
  

@@ -17,7 +17,7 @@ public class RatingsActivity extends TabActivity {
 	 {
 	        super.onCreate(savedInstanceState);
 	        
-  	        setContentView(R.layout.ratings);
+  	        setContentView(R.layout.ratings_tab);
  	        
 // 	       String[] values1 = new String[] { "Android", "iPhone", "WindowsMobile",
 // 	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",

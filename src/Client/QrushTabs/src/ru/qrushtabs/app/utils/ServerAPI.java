@@ -75,13 +75,8 @@ public class ServerAPI {
 		HttpPost httpost = new HttpPost("http://188.120.235.179/" + query + "/");
 		HttpResponse response = null;
 
-		if (ProfileInfo.loginType.equals("vk")) {
-			Log.d("http", "sending vk userid");
-			values.add(new BasicNameValuePair("userid", ProfileInfo.userVKID));
-		} else {
-			Log.d("http", "sending def username");
-			values.add(new BasicNameValuePair("username", ProfileInfo.userID));
-		}
+		 
+		values.add(new BasicNameValuePair("username", ProfileInfo.username));
 		values.add(new BasicNameValuePair("atoken", ProfileInfo.userToken));
 
 		try {
@@ -90,6 +85,7 @@ public class ServerAPI {
 			e.printStackTrace();
 		}
 
+		
 		try {
 			response = httpclient.execute(httpost);
 		} catch (ClientProtocolException e) {
@@ -122,15 +118,30 @@ public class ServerAPI {
 
 	public static String signUp() {
 
+		
 		// String req =
 		// "add&what=user&username="+userID+"&password="+userPass+"&deviceid="+deviceID;
 		// String resp = executeHttpResponse(req);
 		String req = "add";
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		nvps.add(new BasicNameValuePair("what", "user"));
+		
 //		nvps.add(new BasicNameValuePair("username", userID));
-//		nvps.add(new BasicNameValuePair("password", userPass));
+		
+		nvps.add(new BasicNameValuePair("what", "user"));
+		nvps.add(new BasicNameValuePair("email", ProfileInfo.mail));
+		nvps.add(new BasicNameValuePair("sex", ProfileInfo.sex));
 		nvps.add(new BasicNameValuePair("deviceid", ProfileInfo.deviceID));
+		if(ProfileInfo.signInType.equals("vk"))
+		{
+			nvps.add(new BasicNameValuePair("userid", ProfileInfo.userVKID));
+			nvps.add(new BasicNameValuePair("vktoken", ProfileInfo.userVKToken));
+		}
+		else
+		{
+			nvps.add(new BasicNameValuePair("password", ProfileInfo.userPass));
+		}
+		
+		
 
 		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
@@ -145,13 +156,52 @@ public class ServerAPI {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.d("http on reg", success);
+		Log.d("http on regist", success);
 		if (success.equals("success")) {
 			return "true";
 		} else
 			return "false";
 	}
+	public static String signin() {
 
+		// String req =
+		// "get&what=atoken&username="+userID+"&password="+userPass;
+		// String resp = executeHttpResponse(req);
+		String req = "signin";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		//nvps.add(new BasicNameValuePair("what", "atoken"));
+		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
+		if (ProfileInfo.signInType.equals("vk")) {
+			nvps.add(new BasicNameValuePair("userid", ProfileInfo.userVKID));
+			nvps.add(new BasicNameValuePair("vktoken", ProfileInfo.userVKToken));
+
+		} else {
+			nvps.add(new BasicNameValuePair("password", ProfileInfo.userPass));
+
+		}
+		nvps.add(new BasicNameValuePair("signintype", ProfileInfo.signInType));
+
+		String resp = executeHttpPostResponse(req, nvps);
+		String success = "";
+		String token = "";
+		try {
+			Log.d("http", "signin");
+			JSONObject jsonObj = new JSONObject(resp);
+			success = (String) jsonObj.get("report");
+			token = (String) jsonObj.get("atoken");
+			ProfileInfo.userToken = token;
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.d("http on reg", success);
+		if (success.equals("success")) {
+			loadProfileInfo();
+			return "true";
+		} else
+			return "false";
+	}
 	public static String getToken() {
 
 		// String req =
@@ -161,7 +211,7 @@ public class ServerAPI {
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("what", "atoken"));
 		// nvps.add(new BasicNameValuePair("username", ProfileInfo.userID));
-		if (ProfileInfo.loginType.equals("vk")) {
+		if (ProfileInfo.signInType.equals("vk")) {
 			nvps.add(new BasicNameValuePair("atokenvk", ProfileInfo.userVKToken));
 
 		} else {
@@ -319,11 +369,11 @@ public class ServerAPI {
 				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
 		Editor editor = prefs.edit();
 		editor.putString("userPass", ProfileInfo.userPass);
-		editor.putString("userID", ProfileInfo.userID);
+		editor.putString("userID", ProfileInfo.username);
 		editor.putString("userToken", ProfileInfo.userToken);
 		editor.putString("userVKID", ProfileInfo.userVKID);
 		editor.putString("userVKToken", ProfileInfo.userVKToken);
-		editor.putString("loginType", ProfileInfo.loginType);
+		editor.putString("loginType", ProfileInfo.signInType);
 		editor.putInt("scansCount", ProfileInfo.getScansCount());
 		editor.putInt("rescanCount", ProfileInfo.getRescansCount());
 		editor.putInt("moneyCount", ProfileInfo.getMoneyCount());

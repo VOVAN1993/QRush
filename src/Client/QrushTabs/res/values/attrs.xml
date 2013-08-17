@@ -3,4 +3,12 @@
     <declare-styleable name="TextViewPlus">
         <attr name="customFont" format="string"/>
     </declare-styleable>
+ 
+    
+     <declare-styleable name="TextOnlyButton">
+        <attr name="textColorNotFocused" format="integer"/>
+        <attr name="textColorFocused" format="integer"/>
+        <attr name="textColorPressed" format="integer"/>
+        
+    </declare-styleable> 
 </resources>
