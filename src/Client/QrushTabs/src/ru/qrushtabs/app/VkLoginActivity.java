@@ -3,7 +3,6 @@ package ru.qrushtabs.app;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ru.qrushtabs.app.custom.DateActivity;
 import ru.qrushtabs.app.utils.ServerAPI;
 
 import com.perm.kate.api.Api;
@@ -36,7 +35,7 @@ public class VkLoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.vksignin);
         
         webview = (WebView) findViewById(R.id.vkontakteview);
         webview.getSettings().setJavaScriptEnabled(true);

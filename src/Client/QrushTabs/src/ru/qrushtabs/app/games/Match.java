@@ -72,8 +72,8 @@ public class Match extends View {
 				
 			} else 
 			{
-				y += Math.max(deltaY, -tDeltaY);
-				prevY += Math.max(deltaY, -tDeltaY);
+//				y += Math.max(deltaY, -tDeltaY);
+//				prevY += Math.max(deltaY, -tDeltaY);
 			}
 		}
 		canvas.drawBitmap(bitmap, x, y, null);

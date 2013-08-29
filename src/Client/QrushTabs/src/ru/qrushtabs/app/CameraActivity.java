@@ -72,7 +72,7 @@ public class CameraActivity extends FragmentActivity {
 		autoFocusHandler = new Handler();
 
 		preview = (FrameLayout) findViewById(R.id.cameraPreview);
-		aimImage = (ImageView)findViewById(R.id.aim);
+		aimImage = (ImageView) findViewById(R.id.aim);
 		startScan();
 
 	}
@@ -128,7 +128,7 @@ public class CameraActivity extends FragmentActivity {
 
 	public void startScan() {
 		if (camIsNotBusy) {
-			
+
 			mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
 			preview.addView(mPreview);
 			aimImage.bringToFront();
@@ -178,58 +178,52 @@ public class CameraActivity extends FragmentActivity {
 			if (result != 0) {
 
 				Log.d(TAG, "On Scanned");
-				 SymbolSet syms = scanner.getResults();
-				 String str = "";
-				 for (Symbol sym : syms) 
-				 {
-					 Log.d(TAG, "barcode "+ sym.getData());
-				     str =  sym.getData();
-				
-				 }
-				 str = String.valueOf((int)(Math.random()*10000000));
-				 int scanStatus = ScanBox.addScan(str);
-				  camIsNotBusy = true;
-				    stopScan();
-				 if(scanStatus==2)
-				 {
-				  
-				    //showDialog(DIALOG_EXIT);
-				    Intent intent = new Intent(CameraActivity.this,GamesActivity.class);
-				    startActivity(intent);
-				 }
-				 else
-				 {
-					 LoseDialog newFragment;
- 					 newFragment = new LoseDialog();
- 					 if(scanStatus==1)
- 						 newFragment.setLabelText("—охранен в сундук");
- 					 else
- 					 {
- 						newFragment.setLabelText("“акой скан уже был");
- 					 }
- 					 newFragment.show(getSupportFragmentManager(), "missiles");
- 					 newFragment.setOnDialogClickListener(onDialogClick);
-				 }
-				
+				SymbolSet syms = scanner.getResults();
+				String str = "";
+				for (Symbol sym : syms) {
+					Log.d(TAG, "barcode " + sym.getData());
+					str = sym.getData();
+
+				}
+				str = String.valueOf((int) (Math.random() * 10000000));
+				int scanStatus = ScanBox.addScan(str);
+				camIsNotBusy = true;
+				stopScan();
+				if (scanStatus == 2) {
+
+					// showDialog(DIALOG_EXIT);
+					Intent intent = new Intent(CameraActivity.this,
+							GamesActivity.class);
+					startActivity(intent);
+				} else {
+					LoseDialog newFragment;
+					newFragment = new LoseDialog();
+					if (scanStatus == 1)
+						newFragment.setLabelText("Сохранен в сундук");
+					else {
+						newFragment.setLabelText("Такой скан уже был");
+					}
+					newFragment.show(getSupportFragmentManager(), "missiles");
+					newFragment.setOnDialogClickListener(onDialogClick);
+				}
+
 			}
 		}
 	};
-	OnDialogClickListener onDialogClick = new OnDialogClickListener()
-	{
+	OnDialogClickListener onDialogClick = new OnDialogClickListener() {
 
 		@Override
-		public void onOkClick() 
-		{
-			 
-			
+		public void onOkClick() {
+
 		}
 
 		@Override
 		public void onCancelClick() {
 			startScan();
 		}
-		
+
 	};
+
 	protected Dialog onCreateDialog(int id) {
 		if (id == DIALOG_EXIT) {
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -242,9 +236,9 @@ public class CameraActivity extends FragmentActivity {
 			// кнопка положительного ответа
 			adb.setPositiveButton(R.string.contin, myClickListener);
 			// кнопка отрицательного ответа
-			//adb.setNegativeButton(R.string.no, myClickListener);
+			// adb.setNegativeButton(R.string.no, myClickListener);
 			// кнопка нейтрального ответа
-			//adb.setNeutralButton(R.string.cancel, myClickListener);
+			// adb.setNeutralButton(R.string.cancel, myClickListener);
 			// создаем диалог
 			return adb.create();
 		}
@@ -257,13 +251,13 @@ public class CameraActivity extends FragmentActivity {
 			switch (which) {
 			// положительная кнопка
 			case Dialog.BUTTON_POSITIVE:
-				//saveData();
+				// saveData();
 				startScan();
-				//finish();
+				// finish();
 				break;
 			// негаитвная кнопка
 			case Dialog.BUTTON_NEGATIVE:
-				//finish();
+				// finish();
 				break;
 			// нейтральная кнопка
 			case Dialog.BUTTON_NEUTRAL:

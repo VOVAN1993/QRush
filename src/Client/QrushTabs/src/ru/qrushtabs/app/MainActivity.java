@@ -16,6 +16,8 @@ import android.widget.TabHost.OnTabChangeListener;
  
 
 public class MainActivity extends TabActivity {
+	private static MainActivity instance;
+	 
 	/** Called when the activity is first created. */
 	Handler mHandler = new Handler();
 	OnClickListener onScanBoxButtonClickListener = new OnClickListener()
@@ -44,6 +46,7 @@ public class MainActivity extends TabActivity {
 	};
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		instance = this;
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main_tabs);
@@ -110,5 +113,14 @@ public class MainActivity extends TabActivity {
  		tabHost.setCurrentTabByTag("tag3");
 
  		 
+	}
+	public static MainActivity getInstance()
+	{
+		if(instance!=null)
+			return instance;
+		else
+		{
+			return new MainActivity();
+		}
 	}
 }

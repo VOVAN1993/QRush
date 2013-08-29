@@ -1,5 +1,6 @@
 package ru.qrushtabs.app;
 
+import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,10 +34,16 @@ public class SettingsActivity extends Activity {
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_MAIN);
-				intent.addCategory(Intent.CATEGORY_HOME);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				MainActivity.getInstance().finish();
+				Intent intent = new Intent(SettingsActivity.this,EnterActivity.class);
+				
 				startActivity(intent);
+				finish();
+				ServerAPI.flushProfile();
+//				Intent intent = new Intent(Intent.ACTION_MAIN);
+//				intent.addCategory(Intent.CATEGORY_HOME);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				startActivity(intent);
 			}
 		});
 

@@ -1,6 +1,8 @@
 package ru.qrushtabs.app;
 
- import ru.qrushtabs.app.utils.OnInfoLoadListener;
+ import ru.qrushtabs.app.utils.BitmapCropper;
+import ru.qrushtabs.app.utils.OnInfoLoadListener;
+import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -38,33 +40,50 @@ public class ProfileActivity extends Activity
  		ProgressBar pb = (ProgressBar)findViewById(R.id.progressBar);
  		pb.setProgress(50);
  		
- 		ivPeakOver=(ImageView) findViewById(R.id.avatar);
+ 		TextView tv = (TextView)findViewById(R.id.name_tv);
+ 		tv.setText(ProfileInfo.username);
+ 		
+ 		tv = (TextView)findViewById(R.id.city_tv);
+ 		tv.setText(ProfileInfo.city);
+ 		ivPeakOver=(ImageView) findViewById(R.id.avatar_iv);
 
  		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
  		
  		int dpw = 86;
  		int dph = 86;
+ 		Bitmap bmp = null;
  		
- 		int pixelsw = (int) (dpw * scale + 0.5f);
- 		int pixelsh = (int) (dph * scale + 0.5f);
+// 		byte[] bmpBytes = ServerAPI.downloadProfilePhoto("Mihan");
+//
+// 		if(bmpBytes!=null)
+//    	     bmp = BitmapFactory.decodeByteArray(bmpBytes, 0, bmpBytes.length);
+// 		else
+// 		{
+ 		Log.d("avatar path", ProfileInfo.avatarPath);
+ 		if(!ProfileInfo.avatarPath.equals("0"))
+ 		{
+ 			if(ProfileInfo.avatarBitmap==null)
+ 				bmp=BitmapFactory.decodeFile(ProfileInfo.avatarPath);
+ 			else
+ 				bmp = ProfileInfo.avatarBitmap;
+ 		}
+ //		}
+ 		
+ 		if(bmp==null)
+ 		    bmp=BitmapFactory.decodeResource(getResources(), R.drawable.qrcat);
+ 		
+ 		ivPeakOver.setImageBitmap(BitmapCropper.crop(scale, bmp, dpw, dph));
+ 		
+ 		ivPeakOver.setOnClickListener(new OnClickListener()
+ 		{
 
- 		
- 		Bitmap bmp=BitmapFactory.decodeResource(getResources(), R.drawable.qrcat);
- 		int minsize = Math.min(bmp.getWidth(), bmp.getHeight());
- 		float scaling = (float)minsize/(float)pixelsw;
- 		float neededw =  (float)bmp.getWidth() / scaling;
- 		float neededh =  (float)bmp.getHeight() / scaling;
- 		Bitmap bmp2 = Bitmap.createScaledBitmap(bmp, (int)neededw, (int)neededh,true);
- 		
- 		int neededx = (int)neededw/2 - pixelsw/2;
- 		int neededy = (int)neededh/2 - pixelsh/2;
- 		 
- 		Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, neededx, neededy, pixelsw, pixelsh);
- 	//	Bitmap resizedbitmap=Bitmap.createBitmap(bmp,0,0, pixelsh, pixelsw);
- 	//	Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, 0, 0, (int)neededw, (int)neededh);
- 		//Bitmap resizedbitmap=Bitmap.createBitmap(bmp,0,0, pixelsh, pixelsw);
- 		ivPeakOver.setImageBitmap(croppedBitmap);
- 		
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+ 			
+ 		});
   		Button getMoneyButton = (Button)findViewById(R.id.get_money_btn);
  		
  		getMoneyButton.setOnClickListener(new OnClickListener()
@@ -77,13 +96,34 @@ public class ProfileActivity extends Activity
 			}
  			
  		});
-// 		TextView tv = (TextView)findViewById(R.id.scansTV);
-// 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
-// 		
-// 		tv = (TextView)findViewById(R.id.rescansTV);
-// 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
-// 		
- 		TextView tv = (TextView)findViewById(R.id.moneyTV);
+ 		
+ 		Button searchFriendsBtn = (Button)findViewById(R.id.search_friend_btn);
+ 		
+ 		searchFriendsBtn.setOnClickListener(new OnClickListener()
+ 		{
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(ProfileActivity.this,FriendsSearchActivity.class);
+				startActivity(intent);	
+			}
+ 			
+ 		});
+ 		
+        Button friendsBtn = (Button)findViewById(R.id.friendsbtn);
+ 		
+        friendsBtn.setOnClickListener(new OnClickListener()
+ 		{
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(ProfileActivity.this,FriendsActivity.class);
+				startActivity(intent);	
+			}
+ 			
+ 		});
+
+ 		tv = (TextView)findViewById(R.id.moneyTV);
  		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		
 	}
@@ -91,12 +131,7 @@ public class ProfileActivity extends Activity
 	public void onResume()
 	{
 		super.onResume();
-//		TextView tv = (TextView)findViewById(R.id.scansTV);
-// 		tv.setText(String.valueOf(ProfileInfo.getScansCount()));
-// 		
-// 		tv = (TextView)findViewById(R.id.rescansTV);
-// 		tv.setText(String.valueOf(ProfileInfo.getRescansCount()));
- 		
+
 		TextView tv = (TextView)findViewById(R.id.moneyTV);
  		tv.setText(String.valueOf(ProfileInfo.getMoneyCount()));
  		

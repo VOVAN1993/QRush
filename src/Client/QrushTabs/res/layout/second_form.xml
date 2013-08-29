@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="12dp"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+
+    <AutoCompleteTextView
+        android:id="@+id/countries_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/country_et"
+        android:editable="false"
+        android:paddingLeft="8dp"
+        android:paddingTop="9dp"
+        android:layout_marginTop="40dp"
+        android:text="Россия"
+        android:enabled="false"
+        android:textSize="18sp" >
+    </AutoCompleteTextView>
+
+    <AutoCompleteTextView
+        android:id="@+id/cities_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Вводите город..."
+        android:background="@drawable/city_et"
+        android:paddingLeft="8dp"
+        android:textSize="18sp" >
+    </AutoCompleteTextView>
+
+    <EditText
+        android:id="@+id/birthdate_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/birthdate_et"
+        android:editable="false"
+        android:paddingLeft="8dp"
+        android:hint="Вводите дату рождения..."
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/birthdate_wheels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp" >
+
+        <kankan.wheel.widget.WheelView
+            android:id="@+id/day"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content" />
+
+        <kankan.wheel.widget.WheelView
+            android:id="@+id/month"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <kankan.wheel.widget.WheelView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/graybtn"
+        android:text="Регистрация" />
+
+</LinearLayout>

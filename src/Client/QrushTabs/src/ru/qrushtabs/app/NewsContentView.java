@@ -33,12 +33,12 @@ public class NewsContentView extends LinearLayout {
       .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	   rowView = inflater.inflate(R.layout.news_place, this, false);
 	   
-	   newsTextView = (TextView)rowView.findViewById(R.id.news_tv);
+	   //newsTextView = (TextView)rowView.findViewById(R.id.news_tv);
 	   this.addView(rowView);
 	   
 	   rescanButton = (Button)rowView.findViewById(R.id.rescan_btn);
 	   arrowsImg = (ImageView)rowView.findViewById(R.id.rescan_arrows_icon);
-	   imgPlace = (ImageView)rowView.findViewById(R.id.news_content_iv);
+	   //imgPlace = (ImageView)rowView.findViewById(R.id.news_content_iv);
 	}
 	public NewsContentView(Context context) {
 		this(context, null);
@@ -60,9 +60,9 @@ public class NewsContentView extends LinearLayout {
 				@Override
 				public void onClick(View arg0) 
 				{
-					Log.d(null, (String) ((TextView)rowView.findViewById(R.id.news_tv)).getText());
+					//Log.d(null, (String) ((TextView)rowView.findViewById(R.id.news_tv)).getText());
 					//Animation anim = AnimationUtils.loadAnimation(rowView.getContext(), R.anim.arrow_rotate_anim);
-					RotateAnimation anim = new RotateAnimation(0, 360, 0,arrowsImg.getWidth()/2, 0, arrowsImg.getHeight()/2);
+					RotateAnimation anim = new RotateAnimation(0, 360, 0,(float)arrowsImg.getWidth()/2.0f, 0, (float)arrowsImg.getHeight()/2.0f);
 					anim.setDuration(500);
 					anim.setAnimationListener(new AnimationListener()
 					{
@@ -98,14 +98,14 @@ public class NewsContentView extends LinearLayout {
 	        	
 	        });
 		}
-		newsTextView.setText(newsContent.getContent());
+		//newsTextView.setText(newsContent.getContent());
 		
       if(newsContent.getBitmap()!=null)
       {
     	  
     	  //Bitmap bmp = newsContent.getBitmap();
     	  Bitmap bmp =  Bitmap.createBitmap(newsContent.getBitmap(), 0, 0, 100, 100);
-          imgPlace.setImageBitmap(bmp);
+          //imgPlace.setImageBitmap(bmp);
       	
       }
   	}

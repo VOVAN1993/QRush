@@ -1,9 +1,15 @@
 package ru.qrushtabs.app;
 
+import java.io.File;
+
+import android.graphics.Bitmap;
 import ru.qrushtabs.app.utils.OnInfoLoadListener;
 
 public class ProfileInfo {
 
+	public static final int maxPhotoWidth = 200;
+	public static final int maxPhotoHeight = 200;
+	
 	private static int scansCount = 0;
 	private static int rescansCount = 0;
 	private static int moneyCount = 0 ; 
@@ -18,6 +24,12 @@ public class ProfileInfo {
 	public static String userVKID = "0";
  	public static String userVKToken = "0";
  	public static String deviceID = "0";
+ 	
+ 	public static Bitmap avatarBitmap = null;
+ 	public static String avatarPath = "0";
+ 	public static File avatarFile = null;
+ 	
+ 	public static String city = "Репрежевальск";
 	public static int getScansCount()
 	{
 		if(loaded)

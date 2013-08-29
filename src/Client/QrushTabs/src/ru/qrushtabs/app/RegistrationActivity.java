@@ -1,12 +1,16 @@
 package ru.qrushtabs.app;
 
  
+import ru.qrushtabs.app.mycamera.AvatarCameraActivity;
+import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +22,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -93,6 +98,30 @@ public class RegistrationActivity extends Activity
 		}
 		
 	};
+	private OnClickListener onAvatarClick = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(RegistrationActivity.this,AvatarCameraActivity.class);
+			startActivityForResult(intent,1);	
+		}
+		
+	};
+	@Override
+	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (resultCode==0)
+	    	return;
+    	else
+    	{
+    		ImageView avatarView = (ImageView)findViewById(R.id.reg_avatar);
+    		
+    		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
+    		avatarView.getWidth();
+     		avatarView.setImageBitmap(BitmapCropper.pxcrop(scale, ProfileInfo.avatarBitmap, avatarView.getWidth(), avatarView.getWidth()));
+    		 
+    	}
+  	  }
 	private class SignUpTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
@@ -104,10 +133,10 @@ public class RegistrationActivity extends Activity
 			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-			    tv.setText("Вы успешно зарегистрировались");
+			    //tv.setText("Вы успешно зарегистрировались");
 		        ServerAPI.saveProfileInfo();
 		        
-		        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+		        Intent intent = new Intent(RegistrationActivity.this, SecondFormActivity.class);
 				finish();
 				startActivity(intent);
 			}
@@ -133,6 +162,8 @@ public class RegistrationActivity extends Activity
 		}
 //		Button btn = (Button)findViewById(R.id.signinBtn);
 //		btn.setOnClickListener(onSignIn);
+		ImageView iv = (ImageView)findViewById(R.id.reg_avatar);
+		iv.setOnClickListener(onAvatarClick );
 		Button btn = (Button)findViewById(R.id.signupBtn);
 		btn.setOnClickListener(onSignUp);
 	}

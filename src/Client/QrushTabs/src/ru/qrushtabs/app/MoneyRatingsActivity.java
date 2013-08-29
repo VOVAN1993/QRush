@@ -1,6 +1,7 @@
 package ru.qrushtabs.app;
 
- import android.app.Activity;
+import ru.qrushtabs.app.utils.ServerAPI;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,94 +17,97 @@ import android.widget.TextView;
 public class MoneyRatingsActivity extends Activity {
 
 	ListView lv;
-	 public void onCreate(Bundle savedInstanceState) 
-	 {
-	        super.onCreate(savedInstanceState);
-	        
-  	        setContentView(R.layout.money_rating);
- 	        
- 	       String[] values1 = new String[] { "Android", "iPhone", "WindowsMobile",
- 	                "Blackberry", "WebOS", "Windows7", "Max OS X",
- 	                "Linux", "OS/2" };
- 	      String[] values2 = new String[] { "iPhone",
-	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-	                "Linux", "OS/2" };
- 	        RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this, values1);
-	        lv = (ListView)findViewById(R.id.money_ratings_list1);
-	        lv.setAdapter(adapter1);
-	        
-	        RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this, values2);
-	        lv = (ListView)findViewById(R.id.money_ratings_list2);
-	        lv.setAdapter(adapter2);
-	         
-	        initTabs();
-//	        iv = (ImageView)findViewById(R.drawable.banner);
-//	        
-//	        iv.setOnClickListener(new OnClickListener() {
-//	            public void onClick(View v) {
-//	            	 
-//	                 
-//	                 Intent intent = new Intent(th, CameraTestActivity.class);
-//	         		 startActivity(intent);
-//	            }
-//	        });
-	        
-	       
-	 }
-	 private void initTabs() {
-			TabHost tabHost = (TabHost)findViewById(R.id.rating_type_tabhost);
-			// инициализация
-			tabHost.setup();
-//
-			TabHost.TabSpec tabSpec;
+	private static boolean inited = false;
 
-			tabSpec = tabHost.newTabSpec("tag1");
-			tabSpec.setIndicator(createLeftTabView(this,"Общий"));
-			 tabSpec.setContent(R.id.money_ratings_list1);
-			tabHost.addTab(tabSpec);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-			tabSpec = tabHost.newTabSpec("tag2");
-			tabSpec.setIndicator(createRightTabView(this,"Друзья"));
-			 tabSpec.setContent(R.id.money_ratings_list2);
-			tabHost.addTab(tabSpec);
+		setContentView(R.layout.money_rating);
+
+		initTabs();
+		// iv = (ImageView)findViewById(R.drawable.banner);
+		//
+		// iv.setOnClickListener(new OnClickListener() {
+		// public void onClick(View v) {
+		//
+		//
+		// Intent intent = new Intent(th, CameraTestActivity.class);
+		// startActivity(intent);
+		// }
+		// });
+
+	}
+
+	private void initTabs() {
+		  
 			
-			//tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+			String[] values2 = ServerAPI.getTopUsers();
+			String[] values1 = values2;
 			
-			
-//			  View tabview = createTabView(tabHost.getContext(), "");
-//			  TabSpec setContent = tabHost.newTabSpec("").setIndicator(tabview);
-//			
-//			  mTabHost.addTab(setContent);
-			
-//			for (int i = 0; i < 2; i++)
-//				tabHost.getTabWidget().getChildTabViewAt(i)
-//						.setBackgroundDrawable(null);
-	 }
-	 
-//		private void setupTab(final View view, final String tag) {
-//			
-//			    View tabview = createTabView(mTabHost.getContext(), tag);
-//			    TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview);
-//			
-//			    mTabHost.addTab(setContent);
-//			
-//			}
-			
-			 
-			
-			private  View createLeftTabView(final Context context, final String text) {			
-			    View view = LayoutInflater.from(context).inflate(R.layout.left_tab_bg, null);			
-			    TextView tv = (TextView) view.findViewById(R.id.tabsText);			
-			    tv.setText(text);			
-			    return view;
-			
-			}
-			private  View createRightTabView(final Context context, final String text) {			
-			    View view = LayoutInflater.from(context).inflate(R.layout.right_tab_bg, null);			
-			    TextView tv = (TextView) view.findViewById(R.id.tabsText);			
-			    tv.setText(text);			
-			    return view;
-			
-			}
+			RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this,
+					values1);
+			lv = (ListView) findViewById(R.id.money_ratings_list1);
+			lv.setAdapter(adapter1);
+
+			RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this,
+					values2);
+			lv = (ListView) findViewById(R.id.money_ratings_list2);
+			lv.setAdapter(adapter2);
+			inited = true;
+		
+		TabHost tabHost = (TabHost) findViewById(R.id.rating_type_tabhost);
+		// инициализация
+		tabHost.setup();
+		//
+		TabHost.TabSpec tabSpec;
+
+		tabSpec = tabHost.newTabSpec("tag1");
+		tabSpec.setIndicator(createLeftTabView(this, "Общий"));
+		tabSpec.setContent(R.id.money_ratings_list1);
+		tabHost.addTab(tabSpec);
+
+		tabSpec = tabHost.newTabSpec("tag2");
+		tabSpec.setIndicator(createRightTabView(this, "Друзья"));
+		tabSpec.setContent(R.id.money_ratings_list2);
+		tabHost.addTab(tabSpec);
+
+		// tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+
+		// View tabview = createTabView(tabHost.getContext(), "");
+		// TabSpec setContent = tabHost.newTabSpec("").setIndicator(tabview);
+		//
+		// mTabHost.addTab(setContent);
+
+		// for (int i = 0; i < 2; i++)
+		// tabHost.getTabWidget().getChildTabViewAt(i)
+		// .setBackgroundDrawable(null);
+	}
+
+	// private void setupTab(final View view, final String tag) {
+	//
+	// View tabview = createTabView(mTabHost.getContext(), tag);
+	// TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview);
+	//
+	// mTabHost.addTab(setContent);
+	//
+	// }
+
+	private View createLeftTabView(final Context context, final String text) {
+		View view = LayoutInflater.from(context).inflate(R.layout.left_tab_bg,
+				null);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setText(text);
+		return view;
+
+	}
+
+	private View createRightTabView(final Context context, final String text) {
+		View view = LayoutInflater.from(context).inflate(R.layout.right_tab_bg,
+				null);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setText(text);
+		return view;
+
+	}
 
 }

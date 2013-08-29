@@ -1,5 +1,8 @@
 package ru.qrushtabs.app;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +16,7 @@ public class RatingsArrayAdapter extends ArrayAdapter<String> {
     private final String[] values;
 
     public RatingsArrayAdapter(Context context, String[] values) {
-        super(context, R.layout.rating_field, values);
+        super(context, R.layout. rating_field, values);
         this.context = context;
         this.values = values;
     }
@@ -25,15 +28,30 @@ public class RatingsArrayAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.rating_field, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        textView.setText(values[position]);
+        
         // Изменение иконки для Windows и iPhone
+        
         String s = values[position];
-        if (s.startsWith("Windows7") || s.startsWith("iPhone")
-                || s.startsWith("Solaris")) {
-            imageView.setImageResource(R.drawable.profil);
-        } else {
-            imageView.setImageResource(R.drawable.profil);
-        }
+        JSONObject jsonObj = null;
+        try {
+			jsonObj = new JSONObject(s);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        RatingField rf = null;
+        try {
+			rf = RatingField.parse(jsonObj);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        textView.setText(rf.username);
+        imageView.setImageResource(R.drawable.profil);
+         
 
         return rowView;
     }

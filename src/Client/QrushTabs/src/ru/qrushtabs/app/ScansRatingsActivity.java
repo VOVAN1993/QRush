@@ -18,19 +18,19 @@ public class ScansRatingsActivity extends Activity {
 	        
   	        setContentView(R.layout.scans_rating);
  	        
- 	       String[] values1 = new String[] { "Android", "iPhone", "WindowsMobile",
- 	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
- 	                "Linux", "OS/2" };
- 	      String[] values2 = new String[] { "iPhone", "WindowsMobile",
-	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-	                "Linux", "OS/2" };
- 	        RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this, values1);
-	        lv = (ListView)findViewById(R.id.scan_ratings_list1);
-	        lv.setAdapter(adapter1);
-	        
-	        RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this, values2);
-	        lv = (ListView)findViewById(R.id.scan_ratings_list2);
-	        lv.setAdapter(adapter2);
+// 	       String[] values1 = new String[] { "Android", "iPhone", "WindowsMobile",
+// 	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+// 	                "Linux", "OS/2" };
+// 	      String[] values2 = new String[] { "iPhone", "WindowsMobile",
+//	                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+//	                "Linux", "OS/2" };
+// 	        RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this, values1);
+//	        lv = (ListView)findViewById(R.id.scan_ratings_list1);
+//	        lv.setAdapter(adapter1);
+//	        
+//	        RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this, values2);
+//	        lv = (ListView)findViewById(R.id.scan_ratings_list2);
+//	        lv.setAdapter(adapter2);
 	         
 	        initTabs();
 //	        iv = (ImageView)findViewById(R.drawable.banner);

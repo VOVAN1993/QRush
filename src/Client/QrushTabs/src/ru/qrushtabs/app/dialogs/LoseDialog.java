@@ -21,7 +21,7 @@ public class LoseDialog extends MyDialog {
 
 
 	View v;
-	String text = "Вы проиграли";
+	
 	private OnClickListener onCancel = new OnClickListener()
 	{
 
@@ -29,32 +29,30 @@ public class LoseDialog extends MyDialog {
 		public void onClick(View arg0) {
 			LoseDialog.this.dismiss();
 			if(onDialogClick!=null)
-			onDialogClick.onCancelClick();
+			onDialogClick.onOkClick();
   		}
 		
 	};
 	
 
-	
+	TextView tv;
+	Button btn;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		v = inflater.inflate(R.layout.lose_dialog, container);
 		
-		TextView tv = (TextView)v.findViewById(R.id.okLabel);
+		tv = (TextView)v.findViewById(R.id.okLabel);
 		tv.setText(text);
-		Button cancel = (Button)v.findViewById(R.id.okBtn);
+		btn = (Button)v.findViewById(R.id.okBtn);
 		
-		cancel.setOnClickListener(onCancel);
+		btn.setOnClickListener(onCancel);
 	 
 		return v;
 		
 	}
 	
-	public void setLabelText(String text)
-	{
-		this.text = text;
-	}
+
  
 	@Override
 	public void onResume()

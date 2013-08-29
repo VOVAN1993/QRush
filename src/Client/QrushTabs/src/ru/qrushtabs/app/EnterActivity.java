@@ -35,7 +35,7 @@ public class EnterActivity extends Activity {
 			 
 			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, RegistrationActivity.class);
-			finish();
+			//finish();
 			startActivity(intent);
 			
 		}
@@ -50,7 +50,7 @@ public class EnterActivity extends Activity {
 			 
 			ProfileInfo.signInType = "vk";
 			Intent intent = new Intent(EnterActivity.this, VkLoginActivity.class);
-			finish();
+			//finish();
 			startActivity(intent);
 			
 		}
@@ -65,7 +65,7 @@ public class EnterActivity extends Activity {
 			 
 			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, SignInActivity.class);
-			finish();
+			//finish();
 			startActivity(intent);
 			
 		}

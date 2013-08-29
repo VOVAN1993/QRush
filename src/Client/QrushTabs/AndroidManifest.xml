@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -17,10 +18,8 @@
           <activity
             android:name="PreloadActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-             
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,19 +27,22 @@
             android:name="MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme">
-           
+            android:theme="@style/MyTheme">          
         </activity>
         <activity
             android:name="EnterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>        
+          <activity
+            android:name="ru.qrushtabs.app.mycamera.AvatarCameraActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait" 
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
          <activity
             android:name="FormActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait" />       
         <activity
             android:name="VkLoginActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -51,9 +53,20 @@
             android:screenOrientation="portrait"
                android:theme="@style/MyTheme" />
         <activity
+            android:name="FriendsSearchActivity"
+             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait"
+               android:theme="@style/MyTheme" />
+        <activity
+            android:name="FriendsActivity"
+             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait"
+               android:theme="@style/MyTheme" />
+        <activity
             android:name="SignInActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme" />
          
         <activity
             android:name="CameraActivity"
@@ -87,13 +100,18 @@
         <activity
             android:name="NewsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" />
+         <activity
+            android:name="QuestActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme">
+        </activity>
         <activity
             android:name="QuestsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />
+             />
         <activity
             android:name="GetMoneyActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -112,13 +130,12 @@
             android:name="PrizeActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />
-        
-        <activity android:name="ru.qrushtabs.app.custom.DateActivity" android:label="Date">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="kankan.wheel.WHEEL_SAMPLE"/>
-            </intent-filter>
+            android:theme="@style/MyTheme" />       
+        <activity 
+            android:name="ru.qrushtabs.app.SecondFormActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme">             
         </activity>
     </application>
 

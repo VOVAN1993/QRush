@@ -27,7 +27,7 @@
                 android:background="@color/white" >
 
                 <ImageView
-                    android:id="@+id/avatar"
+                    android:id="@+id/avatar_iv"
                     android:layout_width="@dimen/profile_tv_width"
                     android:layout_height="@dimen/profile_tv_width"
                     android:layout_gravity="center"
@@ -59,6 +59,16 @@
                 android:textSize="@dimen/profile_city_font_size"
                 foo:customFont="fonts/lobster.ttf" >
             </ru.qrushtabs.app.custom.TextViewPlus>
+
+            <Button
+                android:id="@+id/search_friend_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/qrcat"
+                android:text="+" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -75,6 +85,7 @@
                 android:orientation="vertical" >
 
                 <ru.qrushtabs.app.custom.ButtonPlus
+                    android:id="@+id/friendsbtn"
                     android:layout_width="@dimen/profile_tv_width"
                     android:layout_height="@dimen/profile_tv_height"
                     android:layout_gravity="center_horizontal"

@@ -1,0 +1,2245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="countries_array">
+        <item>Австралия</item>
+        <item>Австрия</item>
+        <item>Азербайджан</item>
+        <item>Албания</item>
+        <item>Алжир</item>
+        <item>Американское Самоа</item>
+        <item>Ангилья</item>
+        <item>Ангола</item>
+        <item>Андорра</item>
+        <item>Антигуа и Барбуда</item>
+        <item>Аргентина</item>
+        <item>Армения</item>
+        <item>Аруба</item>
+        <item>Афганистан</item>
+        <item>Багамы</item>
+        <item>Бангладеш</item>
+        <item>Барбадос</item>
+        <item>Бахрейн</item>
+        <item>Беларусь</item>
+        <item>Белиз</item>
+        <item>Бельгия</item>
+        <item>Бенин</item>
+        <item>Бермуды</item>
+        <item>Болгария</item>
+        <item>Боливия</item>
+        <item>Бонайре, Синт-Эстатиус и Саба</item>
+        <item>Босния и Герцеговина</item>
+        <item>Ботсвана</item>
+        <item>Бразилия</item>
+        <item>Бруней-Даруссалам</item>
+        <item>Буркина-Фасо</item>
+        <item>Бурунди</item>
+        <item>Бутан</item>
+        <item>Вануату</item>
+        <item>Ватикан</item>
+        <item>Великобритания</item>
+        <item>Венгрия</item>
+        <item>Венесуэла</item>
+        <item>Виргинские острова, Британские</item>
+        <item>Виргинские острова, США</item>
+        <item>Восточный Тимор</item>
+        <item>Вьетнам</item>
+        <item>Габон</item>
+        <item>Гаити</item>
+        <item>Гайана</item>
+        <item>Гамбия</item>
+        <item>Гана</item>
+        <item>Гваделупа</item>
+        <item>Гватемала</item>
+        <item>Гвинея</item>
+        <item>Гвинея-Бисау</item>
+        <item>Германия</item>
+        <item>Гибралтар</item>
+        <item>Гондурас</item>
+        <item>Гонконг</item>
+        <item>Гренада</item>
+        <item>Гренландия</item>
+        <item>Греция</item>
+        <item>Грузия</item>
+        <item>Гуам</item>
+        <item>Дания</item>
+        <item>Джибути</item>
+        <item>Доминика</item>
+        <item>Доминиканская Республика</item>
+        <item>Египет</item>
+        <item>Замбия</item>
+        <item>Западная Сахара</item>
+        <item>Зимбабве</item>
+        <item>Израиль</item>
+        <item>Индия</item>
+        <item>Индонезия</item>
+        <item>Иордания</item>
+        <item>Ирак</item>
+        <item>Иран</item>
+        <item>Ирландия</item>
+        <item>Исландия</item>
+        <item>Испания</item>
+        <item>Италия</item>
+        <item>Йемен</item>
+        <item>Кабо-Верде</item>
+        <item>Казахстан</item>
+        <item>Камбоджа</item>
+        <item>Камерун</item>
+        <item>Канада</item>
+        <item>Катар</item>
+        <item>Кения</item>
+        <item>Кипр</item>
+        <item>Кирибати</item>
+        <item>Китай</item>
+        <item>Колумбия</item>
+        <item>Коморы</item>
+        <item>Конго</item>
+        <item>Конго, демократическая республика</item>
+        <item>Коста-Рика</item>
+        <item>Кот д`Ивуар</item>
+        <item>Куба</item>
+        <item>Кувейт</item>
+        <item>Кыргызстан</item>
+        <item>Кюрасао</item>
+        <item>Лаос</item>
+        <item>Латвия</item>
+        <item>Лесото</item>
+        <item>Либерия</item>
+        <item>Ливан</item>
+        <item>Ливия</item>
+        <item>Литва</item>
+        <item>Лихтенштейн</item>
+        <item>Люксембург</item>
+        <item>Маврикий</item>
+        <item>Мавритания</item>
+        <item>Мадагаскар</item>
+        <item>Макао</item>
+        <item>Македония</item>
+        <item>Малави</item>
+        <item>Малайзия</item>
+        <item>Мали</item>
+        <item>Мальдивы</item>
+        <item>Мальта</item>
+        <item>Марокко</item>
+        <item>Мартиника</item>
+        <item>Маршалловы Острова</item>
+        <item>Мексика</item>
+        <item>Микронезия, федеративные штаты</item>
+        <item>Мозамбик</item>
+        <item>Молдова</item>
+        <item>Монако</item>
+        <item>Монголия</item>
+        <item>Монтсеррат</item>
+        <item>Мьянма</item>
+        <item>Намибия</item>
+        <item>Науру</item>
+        <item>Непал</item>
+        <item>Нигер</item>
+        <item>Нигерия</item>
+        <item>Нидерланды</item>
+        <item>Никарагуа</item>
+        <item>Ниуэ</item>
+        <item>Новая Зеландия</item>
+        <item>Новая Каледония</item>
+        <item>Норвегия</item>
+        <item>Объединенные Арабские Эмираты</item>
+        <item>Оман</item>
+        <item>Остров Мэн</item>
+        <item>Остров Норфолк</item>
+        <item>Острова Кайман</item>
+        <item>Острова Кука</item>
+        <item>Острова Теркс и Кайкос</item>
+        <item>Пакистан</item>
+        <item>Палау</item>
+        <item>Палестинская автономия</item>
+        <item>Панама</item>
+        <item>Папуа - Новая Гвинея</item>
+        <item>Парагвай</item>
+        <item>Перу</item>
+        <item>Питкерн</item>
+        <item>Польша</item>
+        <item>Португалия</item>
+        <item>Пуэрто-Рико</item>
+        <item>Реюньон</item>
+        <item>Россия</item>
+        <item>Руанда</item>
+        <item>Румыния</item>
+        <item>США</item>
+        <item>Сальвадор</item>
+        <item>Самоа</item>
+        <item>Сан-Марино</item>
+        <item>Сан-Томе и Принсипи</item>
+        <item>Саудовская Аравия</item>
+        <item>Свазиленд</item>
+        <item>Святая Елена</item>
+        <item>Северная Корея</item>
+        <item>Северные Марианские острова</item>
+        <item>Сейшелы</item>
+        <item>Сенегал</item>
+        <item>Сент-Винсент</item>
+        <item>Сент-Китс и Невис</item>
+        <item>Сент-Люсия</item>
+        <item>Сент-Пьер и Микелон</item>
+        <item>Сербия</item>
+        <item>Сингапур</item>
+        <item>Синт-Мартен</item>
+        <item>Сирийская Арабская Республика</item>
+        <item>Словакия</item>
+        <item>Словения</item>
+        <item>Соломоновы Острова</item>
+        <item>Сомали</item>
+        <item>Судан</item>
+        <item>Суринам</item>
+        <item>Сьерра-Леоне</item>
+        <item>Таджикистан</item>
+        <item>Таиланд</item>
+        <item>Тайвань</item>
+        <item>Танзания</item>
+        <item>Того</item>
+        <item>Токелау</item>
+        <item>Тонга</item>
+        <item>Тринидад и Тобаго</item>
+        <item>Тувалу</item>
+        <item>Тунис</item>
+        <item>Туркменистан</item>
+        <item>Турция</item>
+        <item>Уганда</item>
+        <item>Узбекистан</item>
+        <item>Украина</item>
+        <item>Уоллис и Футуна</item>
+        <item>Уругвай</item>
+        <item>Фарерские острова</item>
+        <item>Фиджи</item>
+        <item>Филиппины</item>
+        <item>Финляндия</item>
+        <item>Фолклендские острова</item>
+        <item>Франция</item>
+        <item>Французская Гвиана</item>
+        <item>Французская Полинезия</item>
+        <item>Хорватия</item>
+        <item>Центрально-Африканская Республика</item>
+        <item>Чад</item>
+        <item>Черногория</item>
+        <item>Чехия</item>
+        <item>Чили</item>
+        <item>Швейцария</item>
+        <item>Швеция</item>
+        <item>Шпицберген и Ян Майен</item>
+        <item>Шри-Ланка</item>
+        <item>Эквадор</item>
+        <item>Экваториальная Гвинея</item>
+        <item>Эритрея</item>
+        <item>Эстония</item>
+        <item>Эфиопия</item>
+        <item>Южная Корея</item>
+        <item>Южно-Африканская Республика</item>
+        <item>Южный Судан</item>
+        <item>Ямайка</item>
+        <item>Япония</item>
+    </string-array>
+    <string-array name="countries_cid">
+        <item>19</item>
+        <item>20</item>
+        <item>5</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>6</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>3</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>235</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>233</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>7</item>
+        <item>72</item>
+        <item>73</item>
+        <item>231</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>8</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>4</item>
+        <item>91</item>
+        <item>92</item>
+        <item>10</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+        <item>11</item>
+        <item>138</item>
+        <item>106</item>
+        <item>12</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>13</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>114</item>
+        <item>115</item>
+        <item>116</item>
+        <item>117</item>
+        <item>118</item>
+        <item>119</item>
+        <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>15</item>
+        <item>129</item>
+        <item>130</item>
+        <item>131</item>
+        <item>132</item>
+        <item>133</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>139</item>
+        <item>140</item>
+        <item>141</item>
+        <item>142</item>
+        <item>143</item>
+        <item>144</item>
+        <item>145</item>
+        <item>146</item>
+        <item>147</item>
+        <item>148</item>
+        <item>149</item>
+        <item>150</item>
+        <item>151</item>
+        <item>152</item>
+        <item>153</item>
+        <item>154</item>
+        <item>155</item>
+        <item>156</item>
+        <item>157</item>
+        <item>158</item>
+        <item>159</item>
+        <item>160</item>
+        <item>161</item>
+        <item>162</item>
+        <item>163</item>
+        <item>1</item>
+        <item>164</item>
+        <item>165</item>
+        <item>9</item>
+        <item>166</item>
+        <item>167</item>
+        <item>168</item>
+        <item>169</item>
+        <item>170</item>
+        <item>171</item>
+        <item>172</item>
+        <item>173</item>
+        <item>174</item>
+        <item>175</item>
+        <item>176</item>
+        <item>177</item>
+        <item>178</item>
+        <item>179</item>
+        <item>180</item>
+        <item>181</item>
+        <item>182</item>
+        <item>234</item>
+        <item>183</item>
+        <item>184</item>
+        <item>185</item>
+        <item>186</item>
+        <item>187</item>
+        <item>188</item>
+        <item>189</item>
+        <item>190</item>
+        <item>16</item>
+        <item>191</item>
+        <item>192</item>
+        <item>193</item>
+        <item>194</item>
+        <item>195</item>
+        <item>196</item>
+        <item>197</item>
+        <item>198</item>
+        <item>199</item>
+        <item>17</item>
+        <item>200</item>
+        <item>201</item>
+        <item>18</item>
+        <item>2</item>
+        <item>202</item>
+        <item>203</item>
+        <item>204</item>
+        <item>205</item>
+        <item>206</item>
+        <item>207</item>
+        <item>208</item>
+        <item>209</item>
+        <item>210</item>
+        <item>211</item>
+        <item>212</item>
+        <item>213</item>
+        <item>214</item>
+        <item>230</item>
+        <item>215</item>
+        <item>216</item>
+        <item>217</item>
+        <item>218</item>
+        <item>219</item>
+        <item>220</item>
+        <item>221</item>
+        <item>222</item>
+        <item>223</item>
+        <item>14</item>
+        <item>224</item>
+        <item>226</item>
+        <item>227</item>
+        <item>232</item>
+        <item>228</item>
+        <item>229</item>
+    </string-array>
+    <string-array name="city19">
+        <item>Adelaide</item>
+        <item>Brisbane</item>
+        <item>Canberra</item>
+        <item>Darwin</item>
+        <item>Hobart</item>
+        <item>Melbourne</item>
+        <item>Perth</item>
+        <item>Sydney</item>
+    </string-array>
+    <string-array name="city20">
+        <item>Eisenstadt</item>
+        <item>Graz</item>
+        <item>Innsbruck</item>
+        <item>Klagenfurt</item>
+        <item>Linz</item>
+        <item>Salzburg</item>
+        <item>Sankt Pölten</item>
+        <item>Villach</item>
+        <item>Wels</item>
+        <item>Wien</item>
+    </string-array>
+    <string-array name="city5">
+        <item>Баку</item>
+        <item>Али-Байрамлы</item>
+        <item>Гянджа</item>
+        <item>Евлах</item>
+        <item>Лянкяран</item>
+        <item>Мингечевир</item>
+        <item>Нафталан</item>
+        <item>Нахичевань</item>
+        <item>Ханкенди</item>
+        <item>Сумгаит</item>
+        <item>Шеки</item>
+        <item>Шуша</item>
+    </string-array>
+    <string-array name="city21">
+        <item>Durrës</item>
+        <item>Elbasan</item>
+        <item>Fier</item>
+        <item>Shkodër</item>
+        <item>Tirana</item>
+        <item>Vlorë</item>
+    </string-array>
+    <string-array name="city22">
+        <item>Algiers</item>
+        <item>Annaba</item>
+        <item>Batna</item>
+        <item>Constantine</item>
+        <item>Oran</item>
+    </string-array>
+    <string-array name="city23">
+        <item>Fagatogo</item>
+        <item>Pago Pago</item>
+    </string-array>
+    <string-array name="city24">
+        <item>The Valley</item>
+    </string-array>
+    <string-array name="city25">
+        <item>Benguela</item>
+        <item>Huambo</item>
+        <item>Kuito</item>
+        <item>Lobito</item>
+        <item>Luanda</item>
+        <item>Lubango</item>
+        <item>M\'banza Congo</item>
+        <item>Malanje</item>
+        <item>Namibe</item>
+        <item>Uíge</item>
+    </string-array>
+    <string-array name="city26">
+        <item>Andorra la Vella</item>
+    </string-array>
+    <string-array name="city27">
+        <item>All Saints</item>
+        <item>Liberta</item>
+        <item>Saint John\'s</item>
+    </string-array>
+    <string-array name="city28">
+        <item>Buenos Aires</item>
+        <item>Córdoba</item>
+        <item>La Plata</item>
+        <item>Mar del Plata</item>
+        <item>Mendoza</item>
+        <item>Rosario</item>
+        <item>Salta</item>
+        <item>Santa Fe</item>
+    </string-array>
+    <string-array name="city6">
+        <item>Ереван</item>
+        <item>Армавир</item>
+        <item>Арташат</item>
+        <item>Аштарак</item>
+        <item>Ванадзор</item>
+        <item>Гавар</item>
+        <item>Гюмри</item>
+        <item>Ехегнадзор</item>
+        <item>Иджеван</item>
+        <item>Капан</item>
+        <item>Раздан</item>
+    </string-array>
+    <string-array name="city29">
+        <item>Oranjestad</item>
+    </string-array>
+    <string-array name="city30">
+        <item>Charikar</item>
+        <item>Herat</item>
+        <item>Jalalabad</item>
+        <item>Kabul</item>
+        <item>Kandahar</item>
+        <item>Kondūz</item>
+        <item>Mazār-e Sharīf</item>
+        <item>Pol-e Khomrī</item>
+        <item>Sheberghān</item>
+        <item>Talūkān</item>
+    </string-array>
+    <string-array name="city31">
+        <item>Freeport District</item>
+        <item>Nassau</item>
+    </string-array>
+    <string-array name="city32">
+        <item>Chittagong</item>
+        <item>Comilla</item>
+        <item>Dhaka</item>
+        <item>Khulna</item>
+        <item>Mymensingh</item>
+        <item>Rājshāhi</item>
+        <item>Tungi</item>
+    </string-array>
+    <string-array name="city33">
+        <item>Bridgetown</item>
+        <item>Speightstown</item>
+    </string-array>
+    <string-array name="city34">
+        <item>Al Muḩarraq</item>
+        <item>Ar Rifā`</item>
+        <item>Manama</item>
+    </string-array>
+    <string-array name="city3">
+        <item>Минск</item>
+        <item>Барановичи</item>
+        <item>Брест</item>
+        <item>Витебск</item>
+        <item>Гомель</item>
+        <item>Горки</item>
+        <item>Гродно</item>
+        <item>Могилев</item>
+        <item>Мозырь</item>
+        <item>Новополоцк</item>
+        <item>Пинск</item>
+        <item>Бобруйск</item>
+    </string-array>
+    <string-array name="city35">
+        <item>Belize City</item>
+        <item>Belmopan</item>
+    </string-array>
+    <string-array name="city36">
+        <item>Antwerpen</item>
+        <item>Brugge</item>
+        <item>Bruxelles</item>
+        <item>Charleroi</item>
+        <item>Gent</item>
+        <item>Hasselt</item>
+        <item>Leuven</item>
+        <item>Liège</item>
+        <item>Mons</item>
+        <item>Namur</item>
+    </string-array>
+    <string-array name="city37">
+        <item>Cotonou</item>
+        <item>Djougou</item>
+        <item>Parakou</item>
+        <item>Porto-Novo</item>
+    </string-array>
+    <string-array name="city38">
+        <item>Hamilton</item>
+    </string-array>
+    <string-array name="city39">
+        <item>Burgas</item>
+        <item>Dobrich</item>
+        <item>Pleven</item>
+        <item>Plovdiv</item>
+        <item>Ruse</item>
+        <item>Sliven</item>
+        <item>Sofia</item>
+        <item>Stara Zagora</item>
+        <item>Varna</item>
+    </string-array>
+    <string-array name="city40">
+        <item>Cochabamba</item>
+        <item>El Alto</item>
+        <item>La Paz</item>
+        <item>Montero</item>
+        <item>Oruro</item>
+        <item>Potosí</item>
+        <item>Santa Cruz de la Sierra</item>
+        <item>Sucre</item>
+        <item>Tarija</item>
+        <item>Trinidad</item>
+    </string-array>
+    <string-array name="city235"></string-array>
+    <string-array name="city41">
+        <item>Banja Luka</item>
+        <item>Bihać</item>
+        <item>Bijeljina</item>
+        <item>Brčko</item>
+        <item>Doboj</item>
+        <item>Mostar</item>
+        <item>Prijedor</item>
+        <item>Sarajevo</item>
+        <item>Tuzla</item>
+        <item>Zenica</item>
+    </string-array>
+    <string-array name="city42">
+        <item>Francistown</item>
+        <item>Gaborone</item>
+        <item>Molepolole</item>
+        <item>Selebi-Phikwe</item>
+    </string-array>
+    <string-array name="city43">
+        <item>Belém</item>
+        <item>Belo Horizonte</item>
+        <item>Brasília</item>
+        <item>Campinas</item>
+        <item>Curitiba</item>
+        <item>Fortaleza</item>
+        <item>Goiânia</item>
+        <item>Guarulhos</item>
+        <item>Manaus</item>
+        <item>Porto Alegre</item>
+        <item>Recife</item>
+        <item>Rio de Janeiro</item>
+        <item>Salvador</item>
+        <item>São Paulo</item>
+    </string-array>
+    <string-array name="city44">
+        <item>Bandar Seri Begawan</item>
+        <item>Bangar</item>
+        <item>Kuala Belait</item>
+        <item>Tutong</item>
+    </string-array>
+    <string-array name="city45">
+        <item>Banfora</item>
+        <item>Bobo Dioulasso</item>
+        <item>Dédougou</item>
+        <item>Fada N\'Gourma</item>
+        <item>Houndé</item>
+        <item>Kaya</item>
+        <item>Koudougou</item>
+        <item>Ouagadougou</item>
+        <item>Ouahigouya</item>
+        <item>Tenkodogo</item>
+    </string-array>
+    <string-array name="city46">
+        <item>Bujumbura</item>
+        <item>Gitega</item>
+        <item>Muyinga</item>
+        <item>Ngozi</item>
+    </string-array>
+    <string-array name="city47">
+        <item>Phuntsholing</item>
+        <item>Punākha</item>
+        <item>Thimphu</item>
+    </string-array>
+    <string-array name="city48">
+        <item>Luganville</item>
+        <item>Vila</item>
+    </string-array>
+    <string-array name="city233"></string-array>
+    <string-array name="city49">
+        <item>Belfast</item>
+        <item>Birmingham</item>
+        <item>Bristol</item>
+        <item>Cardiff</item>
+        <item>Edinburgh</item>
+        <item>Glasgow</item>
+        <item>Leeds</item>
+        <item>Liverpool</item>
+        <item>London</item>
+        <item>Manchester</item>
+        <item>Newcastle upon Tyne</item>
+        <item>Sheffield</item>
+    </string-array>
+    <string-array name="city50">
+        <item>Budapest</item>
+        <item>Debrecen</item>
+        <item>Győr</item>
+        <item>Kecskemét</item>
+        <item>Miskolc</item>
+        <item>Nyíregyháza</item>
+        <item>Pécs</item>
+        <item>Szeged</item>
+        <item>Székesfehérvár</item>
+        <item>Szolnok</item>
+        <item>Szombathely</item>
+    </string-array>
+    <string-array name="city51">
+        <item>Barcelona</item>
+        <item>Barquisimeto</item>
+        <item>Caracas</item>
+        <item>Ciudad Bolívar</item>
+        <item>Ciudad Guayana</item>
+        <item>Maracaibo</item>
+        <item>Maracay</item>
+        <item>Maturín</item>
+        <item>Turmero</item>
+        <item>Valencia</item>
+    </string-array>
+    <string-array name="city52">
+        <item>Road Town</item>
+    </string-array>
+    <string-array name="city53">
+        <item>Charlotte Amalie</item>
+    </string-array>
+    <string-array name="city54">
+        <item>Baucau</item>
+        <item>Dili</item>
+        <item>Lospalos</item>
+    </string-array>
+    <string-array name="city55">
+        <item>Cần Thơ</item>
+        <item>Da Nang</item>
+        <item>Hà Tĩnh</item>
+        <item>Haiphong</item>
+        <item>Hanoi</item>
+        <item>Ho Chi Minh City</item>
+    </string-array>
+    <string-array name="city56">
+        <item>Franceville</item>
+        <item>Libreville</item>
+        <item>Port-Gentil</item>
+    </string-array>
+    <string-array name="city57">
+        <item>Cap-Haïtien</item>
+        <item>Carrefour</item>
+        <item>Delmas</item>
+        <item>Gonaïves</item>
+        <item>Les Cayes</item>
+        <item>Pétionville</item>
+        <item>Port-au-Prince</item>
+        <item>Saint-Marc</item>
+    </string-array>
+    <string-array name="city58">
+        <item>Georgetown</item>
+        <item>Linden</item>
+        <item>New Amsterdam</item>
+    </string-array>
+    <string-array name="city59">
+        <item>Bakau</item>
+        <item>Banjul</item>
+        <item>Serekunda</item>
+    </string-array>
+    <string-array name="city60">
+        <item>Accra</item>
+        <item>Ashaiman</item>
+        <item>Cape Coast</item>
+        <item>Kumasi</item>
+        <item>Obuasi</item>
+        <item>Sekondi</item>
+        <item>Tamale</item>
+        <item>Tema</item>
+        <item>Teshi</item>
+    </string-array>
+    <string-array name="city61">
+        <item>Basse-Terre</item>
+        <item>Pointe-à-Pitre</item>
+    </string-array>
+    <string-array name="city62">
+        <item>Escuintla</item>
+        <item>Guatemala City</item>
+        <item>Quetzaltenango</item>
+    </string-array>
+    <string-array name="city63">
+        <item>Boké</item>
+        <item>Conakry</item>
+        <item>Kankan</item>
+        <item>Kindia</item>
+        <item>Nzérékoré</item>
+    </string-array>
+    <string-array name="city64">
+        <item>Bafatá</item>
+        <item>Bissau</item>
+        <item>Gabú</item>
+    </string-array>
+    <string-array name="city65">
+        <item>Berlin</item>
+        <item>Bonn</item>
+        <item>Bremen</item>
+        <item>Dortmund</item>
+        <item>Düsseldorf</item>
+        <item>Essen</item>
+        <item>Frankfurt am Main</item>
+        <item>Hamburg</item>
+        <item>Hannover</item>
+        <item>Köln</item>
+        <item>Leipzig</item>
+        <item>München</item>
+        <item>Stuttgart</item>
+    </string-array>
+    <string-array name="city66">
+        <item>Gibraltar</item>
+    </string-array>
+    <string-array name="city67">
+        <item>Choluteca</item>
+        <item>La Ceiba</item>
+        <item>Puerto Cortés</item>
+        <item>San Pedro Sula</item>
+        <item>Tegucigalpa</item>
+        <item>Tela</item>
+    </string-array>
+    <string-array name="city68">
+        <item>Hong Kong</item>
+    </string-array>
+    <string-array name="city69">
+        <item>Gouyave</item>
+        <item>Grenville</item>
+        <item>Saint George\'s</item>
+    </string-array>
+    <string-array name="city70">
+        <item>Nuuk</item>
+    </string-array>
+    <string-array name="city71">
+        <item>Athina</item>
+        <item>Irákleion</item>
+        <item>Kallithéa</item>
+        <item>Lárisa</item>
+        <item>Pátrai</item>
+        <item>Piraeus</item>
+        <item>Thessaloníki</item>
+    </string-array>
+    <string-array name="city7">
+        <item>Тбилиси</item>
+        <item>Амбролаури</item>
+        <item>Ахалцихе</item>
+        <item>Батуми</item>
+        <item>Гагра</item>
+        <item>Гори</item>
+        <item>Зугдиди</item>
+        <item>Кутаиси</item>
+        <item>Мцхета</item>
+        <item>Озургети</item>
+        <item>Поти</item>
+        <item>Рустави</item>
+        <item>Сухуми</item>
+        <item>Телави</item>
+        <item>Чиатура </item>
+    </string-array>
+    <string-array name="city72">
+        <item>Dededo</item>
+        <item>Hagåtña</item>
+    </string-array>
+    <string-array name="city73">
+        <item>Ålborg</item>
+        <item>Århus</item>
+        <item>Esbjerg</item>
+        <item>Horsens</item>
+        <item>Kolding</item>
+        <item>København</item>
+        <item>Odense</item>
+        <item>Randers</item>
+        <item>Vejle</item>
+    </string-array>
+    <string-array name="city231">
+        <item>Djibouti</item>
+        <item>Tadjoura</item>
+        <item>`Ali Sabieh</item>
+    </string-array>
+    <string-array name="city74">
+        <item>Roseau</item>
+    </string-array>
+    <string-array name="city75">
+        <item>Santiago de los Caballeros</item>
+        <item>Santo Domingo</item>
+    </string-array>
+    <string-array name="city76">
+        <item>Al Maḩallah al Kubrá</item>
+        <item>Alexandria</item>
+        <item>Cairo</item>
+        <item>Giza</item>
+        <item>Hurghada</item>
+        <item>Luxor</item>
+        <item>Port Saïd</item>
+        <item>Sharm el-Sheikh</item>
+        <item>Shubrā al Khaymah</item>
+        <item>Suez</item>
+    </string-array>
+    <string-array name="city77">
+        <item>Chingola</item>
+        <item>Chipata</item>
+        <item>Kabwe</item>
+        <item>Kasama</item>
+        <item>Kitwe</item>
+        <item>Livingstone</item>
+        <item>Luanshya</item>
+        <item>Lusaka</item>
+        <item>Mufulira</item>
+        <item>Ndola</item>
+    </string-array>
+    <string-array name="city78">
+        <item>Dakhla</item>
+        <item>Laayoune Plage</item>
+        <item>Semara</item>
+    </string-array>
+    <string-array name="city79">
+        <item>Bulawayo</item>
+        <item>Chitungwiza</item>
+        <item>Harare</item>
+    </string-array>
+    <string-array name="city8">
+        <item>Иерусалим</item>
+        <item>Ашдод</item>
+        <item>Ашкелон</item>
+        <item>Беэр Шева</item>
+        <item>Нетания</item>
+        <item>Петах Тиква</item>
+        <item>Реховот</item>
+        <item>Ришон ЛеЦион</item>
+        <item>Тель-Авив</item>
+        <item>Хайфа</item>
+    </string-array>
+    <string-array name="city80">
+        <item>Ahmedabad</item>
+        <item>Bangalore</item>
+        <item>Chennai</item>
+        <item>Delhi</item>
+        <item>Hyderābād</item>
+        <item>Kānpur</item>
+        <item>Kolkata</item>
+        <item>Lucknow</item>
+        <item>Mumbai</item>
+        <item>New Delhi</item>
+        <item>Pune</item>
+    </string-array>
+    <string-array name="city81">
+        <item>Bandar Lampung</item>
+        <item>Bandung</item>
+        <item>Jakarta</item>
+        <item>Makassar</item>
+        <item>Medan</item>
+        <item>Palembang</item>
+        <item>Semarang</item>
+        <item>Surabaya</item>
+        <item>Yogyakarta</item>
+    </string-array>
+    <string-array name="city82">
+        <item>Al `Aqabah</item>
+        <item>Amman</item>
+        <item>Az Zarqā\'</item>
+        <item>Irbid</item>
+        <item>Mādabā</item>
+    </string-array>
+    <string-array name="city83">
+        <item>Al Başrah</item>
+        <item>Al Fallūjah</item>
+        <item>An Najaf</item>
+        <item>Ar Ramādī</item>
+        <item>Arbīl</item>
+        <item>As Sulaymānīyah</item>
+        <item>Baghdad</item>
+        <item>Boneh-ye Karbalā’ī Ḩājj</item>
+        <item>Kirkuk</item>
+        <item>Mosul</item>
+    </string-array>
+    <string-array name="city84">
+        <item>Ahvāz</item>
+        <item>Arāk</item>
+        <item>Ardabīl</item>
+        <item>Bandar ‘Abbās</item>
+        <item>Būshehr</item>
+        <item>Eşfahān</item>
+        <item>Gorgān</item>
+        <item>Hamadān</item>
+        <item>Karaj</item>
+        <item>Kermān</item>
+        <item>Kermānshāh</item>
+        <item>Kīsh</item>
+        <item>Mashhad</item>
+        <item>Qazvīn</item>
+        <item>Qom</item>
+        <item>Rasht</item>
+        <item>Sanandaj</item>
+        <item>Sarī</item>
+        <item>Shīrāz</item>
+        <item>Tabrīz</item>
+        <item>Tehran</item>
+        <item>Urmia</item>
+        <item>Yazd</item>
+        <item>Zāhedān</item>
+        <item>Zanjān</item>
+    </string-array>
+    <string-array name="city85">
+        <item>Cork</item>
+        <item>Dublin</item>
+        <item>Galway</item>
+        <item>Limerick</item>
+    </string-array>
+    <string-array name="city86">
+        <item>Hafnarfjörður</item>
+        <item>Kópavogur</item>
+        <item>Reykjavík</item>
+    </string-array>
+    <string-array name="city87">
+        <item>Barcelona</item>
+        <item>Bilbao</item>
+        <item>Granada</item>
+        <item>Las Palmas de Gran Canaria</item>
+        <item>Madrid</item>
+        <item>Málaga</item>
+        <item>Murcia</item>
+        <item>Palma</item>
+        <item>Santa Cruz de Tenerife</item>
+        <item>Sevilla</item>
+        <item>Valencia</item>
+        <item>Zaragoza</item>
+    </string-array>
+    <string-array name="city88">
+        <item>Bari</item>
+        <item>Bologna</item>
+        <item>Firenze</item>
+        <item>Genova</item>
+        <item>Milano</item>
+        <item>Napoli</item>
+        <item>Palermo</item>
+        <item>Roma</item>
+        <item>Torino</item>
+        <item>Venezia</item>
+        <item>Verona</item>
+    </string-array>
+    <string-array name="city89">
+        <item>Aden</item>
+        <item>Al Ḩudaydah</item>
+        <item>Al Mukallā</item>
+        <item>Dhamār</item>
+        <item>Ibb</item>
+        <item>Sanaa</item>
+        <item>Taizz</item>
+    </string-array>
+    <string-array name="city90">
+        <item>Mindelo</item>
+        <item>Praia</item>
+        <item>Santa Maria</item>
+    </string-array>
+    <string-array name="city4">
+        <item>Астана</item>
+        <item>Алматы</item>
+        <item>Актау</item>
+        <item>Байконур</item>
+        <item>Караганда</item>
+        <item>Кокшетау</item>
+        <item>Павлодар</item>
+        <item>Петропавловск</item>
+        <item>Семипалатинск</item>
+        <item>Тараз</item>
+        <item>Уральск</item>
+        <item>Усть-Каменогорск</item>
+        <item>Чимкент</item>
+    </string-array>
+    <string-array name="city91">
+        <item>Bătdâmbâng</item>
+        <item>Phnom Penh</item>
+        <item>Siĕmréab</item>
+        <item>Sihanoukville</item>
+    </string-array>
+    <string-array name="city92">
+        <item>Bafoussam</item>
+        <item>Bamenda</item>
+        <item>Bertoua</item>
+        <item>Douala</item>
+        <item>Garoua</item>
+        <item>Maroua</item>
+        <item>Ngaoundéré</item>
+        <item>Nkongsamba</item>
+        <item>Yaoundé</item>
+    </string-array>
+    <string-array name="city10">
+        <item>Calgary</item>
+        <item>Edmonton</item>
+        <item>Halifax</item>
+        <item>Montréal</item>
+        <item>Ottawa</item>
+        <item>Québec</item>
+        <item>Toronto</item>
+        <item>Vancouver</item>
+        <item>Winnipeg</item>
+    </string-array>
+    <string-array name="city93">
+        <item>Al Khawr</item>
+        <item>Al Wakrah</item>
+        <item>Doha</item>
+        <item>Umm Sa`īd</item>
+    </string-array>
+    <string-array name="city94">
+        <item>Eldoret</item>
+        <item>Kisumu</item>
+        <item>Mombasa</item>
+        <item>Nairobi</item>
+        <item>Nakuru</item>
+    </string-array>
+    <string-array name="city95">
+        <item>Ayia Napa</item>
+        <item>Famagusta</item>
+        <item>Kyrenia</item>
+        <item>Larnaka</item>
+        <item>Limassol</item>
+        <item>Nicosia</item>
+        <item>Paphos</item>
+        <item>Paralimni</item>
+    </string-array>
+    <string-array name="city96">
+        <item>Tarawa</item>
+    </string-array>
+    <string-array name="city97">
+        <item>Beijing</item>
+        <item>Changchun</item>
+        <item>Chengdu</item>
+        <item>Chongqing</item>
+        <item>Guangzhou</item>
+        <item>Harbin</item>
+        <item>Shanghai</item>
+        <item>Shenyang</item>
+        <item>Tianjin</item>
+        <item>Wuhan</item>
+        <item>Xi\'an</item>
+    </string-array>
+    <string-array name="city98">
+        <item>Barranquilla</item>
+        <item>Bogotá</item>
+        <item>Bucaramanga</item>
+        <item>Cali</item>
+        <item>Cartagena de Indias</item>
+        <item>Cúcuta</item>
+        <item>Medellín</item>
+        <item>Pereira</item>
+    </string-array>
+    <string-array name="city99">
+        <item>Fomboni</item>
+        <item>Moroni</item>
+    </string-array>
+    <string-array name="city100">
+        <item>Brazzaville</item>
+        <item>Dolisie</item>
+        <item>Pointe-Noire</item>
+    </string-array>
+    <string-array name="city101">
+        <item>Boma</item>
+        <item>Bukavu</item>
+        <item>Kananga</item>
+        <item>Kinshasa</item>
+        <item>Kisangani</item>
+        <item>Kolwezi</item>
+        <item>Likasi</item>
+        <item>Lubumbashi</item>
+        <item>Mbuji-Mayi</item>
+        <item>Tshikapa</item>
+    </string-array>
+    <string-array name="city102">
+        <item>Cartago</item>
+        <item>Limón</item>
+        <item>Puntarenas</item>
+        <item>San José</item>
+    </string-array>
+    <string-array name="city103">
+        <item>Abidjan</item>
+        <item>Bouaké</item>
+        <item>Daloa</item>
+        <item>Divo</item>
+        <item>Korhogo</item>
+        <item>San Pedro</item>
+        <item>Yamoussoukro</item>
+    </string-array>
+    <string-array name="city104">
+        <item>Bayamo</item>
+        <item>Camagüey</item>
+        <item>Ciego de Ávila</item>
+        <item>Cienfuegos</item>
+        <item>Guantánamo</item>
+        <item>Holguín</item>
+        <item>La Habana</item>
+        <item>Las Tunas</item>
+        <item>Matanzas</item>
+        <item>Pinar del Río</item>
+        <item>Santa Clara</item>
+        <item>Santiago de Cuba</item>
+    </string-array>
+    <string-array name="city105">
+        <item>Al Jahrā\'</item>
+        <item>Kuwait</item>
+    </string-array>
+    <string-array name="city11">
+        <item>Бишкек</item>
+        <item>Баткен</item>
+        <item>Джалал-Абад</item>
+        <item>Кант</item>
+        <item>Каракол</item>
+        <item>Нарын</item>
+        <item>Ош</item>
+        <item>Талас</item>
+        <item>Токмок</item>
+        <item>Узген</item>
+    </string-array>
+    <string-array name="city138">
+        <item>Willemstad</item>
+    </string-array>
+    <string-array name="city106">
+        <item>Ban Phônsavan</item>
+        <item>Louangphrabang</item>
+        <item>Pakxé</item>
+        <item>San Nua</item>
+        <item>Savannakhét</item>
+        <item>Vientiane</item>
+    </string-array>
+    <string-array name="city12">
+        <item>Rīga</item>
+        <item>Daugavpils</item>
+        <item>Liepāja</item>
+        <item>Jelgava</item>
+        <item>Jūrmala</item>
+        <item>Ventspils</item>
+        <item>Rēzekne</item>
+        <item>Valmiera</item>
+        <item>Ogre</item>
+        <item>Cēsis</item>
+    </string-array>
+    <string-array name="city107">
+        <item>Mafeteng</item>
+        <item>Maseru</item>
+        <item>Teyateyaneng</item>
+    </string-array>
+    <string-array name="city108">
+        <item>Buchanan</item>
+        <item>Harper</item>
+        <item>Monrovia</item>
+    </string-array>
+    <string-array name="city109">
+        <item>Beirut</item>
+        <item>Sidon</item>
+        <item>Tripoli</item>
+    </string-array>
+    <string-array name="city110">
+        <item>Banghāzī</item>
+        <item>Mişrātah</item>
+        <item>Sabhā</item>
+        <item>Tripoli</item>
+    </string-array>
+    <string-array name="city13">
+        <item>Vilnius</item>
+        <item>﻿Alytus</item>
+        <item>Kaunas</item>
+        <item>Klaipėda</item>
+        <item>Marijampolė</item>
+        <item>Panevėžys</item>
+        <item>Šiauliai</item>
+        <item>Tauragė</item>
+        <item>Telšiai</item>
+        <item>Utena</item>
+    </string-array>
+    <string-array name="city111">
+        <item>Vaduz</item>
+    </string-array>
+    <string-array name="city112">
+        <item>Differdange</item>
+        <item>Dudelange</item>
+        <item>Luxembourg</item>
+    </string-array>
+    <string-array name="city113">
+        <item>Beau Bassin</item>
+        <item>Curepipe</item>
+        <item>Port Louis</item>
+    </string-array>
+    <string-array name="city114">
+        <item>Adel Bagrou</item>
+        <item>Nouâdhibou</item>
+        <item>Nouakchott</item>
+        <item>Rosso</item>
+    </string-array>
+    <string-array name="city115">
+        <item>Antananarivo</item>
+        <item>Antsirabe</item>
+        <item>Fianarantsoa</item>
+        <item>Mahajanga</item>
+        <item>Toamasina</item>
+        <item>Toliara</item>
+    </string-array>
+    <string-array name="city116">
+        <item>Macau</item>
+    </string-array>
+    <string-array name="city117">
+        <item>Битола</item>
+        <item>Куманово</item>
+        <item>Охрид</item>
+        <item>Прилеп</item>
+        <item>Скопје</item>
+        <item>Струмица</item>
+        <item>Тетово</item>
+        <item>Штип</item>
+    </string-array>
+    <string-array name="city118">
+        <item>Blantyre</item>
+        <item>Lilongwe</item>
+        <item>Zomba</item>
+    </string-array>
+    <string-array name="city119">
+        <item>Ampang</item>
+        <item>Batu Pahat</item>
+        <item>Ipoh</item>
+        <item>Johor Bahru</item>
+        <item>Klang</item>
+        <item>Kuala Lumpur</item>
+        <item>Kuching</item>
+        <item>Petaling Jaya</item>
+        <item>Shah Alam</item>
+        <item>Subang Jaya</item>
+    </string-array>
+    <string-array name="city120">
+        <item>Bamako</item>
+        <item>Kayes</item>
+        <item>Koutiala</item>
+        <item>Mopti</item>
+        <item>Niono</item>
+        <item>Nioro du Sahel</item>
+        <item>Ségou</item>
+        <item>Sikasso</item>
+    </string-array>
+    <string-array name="city121">
+        <item>Male</item>
+    </string-array>
+    <string-array name="city122">
+        <item>Valletta</item>
+    </string-array>
+    <string-array name="city123">
+        <item>Agadir</item>
+        <item>Casablanca</item>
+        <item>Fès</item>
+        <item>Kenitra</item>
+        <item>Marrakech</item>
+        <item>Meknès</item>
+        <item>Oujda</item>
+        <item>Rabat</item>
+        <item>Tangier</item>
+        <item>Tetouan</item>
+    </string-array>
+    <string-array name="city124">
+        <item>Fort-de-France</item>
+    </string-array>
+    <string-array name="city125">
+        <item>Majuro</item>
+    </string-array>
+    <string-array name="city126">
+        <item>Ciudad Juárez</item>
+        <item>Ciudad Nezahualcóyotl</item>
+        <item>Ecatepec</item>
+        <item>Guadalajara</item>
+        <item>León</item>
+        <item>México</item>
+        <item>Monterrey</item>
+        <item>Puebla</item>
+        <item>Tijuana</item>
+        <item>Zapopan</item>
+    </string-array>
+    <string-array name="city127">
+        <item>Colonia</item>
+        <item>Kolonia</item>
+        <item>Palikir</item>
+        <item>Weno</item>
+    </string-array>
+    <string-array name="city128">
+        <item>Beira</item>
+        <item>Chimoio</item>
+        <item>Maputo</item>
+        <item>Matola</item>
+        <item>Nacala</item>
+        <item>Nampula</item>
+        <item>Quelimane</item>
+        <item>Tete</item>
+        <item>Vila Junqueiro</item>
+        <item>Xai-Xai</item>
+    </string-array>
+    <string-array name="city15">
+        <item>Кишинев</item>
+        <item>Тирасполь</item>
+        <item>Бельцы</item>
+        <item>Бендеры</item>
+        <item>Дубоссары</item>
+        <item>Кагул</item>
+        <item>Комрат</item>
+        <item>Оргеев</item>
+        <item>Сороки</item>
+    </string-array>
+    <string-array name="city129">
+        <item>Monaco</item>
+    </string-array>
+    <string-array name="city130">
+        <item>Choybalsan</item>
+        <item>Darhan</item>
+        <item>Erdenet</item>
+        <item>Ulaanbaatar Hot</item>
+    </string-array>
+    <string-array name="city131">
+        <item>Plymouth</item>
+    </string-array>
+    <string-array name="city132">
+        <item>Akyab</item>
+        <item>Bago</item>
+        <item>Mandalay</item>
+        <item>Mawlamyine</item>
+        <item>Meiktila</item>
+        <item>Monywa</item>
+        <item>Myeik</item>
+        <item>Naypyidaw</item>
+        <item>Pathein</item>
+        <item>Taunggyi</item>
+        <item>Yangon</item>
+    </string-array>
+    <string-array name="city133">
+        <item>Swakopmund</item>
+        <item>Windhoek</item>
+    </string-array>
+    <string-array name="city134">
+        <item>Yaren</item>
+    </string-array>
+    <string-array name="city135">
+        <item>Birātnagar</item>
+        <item>Kathmandu</item>
+        <item>Pātan</item>
+        <item>Pokhara</item>
+    </string-array>
+    <string-array name="city136">
+        <item>Maradi</item>
+        <item>Niamey</item>
+        <item>Zinder</item>
+    </string-array>
+    <string-array name="city137">
+        <item>Abuja</item>
+        <item>Benin-City</item>
+        <item>Calabar</item>
+        <item>Ibadan</item>
+        <item>Ilorin</item>
+        <item>Kaduna</item>
+        <item>Kano</item>
+        <item>Lagos</item>
+        <item>Maiduguri</item>
+        <item>Port Harcourt</item>
+        <item>Warri</item>
+        <item>Zaria</item>
+    </string-array>
+    <string-array name="city139">
+        <item>Amsterdam</item>
+        <item>Den Haag</item>
+        <item>Eindhoven</item>
+        <item>Groningen</item>
+        <item>Haarlem</item>
+        <item>Nijmegen</item>
+        <item>Rotterdam</item>
+        <item>Tilburg</item>
+        <item>Utrecht</item>
+    </string-array>
+    <string-array name="city140">
+        <item>León</item>
+        <item>Managua</item>
+        <item>Masaya</item>
+    </string-array>
+    <string-array name="city141">
+        <item>Alofi</item>
+    </string-array>
+    <string-array name="city142">
+        <item>Auckland</item>
+        <item>Christchurch</item>
+        <item>Dunedin</item>
+        <item>Hamilton</item>
+        <item>Tauranga</item>
+        <item>Wellington</item>
+    </string-array>
+    <string-array name="city143">
+        <item>Nouméa</item>
+    </string-array>
+    <string-array name="city144">
+        <item>Bergen</item>
+        <item>Drammen</item>
+        <item>Fredrikstad</item>
+        <item>Kristiansand</item>
+        <item>Oslo</item>
+        <item>Stavanger</item>
+        <item>Tromsø</item>
+        <item>Trondheim</item>
+    </string-array>
+    <string-array name="city145">
+        <item>Abu Dhabi</item>
+        <item>Al Fujayrah</item>
+        <item>Dubai</item>
+        <item>Khawr Fakkān</item>
+        <item>Ra\'s al Khaymah</item>
+        <item>Sharjah</item>
+        <item>Umm al Qaywayn</item>
+        <item>`Ajmān</item>
+    </string-array>
+    <string-array name="city146">
+        <item>Muscat</item>
+        <item>Nizwá</item>
+        <item>Şalālah</item>
+    </string-array>
+    <string-array name="city147">
+        <item>Douglas</item>
+    </string-array>
+    <string-array name="city148">
+        <item>Kingston</item>
+    </string-array>
+    <string-array name="city149">
+        <item>George Town</item>
+    </string-array>
+    <string-array name="city150">
+        <item>Avarua</item>
+    </string-array>
+    <string-array name="city151">
+        <item>Cockburn Town</item>
+    </string-array>
+    <string-array name="city152">
+        <item>Faisalābād</item>
+        <item>Gujrānwāla</item>
+        <item>Hyderābād</item>
+        <item>Islamabad</item>
+        <item>Karāchi</item>
+        <item>Lahore</item>
+        <item>Multan</item>
+        <item>Peshāwar</item>
+        <item>Rāwalpindi</item>
+    </string-array>
+    <string-array name="city153">
+        <item>Koror</item>
+    </string-array>
+    <string-array name="city154">
+        <item>Bethlehem</item>
+        <item>Gaza</item>
+        <item>Khān Yūnis</item>
+    </string-array>
+    <string-array name="city155">
+        <item>Colón</item>
+        <item>David</item>
+        <item>Panama</item>
+    </string-array>
+    <string-array name="city156">
+        <item>Arawa</item>
+        <item>Goroka</item>
+        <item>Kokopo</item>
+        <item>Lae</item>
+        <item>Madang</item>
+        <item>Mount Hagen</item>
+        <item>Port Moresby</item>
+        <item>Wewak</item>
+    </string-array>
+    <string-array name="city157">
+        <item>Asunción</item>
+        <item>Ciudad del Este</item>
+        <item>Encarnación</item>
+    </string-array>
+    <string-array name="city158">
+        <item>Arequipa</item>
+        <item>Chiclayo</item>
+        <item>Chimbote</item>
+        <item>Huancayo</item>
+        <item>Iquitos</item>
+        <item>Lima</item>
+        <item>Piura</item>
+        <item>Trujillo</item>
+    </string-array>
+    <string-array name="city159">
+        <item>Adamstown</item>
+    </string-array>
+    <string-array name="city160">
+        <item>Białystok</item>
+        <item>Bydgoszcz</item>
+        <item>Gdańsk</item>
+        <item>Gdynia</item>
+        <item>Katowice</item>
+        <item>Kraków</item>
+        <item>Lublin</item>
+        <item>Poznań</item>
+        <item>Szczecin</item>
+        <item>Warszawa</item>
+        <item>Wrocław</item>
+        <item>Łódź</item>
+    </string-array>
+    <string-array name="city161">
+        <item>Braga</item>
+        <item>Coimbra</item>
+        <item>Funchal</item>
+        <item>Lisboa</item>
+        <item>Porto</item>
+        <item>Setúbal</item>
+    </string-array>
+    <string-array name="city162">
+        <item>Ponce</item>
+        <item>San Juan</item>
+    </string-array>
+    <string-array name="city163">
+        <item>Saint Denis</item>
+    </string-array>
+    <string-array name="city1">
+        <item>Санкт-Петербург</item>
+        <item>Москва</item>
+        <item>Волгоград</item>
+        <item>Владивосток</item>
+        <item>Хабаровск</item>
+        <item>Екатеринбург</item>
+        <item>Казань</item>
+        <item>Калининград</item>
+        <item>Краснодар</item>
+        <item>Красноярск</item>
+        <item>Набережные Челны</item>
+        <item>Нижний Новгород</item>
+        <item>Новосибирск</item>
+        <item>Омск</item>
+        <item>Пермь</item>
+        <item>Ростов-на-Дону</item>
+        <item>Самара</item>
+        <item>Уфа</item>
+        <item>Челябинск</item>
+    </string-array>
+    <string-array name="city164">
+        <item>Butare</item>
+        <item>Gisenyi</item>
+        <item>Kigali</item>
+    </string-array>
+    <string-array name="city165">
+        <item>Brăila</item>
+        <item>Braşov</item>
+        <item>Bucureşti</item>
+        <item>Cluj-Napoca</item>
+        <item>Constanţa</item>
+        <item>Craiova</item>
+        <item>Galaţi</item>
+        <item>Iaşi</item>
+        <item>Oradea</item>
+        <item>Ploieşti</item>
+        <item>Timişoara</item>
+    </string-array>
+    <string-array name="city9">
+        <item>Boston</item>
+        <item>Chicago</item>
+        <item>Houston</item>
+        <item>Los Angeles</item>
+        <item>New York City</item>
+        <item>Philadelphia</item>
+        <item>San Francisco</item>
+        <item>Washington, D.C.</item>
+    </string-array>
+    <string-array name="city166">
+        <item>San Salvador</item>
+        <item>Santa Ana</item>
+    </string-array>
+    <string-array name="city167">
+        <item>Apia</item>
+    </string-array>
+    <string-array name="city168">
+        <item>San Marino</item>
+    </string-array>
+    <string-array name="city169">
+        <item>Neves</item>
+        <item>São Tomé</item>
+        <item>Trindade</item>
+    </string-array>
+    <string-array name="city170">
+        <item>Ad Dammām</item>
+        <item>Buraydah</item>
+        <item>Jiddah</item>
+        <item>Mecca</item>
+        <item>Medina</item>
+        <item>Riyadh</item>
+        <item>Tabūk</item>
+    </string-array>
+    <string-array name="city171"></string-array>
+    <string-array name="city172">
+        <item>Jamestown</item>
+    </string-array>
+    <string-array name="city173">
+        <item>Chongjin</item>
+        <item>Haeju</item>
+        <item>Hamheung</item>
+        <item>Hoeryeong</item>
+        <item>Kaeseong</item>
+        <item>Nampo</item>
+        <item>Pyongyang</item>
+        <item>Sariwon</item>
+        <item>Sineuiju</item>
+        <item>Wonsan</item>
+    </string-array>
+    <string-array name="city174">
+        <item>Saipan</item>
+    </string-array>
+    <string-array name="city175">
+        <item>Victoria</item>
+    </string-array>
+    <string-array name="city176">
+        <item>Dakar</item>
+        <item>Diourbel</item>
+        <item>Kaolack</item>
+        <item>Louga</item>
+        <item>Mbour</item>
+        <item>Rufisque</item>
+        <item>Saint-Louis</item>
+        <item>Thiès</item>
+        <item>Touba</item>
+        <item>Ziguinchor</item>
+    </string-array>
+    <string-array name="city177">
+        <item>Kingstown</item>
+    </string-array>
+    <string-array name="city178">
+        <item>Basseterre</item>
+    </string-array>
+    <string-array name="city179">
+        <item>Castries</item>
+        <item>Vieux Fort</item>
+    </string-array>
+    <string-array name="city180">
+        <item>Saint-Pierre</item>
+    </string-array>
+    <string-array name="city181">
+        <item>Beograd</item>
+        <item>Čačak</item>
+        <item>Kragujevac</item>
+        <item>Kruševac</item>
+        <item>Niš</item>
+        <item>Novi Sad</item>
+        <item>Pančevo</item>
+        <item>Smederevo</item>
+        <item>Subotica</item>
+        <item>Zrenjanin</item>
+    </string-array>
+    <string-array name="city182">
+        <item>Singapore</item>
+    </string-array>
+    <string-array name="city234"></string-array>
+    <string-array name="city183">
+        <item>Aleppo</item>
+        <item>Damascus</item>
+        <item>Dayr az Zawr</item>
+        <item>Ḩamāh</item>
+        <item>Homs</item>
+        <item>Latakia</item>
+    </string-array>
+    <string-array name="city184">
+        <item>Banská Bystrica</item>
+        <item>Bratislava</item>
+        <item>Košice</item>
+        <item>Martin</item>
+        <item>Nitra</item>
+        <item>Prešov</item>
+        <item>Trenčín</item>
+        <item>Trnava</item>
+        <item>Žilina</item>
+    </string-array>
+    <string-array name="city185">
+        <item>Celje</item>
+        <item>Izola</item>
+        <item>Koper</item>
+        <item>Kranj</item>
+        <item>Ljubljana</item>
+        <item>Maribor</item>
+        <item>Nova Gorica</item>
+        <item>Novo Mesto</item>
+        <item>Piran</item>
+        <item>Portorož</item>
+    </string-array>
+    <string-array name="city186">
+        <item>Gizo</item>
+        <item>Honiara</item>
+        <item>Munda</item>
+    </string-array>
+    <string-array name="city187">
+        <item>Mogadishu</item>
+    </string-array>
+    <string-array name="city188">
+        <item>Khartoum</item>
+        <item>Khartoum North</item>
+        <item>Omdurman</item>
+        <item>Port Sudan</item>
+    </string-array>
+    <string-array name="city189">
+        <item>Lelydorp</item>
+        <item>Nieuw Nickerie</item>
+        <item>Paramaribo</item>
+    </string-array>
+    <string-array name="city190">
+        <item>Bo</item>
+        <item>Freetown</item>
+        <item>Kenema</item>
+        <item>Koidu</item>
+        <item>Makeni</item>
+    </string-array>
+    <string-array name="city16">
+        <item>Душанбе</item>
+        <item>Исфара</item>
+        <item>Кайракум</item>
+        <item>Куляб</item>
+        <item>Канибадам</item>
+        <item>Курган-Тюбе</item>
+        <item>Нурек</item>
+        <item>Пенджикент</item>
+        <item>Ура-Тюбе</item>
+        <item>Худжанд</item>
+        <item>Чкаловск</item>
+    </string-array>
+    <string-array name="city191">
+        <item>Bangkok</item>
+        <item>Chiang Mai</item>
+        <item>Chon Buri</item>
+        <item>Khon Kaen</item>
+        <item>Nakhon Ratchasima</item>
+        <item>Nakhon Si Thammarat</item>
+        <item>Nonthaburi</item>
+        <item>Phuket</item>
+        <item>Songkhla</item>
+        <item>Surat Thani</item>
+        <item>Udon Thani</item>
+    </string-array>
+    <string-array name="city192">
+        <item>Kaohsiung</item>
+        <item>New Taipei</item>
+        <item>Taichung</item>
+        <item>Tainan</item>
+        <item>Taipei</item>
+        <item>Taoyuan</item>
+    </string-array>
+    <string-array name="city193">
+        <item>Dar es Salaam</item>
+        <item>Dodoma</item>
+        <item>Mwanza</item>
+        <item>Tanga</item>
+        <item>Zanzibar</item>
+    </string-array>
+    <string-array name="city194">
+        <item>Kara</item>
+        <item>Lomé</item>
+        <item>Sokodé</item>
+    </string-array>
+    <string-array name="city195">
+        <item>Tokelau</item>
+    </string-array>
+    <string-array name="city196">
+        <item>Nuku`alofa</item>
+    </string-array>
+    <string-array name="city197">
+        <item>Chaguanas</item>
+        <item>Port-of-Spain</item>
+        <item>San Fernando</item>
+        <item>San Juan</item>
+    </string-array>
+    <string-array name="city198">
+        <item>Funafuti</item>
+    </string-array>
+    <string-array name="city199">
+        <item>Ben Arous</item>
+        <item>Bizerte</item>
+        <item>Kairouan</item>
+        <item>Nabeul</item>
+        <item>Sfax</item>
+        <item>Sousse</item>
+        <item>Tunis</item>
+    </string-array>
+    <string-array name="city17">
+        <item>Аннау</item>
+        <item>Ашхабад</item>
+        <item>Балканабад</item>
+        <item>Дашогуз</item>
+        <item>Керки</item>
+        <item>Кизыл-Арват</item>
+        <item>Кушка</item>
+        <item>Мары</item>
+        <item>Туркменабад</item>
+        <item>Туркменбаши</item>
+    </string-array>
+    <string-array name="city200">
+        <item>Adana</item>
+        <item>Ankara</item>
+        <item>Antalya</item>
+        <item>Belek</item>
+        <item>Bodrum</item>
+        <item>Bursa</item>
+        <item>Fethiye</item>
+        <item>Gaziantep</item>
+        <item>İstanbul</item>
+        <item>İzmir</item>
+        <item>Kemer</item>
+        <item>Konya</item>
+        <item>Kuşadası</item>
+        <item>Marmaris</item>
+        <item>Side</item>
+    </string-array>
+    <string-array name="city201">
+        <item>Jinja</item>
+        <item>Kampala</item>
+        <item>Mbale</item>
+    </string-array>
+    <string-array name="city18">
+        <item>Ташкент</item>
+        <item>Бухара</item>
+        <item>Коканд</item>
+        <item>Нукус</item>
+        <item>Самарканд</item>
+        <item>Хива</item>
+    </string-array>
+    <string-array name="city2">
+        <item>Киев</item>
+        <item>Днепропетровск</item>
+        <item>Донецк</item>
+        <item>Запорожье</item>
+        <item>Кривой Рог</item>
+        <item>Львов</item>
+        <item>Луганск</item>
+        <item>Мариуполь</item>
+        <item>Николаев</item>
+        <item>Одесса</item>
+        <item>Севастополь</item>
+        <item>Симферополь</item>
+        <item>Харьков</item>
+        <item>Винница</item>
+        <item>Чернигов</item>
+    </string-array>
+    <string-array name="city202">
+        <item>Mata-Utu</item>
+    </string-array>
+    <string-array name="city203">
+        <item>Montevideo</item>
+        <item>Paysandú</item>
+        <item>Salto</item>
+    </string-array>
+    <string-array name="city204">
+        <item>Tórshavn</item>
+    </string-array>
+    <string-array name="city205">
+        <item>Lautoka</item>
+        <item>Suva</item>
+    </string-array>
+    <string-array name="city206">
+        <item>Baguio</item>
+        <item>Caloocan</item>
+        <item>Cebu City</item>
+        <item>Davao</item>
+        <item>Iloilo</item>
+        <item>Manila</item>
+        <item>Pasay</item>
+        <item>Pasig</item>
+        <item>Quezon City</item>
+        <item>Taguig</item>
+        <item>Zamboanga</item>
+    </string-array>
+    <string-array name="city207">
+        <item>Espoo</item>
+        <item>Hämeenlinna</item>
+        <item>Helsinki</item>
+        <item>Imatra</item>
+        <item>Joensuu</item>
+        <item>Jyväskylä</item>
+        <item>Kotka</item>
+        <item>Lahti</item>
+        <item>Lappeenranta</item>
+        <item>Oulu</item>
+        <item>Rovaniemi</item>
+        <item>Tampere</item>
+        <item>Turku</item>
+        <item>Vaasa</item>
+        <item>Vantaa</item>
+    </string-array>
+    <string-array name="city208">
+        <item>Stanley</item>
+    </string-array>
+    <string-array name="city209">
+        <item>Bordeaux</item>
+        <item>Lille</item>
+        <item>Lyon</item>
+        <item>Marseille</item>
+        <item>Montpellier</item>
+        <item>Nantes</item>
+        <item>Nice</item>
+        <item>Paris</item>
+        <item>Strasbourg</item>
+        <item>Toulouse</item>
+    </string-array>
+    <string-array name="city210">
+        <item>Cayenne</item>
+        <item>Kourou</item>
+        <item>Matoury</item>
+    </string-array>
+    <string-array name="city211">
+        <item>Papeete</item>
+    </string-array>
+    <string-array name="city212">
+        <item>Dubrovnik</item>
+        <item>Makarska</item>
+        <item>Opatija</item>
+        <item>Osijek</item>
+        <item>Poreč</item>
+        <item>Pula</item>
+        <item>Rijeka</item>
+        <item>Rovinj</item>
+        <item>Split</item>
+        <item>Trogir</item>
+        <item>Zadar</item>
+        <item>Zagreb</item>
+    </string-array>
+    <string-array name="city213">
+        <item>Bangui</item>
+        <item>Berbérati</item>
+        <item>Bimbo</item>
+    </string-array>
+    <string-array name="city214">
+        <item>Abéché</item>
+        <item>Am Timan</item>
+        <item>Bongor</item>
+        <item>Kélo</item>
+        <item>Koumra</item>
+        <item>Mongo</item>
+        <item>Moundou</item>
+        <item>N\'Djamena</item>
+        <item>Pala</item>
+        <item>Sarh</item>
+    </string-array>
+    <string-array name="city230">
+        <item>Bar</item>
+        <item>Bečići</item>
+        <item>Bijelo Polje</item>
+        <item>Budva</item>
+        <item>Nikšić</item>
+        <item>Podgorica</item>
+    </string-array>
+    <string-array name="city215">
+        <item>Brno</item>
+        <item>České Budějovice</item>
+        <item>Františkovy Lázně</item>
+        <item>Hradec Králové</item>
+        <item>Karlovy Vary</item>
+        <item>Liberec</item>
+        <item>Mariánské Lázně</item>
+        <item>Olomouc</item>
+        <item>Ostrava</item>
+        <item>Pardubice</item>
+        <item>Plzeň</item>
+        <item>Praha</item>
+        <item>Ústí nad Labem</item>
+    </string-array>
+    <string-array name="city216">
+        <item>La Florida</item>
+        <item>Maipú</item>
+        <item>Puente Alto</item>
+        <item>Santiago</item>
+        <item>Valparaíso</item>
+    </string-array>
+    <string-array name="city217">
+        <item>Basel</item>
+        <item>Bern</item>
+        <item>Biel / Bienne</item>
+        <item>Genève</item>
+        <item>Lausanne</item>
+        <item>Lugano</item>
+        <item>Luzern</item>
+        <item>Montana</item>
+        <item>Sankt Gallen</item>
+        <item>Winterthur</item>
+        <item>Zürich</item>
+    </string-array>
+    <string-array name="city218">
+        <item>Göteborg</item>
+        <item>Helsingborg</item>
+        <item>Jönköping</item>
+        <item>Linköping</item>
+        <item>Malmö</item>
+        <item>Norrköping</item>
+        <item>Örebro</item>
+        <item>Stockholm</item>
+        <item>Uppsala</item>
+        <item>Västerås</item>
+    </string-array>
+    <string-array name="city219">
+        <item>Barentsburg</item>
+        <item>Longyearbyen</item>
+    </string-array>
+    <string-array name="city220">
+        <item>Colombo</item>
+        <item>Dehiwala</item>
+        <item>Galle</item>
+        <item>Jaffna</item>
+        <item>Kandy</item>
+        <item>Kurunegala</item>
+        <item>Moratuwa</item>
+        <item>Sri Jayawardenapura Kotte</item>
+        <item>Trincomalee</item>
+    </string-array>
+    <string-array name="city221">
+        <item>Cuenca</item>
+        <item>Durán</item>
+        <item>Guayaquil</item>
+        <item>Machala</item>
+        <item>Quito</item>
+        <item>Santo Domingo de los Colorados</item>
+    </string-array>
+    <string-array name="city222">
+        <item>Bata</item>
+        <item>Malabo</item>
+    </string-array>
+    <string-array name="city223">
+        <item>Asmara</item>
+        <item>Dekemhāre</item>
+        <item>Keren</item>
+    </string-array>
+    <string-array name="city14">
+        <item>Tallinn (Таллин)</item>
+        <item>Jõhvi (Йыхви)</item>
+        <item>Kohtla-Järve (Кохтла-Ярве)</item>
+        <item>Maardu (Маарду)</item>
+        <item>Narva (Нарва)</item>
+        <item>Pärnu (Пярну)</item>
+        <item>Sillamäe (Силламяэ)</item>
+        <item>Tartu (Тарту)</item>
+        <item>Viljandi (Вильянди)</item>
+    </string-array>
+    <string-array name="city224">
+        <item>Ādama</item>
+        <item>Addis Ababa</item>
+        <item>Āwasa</item>
+        <item>Bahir Dar</item>
+        <item>Dirē Dawa</item>
+        <item>Gonder</item>
+        <item>Hārer</item>
+        <item>Jijiga</item>
+        <item>Kombolcha</item>
+        <item>Mek\'elē</item>
+    </string-array>
+    <string-array name="city226">
+        <item>Busan</item>
+        <item>Daegu</item>
+        <item>Daejeon</item>
+        <item>Gwangju</item>
+        <item>Incheon</item>
+        <item>Seoul</item>
+        <item>Suwon</item>
+        <item>Ulsan</item>
+    </string-array>
+    <string-array name="city227">
+        <item>Bloemfontein</item>
+        <item>Cape Town</item>
+        <item>Durban</item>
+        <item>Johannesburg</item>
+        <item>Pietermaritzburg</item>
+        <item>Port Elizabeth</item>
+        <item>Pretoria</item>
+        <item>Pretoria</item>
+    </string-array>
+    <string-array name="city232"></string-array>
+    <string-array name="city228">
+        <item>Kingston</item>
+        <item>Montego Bay</item>
+        <item>Portmore</item>
+        <item>Spanish Town</item>
+    </string-array>
+    <string-array name="city229">
+        <item>Fukuoka</item>
+        <item>Hiroshima</item>
+        <item>Kawasaki</item>
+        <item>Kiotoga</item>
+        <item>Kōbe</item>
+        <item>Nagoya</item>
+        <item>Ōsaka</item>
+        <item>Saitama</item>
+        <item>Sapporo</item>
+        <item>Sendai</item>
+        <item>Tokyo</item>
+        <item>Yokohama</item>
+    </string-array>
+
+</resources>

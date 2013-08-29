@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Запросы" /> 
+
+<!--     <EditText
+        android:id="@+id/name_for_friend_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введитя имя..."/>
+    <Button 
+        android:id="@+id/my_friends_search_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поиск"/> -->
+        <ListView
+        android:id="@+id/friends_requests_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Друзья" /> 
+    <ListView
+        android:id="@+id/friends_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+</LinearLayout>
