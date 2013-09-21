@@ -2,12 +2,12 @@ package ru.qrushtabs.app.games;
 
 import ru.qrushtabs.app.GamesActivity;
 import ru.qrushtabs.app.PrizeActivity;
-import ru.qrushtabs.app.ProfileInfo;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.dialogs.LoseDialog;
 import ru.qrushtabs.app.dialogs.MyDialog;
 import ru.qrushtabs.app.dialogs.OnDialogClickListener;
 import ru.qrushtabs.app.dialogs.ToTwiceDialog;
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Region;
+import android.media.MediaPlayer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
@@ -74,13 +75,15 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	private int rouletteY;
  	private int roulArrowX;
 	private int roulArrowY;
-	private float roulAngPreVel = 0.2f;
+	private float roulAngPreVel = 0.3f;
 	private float vels[] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
 	private float roulAngAcc = 0.01f;
 	private float roulAngVel = 0.2f;
 	private float midPath = 360.0f;
-	private float cellAngle = 22.5f;
-	private float halfCellAngle = 11.25f;
+	private float cellAngle = 25.7142857f;
+	private float halfCellAngle = 12.85714f;
+	private float arrowCenterX;
+	private float arrowCenterY;
 	private int rx;
 
 	private GestureDetector gestureScanner;
@@ -106,13 +109,24 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	int spixs[];
 
 	Matrix rotateMatrix;
+	Matrix arrowRotateMatrix;
 	float currentRotation = 0.0f;
+	float currentArrowRotation = 0.0f;
+	float maxArrowRotation = 0.80f;
+	float roulArrowAcc = 0.0f;
+	float roulArrowVel = 0.0f;
+	float currentPath = 0.0f;
+	float lastPath = 0.0f;
 	
+	
+	private MediaPlayer audioPlayer;
 	Paint antiAliasPaint;
-	public RouletteRenderer(Context context) {
+	Paint alphaPaint;
+ 	public RouletteRenderer(Context context) {
 		super(context);
 		setWillNotDraw(false);
 		rotateMatrix = new Matrix();
+		arrowRotateMatrix = new Matrix();
 		holder = getHolder();
 		instance = this;
 		roulette = BitmapFactory.decodeResource(getResources(),
@@ -126,13 +140,13 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 				R.drawable.pushbtn_on);
 
 		greenButtonPressed = BitmapFactory.decodeResource(getResources(),
-				R.drawable.r_greenbtn_pressed);
+				R.drawable.r_greenbtn_normal);
 		greenButtonNormal = BitmapFactory.decodeResource(getResources(),
 				R.drawable.r_greenbtn_normal);
 
 		orangeButtonPressed = BitmapFactory.decodeResource(getResources(),
-				R.drawable.r_orangebtn_pressed);
-		orangeButtonNormal = BitmapFactory.decodeResource(getResources(),
+				R.drawable.r_orangebtn_normal);
+ 		orangeButtonNormal = BitmapFactory.decodeResource(getResources(),
 				R.drawable.r_orangebtn_normal);
 
 		middleButtonOff = BitmapFactory.decodeResource(getResources(),
@@ -149,12 +163,14 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 		mScreenWidth = display.getWidth();
 
 		rouletteX = mScreenWidth / 2 - roulette.getWidth() / 2;
-		rouletteY = 80;
+		rouletteY = mScreenHeight / 8;
 
 		roulArrowX = rouletteX + roulette.getWidth() / 2 - roulArrow.getWidth()
 				/ 2;
-		roulArrowY = rouletteY + roulette.getHeight() / 2
-				- roulArrow.getHeight() / 2;
+		roulArrowY = rouletteY + 
+				- roulArrow.getHeight() / 2 - roulArrow.getHeight() / 6 ;
+		arrowCenterX = roulArrow.getWidth()/2;
+		arrowCenterY = (float)roulArrow.getHeight()*16.0f/42.0f;
 
 		pushButtonX = rouletteX + roulette.getWidth() / 2
 				- pushButtonOff.getWidth() / 2;
@@ -162,21 +178,27 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 				- pushButtonOff.getHeight() / 2;
 
 		middleButtonX = mScreenWidth / 2 - middleButtonOff.getWidth() / 2;
-		middleButtonY = mScreenHeight - 80;
+		middleButtonY = mScreenHeight - middleButtonOff.getHeight() - middleButtonOff.getHeight()/2 ;
 
-		greenButtonX = middleButtonX + middleButtonOff.getWidth();
+		greenButtonX = middleButtonX + middleButtonOff.getWidth()/2;
 		greenButtonY = middleButtonY
 				+ (middleButtonOff.getHeight() - greenButtonNormal.getHeight())
 				/ 2;
 
-		orangeButtonX = middleButtonX - orangeButtonNormal.getWidth();
+		orangeButtonX = middleButtonX+middleButtonOff.getWidth()/2 - orangeButtonNormal.getWidth();
 		orangeButtonY = middleButtonY
 				+ (middleButtonOff.getHeight() - orangeButtonNormal.getHeight())
 				/ 2;
 
 		rotateMatrix.setTranslate(rouletteX, rouletteY);
+		arrowRotateMatrix.setTranslate(roulArrowX, roulArrowY);
 		antiAliasPaint = new Paint();
 		antiAliasPaint.setFilterBitmap(true);
+		alphaPaint = new Paint();
+		alphaPaint.setAlpha(128);
+		
+		audioPlayer  = MediaPlayer.create(context, R.raw.spinone);
+		audioPlayer.setLooping(true);
 	}
 
 	public void setOnGameEndListener(OnGameEndListener l) {
@@ -197,21 +219,31 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 			{
 				if(bitmapTouched(positionX,positionY,greenButtonNormal,greenButtonX,greenButtonY))
 				{
-					choosedColor = GREEN_COLOR;
+					if(isWin)
+						choosedColor = GREEN_COLOR;
+					else
+						choosedColor = ORANGE_COLOR;
 					currentState = TWISTING_STATE;
 					
 					currentTime = System.currentTimeMillis();
  					roulAngVel = roulAngPreVel;
 					Log.d(VIEW_LOG_TAG, "Twist");
+					
+					//audioPlayer.start();
 				}
 				if(bitmapTouched(positionX,positionY,orangeButtonNormal,orangeButtonX,orangeButtonY))
 				{
-					choosedColor = ORANGE_COLOR;
+					if(isWin)
+						choosedColor = ORANGE_COLOR;
+					else
+						choosedColor = GREEN_COLOR;
 					currentState = TWISTING_STATE;
 					
 					currentTime = System.currentTimeMillis();
  					roulAngVel = roulAngPreVel;
 					Log.d(VIEW_LOG_TAG, "Twist");
+					
+					//audioPlayer.start();
 				}
 			}
 			 
@@ -219,20 +251,34 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 			if (stopTouched(positionX, positionY) && currentState == TWISTING_STATE)
 			{
 
+				    audioPlayer.stop();
+				    audioPlayer  = MediaPlayer.create(RouletteRenderer.this.getContext(), R.raw.spintwo);
+				    audioPlayer.setLooping(false);
+				    //audioPlayer.start();
 					currentState = STOPING_STATE;
- 					float f = ( currentRotation + midPath +  halfCellAngle ) / cellAngle;
-					float m = ( currentRotation + midPath +  halfCellAngle ) % cellAngle;
+					currentPath = currentRotation;
+ 					float f = ( currentRotation + midPath) / cellAngle;
+					float m = ( currentRotation + midPath) % cellAngle;
 
 					if ( ((int)f) % 2 == choosedColor )
+					{
 						roulAngAcc = roulAngPreVel * roulAngPreVel
-								/ (2.0f * midPath);
+								/ (2.0f * (midPath));
+						lastPath = midPath;
+					}
 					else {
 						if (m > halfCellAngle)
+						{
 							roulAngAcc = roulAngPreVel * roulAngPreVel
 									/ (2.0f * (midPath + 14));
+							lastPath = midPath + 14;
+						}
 						else
+						{
 							roulAngAcc = roulAngPreVel * roulAngPreVel
 									/ (2.0f * (midPath - 14));
+							lastPath = midPath- 14;
+						}
 
 					}
 
@@ -253,8 +299,8 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	}
 
 	private boolean stopTouched(int tX, int tY) {
-		return tX < roulArrowX + roulArrow.getWidth() && tX > roulArrowX
-				&& tY > roulArrowY && tY < roulArrowY + roulArrow.getHeight();
+		return tX < rouletteX + roulette.getWidth() && tX > rouletteX
+				&& tY > rouletteY && tY < rouletteY + roulette.getHeight();
 	}
 	
 	private boolean bitmapTouched(int tX, int tY,Bitmap bitmap, int bX, int bY) {
@@ -279,27 +325,99 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 			Canvas canvas = holder.lockCanvas();
 			canvas.drawRGB(228, 228, 228);
 			if (currentState==TWISTING_STATE || currentState == STOPING_STATE) {
-				long deltaTime = System.currentTimeMillis() - currentTime;
+				
+				float deltaTime = System.currentTimeMillis() - currentTime;
 				currentTime = System.currentTimeMillis();
 				rotateMatrix.preTranslate(0, 0);
 				rotateMatrix.setRotate(currentRotation,
 						roulette.getWidth() / 2, roulette.getHeight() / 2);
 				currentRotation += roulAngVel * deltaTime;
 				rotateMatrix.postTranslate(rouletteX, rouletteY);
+				
+				arrowRotateMatrix.preTranslate(0, 0);
+				arrowRotateMatrix.setRotate(currentArrowRotation,arrowCenterX,arrowCenterY);
+				arrowRotateMatrix.postTranslate(roulArrowX, roulArrowY);
+				
+				float b = (int)((currentRotation) % (halfCellAngle));
+				float ov = 4;
+				float ovb =5;
+				float ovk = 6;
+				roulArrowVel = 2f;
+				float S = deltaTime * roulAngVel;
+				if(b<S)
+				{
+					
+				}
+				else
+				{
+					currentArrowRotation +=roulArrowVel;
+				}
+
+				if(b<ovb || b > halfCellAngle-ov)
+				{
+					if(b>halfCellAngle-ov)
+						b -= halfCellAngle-ov;
+					else
+						b+=ov;
+					currentArrowRotation = Math.min(-(b)*ovk,currentArrowRotation);
+				}
+				else
+				{
+				}
+				
+//				if(currentArrowRotation >= 0 && b < 7)
+//				{
+//					 roulArrowVel = -200.0f * roulAngVel - 1f; 
+//				}
+//				
+//				roulArrowAcc = -currentArrowRotation/1.0f;
+//				 
+//				roulArrowVel += roulArrowAcc; 
+//				
+//				currentArrowRotation+=roulArrowVel;
+				
+				if(currentArrowRotation >= 0)
+					currentArrowRotation = 0;
+				
+				
+				 
+				
+				
 
 				if (currentState==STOPING_STATE) {
+					
+					 
+
+			  
+							roulAngAcc = roulAngVel * roulAngVel
+									/ (2.0f * (lastPath-(currentRotation - currentPath)));
+ 						 
+
+					 
 					roulAngVel -= (float) deltaTime * roulAngAcc;
 
-					if (roulAngVel < 0) {
- 						pause();
-						boolean r = ((int)(( currentRotation + halfCellAngle) / cellAngle) % 2) == choosedColor;
+					if (roulAngVel < 0.0001) {
+ 						//pause();
+						boolean r = ((int)(( currentRotation) / cellAngle) % 2) == choosedColor;
 						currentState = OFF_STATE;
+						audioPlayer.stop();
+//						if(r)
+//						{
+//							audioPlayer = MediaPlayer.create(getContext(), R.raw.win);
+//						}
+//						else
+//						{
+//							audioPlayer = MediaPlayer.create(getContext(), R.raw.fail);
+//						}
+//						audioPlayer.start();
 						this.onGameEndListener.onGameEnd(r);
 					}
 				}
 			}
+			
+			
 			canvas.drawBitmap(roulette, rotateMatrix, antiAliasPaint);
-			canvas.drawBitmap(roulArrow, roulArrowX, roulArrowY, null);
+			canvas.drawBitmap(roulArrow, arrowRotateMatrix, antiAliasPaint);
 
 			if(currentState==TWISTING_STATE)
 			{
@@ -316,12 +434,12 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 					canvas.drawBitmap(greenButtonNormal, greenButtonX, greenButtonY,
 							null);
 					canvas.drawBitmap(orangeButtonPressed, orangeButtonX, orangeButtonY,
-							null);
+							alphaPaint);
 				}
 				else
 				{
 					canvas.drawBitmap(greenButtonPressed, greenButtonX, greenButtonY,
-							null);
+							alphaPaint);
 					canvas.drawBitmap(orangeButtonNormal, orangeButtonX, orangeButtonY,
 							null);
 				}

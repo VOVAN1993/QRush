@@ -5,90 +5,48 @@
     android:background="@color/gray"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/reportView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/red" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical" >
 
-        <RelativeLayout 
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:background="@color/white">
-        <ImageView
-            
-            android:id="@+id/reg_avatar"
-            android:layout_margin="5dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/gray" /> 
-            
-        </RelativeLayout>
-        
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/name_img" />
 
             <EditText
                 android:id="@+id/username_te"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/teup3"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:singleLine="true" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/tedown3"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Пол:" />
-
-                <RadioGroup
-                    android:id="@+id/sexRadioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <RadioButton
-                        android:id="@+id/radioMale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:button="@drawable/mrb"
-                        android:checked="true"
-                        android:text="" />
-
-                    <RadioButton
-                        android:id="@+id/radioFemale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/frb"
-                        android:checked="false"
-                        android:text="" />
-                </RadioGroup>
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/extragray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,18 +56,52 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/mail_icon" />
+                android:src="@drawable/mail_img" />
 
             <EditText
                 android:id="@+id/signupAcc"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/mail_et"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:singleLine="true" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/extragray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/pass_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pass_img" />
+
+            <EditText
+                android:id="@+id/signupPass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/extragray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,14 +111,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pass_icon" />
+                android:src="@drawable/repass_img" />
 
             <EditText
-                android:id="@+id/signupPass"
+                android:id="@+id/signupRepass"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
- 
-                android:background="@drawable/pass_et"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:inputType="textPassword"
                 android:maxLength="20"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -135,18 +127,12 @@
 
         <Button
             android:id="@+id/signupBtn"
-            android:background="@drawable/graybtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/reg_greenbtn"
             android:text="Далее" />
-
-        <TextView
-            android:id="@+id/reportView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
 </LinearLayout>

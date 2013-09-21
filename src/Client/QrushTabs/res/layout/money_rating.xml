@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
@@ -8,8 +8,9 @@
     <TabHost
         android:id="@+id/rating_type_tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+         
         android:background="@color/transparent" >
 
         <RelativeLayout
@@ -31,21 +32,33 @@
                 android:id="@android:id/tabcontent"
                 android:layout_below="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white" >
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@color/gray" >
 
                 <ListView
                     android:id="@+id/money_ratings_list1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content" 
+                    android:scrollbars="none"
+   	                android:dividerHeight="0dp"
+  	                android:divider="@null"
+  	                android:cacheColorHint="@color/transparent"
+  	                
+                    >
                 </ListView>
                 <ListView
                     android:id="@+id/money_ratings_list2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:cacheColorHint="@color/transparent"
+                    android:divider="@null"
+   	    			android:dividerHeight="0dp"
+        			 >
                 </ListView>
             </FrameLayout>
         </RelativeLayout>
     </TabHost>
 
-</LinearLayout>
+</RelativeLayout>

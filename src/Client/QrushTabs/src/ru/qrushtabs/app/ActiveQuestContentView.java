@@ -1,5 +1,6 @@
 package ru.qrushtabs.app;
 
+import ru.qrushtabs.app.quests.QuestContentView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -22,13 +23,7 @@ public class ActiveQuestContentView extends QuestContentView  {
 	   rowView = inflater.inflate(R.layout.active_quest, this, false);
 	   
 	   this.addView(rowView);
-	   
-	   
 	}
 
-	@Override
-	public void setQuestContent(QuestContent newContent) {
-		// TODO Auto-generated method stub
-		
-	}
+ 
 }

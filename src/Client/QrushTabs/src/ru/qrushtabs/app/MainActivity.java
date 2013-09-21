@@ -1,6 +1,16 @@
 package ru.qrushtabs.app;
 
- import android.app.TabActivity;
+ import org.json.JSONException;
+import org.json.JSONObject;
+
+import ru.qrushtabs.app.badges.Badges;
+import ru.qrushtabs.app.friends.FriendField;
+import ru.qrushtabs.app.profile.ProfileActivity;
+import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.quests.QuestObject;
+import ru.qrushtabs.app.quests.QuestsActivity;
+import ru.qrushtabs.app.utils.ServerAPI;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,20 +28,11 @@ import android.widget.TabHost.OnTabChangeListener;
 public class MainActivity extends TabActivity {
 	private static MainActivity instance;
 	 
+	
+	TabHost tabHost;
 	/** Called when the activity is first created. */
 	Handler mHandler = new Handler();
-	OnClickListener onScanBoxButtonClickListener = new OnClickListener()
-	{
-
-		@Override
-		public void onClick(View arg0) {
-			
-			Intent intent = new Intent(MainActivity.this,ScanBoxActivity.class);
-			startActivity(intent);
-			
-		}
-		
-	};
+	
 	OnClickListener onSettingsButtonClickListener = new OnClickListener()
 	{
 
@@ -44,25 +45,127 @@ public class MainActivity extends TabActivity {
 		}
 		
 	};
+
+	OnClickListener onScanBoxButtonClickListener = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View arg0) {
+			
+			Intent intent = new Intent(MainActivity.this,ScanBoxActivity.class);
+			startActivity(intent);
+			
+		}
+		
+	};
+	private OnTabChangeListener l = new OnTabChangeListener()
+	{
+
+		private OnClickListener onGetMoneyButtonClickListener = new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(MainActivity.this,GetMoneyActivity.class);
+				startActivity(intent);	
+				
+			}
+			
+		};
+		OnClickListener onScanBoxButtonClickListener = new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent intent = new Intent(MainActivity.this,ScanBoxActivity.class);
+				startActivity(intent);
+				
+			}
+			
+		};
+
+		@Override
+		public void onTabChanged(String arg0) {
+			int i = tabHost.getCurrentTab();
+	        Button b = (Button)findViewById(R.id.title_right_button);
+	        b.setVisibility(View.VISIBLE);
+	       
+			if(i==0)
+			{
+				 b.setOnClickListener(onGetMoneyButtonClickListener );
+				 b.setBackgroundDrawable(MainActivity.this.getResources().getDrawable(R.drawable.getmoneybtn));
+			}
+			if(i==1)
+			{
+				b.setVisibility(View.GONE);
+			}
+			if(i==2)
+			{
+				b.setOnClickListener(onScanBoxButtonClickListener );
+				if(ScanBox.getScansInfo().size()==0)
+					b.setBackgroundDrawable(MainActivity.this.getResources().getDrawable(R.drawable.scanboxbtn));
+				else
+					b.setBackgroundDrawable(MainActivity.this.getResources().getDrawable(R.drawable.scanboxbtnactive));
+
+			}
+			if(i==3)
+			{
+				b.setVisibility(View.GONE);
+			}
+			if(i==4)
+			{
+				b.setVisibility(View.GONE);
+			}
+			
+		}
+		
+	};
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		instance = this;
 		super.onCreate(savedInstanceState);
+		
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main_tabs);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
-        Button b = (Button)findViewById(R.id.scan_box_button);
-        
+        Button b = (Button)findViewById(R.id.title_right_button);
+//        
         b.setOnClickListener(onScanBoxButtonClickListener);
-        
-        b = (Button)findViewById(R.id.settings_btn);
+//        
+        b = (Button)findViewById(R.id.title_left_button);
         
         b.setOnClickListener(onSettingsButtonClickListener);
-        
+       // l.onTabChanged("h");
         ScanBox.loadScans(this);
+        Badges.initBadges(this);
+        //Badges.checkBadges();
+        QuestObject.setAllQuests(ServerAPI.getQuests());
+ 		QuestObject.addQuest(ServerAPI.getDailyQuest());
+		ServerAPI.loadProgress();
+ 		QuestObject.checkTasks();
+        if(ScanBox.getScansInfo().size()>0)
+        	b.setBackgroundDrawable(MainActivity.this.getResources().getDrawable(R.drawable.scanboxbtnactive));
 		initTabs();
+		
+		String users[] = ServerAPI.getMyFriends(ProfileInfo.username,"",0,0);
+		
+        FriendField friends[]  = new FriendField[users.length];
+        ProfileInfo.friendsList = friends;
+        for(int i = 0;i<users.length;i++)
+        {
+        	try {
+				friends[i] = FriendField.parse(new JSONObject(users[i]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
 
 	}
 	@Override
@@ -70,9 +173,11 @@ public class MainActivity extends TabActivity {
 	{
 		super.onDestroy();
 		ScanBox.saveScans();
+		
+		ServerAPI.saveProgress();
 	}
 	private void initTabs() {
-		TabHost tabHost = getTabHost();
+		tabHost = getTabHost();
  		tabHost.setup();
 
 		TabHost.TabSpec tabSpec;
@@ -110,7 +215,9 @@ public class MainActivity extends TabActivity {
 		        params.setMargins(-4, -4, -4, -4);
  		}
 
- 		tabHost.setCurrentTabByTag("tag3");
+ 		tabHost.setCurrentTabByTag("tag1");
+ 		
+ 		tabHost.setOnTabChangedListener(l );
 
  		 
 	}

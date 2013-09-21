@@ -1,4 +1,4 @@
-package ru.qrushtabs.app;
+package ru.qrushtabs.app.quests;
 
 import android.graphics.Bitmap;
 import android.util.Log;

@@ -16,14 +16,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class NewsArrayAdapter extends ArrayAdapter<NewsContent> 
+public class NewsArrayAdapter extends ArrayAdapter<ScanObject> 
 {
 
 	private final Context context;
-    private final ArrayList<NewsContent> values;
+    private final ArrayList<ScanObject> values;
     ImageView arrows;
     private View rowView;
-    public NewsArrayAdapter(Context context, ArrayList<NewsContent> values) {
+    public NewsArrayAdapter(Context context, ArrayList<ScanObject> values) {
         super(context, R.layout.rating_field, values);
         this.context = context;
         this.values = values;

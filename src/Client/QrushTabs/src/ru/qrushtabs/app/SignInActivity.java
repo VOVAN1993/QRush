@@ -1,6 +1,7 @@
 package ru.qrushtabs.app;
 
  
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
@@ -32,12 +33,10 @@ public class SignInActivity extends Activity
 		public void onClick(View arg0) {
 			
 			EditText ed = (EditText)SignInActivity.this.findViewById(R.id.signinAcc);
-			ProfileInfo.username = ed.getText().toString();
+			ProfileInfo.mail = ed.getText().toString();
 			ed = (EditText)SignInActivity.this.findViewById(R.id.signinPass);
 			ProfileInfo.userPass = ed.getText().toString();
-			(new CheckTask()).execute();
-			 
-			
+			(new CheckTask()).execute();	
 		}
 //		
 //		
@@ -45,7 +44,7 @@ public class SignInActivity extends Activity
 	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.loadProfileInfo();
+			return ServerAPI.signin();
 		}
 
 		protected void onPostExecute(String objResult) 
@@ -53,8 +52,7 @@ public class SignInActivity extends Activity
 
 			if(objResult.equals("true"))
 			{
-			    TextView tv = (TextView)SignInActivity.this.findViewById(R.id.reportView);
-			    tv.setText("Вы успешно вошли");
+			     Log.d("on signin", "true");
 		        ServerAPI.saveProfileInfo();
 		        
 		        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -63,8 +61,9 @@ public class SignInActivity extends Activity
 			}
 			else
 			{
-				TextView tv = (TextView)SignInActivity.this.findViewById(R.id.reportView);
-			    tv.setText("Не получилось войти");
+				 Log.d("on signin", "true");
+				TextView tv = (TextView)SignInActivity.this.findViewById(R.id.signin_report_view);
+			    tv.setText(objResult);
 			}
 		
 		}

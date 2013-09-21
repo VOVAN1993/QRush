@@ -1,23 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:background="@drawable/gradient_shadow"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp" >
-    </ImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" >
-    </TextView>
+        <ImageView
+            android:id="@+id/rating_icon"
+            android:layout_width="@dimen/news_iv_width"
+            android:layout_height="@dimen/news_iv_height"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/qrcat" />
+
+        
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/rating_icon"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/rating_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Константин"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/rating_city_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Город"
+                android:textSize="12sp" />
+
+            
+        </LinearLayout>
+      <!--   <TextView
+            android:id="@+id/rating_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/rating_icon"
+            android:text="Имя"
+            android:textColor="@color/extragray"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/rating_city_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rating_name_tv"
+            android:layout_alignLeft="@id/rating_name_tv"
+             android:layout_marginTop="0dp"
+            android:layout_toRightOf="@id/rating_icon"
+            android:text="Город"
+            android:textColor="@color/extragray"
+            android:textAppearance="?android:attr/textAppearanceSmall" /> -->
+
+        <TextView
+            android:id="@+id/rating_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/imageView1"
+            android:text="188" />
+
+        <TextView
+            android:id="@+id/rating_scans_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="156" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="46dp"
+            android:background="@drawable/scan_icon" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="46dp"
+            android:layout_toLeftOf="@+id/imageView1"
+            android:background="@drawable/coins_icon" />
+
+         
+    </RelativeLayout>
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package ru.qrushtabs.app;
 
 
 
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
@@ -39,13 +40,14 @@ public class PreloadActivity extends Activity {
 			Log.d("http", "isNotOnline");
 			ServerAPI.offlineMod = true;
 			auth();
-			Intent intent = new Intent(this, MainActivity.class);
+			Intent intent = new Intent(this, GamesActivity.class);
 			finish();
 			startActivity(intent);
 		}
 	}
 
 	private boolean auth() {
+		
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 		ProfileInfo.username = prefs.getString("userID", "Анонимус");
@@ -61,6 +63,7 @@ public class PreloadActivity extends Activity {
 		
 		ProfileInfo.avatarPath = prefs.getString("avatarPath", "0");
 		ProfileInfo.sex = prefs.getString("sex", "М");
+		ProfileInfo.mail = prefs.getString("email", "mail@mail.ru");
 		
 		ProfileInfo.city = prefs.getString("city", "Репрежевальск");
 		

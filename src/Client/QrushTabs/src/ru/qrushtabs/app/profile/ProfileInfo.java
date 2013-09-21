@@ -1,8 +1,12 @@
-package ru.qrushtabs.app;
+package ru.qrushtabs.app.profile;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Bitmap;
+import ru.qrushtabs.app.badges.Badges;
+import ru.qrushtabs.app.friends.FriendField;
 import ru.qrushtabs.app.utils.OnInfoLoadListener;
 
 public class ProfileInfo {
@@ -24,12 +28,46 @@ public class ProfileInfo {
 	public static String userVKID = "0";
  	public static String userVKToken = "0";
  	public static String deviceID = "0";
- 	
+ 	public static String birthday = "0";
  	public static Bitmap avatarBitmap = null;
  	public static String avatarPath = "0";
  	public static File avatarFile = null;
  	
+ 	public static List<String> scansList = new ArrayList<String>();
+ 	public static FriendField[] friendsList;;
+ 	public static boolean friendsChanged = true;
+
+ 	public static List<String> myFriendsReqList = new ArrayList<String>();
+ 	
  	public static String city = "ђепрежевальск";
+ 	public static String cityId = "0";
+ 	
+ 	public static boolean haveScan(String scan)
+ 	{
+ 		for(int i = 0;i<scansList.size();i++)
+ 			if(scansList.get(i).equals(scan))
+ 				return true;
+ 		return false;
+ 	}
+ 	
+ 
+ 	public static boolean checkMyFriend(String name)
+ 	{
+ 		for(int i = 0;i<friendsList.length;i++)
+ 			if(friendsList[i].username.equals(name))
+ 				return false;
+ 		return true;
+ 	}
+ 	
+ 	public static void removeFriend(String name)
+ 	{
+ 		for(int i = 0;i<friendsList.length;i++)
+ 			if(friendsList[i].username.equals(name))
+ 				friendsList[i].username = "0";
+ 		
+ 		
+ 			 friendsChanged = true;
+ 	}
 	public static int getScansCount()
 	{
 		if(loaded)
@@ -54,6 +92,7 @@ public class ProfileInfo {
 	public static void addScan(String scanInfo)
 	{
 		ProfileInfo.scansCount++;
+		Badges.checkBadges();
 		//добавление на сервер и в склайт
 	}
 	public static void setScansCount(int scansCount)
@@ -74,6 +113,7 @@ public class ProfileInfo {
 	public static void addMoneyCount(int moneyCount)
 	{
 		ProfileInfo.moneyCount += moneyCount;
+		Badges.checkBadges();
 		//добавление на сервер и в склайт
 	}
 	

@@ -11,6 +11,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import ru.qrushtabs.app.profile.ProfileInfo;
+
  
  
 import android.app.Activity;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 
 public class EnterActivity extends Activity {
 	
+	private static EnterActivity instance;
 	OnClickListener l = new OnClickListener()
 	{
 
@@ -36,6 +39,7 @@ public class EnterActivity extends Activity {
 			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, RegistrationActivity.class);
 			//finish();
+			
 			startActivity(intent);
 			
 		}
@@ -75,11 +79,12 @@ public class EnterActivity extends Activity {
 	  public void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           
-          
+          instance = this;
           //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
           this.setContentView(R.layout.enter);
 //          getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_empty);
           //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+          
           
           Button bt = (Button)findViewById(R.id.regbtn);
           bt.setOnClickListener(l);
@@ -89,5 +94,15 @@ public class EnterActivity extends Activity {
           bt = (Button)findViewById(R.id.signinBtn);
           bt.setOnClickListener(ll);
   }
+	  @Override
+	  public void onDestroy()
+	  {
+		  super.onDestroy();
+		  instance = null;
+	  }
+	  public static EnterActivity getInstance()
+	  {
+		  return instance;
+	  }
 
 }

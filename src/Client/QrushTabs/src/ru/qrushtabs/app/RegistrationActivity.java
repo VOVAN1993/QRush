@@ -2,6 +2,7 @@ package ru.qrushtabs.app;
 
  
 import ru.qrushtabs.app.mycamera.AvatarCameraActivity;
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -75,53 +77,71 @@ public class RegistrationActivity extends Activity
 //		}
 //
 //	}
+	private boolean isValidEmail(CharSequence target) {
+	    if (target == null) {
+	        return false;
+	    } else {
+	        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+	    }
+	}
+	private void alert(String message)
+	{
+		TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
+		tv.setText(message);
+	}
 	OnClickListener onSignUp = new OnClickListener()
 	{
 
 		@Override
 		public void onClick(View arg0) {
 			EditText ed = (EditText)RegistrationActivity.this.findViewById(R.id.signupAcc);
+			if(ed.getText().toString().length()==0)
+			{
+				alert("Все поля должны быть заплнены!");
+				return;
+			}
+			if(!isValidEmail(ed.getText().toString()))
+			{
+				alert("Некорректно введена почта");
+				return;
+			}	
+			
 			ProfileInfo.mail = ed.getText().toString();
 			ed = (EditText)RegistrationActivity.this.findViewById(R.id.signupPass);
+			if(ed.getText().toString().length()==0 && ProfileInfo.signInType.equals("def"))
+			{
+				alert("Все поля должны быть заплнены!");
+				return;
+			}
+			if(ed.getText().toString().length()<4 && ProfileInfo.signInType.equals("def"))
+			{
+				alert("Должно быть более трех символов в пароле");
+				return;
+			}	
 			ProfileInfo.userPass = ed.getText().toString();
 			ed = (EditText)RegistrationActivity.this.findViewById(R.id.username_te);
+			if(ed.getText().toString().length()==0)
+			{
+				alert("Все поля должны быть заплнены!");
+				return;
+			}
+			if(ed.getText().toString().length()<3)
+			{
+				alert("Должно быть более двух символов в нике");
+				return;
+			}	
 			ProfileInfo.username = ed.getText().toString();
 			
-			RadioButton rb = (RadioButton)RegistrationActivity.this.findViewById(R.id.radioMale);
-			if(rb.isChecked())
-				ProfileInfo.sex = "M";
-			else
-				ProfileInfo.sex = "F";
-			TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
- 			(new SignUpTask()).execute();
+			
+  			//(new SignUpTask()).execute();
+			Intent intent = new Intent(RegistrationActivity.this, SecondFormActivity.class);
+			finish();
+			startActivity(intent);
 			
 		}
 		
 	};
-	private OnClickListener onAvatarClick = new OnClickListener()
-	{
-
-		@Override
-		public void onClick(View arg0) {
-			Intent intent = new Intent(RegistrationActivity.this,AvatarCameraActivity.class);
-			startActivityForResult(intent,1);	
-		}
-		
-	};
-	@Override
-	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (resultCode==0)
-	    	return;
-    	else
-    	{
-    		ImageView avatarView = (ImageView)findViewById(R.id.reg_avatar);
-    		
-    		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-    		avatarView.getWidth();
-     		avatarView.setImageBitmap(BitmapCropper.pxcrop(scale, ProfileInfo.avatarBitmap, avatarView.getWidth(), avatarView.getWidth()));
-    		 
-    	}
-  	  }
+	
 	private class SignUpTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
@@ -130,7 +150,7 @@ public class RegistrationActivity extends Activity
 
 		protected void onPostExecute(String objResult) {
 
-			if(objResult.equals("true"))
+ 			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
 			    //tv.setText("Вы успешно зарегистрировались");
@@ -143,7 +163,7 @@ public class RegistrationActivity extends Activity
 			else
 			{
 				TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-			    tv.setText("Не получилось зарегестрирваться");
+			    tv.setText(objResult);
 			}
 		}
 
@@ -154,16 +174,18 @@ public class RegistrationActivity extends Activity
 		setContentView(R.layout.registration);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_empty);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+		EditText etValue = (EditText)this.findViewById(R.id.username_te);
+        etValue.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 		if(!ProfileInfo.signInType.equals("def"))
 		{
 			EditText ed = (EditText)RegistrationActivity.this.findViewById(R.id.signupPass);
-			ed.setVisibility(View.INVISIBLE);
+			ed.setVisibility(View.GONE);
+			ImageView iv = (ImageView)RegistrationActivity.this.findViewById(R.id.pass_iv);
+			iv.setVisibility(View.GONE);
 		}
 //		Button btn = (Button)findViewById(R.id.signinBtn);
 //		btn.setOnClickListener(onSignIn);
-		ImageView iv = (ImageView)findViewById(R.id.reg_avatar);
-		iv.setOnClickListener(onAvatarClick );
+		
 		Button btn = (Button)findViewById(R.id.signupBtn);
 		btn.setOnClickListener(onSignUp);
 	}

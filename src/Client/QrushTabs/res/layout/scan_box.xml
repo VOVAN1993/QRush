@@ -5,10 +5,13 @@
     android:orientation="vertical"
     android:background="@color/gray"
      >
-     <ListView
+     			<ListView
                     android:id="@+id/scan_box_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp" 
+                    android:layout_marginRight="10dp"  >
                 </ListView>
 
 </LinearLayout>

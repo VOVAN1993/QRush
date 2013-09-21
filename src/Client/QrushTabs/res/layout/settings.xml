@@ -6,21 +6,23 @@
     android:orientation="vertical" >
 
     <Button
+        android:id="@+id/set_change_prof_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
         android:background="@drawable/settingbtn"
-        android:text="Настройка 1"
+        android:text="Изменить профиль"
         android:textColor="@color/black" />
 
     <Button
+        android:id="@+id/set_change_pass_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:background="@drawable/settingbtn"
-        android:text="Настройка 2"
+        android:text="Сменить пароль"
         android:textColor="@color/black" />
 
     <Button

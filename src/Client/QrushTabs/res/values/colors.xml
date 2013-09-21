@@ -6,6 +6,7 @@
 <color name="date_color">#999999</color>
 <color name="black">#000000</color>
 <color name="gray">#e4e4e4</color>
+<color name="gray_for_lines">#a1a1a1</color>
 <color name="blue">#0066cc</color>
 <color name="gold">#e6b121</color>
 <color name="blueback">#99FFFF</color>
@@ -16,4 +17,9 @@
 <color name="pink">#FF00FF</color>
 <color name="green">#00FF00</color>
 <color name="mycolor">#FF9900</color>
-</resources>
+<color name="extragray">#d0d0d0</color>
+<color name="darkblue">#282c34</color>
+<color name="extrablack">#0e1012</color>
+<color name="darkgray">#858585</color>
+<color name="darkgreen">#6d8e4c</color>
+ </resources>

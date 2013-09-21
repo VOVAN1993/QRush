@@ -24,7 +24,7 @@ public class BitmapCropper
  		Bitmap croppedBitmap = Bitmap.createBitmap(bmp2, neededx, neededy, pixelsw, pixelsh);
    		return croppedBitmap;
 	}
-	public static Bitmap pxcrop(float scale, Bitmap bmp, int maxWidth,int maxHeight)
+	public static Bitmap pxcrop( Bitmap bmp, int maxWidth,int maxHeight)
 	{
 		
 		int pixelsw = maxWidth;

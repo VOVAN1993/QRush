@@ -1,5 +1,6 @@
 package ru.qrushtabs.app;
 
+import ru.qrushtabs.app.quests.QuestContentView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -26,9 +27,5 @@ public class NotActiveQuestContentView extends QuestContentView {
 	   
 	}
 
-	@Override
-	public void setQuestContent(QuestContent newContent) {
-		// TODO Auto-generated method stub
-		
-	}
+ 
 }

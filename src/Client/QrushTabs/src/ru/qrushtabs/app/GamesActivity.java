@@ -4,10 +4,12 @@ import ru.qrushtabs.app.dialogs.LoseDialog;
 import ru.qrushtabs.app.dialogs.MyDialog;
 import ru.qrushtabs.app.dialogs.OnDialogClickListener;
 import ru.qrushtabs.app.dialogs.ToTwiceDialog;
+import ru.qrushtabs.app.games.ChestsRenderer;
 import ru.qrushtabs.app.games.GameRenderer;
 import ru.qrushtabs.app.games.MatchesRenderer;
 import ru.qrushtabs.app.games.OnGameEndListener;
 import ru.qrushtabs.app.games.RouletteRenderer;
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.app.Dialog;
@@ -26,6 +28,7 @@ public class GamesActivity extends FragmentActivity {
 	GameRenderer game;
 	LinearLayout gamesLayout;
 	int currentPrize = 0;
+	String currentScan = "0";
 	OnDialogClickListener onDialogAfterMatchClick = new OnDialogClickListener() {
 
 		@Override
@@ -36,6 +39,11 @@ public class GamesActivity extends FragmentActivity {
 			game = RouletteRenderer.getInstance(g);
 			g.gamesLayout.addView(game);
 			game.setOnGameEndListener(onRouletteEnd);
+			String isWin = GamesActivity.this.getIntent().getStringExtra("isTwice");
+			if(isWin.equals("true"))
+				game.isWin = true;
+			else
+				game.isWin = false;
 			game.resume();
 
 		}
@@ -43,7 +51,7 @@ public class GamesActivity extends FragmentActivity {
 		@Override
 		public void onCancelClick() {
 			GamesActivity.this.finish();
-			if (ServerAPI.addMoney(currentPrize).equals("true")) {
+			if (ServerAPI.tryAddMoneyForScan(GamesActivity.this.getIntent().getStringExtra("currentScan")).equals("true")) {
 				PrizeActivity.currentPrize = currentPrize;
 			} else {
 				PrizeActivity.currentPrize = 0;
@@ -81,7 +89,7 @@ public class GamesActivity extends FragmentActivity {
 		@Override
 		public void onOkClick() {
 			GamesActivity.this.finish();
-			if (ServerAPI.addMoney(currentPrize).equals("true")) {
+			if (ServerAPI.tryAddMoneyForScan(GamesActivity.this.getIntent().getStringExtra("currentScan")).equals("true")) {
 				PrizeActivity.currentPrize = currentPrize;
 			} else {
 				PrizeActivity.currentPrize = 0;
@@ -107,9 +115,10 @@ public class GamesActivity extends FragmentActivity {
 			// gamesLayout.removeView(gameRenderer);
 			MyDialog newFragment;
 			if (isWin) {
-				currentPrize += 50;
+				currentPrize += Integer.valueOf(GamesActivity.this.getIntent().getStringExtra("prize"));
 
 				newFragment = new ToTwiceDialog();
+				newFragment.setLabelText("Вы выйграли "+currentPrize+"!");
 				newFragment.setOnDialogClickListener(onDialogAfterMatchClick);
 				newFragment.show(getSupportFragmentManager(), "missiles");
 
@@ -162,10 +171,15 @@ public class GamesActivity extends FragmentActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		game = MatchesRenderer.getInstance(this);
+		game = ChestsRenderer.getInstance(this);
 		setContentView(R.layout.games);
 		gamesLayout = (LinearLayout) findViewById(R.id.games_layout);
 
+		int prize = Integer.valueOf(GamesActivity.this.getIntent().getStringExtra("prize"));
+		if(prize>0)
+			game.isWin = true;
+		else
+			game.isWin = false;
 		game.setOnGameEndListener(onMatchEnd);
 		// gamesLayout.addView(gameRenderer);
 

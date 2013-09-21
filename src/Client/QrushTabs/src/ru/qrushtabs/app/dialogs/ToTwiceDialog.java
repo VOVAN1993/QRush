@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ToTwiceDialog extends MyDialog {
 
@@ -45,42 +46,7 @@ public class ToTwiceDialog extends MyDialog {
 		}
 		
 	};
-//	public Dialog onCreateDialog(Bundle savedInstanceState) {
-//		
-//		
-//		 Dialog m_dialog = new Dialog(getActivity());
-//	     // LayoutInflater m_inflater = LayoutInflater.from(CustomDialogActivity.this);
-//	     // View v = LayoutInflater.from(mContext).inflate(R.layout.view_quick_action, null, false);
-//	        // SET ALL THE VIEWS
-//	        m_dialog.setTitle(null);
-//	        
-//	        m_dialog.setContentView(R.layout.to_twice_dialog);
-//	       // m_dialog.show();
-////	   // AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-////	    // Get the layout inflater
-////	    LayoutInflater inflater = getActivity().getLayoutInflater();
-////
-////	    // Inflate and set the layout for the dialog
-////	    // Pass null as the parent view because its going in the dialog layout
-////	    builder.setView(inflater.inflate(R.layout.to_twice_dialog, null));
-////	    // Add action buttons
-////	    Dialog d = builder.create();
-//// 	   // d.getWindow().setBackgroundDrawable(null);	
-////	    Window window = d.getWindow();
-////	    window.setBackgroundDrawable(null);
-//	   // window.setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-//
-//	    
-////	    Dialog m_dialog = new Dialog(getActivity(), false, null);
-////	    // Inflate and set the layout for the dialog
-////	    // Pass null as the parent view because its going in the dialog layout
-////	    View v = inflater.inflate(R.layout.to_twice_dialog,null);
-////	   // builder.setView(inflater.inflate(R.layout.to_twice_dialog, null));
-////	    // Add action buttons
-////	    Dialog d = builder.create();
-//	    
-//  	    return m_dialog;
-//	}
+
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -94,7 +60,11 @@ public class ToTwiceDialog extends MyDialog {
 		Button ok = (Button)v.findViewById(R.id.to_twice_btn);
 		
 		ok.setOnClickListener(onOk);
+		
+		TextView tv = (TextView)v.findViewById(R.id.to_twice_count_tv);
+		tv.setText(text);
 			
+		
 		
 		return v;
 		

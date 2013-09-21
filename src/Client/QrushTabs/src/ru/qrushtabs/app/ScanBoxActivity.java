@@ -2,6 +2,7 @@ package ru.qrushtabs.app;
 
 import java.util.ArrayList;
 
+import ru.qrushtabs.app.utils.ActivitiesStack;
 import ru.qrushtabs.app.utils.SQLiteAPI;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,9 +19,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ScanBoxActivity extends Activity {
+public class ScanBoxActivity extends FragmentActivity {
 
-	private ArrayList<String> scansInfo;
+	private ArrayList<ScanObject> scansInfo;
 	ScanBoxArrayAdapter scansInfoAdapter;
 	private SQLiteAPI sqLiteAPI; 
 	private Context context;
@@ -31,16 +33,20 @@ public class ScanBoxActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.scan_box);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+ 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.custom_title_back);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
+				,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		ActivitiesStack.addActivity(this);
 
 		Button backButton = (Button)this.findViewById(R.id.header_back_btn);
 		backButton.setOnClickListener(new OnClickListener() {
 		  @Override
 		  public void onClick(View v) {
-		    finish();
+			  ActivitiesStack.finishAll();
+			  
 		  }
 		});
 		 //loadScans();
@@ -53,9 +59,8 @@ public class ScanBoxActivity extends Activity {
 
 	}
 	
-	public void addScan(String scanInfo)
-	{
-		 
+	public void addScan(ScanObject scanInfo)
+	{ 
 		scansInfoAdapter.add(scanInfo);
 	}
 	
@@ -73,7 +78,10 @@ public class ScanBoxActivity extends Activity {
 					.getColumnIndex(SQLiteAPI._ID));
 			String name = cursor.getString(cursor
 					.getColumnIndex(SQLiteAPI.SCAN_INFO));
-			scansInfo.add(name);
+			
+			ScanObject so = new ScanObject();
+			so.code = name;
+			scansInfo.add(so);
 			Log.i("LOG_TAG", "ROW " + id + " HAS NAME " + name);
 		}
 	}

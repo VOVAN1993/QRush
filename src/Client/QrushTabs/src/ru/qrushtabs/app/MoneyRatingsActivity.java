@@ -25,30 +25,20 @@ public class MoneyRatingsActivity extends Activity {
 		setContentView(R.layout.money_rating);
 
 		initTabs();
-		// iv = (ImageView)findViewById(R.drawable.banner);
-		//
-		// iv.setOnClickListener(new OnClickListener() {
-		// public void onClick(View v) {
-		//
-		//
-		// Intent intent = new Intent(th, CameraTestActivity.class);
-		// startActivity(intent);
-		// }
-		// });
 
 	}
 
 	private void initTabs() {
 		  
 			
-			String[] values2 = ServerAPI.getTopUsers();
-			String[] values1 = values2;
+			RatingField[] values2 = ServerAPI.getTopUsers();
+ 			RatingField[] values1 = values2;
 			
 			RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this,
 					values1);
 			lv = (ListView) findViewById(R.id.money_ratings_list1);
 			lv.setAdapter(adapter1);
-
+			
 			RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this,
 					values2);
 			lv = (ListView) findViewById(R.id.money_ratings_list2);

@@ -1,63 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/news_bkg"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/gray_gradient_shadow"
     android:orientation="vertical" >
-
-    <!--
-             <TextView 
-            android:id="@+id/news_tv"
-            android:layout_height="match_parent"
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            android:background="#000000"/>
-    -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="6dp" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.30"
-             android:gravity="center_vertical|center_horizontal"
-            android:text="Бла" />
+   
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+ 
+<!--     <FrameLayout
+       android:id="@+id/news_user_avatar_fl"
+        android:layout_width="@dimen/news_frames_width"
+        android:layout_height="@dimen/news_frames_height"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/gray" > -->
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/news_divider" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.30"
-             android:gravity="center_vertical|center_horizontal"
-            android:text="Бла" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/news_divider" />
-
+            android:id="@+id/news_user_icon"
+            android:layout_width="@dimen/news_iv_width"
+            android:layout_height="@dimen/news_iv_height" 
+            android:src="@drawable/qrcat" />
+        
         <FrameLayout
             android:id="@+id/rescan_btn_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40" >
+            android:layout_alignParentRight="true"
+              >
 
             <Button
                 android:id="@+id/rescan_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/rescanbtn" />
 
             <ImageView
@@ -65,26 +45,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/rescan_arrows" />
+                android:background="@drawable/rescan_arrows" />
         </FrameLayout>
-    </LinearLayout>
 
-    <!--
-         <FrameLayout 
-        android:id="@+id/news_content_place"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        >
-        <ImageView 
-            android:id="@+id/news_content_iv"
+         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="100dp"
-            android:maxWidth="100dp"
-            android:layout_gravity="center_horizontal"
-            />
-    </FrameLayout>
-    -->
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/news_user_icon"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/news_place_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Константин"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/news_place_city_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Город"
+                android:textSize="12sp" />
+
+            
+        </LinearLayout>
+     <!--    <TextView
+            android:id="@+id/news_place_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/news_user_icon"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="Имя" />
+
+        <TextView
+            android:id="@+id/news_place_city_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/news_place_name_tv"
+            android:layout_centerVertical="true"
+            android:text="Город" />
+ -->
 </RelativeLayout>
+ </LinearLayout>

@@ -10,12 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ScanBoxArrayAdapter extends ArrayAdapter<String> {
+public class ScanBoxArrayAdapter extends ArrayAdapter<ScanObject> {
 	private final Context context;
-    private final ArrayList<String> values;
+    private final ArrayList<ScanObject> values;
 
-    public ScanBoxArrayAdapter(Context context, ArrayList<String> values) {
-        super(context, R.layout.rating_field, values);
+    public ScanBoxArrayAdapter(Context context, ArrayList<ScanObject> values) {
+        super(context, R.layout.scan_box_field, values);
         this.context = context;
         this.values = values;
      }
@@ -23,20 +23,23 @@ public class ScanBoxArrayAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.rating_field, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        textView.setText(values.get(position));
+    	ScanBoxFieldView rowView = new ScanBoxFieldView(context);
+    	
+    	rowView.setScanInfo(values.get(position));
+       // LayoutInflater inflater = (LayoutInflater) context
+       //         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+       // View rowView = inflater.inflate(R.layout.scan_box_field, parent, false);
+       // TextView textView = (TextView) rowView.findViewById(R.id.label);
+       // ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+      //  textView.setText(values.get(position));
         // Изменение иконки для Windows и iPhone
-        String s = values.get(position);
-        if (s.startsWith("Windows7") || s.startsWith("iPhone")
-                || s.startsWith("Solaris")) {
-            imageView.setImageResource(R.drawable.profil);
-        } else {
-            imageView.setImageResource(R.drawable.profil);
-        }
+//        String s = values.get(position);
+//        if (s.startsWith("Windows7") || s.startsWith("iPhone")
+//                || s.startsWith("Solaris")) {
+//            imageView.setImageResource(R.drawable.profil);
+//        } else {
+//            imageView.setImageResource(R.drawable.profil);
+//        }
 
         return rowView;
     }

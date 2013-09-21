@@ -23,6 +23,7 @@ abstract public class GameRenderer extends SurfaceView{
 
 	private static GameRenderer instance;
 
+	public boolean isWin = false;
 	protected OnGameEndListener onGameEndListener;
 	public GameRenderer(Context context)
 	{

@@ -1,34 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/search_field_height"
+    android:background="@color/white"
     android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/friend_req_icon"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp" >
-    </ImageView>
+    <FrameLayout
+        android:id="@+id/friend_req_avatar_fl"
+        android:layout_width="@dimen/search_frames_width"
+        android:layout_height="@dimen/search_frames_height"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+         android:background="@color/gray" >
+
+        <ImageView
+            android:id="@+id/friend_req_icon"
+            android:layout_width="@dimen/search_iv_width"
+            android:layout_height="@dimen/search_iv_height"
+            android:layout_gravity="center"
+            android:src="@drawable/qrcat" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/friend_req_username_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp" >
+        android:layout_toRightOf="@id/friend_req_avatar_fl"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="Имя"
+        android:textSize="@dimen/search_tv_name_fs" >
     </TextView>
-    <Button 
-        android:id="@+id/accept_friend_btn"
+    <TextView
+        android:id="@+id/friend_req_city_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Добавить"/>
-    <Button 
+        android:layout_toRightOf="@id/friend_req_avatar_fl"
+        android:text="Город"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/friend_req_username_tv"
+        android:layout_marginTop="2dp"
+        android:textSize="@dimen/search_tv_city_fs" >
+    </TextView>
+    <TextView
+        android:id="@+id/friend_req_report_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+         android:layout_gravity="center_vertical"
+        android:textSize="18sp" >
+    </TextView>
+    
+    <Button
         android:id="@+id/decline_friend_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Отказать"/>
+        android:layout_alignParentRight="true"
+         android:layout_marginRight="10dp"
+         android:layout_centerVertical="true"
+        android:background="@drawable/unfollowbtn" />
+   <Button
+        android:id="@+id/accept_friend_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/decline_friend_btn"
+         android:layout_marginRight="5dp"
+         android:layout_centerVertical="true"
+        android:background="@drawable/add_friendbtn" />
+    
      
 
-</LinearLayout>
+</RelativeLayout>

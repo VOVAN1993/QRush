@@ -3,6 +3,7 @@ package ru.qrushtabs.app;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 
 import com.perm.kate.api.Api;
@@ -20,6 +21,8 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -35,11 +38,16 @@ public class VkLoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.vksignin);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_empty);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
         webview = (WebView) findViewById(R.id.vkontakteview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.clearCache(true);
+        //api.getPhotos(uid, aid, offset, count)
       //Чтобы получать уведомления об окончании загрузки страницы
          webview.setWebViewClient(new VkontakteWebViewClient());
                 

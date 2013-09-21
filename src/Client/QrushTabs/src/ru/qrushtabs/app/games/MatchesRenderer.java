@@ -139,10 +139,10 @@ public class MatchesRenderer extends GameRenderer implements Runnable {
 		isEnd = false;
 		boxAlpha = 255;
 		alphaPaint.setAlpha(boxAlpha);
-		curShortSpich = (int) (Math.random() * curSpichCount);
-		rx = spichBox.getWidth() / (curSpichCount + 1);
+		curShortSpich = (int) (Math.random() * curSpichCount);//выбираем какая по счету будет короткая
+		rx = spichBox.getWidth() / (curSpichCount + 1);//расстояние между спичками
 
-		for (int i = 0; i < curSpichCount; i++) {
+		for (int i = 0; i < curSpichCount; i++) {//координаты спичек по иксу
 			spixs[i] = mScreenWidth / 2 - spichBox.getWidth() / 2
 					+ (int) (rx * ((float) i + 0.5));
 		}
@@ -187,7 +187,7 @@ public class MatchesRenderer extends GameRenderer implements Runnable {
 			if (matchPulled) {
 
 				alphaPaint.setAlpha(boxAlpha);
-				boxAlpha-=deltaTime/10;
+				boxAlpha-=deltaTime/5;
 				if(boxAlpha<0)
 					isEnd = true;
 			}

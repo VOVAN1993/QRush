@@ -18,7 +18,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import ru.qrushtabs.app.ProfileInfo;
+import ru.qrushtabs.app.profile.ProfileInfo;
 
 public class SampleFileUpload {
 

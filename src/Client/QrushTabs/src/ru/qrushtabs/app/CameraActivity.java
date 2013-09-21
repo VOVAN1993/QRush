@@ -1,6 +1,10 @@
 package ru.qrushtabs.app;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ru.qrushtabs.app.CameraPreview;
+import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.dialogs.LoseDialog;
 import ru.qrushtabs.app.dialogs.MyDialog;
 import ru.qrushtabs.app.dialogs.OnDialogClickListener;
@@ -18,6 +22,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 
 import android.widget.FrameLayout;
@@ -62,6 +67,8 @@ public class CameraActivity extends FragmentActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+ 		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+
 		setContentView(R.layout.camera_tab);
 
 		/* Instance barcode scanner */
@@ -152,7 +159,9 @@ public class CameraActivity extends FragmentActivity {
 			mCamera.setPreviewCallback(null);
 			preview.removeView(mPreview);
 			mPreview = null;
+			 
 			mCamera.release();
+			
 			mCamera = null;
 		}
 
@@ -186,27 +195,16 @@ public class CameraActivity extends FragmentActivity {
 
 				}
 				str = String.valueOf((int) (Math.random() * 10000000));
-				int scanStatus = ScanBox.addScan(str);
+				ScanObject so = new ScanObject();
+				Date dNow = new Date( );
+			    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.mm.dd HH:mm");
+				so.code = str;
+				so.date = ft.format(dNow);
+				//so.date = dNow.to
+				ScanBox.addScan(so,CameraActivity.this);
 				camIsNotBusy = true;
 				stopScan();
-				if (scanStatus == 2) {
-
-					// showDialog(DIALOG_EXIT);
-					Intent intent = new Intent(CameraActivity.this,
-							GamesActivity.class);
-					startActivity(intent);
-				} else {
-					LoseDialog newFragment;
-					newFragment = new LoseDialog();
-					if (scanStatus == 1)
-						newFragment.setLabelText("Сохранен в сундук");
-					else {
-						newFragment.setLabelText("Такой скан уже был");
-					}
-					newFragment.show(getSupportFragmentManager(), "missiles");
-					newFragment.setOnDialogClickListener(onDialogClick);
-				}
-
+			
 			}
 		}
 	};
@@ -214,61 +212,17 @@ public class CameraActivity extends FragmentActivity {
 
 		@Override
 		public void onOkClick() {
-
+			startScan();
 		}
 
 		@Override
 		public void onCancelClick() {
-			startScan();
-		}
+ 		}
 
 	};
 
-	protected Dialog onCreateDialog(int id) {
-		if (id == DIALOG_EXIT) {
-			AlertDialog.Builder adb = new AlertDialog.Builder(this);
-			// заголовок
-			adb.setTitle(R.string.scanned);
-			// сообщение
-			adb.setMessage(R.string.got_money);
-			// иконка
-			adb.setIcon(android.R.drawable.ic_dialog_info);
-			// кнопка положительного ответа
-			adb.setPositiveButton(R.string.contin, myClickListener);
-			// кнопка отрицательного ответа
-			// adb.setNegativeButton(R.string.no, myClickListener);
-			// кнопка нейтрального ответа
-			// adb.setNeutralButton(R.string.cancel, myClickListener);
-			// создаем диалог
-			return adb.create();
-		}
-		return super.onCreateDialog(id);
-	}
+ 
 
-	DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			switch (which) {
-			// положительная кнопка
-			case Dialog.BUTTON_POSITIVE:
-				// saveData();
-				startScan();
-				// finish();
-				break;
-			// негаитвная кнопка
-			case Dialog.BUTTON_NEGATIVE:
-				// finish();
-				break;
-			// нейтральная кнопка
-			case Dialog.BUTTON_NEUTRAL:
-				break;
-			}
-		}
-
-	};
-
-	void saveData() {
-		// Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
-	}
+  
 
 }

@@ -1,6 +1,11 @@
-package ru.qrushtabs.app;
+package ru.qrushtabs.app.quests;
 
 import java.util.ArrayList;
+
+import ru.qrushtabs.app.ActiveQuestContentView;
+import ru.qrushtabs.app.NotActiveQuestContentView;
+import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.R.layout;
 
 import android.content.Context;
 import android.util.Log;
@@ -16,14 +21,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class QuestsArrayAdapter extends ArrayAdapter<QuestContent> 
+public class QuestsArrayAdapter extends ArrayAdapter<QuestObject> 
 {
 
 	private final Context context;
-    private final ArrayList<QuestContent> values;
+    private final ArrayList<QuestObject> values;
     ImageView arrows;
     private View rowView;
-    public QuestsArrayAdapter(Context context, ArrayList<QuestContent> values) {
+    public QuestsArrayAdapter(Context context, ArrayList<QuestObject> values) {
         super(context, R.layout.rating_field, values);
         this.context = context;
         this.values = values;
@@ -33,12 +38,13 @@ public class QuestsArrayAdapter extends ArrayAdapter<QuestContent>
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
     	
-    	QuestContent qc = values.get(position);
+    	QuestObject qc = values.get(position);
     	QuestContentView rowView;
-    	if(qc.getIsActive())
-    	     rowView = new ActiveQuestContentView(context);
-    	else
-    		rowView = new NotActiveQuestContentView(context);
+    	rowView = new QuestContentView(context);
+//    	if(qc.state==QuestObject.ACTIVE)
+//    	     rowView = new ActiveQuestContentView(context);
+//    	else
+//    		rowView = new NotActiveQuestContentView(context);
 //        LayoutInflater inflater = (LayoutInflater) context
 //                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        rowView = inflater.inflate(R.layout.news_place, parent, false);

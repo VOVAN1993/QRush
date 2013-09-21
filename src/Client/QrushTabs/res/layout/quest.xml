@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:gravity="center_horizontal"
-    android:orientation="vertical" >
-    <RelativeLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/questinfo_bkg">
-        
-    </RelativeLayout>
+    android:background="@color/gray">
+    
+   
     <Button 
+        android:id="@+id/quest_dobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/quest_doitbtn"
         android:text="Выполнить"/>
     
+     <WebView
+        android:id="@+id/quest_wv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_above="@id/quest_dobtn"
+        android:background="@drawable/questinfo_bkg">
+    </WebView>
+    
 
-</LinearLayout>
+</RelativeLayout>

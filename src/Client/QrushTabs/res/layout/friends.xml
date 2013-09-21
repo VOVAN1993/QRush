@@ -2,15 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-       <TextView
+    <TextView
+        android:id="@+id/req_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Запросы" /> 
+        android:background="@color/gray_for_lines"
+        android:gravity="center_horizontal"
+        android:text="Запросы" />
 
-<!--     <EditText
+    <!--
+         <EditText
         android:id="@+id/name_for_friend_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,21 +24,43 @@
         android:id="@+id/my_friends_search_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Поиск"/> -->
-        <ListView
+        android:text="Поиск"/>
+    -->
+
+    <ListView
         android:id="@+id/friends_requests_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Друзья" /> 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:scrollbars="none" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/friends_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_for_lines"
+        android:gravity="center_horizontal"
+        android:text="Друзья" />
+
     <ListView
         android:id="@+id/friends_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:scrollbars="none" >
     </ListView>
 
 </LinearLayout>
