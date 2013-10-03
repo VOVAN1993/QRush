@@ -41,7 +41,7 @@ import net.sourceforge.zbar.Config;
 import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 
-public class CameraActivity extends FragmentActivity {
+public class CameraActivity extends MyVungleActivity {
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	private Handler autoFocusHandler;
@@ -200,8 +200,7 @@ public class CameraActivity extends FragmentActivity {
 			    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.mm.dd HH:mm");
 				so.code = str;
 				so.date = ft.format(dNow);
-				//so.date = dNow.to
-				ScanBox.addScan(so,CameraActivity.this);
+ 				ScanBox.addScan(so,CameraActivity.this);
 				camIsNotBusy = true;
 				stopScan();
 			

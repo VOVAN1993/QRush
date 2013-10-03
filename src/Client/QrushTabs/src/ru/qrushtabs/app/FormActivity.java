@@ -10,7 +10,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class FormActivity extends Activity {
+public class FormActivity extends MyVungleActivity {
 
 	OnItemSelectedListener oisl = new OnItemSelectedListener() {
 		public void onItemSelected(AdapterView<?> parent,

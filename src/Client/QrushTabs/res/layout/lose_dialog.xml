@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Вы проиграли!"
+        android:textSize="28sp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black" />
 
@@ -19,7 +20,8 @@
         android:id="@+id/okBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/not_twicebtn"
         android:text="Продолжить" />

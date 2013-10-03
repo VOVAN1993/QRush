@@ -24,6 +24,9 @@
     <dimen name="search_tv_name_fs">20sp</dimen>
     <dimen name="search_tv_city_fs">16sp</dimen>
     
+    <dimen name="change_profile_iv_width">60dp</dimen>
+    <dimen name="change_profile_iv_height">60dp</dimen>
+    
     <dimen name="profile_tv_width">86dp</dimen>
     <dimen name="profile_tv_height">70dp</dimen>
     <dimen name="profile_margin_top">7dp</dimen>

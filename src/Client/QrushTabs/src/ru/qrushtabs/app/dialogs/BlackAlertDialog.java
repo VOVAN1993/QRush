@@ -31,6 +31,7 @@ public class BlackAlertDialog extends MyDialog {
 		@Override
 		public void onClick(View arg0) {
 			BlackAlertDialog.this.dismiss();
+			 
 			if(onDialogClick!=null)
 			onDialogClick.onOkClick();
   		}
@@ -53,8 +54,8 @@ public class BlackAlertDialog extends MyDialog {
 		
 		if(bkg!=null)
 		{
-		LinearLayout ll = (LinearLayout)v.findViewById(R.id.black_alert_main_layout);
-		ll.setBackgroundDrawable(bkg);
+			LinearLayout ll = (LinearLayout)v.findViewById(R.id.black_alert_main_layout);
+			ll.setBackgroundDrawable(bkg);
 		}
 		return v;
 		

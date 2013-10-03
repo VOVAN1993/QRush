@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ru.qrushtabs.app.utils.ActivitiesStack;
 import ru.qrushtabs.app.utils.SQLiteAPI;
+import ru.qrushtabs.app.utils.SadSmile;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ScanBoxActivity extends FragmentActivity {
+public class ScanBoxActivity extends MyVungleActivity {
 
 	private ArrayList<ScanObject> scansInfo;
 	ScanBoxArrayAdapter scansInfoAdapter;
@@ -53,9 +54,15 @@ public class ScanBoxActivity extends FragmentActivity {
  		instance = this;
 		lv = (ListView) findViewById(R.id.scan_box_list);
 		scansInfo = ScanBox.getScansInfo();
-		scansInfoAdapter = new ScanBoxArrayAdapter(this,scansInfo);
-		
-		lv.setAdapter(scansInfoAdapter);
+		if(scansInfo.size()==0)
+		{
+			SadSmile.setSadSmile(this, "Нет доступных сканов для отправки");
+		}
+		else
+		{
+			scansInfoAdapter = new ScanBoxArrayAdapter(this,scansInfo);
+			lv.setAdapter(scansInfoAdapter);
+		}
 
 	}
 	

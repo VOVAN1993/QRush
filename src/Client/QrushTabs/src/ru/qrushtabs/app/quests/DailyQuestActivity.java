@@ -1,5 +1,6 @@
 package ru.qrushtabs.app.quests;
 
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.R.id;
 import ru.qrushtabs.app.R.layout;
@@ -13,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
 
-public class DailyQuestActivity extends Activity 
+public class DailyQuestActivity extends MyVungleActivity 
 {
 	//private WebView webView;
 	 
@@ -41,6 +42,8 @@ public class DailyQuestActivity extends Activity
 	 
 		 
 	 
+		int currentDay = QuestObject.currentQuestObject.currentDay;
+		
 //		   webView = (WebView) findViewById(R.id.quest_wv);
 //		   webView.getSettings().setJavaScriptEnabled(true);
 		   //webView.loadUrl("http://www.google.com");

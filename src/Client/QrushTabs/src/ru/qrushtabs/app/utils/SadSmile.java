@@ -9,6 +9,7 @@ public class SadSmile {
 	public static void setSadSmile(Activity a,String text)
 	{
 		a.setContentView(R.layout.sad_view);
+		
 		TextView tv = (TextView)a.findViewById(R.id.sad_tv);
 		tv.setText(text);
 	}

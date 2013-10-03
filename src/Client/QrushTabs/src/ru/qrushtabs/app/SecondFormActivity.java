@@ -1,5 +1,9 @@
 package ru.qrushtabs.app;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,11 +17,18 @@ import java.util.TreeMap;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+
+import com.perm.kate.api.Api;
+import com.perm.kate.api.KException;
+import com.perm.kate.api.User;
 
 import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.dialogs.BlackPhotoDialog;
 import ru.qrushtabs.app.mycamera.AvatarCameraActivity;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
+import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SampleFileUpload;
 import ru.qrushtabs.app.utils.ServerAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
@@ -31,7 +42,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +64,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class SecondFormActivity extends Activity {
+public class SecondFormActivity extends MyVungleActivity {
 	EditText birthdateET;
 	AutoCompleteTextView cityTextView;
 	int firstYear;
@@ -202,31 +216,163 @@ public class SecondFormActivity extends Activity {
 		});
 
 	}
-	private OnClickListener onAvatarClick = new OnClickListener()
-	{
+	private static final int SELECT_PHOTO = 100;
+	private static final int CAPTURE_PHOTO = 1;
+	private BlackPhotoDialog.OnPhotoMethodChoosedListener op = new BlackPhotoDialog.OnPhotoMethodChoosedListener() {
+
+		@Override
+		public void onPhotoMethodChoosed(int method) {
+			if (method == BlackPhotoDialog.GALLERY) {
+				Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+				photoPickerIntent.setType("image/*");
+				startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+			}
+			if (method == BlackPhotoDialog.CAPTURE) {
+				Intent intent = new Intent(SecondFormActivity.this,
+						AvatarCameraActivity.class);
+				startActivityForResult(intent, CAPTURE_PHOTO);
+
+			}
+			
+			if (method == BlackPhotoDialog.VK) {
+				 
+				
+				(new DownloadPhotoFromVK()).execute();
+			}
+
+		}
+
+	};
+	 private class DownloadPhotoFromVK extends AsyncTask<String,String,Bitmap> {
+
+		 @Override
+		 protected void onPreExecute()
+		 {
+			 ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar_iv);
+			 QRLoading.setLoading(avatarView);
+		 }
+			protected Bitmap doInBackground(String... args) {
+				 ArrayList<Long> uids = new ArrayList<Long>();
+				  ArrayList<User> info = null;
+				  Api api = new Api(ProfileInfo.userVKToken, Constants.API_ID);
+				  uids.add(Long.valueOf(ProfileInfo.userVKID));
+				  try {
+					info = api.getProfiles(uids, null, null, null, null, null);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (KException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				  
+				  User u = info.get(0);
+ 
+				  if(u.photo_big!=null)
+				  {
+					  return ServerAPI.loadBitmap(u.photo_big);
+				  }
+				  if(u.photo_medium!=null)
+				  {
+					  return ServerAPI.loadBitmap(u.photo_medium);
+				  }
+				  if(u.photo_medium_rec!=null)
+				  {
+					  return ServerAPI.loadBitmap(u.photo_medium_rec);
+				  }
+				  if(u.photo!=null)
+				  {
+					  return ServerAPI.loadBitmap(u.photo);
+				  }
+				  return null;
+				
+			}
+
+			protected void onPostExecute(Bitmap objResult) 
+			{
+
+				ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar_iv);
+				 QRLoading.stopLoading(avatarView);
+				if(objResult==null)
+					return;
+				 
+				 
+				avatar = objResult;
+ 				avatarView.setImageBitmap(BitmapCropper.pxcrop(avatar,
+						avatarView.getWidth(), avatarView.getWidth()));
+			}
+
+		}
+	
+	private OnClickListener onAvatarClick = new OnClickListener() {
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent(SecondFormActivity.this,AvatarCameraActivity.class);
-			startActivityForResult(intent,1);	
+
+			BlackPhotoDialog newFragment;
+			newFragment = new BlackPhotoDialog();
+			newFragment.setOnPhotoMethodChoosedListener(op);
+				 
+				newFragment.show(SecondFormActivity.this
+						.getSupportFragmentManager(), "missiles");
+			  
 		}
-		
+
 	};
+
 	@Override
-	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (resultCode==0)
-	    	return;
-    	else
-    	{
-    		ImageView avatarView = (ImageView)findViewById(R.id.reg_avatar);
-    		byte bytes[] = data.getByteArrayExtra("photo");
-    		avatar = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-    		
-    		//final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-     		avatarView.setImageBitmap(BitmapCropper.pxcrop( avatar, avatarView.getWidth(), avatarView.getWidth()));
-    		 
-    	}
-  	  }
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent imageReturnedIntent) {
+		super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+		switch (requestCode) {
+		case SELECT_PHOTO:
+			if (resultCode == RESULT_OK) {
+				Uri selectedImage = imageReturnedIntent.getData();
+				InputStream imageStream;
+				try {
+					imageStream = getContentResolver().openInputStream(
+							selectedImage);
+					avatar = BitmapFactory.decodeStream(imageStream);
+					ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar_iv);
+					avatarView.setImageBitmap(BitmapCropper.pxcrop(avatar,
+							avatarView.getWidth(), avatarView.getWidth()));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			break;
+		case CAPTURE_PHOTO:
+			if (resultCode == 0)
+				return;
+			else {
+				ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar_iv);
+				byte bytes[] = imageReturnedIntent.getByteArrayExtra("photo");
+				avatar = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+				Matrix matrix = new Matrix();
+		    	// rotate the Bitmap 90 degrees (counterclockwise)
+		    	matrix.postRotate(90);
+
+		    	// recreate the new Bitmap, swap width and height and apply transform
+		    	avatar = Bitmap.createBitmap(avatar, 0, 0,
+		    			avatar.getWidth(), avatar.getHeight(), matrix, true);
+				 
+
+				avatarView.setImageBitmap(BitmapCropper.pxcrop(avatar,
+						avatarView.getWidth(), avatarView.getWidth()));
+			}
+		}
+
+	}
 
 	private void createDateWheel() {
 		Calendar calendar = Calendar.getInstance();

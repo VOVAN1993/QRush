@@ -32,6 +32,11 @@
             </intent-filter>
         </activity>
         <activity
+		android:name="com.vungle.sdk.VungleAdvert"
+		android:configChanges="orientation|keyboardHidden|keyboard"
+		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+	/>
+        <activity
             android:name="MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
@@ -42,7 +47,13 @@
             android:name="EnterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>        
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>      
+            
+         <activity
+            android:name="InfoActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>   
           <activity
             android:name="ru.qrushtabs.app.mycamera.AvatarCameraActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"

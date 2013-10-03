@@ -30,7 +30,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class VkLoginActivity extends Activity {
+public class VkLoginActivity extends MyVungleActivity {
     private static final String TAG = "Kate.LoginActivity";
 
     WebView webview;

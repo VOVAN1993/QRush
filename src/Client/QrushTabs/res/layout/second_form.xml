@@ -6,20 +6,6 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/reg_avatar_rl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="2dp" >
-
-        <ImageView
-            android:id="@+id/reg_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reg_avatar" />
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/second_form_report_view"
         android:layout_width="match_parent"
@@ -28,7 +14,24 @@
         android:gravity="center_horizontal"
         android:text=""
         android:textColor="@color/red" />
+    
+    
+    <RelativeLayout
+        android:id="@+id/reg_avatar_rl"
+        android:layout_below="@id/second_form_report_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="2dp">
 
+        <ImageView
+            android:id="@+id/reg_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/reg_avatar" />
+    </RelativeLayout>
+
+    
     <LinearLayout
         android:id="@+id/country_ll"
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.util.Log;
 import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.dialogs.OnDialogClickListener;
 import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.quests.QuestObject;
 import ru.qrushtabs.app.utils.SQLiteAPI;
 import ru.qrushtabs.app.utils.ServerAPI;
 
@@ -21,7 +22,7 @@ public class ScanBox {
 	private static SQLiteAPI sqLiteAPI;
 	private static SQLiteDatabase sqdb;
 
-	public static int addScan(ScanObject scanInfo,CameraActivity context) {
+	public static void addScan(ScanObject scanInfo,CameraActivity context) {
 		
 		int scanStatus = 0;
 		if (!ServerAPI.offlineMod && ServerAPI.isOnline()) {
@@ -36,6 +37,7 @@ public class ScanBox {
 				intent.putExtra("currentScan", scanInfo.code);
 				intent.putExtra("isTwice", po.isTwice);
 				intent.putExtra("maxPrize", po.maxPrize);
+				QuestObject.checkScanOnActiveQuests(scanInfo.code);
 				context.startActivity(intent);
  			} else {
 				scanStatus =  0;
@@ -51,7 +53,7 @@ public class ScanBox {
 		
 		if (scanStatus == 2) {
 
-			// showDialog(DIAL_EXIT);
+			 
 			
 		} else {
 			BlackAlertDialog newFragment;
@@ -70,7 +72,7 @@ public class ScanBox {
 
 			newFragment.setOnDialogClickListener(context.onDialogClick);
 		}
-		return scanStatus;
+		 
 
 	}
 

@@ -22,8 +22,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class GamesActivity extends FragmentActivity {
+public class GamesActivity extends MyVungleActivity {
 
 	GameRenderer game;
 	LinearLayout gamesLayout;
@@ -35,9 +36,12 @@ public class GamesActivity extends FragmentActivity {
 		public void onOkClick() {
 			game.pause();
 			GamesActivity g = GamesActivity.this;
-			g.gamesLayout.removeAllViews();
+			g.gamesLayout.removeView(game);
 			game = RouletteRenderer.getInstance(g);
+ 			
 			g.gamesLayout.addView(game);
+			prizeTV.setText(String.valueOf(Integer.valueOf(GamesActivity.this.getIntent().getStringExtra("prize"))*2));
+			g.gamesLayout.invalidate();
 			game.setOnGameEndListener(onRouletteEnd);
 			String isWin = GamesActivity.this.getIntent().getStringExtra("isTwice");
 			if(isWin.equals("true"))
@@ -118,7 +122,7 @@ public class GamesActivity extends FragmentActivity {
 				currentPrize += Integer.valueOf(GamesActivity.this.getIntent().getStringExtra("prize"));
 
 				newFragment = new ToTwiceDialog();
-				newFragment.setLabelText("Вы выйграли "+currentPrize+"!");
+				newFragment.setLabelText(currentPrize+"");
 				newFragment.setOnDialogClickListener(onDialogAfterMatchClick);
 				newFragment.show(getSupportFragmentManager(), "missiles");
 
@@ -130,6 +134,7 @@ public class GamesActivity extends FragmentActivity {
 			}
 
 		}
+		
 
 	};
 	OnGameEndListener onRouletteEnd = new OnGameEndListener() {
@@ -160,44 +165,44 @@ public class GamesActivity extends FragmentActivity {
 
 	};
 
+	TextView prizeTV;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		//
 		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 		// R.layout.custom_title_back);
-
+		
+		 
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		game = ChestsRenderer.getInstance(this);
+		//game.prize = GamesActivity.this.getIntent().getStringExtra("prize");
 		setContentView(R.layout.games);
 		gamesLayout = (LinearLayout) findViewById(R.id.games_layout);
-
+		
+		prizeTV = (TextView)findViewById(R.id.games_prize_tv);
 		int prize = Integer.valueOf(GamesActivity.this.getIntent().getStringExtra("prize"));
 		if(prize>0)
 			game.isWin = true;
 		else
 			game.isWin = false;
 		game.setOnGameEndListener(onMatchEnd);
-		// gamesLayout.addView(gameRenderer);
-
-		// if(gameRenderer.getParent()!=null)
-		// gamesLayout.removeView(gameRenderer);
-		// setContentView(gameRenderer);
-		// gamesLayout.removeAllViews();
-		//
-		// addView(gameRenderer);
+	 
 	}
-
-	protected void onResume() {
+	@Override
+	public void onResume() {
 		super.onResume();
 		gamesLayout.addView(game);
+		
+		prizeTV.setText(GamesActivity.this.getIntent().getStringExtra("prize"));
 		game.resume();
 	}
-
-	protected void onPause() {
+	@Override
+	public void onPause() {
 		Log.d("games", "gamesactivity pause");
 		super.onPause();
 		game.pause();

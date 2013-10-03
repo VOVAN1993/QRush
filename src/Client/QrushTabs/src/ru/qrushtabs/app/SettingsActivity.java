@@ -1,5 +1,6 @@
 package ru.qrushtabs.app;
 
+import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
@@ -11,12 +12,28 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends MyVungleActivity {
 	private OnClickListener onChangePassClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			if(!ServerAPI.offlineMod && ServerAPI.isOnline())
+			{
 			Intent intent = new Intent(SettingsActivity.this,ChangePassActivity.class);
 			startActivity(intent);
+			}
+			else
+			{
+				 
+					BlackAlertDialog newFragment;
+					newFragment = new BlackAlertDialog();
+					 
+					newFragment.setLabelText("В оффлайн режиме нельзя изменять пароль!");
+					newFragment.show(SettingsActivity.this.getSupportFragmentManager(),
+							"missiles");
+					newFragment.setDrawableBackground(SettingsActivity.this.getResources().getDrawable(R.drawable.black_alert_error));
+					
+				
+			}
 		}
 	};
 	@Override
@@ -51,8 +68,22 @@ public class SettingsActivity extends Activity {
 		changeProfBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(!ServerAPI.offlineMod && ServerAPI.isOnline())
+				{
 				Intent intent = new Intent(SettingsActivity.this,ChangeProfileActivity.class);
 				startActivity(intent);
+				}
+				else
+				{
+					BlackAlertDialog newFragment;
+					newFragment = new BlackAlertDialog();
+					 
+					newFragment.setLabelText("В оффлайн режиме нельзя изменять профиль!");
+					newFragment.show(SettingsActivity.this.getSupportFragmentManager(),
+							"missiles");
+					newFragment.setDrawableBackground(SettingsActivity.this.getResources().getDrawable(R.drawable.black_alert_error));
+					
+				}
 			}
 		});
 		

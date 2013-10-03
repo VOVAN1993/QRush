@@ -12,9 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.utils.ServerAPI;
  
-public class BadgesActivity extends Activity {
+public class BadgesActivity extends MyVungleActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -40,6 +43,18 @@ public class BadgesActivity extends Activity {
 		TableLayout tl = (TableLayout)findViewById(R.id.badges_tl);
 		
 		ArrayList<Badge> badges = Badges.getBadges();
+		String str[] = ServerAPI.getAchievments(this.getIntent().getStringExtra("username"));
+		for(int i= 0;i<str.length;i++)
+		{
+			for(int j = 0;j<badges.size();j++)
+			{
+				if(badges.get(j).name.equals(str[i]))
+				{
+					badges.get(j).achieved = true;
+				}
+			}
+		}
+		 
 		int l = badges.size();
 		if(l%3==0)
 			l = l/3;

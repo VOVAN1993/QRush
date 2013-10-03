@@ -1,50 +1,119 @@
 package ru.qrushtabs.app;
 
+import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.utils.QRLoading;
+import ru.qrushtabs.app.utils.SadSmile;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class MoneyRatingsActivity extends Activity {
+public class MoneyRatingsActivity extends MyVungleActivity {
 
 	ListView lv;
-	private static boolean inited = false;
-
+	private RatingField[] users;
+	private RatingField[] friends;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.money_rating);
-
-		initTabs();
+		if(!ServerAPI.isOnline() || ServerAPI.offlineMod)
+		{
+			SadSmile.setSadSmile(this, "В оффлайне рейтинги недоступны");
+         	return;
+		}
+		
+		QRLoading.setLoading(this);
+		(new LoadRatingsTask()).execute();
 
 	}
 
+	private class LoadRatingsTask extends AsyncTask<Void, Void, RatingField[]> {
+
+		protected RatingField[] doInBackground(Void...voids) {
+			return ServerAPI.getTopUsers();
+		}
+
+		protected void onPostExecute(RatingField[] objResult) {
+
+			users = objResult;
+			(new LoadFriendRatingsTask()).execute();
+			
+		}
+	}
+	
+	private class LoadFriendRatingsTask extends AsyncTask<Void, Void, RatingField[]> {
+
+		protected RatingField[] doInBackground(Void...voids) {
+			return ServerAPI.getTopFriends();
+		}
+
+		protected void onPostExecute(RatingField[] objResult) {
+
+			friends = objResult;
+			initTabs();
+			
+		}
+	}
 	private void initTabs() {
 		  
-			
-			RatingField[] values2 = ServerAPI.getTopUsers();
- 			RatingField[] values1 = values2;
-			
-			RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this,
-					values1);
-			lv = (ListView) findViewById(R.id.money_ratings_list1);
-			lv.setAdapter(adapter1);
-			
-			RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this,
-					values2);
-			lv = (ListView) findViewById(R.id.money_ratings_list2);
-			lv.setAdapter(adapter2);
-			inited = true;
+		QRLoading.stopLoading(this);
+		setContentView(R.layout.money_rating);
+ 		
+		LinearLayout ll1 = (LinearLayout)findViewById(R.id.money_ratings_list1);
 		
+		for(int i = 0;i<5;i++)
+		{
+			RatingFieldView rfv = new RatingFieldView(this);
+			
+			if(i>=users.length)
+			{
+				rfv.setRatingInfo(null);
+			}
+			else
+			{
+				rfv.setRatingInfo(users[i]);
+			}
+			ll1.addView(rfv);
+		}
+		LinearLayout ll2 = (LinearLayout)findViewById(R.id.money_ratings_list2);
+		
+		for(int i = 0;i<5;i++)
+		{
+			RatingFieldView rfv = new RatingFieldView(this);
+			
+			if(i>=friends.length)
+			{
+				rfv.setRatingInfo(null);
+			}
+			else
+			{
+				rfv.setRatingInfo(friends[i]);
+			}
+			ll2.addView(rfv);
+		}
+//		RatingsArrayAdapter adapter1 = new RatingsArrayAdapter(this,
+//				users);
+//		lv = (ListView) findViewById(R.id.money_ratings_list1);
+//		lv.setAdapter(adapter1);
+//		
+//		RatingsArrayAdapter adapter2 = new RatingsArrayAdapter(this,
+//				friends);
+//		lv = (ListView) findViewById(R.id.money_ratings_list2);
+//		lv.setAdapter(adapter2);
+ 		
 		TabHost tabHost = (TabHost) findViewById(R.id.rating_type_tabhost);
 		// инициализация
 		tabHost.setup();
@@ -61,26 +130,9 @@ public class MoneyRatingsActivity extends Activity {
 		tabSpec.setContent(R.id.money_ratings_list2);
 		tabHost.addTab(tabSpec);
 
-		// tabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
-
-		// View tabview = createTabView(tabHost.getContext(), "");
-		// TabSpec setContent = tabHost.newTabSpec("").setIndicator(tabview);
-		//
-		// mTabHost.addTab(setContent);
-
-		// for (int i = 0; i < 2; i++)
-		// tabHost.getTabWidget().getChildTabViewAt(i)
-		// .setBackgroundDrawable(null);
 	}
 
-	// private void setupTab(final View view, final String tag) {
-	//
-	// View tabview = createTabView(mTabHost.getContext(), tag);
-	// TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview);
-	//
-	// mTabHost.addTab(setContent);
-	//
-	// }
+	 
 
 	private View createLeftTabView(final Context context, final String text) {
 		View view = LayoutInflater.from(context).inflate(R.layout.left_tab_bg,

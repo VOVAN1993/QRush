@@ -14,10 +14,13 @@ public class CheckableTasks {
 			throws NumberFormatException, JSONException {
 		CheckableTasks rf = new CheckableTasks();
 		
-		JSONObject rescans = o.getJSONObject("rescans");
+		JSONObject rescans = o.optJSONObject("rescans");
+		if(rescans!=null)
 		rf.rescanTask = RescanTaskObject.parse(rescans);
 		
-		JSONObject scans = o.getJSONObject("scans");
+		
+		JSONObject scans = o.optJSONObject("scans");
+		if(scans!=null)
 		rf.scanTask = ScanTaskObject.parse(scans);
 	 
 		return rf;
@@ -60,12 +63,32 @@ public class CheckableTasks {
 	}
 
 	public boolean checkRescan() {
-		if(rescanTask!=null && rescanTask.rescansCount < rescanTask.rescannedCount )
+		if(rescanTask!=null && rescanTask.rescansCount > rescanTask.rescannedCount )
 		{
-			 rescanTask.rescansCount++;
+			 rescanTask.rescannedCount++;
 			 return true;
 		}
  			 
 		return false;
+	}
+
+	public boolean canComplete() {
+	 
+		if(rescanTask!=null && scanTask!=null)
+		return rescanTask.rescansCount==rescanTask.rescannedCount 
+				&& scanTask.someCodesCount == scanTask.someUsedCodesCount
+				&& scanTask.usedConcreteCodesCount == scanTask.concreteCodesCount
+				&& scanTask.commonCodesCount == scanTask.usedCommonCodesCount;
+		else
+			if(rescanTask!=null)
+				return rescanTask.rescansCount==rescanTask.rescannedCount;
+			else
+				if(scanTask!=null)
+					return scanTask.someCodesCount == scanTask.someUsedCodesCount
+							&& scanTask.usedConcreteCodesCount == scanTask.concreteCodesCount
+							&& scanTask.commonCodesCount == scanTask.usedCommonCodesCount;
+				else
+					return false;
+					
 	}
 }

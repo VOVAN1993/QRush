@@ -20,9 +20,9 @@ import android.view.WindowManager;
 abstract public class GameRenderer extends SurfaceView{
  
 	 
-
+	 
 	private static GameRenderer instance;
-
+	protected int displayOffset;
 	public boolean isWin = false;
 	protected OnGameEndListener onGameEndListener;
 	public GameRenderer(Context context)

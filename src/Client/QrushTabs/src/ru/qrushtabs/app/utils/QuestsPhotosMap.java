@@ -24,11 +24,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
 
-public class UserPhotosMap {
+public class QuestsPhotosMap {
 
 	
 	private static boolean loading = false;
-	private static LinkedList<LoadPhotoTask> loadingQueue = new LinkedList<LoadPhotoTask>();
+	private static LinkedList<LoadQuestPhotoTask> loadingQueue = new LinkedList<LoadQuestPhotoTask>();
 	public static class UserNameComparator implements Comparator<String> {
 		public int compare(String c1, String c2) {
 			return c1.compareTo(c2);
@@ -53,12 +53,18 @@ public class UserPhotosMap {
 
     	File pictureFile;
     	// create a matrix for the manipulation
-    	
+    	Matrix matrix = new Matrix();
+    	// rotate the Bitmap 90 degrees (counterclockwise)
+    	matrix.postRotate(90);
+
+    	// recreate the new Bitmap, swap width and height and apply transform
+    	Bitmap rotatedBitmap = Bitmap.createBitmap(bmp, 0, 0,
+    	                  width, height, matrix, true);
     	
   		
  		 
  		
-		ProfileInfo.avatarBitmap = BitmapCropper.pxcrop(bmp, ProfileInfo.maxPhotoWidth, ProfileInfo.maxPhotoHeight);
+		ProfileInfo.avatarBitmap = BitmapCropper.pxcrop(rotatedBitmap, ProfileInfo.maxPhotoWidth, ProfileInfo.maxPhotoHeight);
 		
 		
         pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE );
@@ -91,15 +97,17 @@ public class UserPhotosMap {
         
         
 	}
-	public static void setToImageView(String username,ImageView imageView)
+	
+	public static void setToImageView(String url,String questName,ImageView imageView)
 	{
-        Bitmap userPhoto = UserPhotosMap.get(username);
+        Bitmap userPhoto = QuestsPhotosMap.get(questName);
         if(userPhoto==null)
         {
 	       // byte[] data = ServerAPI.downloadProfilePhoto(username);
-        	LoadPhotoTask task = new LoadPhotoTask();
+        	LoadQuestPhotoTask task = new LoadQuestPhotoTask();
+        	task.questname = questName;
         	task.iv = imageView;
-        	task.username = username;
+        	task.url = url;
         	QRLoading.setLoading(imageView);
         	if(!loading)
         	{
@@ -110,37 +118,38 @@ public class UserPhotosMap {
         	{
         		loadingQueue.add(task);
         	}
-	        Log.d("photo loading", username);		  	
+	        Log.d("photo loading", url);		  	
         }
         else
         {
-        	Log.d("photo loaded before", username);
+        	Log.d("photo loaded before", url);
         	imageView.setImageBitmap(userPhoto);
         }
 	}
-	static private class LoadPhotoTask extends AsyncTask<Void, Void, byte[]> {
+	static private class LoadQuestPhotoTask extends AsyncTask<Void, Void, Bitmap> {
 
-		String username;
+		String url;
+		String questname;
 		ImageView iv;
-		protected byte[] doInBackground(Void... s) {
- 			return ServerAPI.downloadProfilePhoto(username);
+		protected Bitmap doInBackground(Void... s) {
+ 			return ServerAPI.loadBitmap(url);
 		}
 
-		protected void onPostExecute(byte[] data) {
+		protected void onPostExecute(Bitmap bmp) {
 
 			QRLoading.stopLoading(iv);
-			if(data!=null)
+			iv.setBackgroundDrawable(null);
+			if(bmp!=null)
 	        {
-	        	Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-	        	UserPhotosMap.add(username, bmp);
+ 	        	QuestsPhotosMap.add(questname, bmp);
 	        	//imageView.setImageBitmap(BitmapCropper.pxcrop(bmp, imageView.getWidth(), imageView.getHeight()));
-	        	iv.setImageBitmap(UserPhotosMap.get(username));
+	        	iv.setImageBitmap(QuestsPhotosMap.get(questname));
 	        }
 	        else
 	        {
-	        	UserPhotosMap.add(username, BitmapFactory.decodeResource(MainActivity.getInstance().getResources(), R.drawable.qrcat));
-	        	//imageView.setImageBitmap(BitmapCropper.pxcrop(UserPhotosMap.get(username),imageView.getWidth(), imageView.getHeight()));
-	        	iv.setImageBitmap(UserPhotosMap.get(username));
+	        	QuestsPhotosMap.add(questname, BitmapFactory.decodeResource(MainActivity.getInstance().getResources(), R.drawable.qrcat));
+	        	//imageView.setImageBitmap(BitmapCropper.pxcrop(QuestsPhotosMap.get(username),imageView.getWidth(), imageView.getHeight()));
+	        	iv.setImageBitmap(QuestsPhotosMap.get(questname));
 
 	        }
 			if(loadingQueue.size()>0)
@@ -154,6 +163,7 @@ public class UserPhotosMap {
 			
 		}
 	}
+
 	 private static Uri getOutputMediaFileUri(int type){
 	        return Uri.fromFile(getOutputMediaFile(type));
 	  }

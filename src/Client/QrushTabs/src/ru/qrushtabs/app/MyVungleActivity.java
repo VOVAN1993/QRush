@@ -9,11 +9,11 @@ public class MyVungleActivity extends FragmentActivity
 	public void onResume()
 	{
 		super.onResume();
-		VunglePub.onResume();
+		//VunglePub.onResume();
 	}
 	public void onPause()
 	{
 		super.onPause();
-		VunglePub.onPause();
+		//VunglePub.onPause();
 	}
 }

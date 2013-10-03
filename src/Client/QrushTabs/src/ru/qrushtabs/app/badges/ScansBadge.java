@@ -7,8 +7,9 @@ import android.graphics.drawable.Drawable;
 public class ScansBadge extends Badge {
 	
 	public int scansCount;
- 	public ScansBadge(String name,Drawable d,int count)
+ 	public ScansBadge(String name,Drawable d,Drawable ds,int count)
 	{
+ 		this.smallBadgeIcon = ds;
 		this.badgeIcon = d;
 		this.name =name;
 		scansCount = count;

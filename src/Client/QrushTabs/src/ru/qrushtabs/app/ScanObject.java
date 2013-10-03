@@ -17,6 +17,7 @@ public class ScanObject
 	 public static String RESCAN = "rescan";
 	 public static String QUEST = "quest";
 	
+	 public boolean scanned = false;
 	 public String username = "";
 	 public String scantype = "scan";
 	 public String city = "";
@@ -24,13 +25,17 @@ public class ScanObject
 	 public String prize = "50";
 	 public String date = "13:27";
 	 public String count = "12";
+	 public String isPaid = "false";
 	 public Bitmap bitmap;
 	 public static ScanObject parse(JSONObject o) throws NumberFormatException, JSONException{
 		 	ScanObject rf = new ScanObject();
  	        rf.code = o.optString("code");
-  	        rf.date = o.optString("time");
+  	        rf.date = o.optString("date");
   	        rf.prize = o.optString("prize");
   	        rf.scantype = o.optString("scantype");
+  	        rf.isPaid = o.optString("isPaid");
+  	        if(rf.isPaid.equals("false"))
+  	        	rf.prize="0";
 	        return rf;
 	    } 
 	

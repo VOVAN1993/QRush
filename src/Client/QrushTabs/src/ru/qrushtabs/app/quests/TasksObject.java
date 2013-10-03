@@ -62,6 +62,13 @@ public class TasksObject
 		
 		return json;
 	}
+	public boolean canComplete() {
+		if(ct!=null)
+			return ct.canComplete(); 
+		else
+			return false;
+		 
+	}
 	
 	  
 	

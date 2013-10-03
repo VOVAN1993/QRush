@@ -8,8 +8,9 @@ public class MoneyBadge extends Badge {
 	
 	public int moneyCount;
 	
-	public MoneyBadge(String name,Drawable d,int count)
+	public MoneyBadge(String name,Drawable d,Drawable ds,int count)
 	{
+		this.smallBadgeIcon = ds;
 		this.badgeIcon = d;
 		moneyCount = count;
 		this.name = name;

@@ -5,9 +5,11 @@ import java.util.TreeMap;
 
 import org.apache.http.client.ClientProtocolException;
 
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.R.id;
 import ru.qrushtabs.app.R.layout;
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +20,7 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
 
-public class QuestActivity extends Activity {
+public class QuestActivity extends MyVungleActivity {
 	private WebView webView;
 	private static TreeMap<String, WebView> webMap = new TreeMap<String, WebView>();
 
@@ -51,10 +53,10 @@ public class QuestActivity extends Activity {
 				public void onClick(View v) {
 					if (ServerAPI.changeQuestStatus(QuestObject.currentQuestObject.name, QuestObject.currentQuestObject.isDaily, "completed").equals("true")) {
 						QuestObject qo = QuestObject.currentQuestObject;
-						//qo.state = QuestObject.COMPLETED;
+						qo.state = QuestObject.COMPLETED;
 						//qo.getQuestContentView().refreshProgress();
-						
-						QuestObject.removeQuest(qo);
+						ProfileInfo.newsChanged = true;//для обновления ленты
+						//QuestObject.removeQuest(qo);
 
 					}
 				}

@@ -350,6 +350,19 @@ public class ServerAPI {
 			return "false";
 	}
 	
+	public static Bitmap loadBitmap(String url) {
+		String urldisplay = url;
+        Bitmap mIcon11 = null;
+        try {
+            InputStream in = new java.net.URL(urldisplay).openStream();
+            mIcon11 = BitmapFactory.decodeStream(in);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+        return mIcon11;
+ 	}
+	
 	public static String tryAddMoneyForScan(String scan) {
 		String req = "add";
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
@@ -515,6 +528,36 @@ public class ServerAPI {
 		return null;
 	}
 
+	public static RatingField[] getTopFriends() {
+		String req = "get";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", "topFriends"));
+
+		String resp = executeHttpPostResponse(req, nvps);
+		String report = "";
+		try {
+			// Log.d("http load profile", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			if (report.equals("success")) {
+				JSONArray array = jsonObj.optJSONArray("topFriends");
+
+				RatingField[] ratings = new RatingField[array.length()];
+				for (int i = 0; i < array.length(); i++) {
+					ratings[i] = RatingField.parse((JSONObject)array.get(array.length() - i - 1));
+					 
+					 
+				}
+				ServerAPI.saveProfileInfo();
+
+				return ratings;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static String[] searchFriend(String friendName) {
 		
 		String req = "get";
@@ -878,7 +921,7 @@ public class ServerAPI {
 	        
 
 	     }
-	     
+	     Log.d("tasks ", result);
 	     TasksObject to = null;
 		try {
 			
@@ -1063,7 +1106,7 @@ public class ServerAPI {
 		editor.putString("loginType", ProfileInfo.signInType);
 
 		editor.putInt("scansCount", ProfileInfo.getScansCount());
-		editor.putInt("rescanCount", ProfileInfo.getRescansCount());
+		editor.putInt("rescansCount", ProfileInfo.getRescansCount());
 		editor.putInt("moneyCount", ProfileInfo.getMoneyCount());
 
 		editor.putString("avatarPath", ProfileInfo.avatarPath);

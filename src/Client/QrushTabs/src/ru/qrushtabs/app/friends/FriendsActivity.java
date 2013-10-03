@@ -3,6 +3,7 @@ package ru.qrushtabs.app.friends;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.R.drawable;
 import ru.qrushtabs.app.R.id;
@@ -24,7 +25,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FriendsActivity extends FragmentActivity 
+public class FriendsActivity extends MyVungleActivity 
 {
 	
 //	private OnClickListener onSearchClick = new OnClickListener()

@@ -41,42 +41,9 @@ public class QuestsArrayAdapter extends ArrayAdapter<QuestObject>
     	QuestObject qc = values.get(position);
     	QuestContentView rowView;
     	rowView = new QuestContentView(context);
-//    	if(qc.state==QuestObject.ACTIVE)
-//    	     rowView = new ActiveQuestContentView(context);
-//    	else
-//    		rowView = new NotActiveQuestContentView(context);
-//        LayoutInflater inflater = (LayoutInflater) context
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        rowView = inflater.inflate(R.layout.news_place, parent, false);
-//        TextView textView = (TextView) rowView.findViewById(R.id.news_tv);
-//       // ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+
         	rowView.setQuestContent(values.get(position));
-//        textView.setText(values.get(position).getContent());
-//        // Изменение иконки для Windows и iPhone
-//        if(values.get(position).getBitmap()!=null)
-//        {
-//        	Log.d(null, "Added bitmap");
-//        	ImageView iv  = (ImageView)rowView.findViewById(R.id.news_content_iv);
-//        	iv.setImageBitmap(values.get(position).getBitmap());
-//        	
-//        }
-//        Button rescanButton = (Button)rowView.findViewById(R.id.rescan_btn);
-//        arrows = (ImageView)rowView.findViewById(R.id.rescan_arrows_icon);
-//        rescanButton.setOnClickListener(new OnClickListener()
-//        {
-//
-//			@Override
-//			public void onClick(View arg0) 
-//			{
-//				Log.d(null, (String) ((TextView)rowView.findViewById(R.id.news_tv)).getText());
-//				//Animation anim = AnimationUtils.loadAnimation(rowView.getContext(), R.anim.arrow_rotate_anim);
-//				RotateAnimation anim = new RotateAnimation(0, 360, 0,arrows.getWidth()/2, 0, arrows.getHeight()/2);
-//				anim.setDuration(500);
-// 				arrows.startAnimation(anim);
-//				
-//			}
-//        	
-//        });
+
  
 
         return rowView;

@@ -51,21 +51,23 @@ public class RatingFieldView extends LinearLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rowView = inflater.inflate(R.layout.rating_field, this, false);
 	   
-	   //newsTextView = (TextView)rowView.findViewById(R.id.news_tv);
 	   this.addView(rowView);
 	   this.setOnClickListener(l);
-//	   rescanButton = (Button)rowView.findViewById(R.id.rescan_btn);
-//	   arrowsImg = (ImageView)rowView.findViewById(R.id.rescan_arrows_icon);
-	   //imgPlace = (ImageView)rowView.findViewById(R.id.news_content_iv);
 	}
 	public RatingFieldView(Context context) {
 		this(context, null);
 	}
-	
-	public void setRatingInfo(RatingField rf) 
+	ImageView imageView;
+	public void setRatingInfo(RatingField rfe) 
 	{
+		if(rfe==null)
+		{
+			this.setVisibility(View.INVISIBLE);
+			return;
+		}
+			this.rf = rfe;
 		    TextView textView = (TextView) rowView.findViewById(R.id.rating_name_tv);
-	        ImageView imageView = (ImageView) rowView.findViewById(R.id.rating_icon);
+	        imageView = (ImageView) rowView.findViewById(R.id.rating_icon);
 	        
 	        TextView moneyTV = (TextView) rowView.findViewById(R.id.rating_money_tv);
 	        TextView scansTV = (TextView) rowView.findViewById(R.id.rating_scans_tv);
@@ -78,8 +80,12 @@ public class RatingFieldView extends LinearLayout {
 	        textView.setText(rf.city);
 	        // Изменение иконки для Windows и iPhone
 	        
-	        this.rf = rf;
-	        UserPhotosMap.setToImageView(rf.username, imageView);
+	        
+	         
+					 UserPhotosMap.setToImageView(rf.username, imageView);
+					
+			 
+	       
 
   	}
  

@@ -2,63 +2,103 @@ package ru.qrushtabs.app;
 
 import java.util.ArrayList;
 
+import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SadSmile;
 import ru.qrushtabs.app.utils.ServerAPI;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
-public class NewsActivity extends Activity 
+public class NewsActivity extends MyVungleActivity 
 {
-	ArrayList<NewsContent> newsInfo;
-	NewsArrayAdapter newsInfoAdapter;
+	private ArrayList<ScanObject> newsContent;
+    private NewsArrayAdapter newsInfoAdapter;
+	ListView lv;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
  		 
-// 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.news_tab);
-//        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
 
-		 
-		//ServerAPI.getFriendsScans();
-		ListView lv = (ListView) findViewById(R.id.news_list);
-//		newsInfo = new ArrayList<NewsContent>();
-//		for(int i = 0;i < 15;i++)
-//		{
-//			NewsContent nc = new NewsContent();
-//			nc.setContent("bla bla "+i);
-//			if(i%1==0)
-//			{
-//				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.banner);
-//				nc.setBitmap(bmp);
-//			}
-//			if(i%4==0)
-//			{
-//				nc.setScannable(false);
-//			}
-//			newsInfo.add(nc);
-//			
-//		}
-		ArrayList<ScanObject> friendsScans = ServerAPI.getFriendsScans();
-		if(friendsScans==null || friendsScans.size()==0)
+		
+
+	}
+	private class LoadRatingsTask extends AsyncTask<Void, Void, ArrayList<ScanObject>> {
+
+		protected ArrayList<ScanObject> doInBackground(Void...voids) {
+			return  ServerAPI.getFriendsScans();
+		}
+
+		protected void onPostExecute(ArrayList<ScanObject> objResult) {
+
+			if(objResult==null || objResult.size()==0)
+			{
+				SadSmile.setSadSmile(NewsActivity.this, "К сожалению, на данный момент, у вас нет доступных ресканов.");
+			}
+			else
+			{
+				newsContent = objResult;
+				for(int i = 0;i<newsContent.size();i++)
+				{
+					if (ProfileInfo.haveScan(newsContent.get(i).code)) 
+					{
+						newsContent.get(i).scanned = true;
+					}
+				}
+				cleanScans();
+				if(newsContent.size()>0)
+				{
+					
+					setContentView(R.layout.news_tab);
+					lv = (ListView) findViewById(R.id.news_list);
+					newsInfoAdapter = new NewsArrayAdapter(NewsActivity.this,objResult);			
+					lv.setAdapter(newsInfoAdapter);
+					
+				}
+				else
+				{
+					SadSmile.setSadSmile(NewsActivity.this, "К сожалению, на данный момент, у вас нет доступных ресканов.");
+				}
+			}
+			
+		}
+	}
+	private void cleanScans()
+	{
+		Log.d("news", "cleanScans");
+		for(int i = 0;i<newsContent.size();i++)
 		{
-			SadSmile.setSadSmile(this, "К сожалению, на данный момент, у вас нет доступных ресканов.");
+			if (newsContent.get(i).scanned) 
+			{
+				newsContent.remove(i);
+				i--;
+			}
+		}
+	}
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		if(ServerAPI.isOnline() && !ServerAPI.offlineMod)
+		{
+			QRLoading.setLoading(this);
+			(new LoadRatingsTask()).execute();
+ 
 		}
 		else
 		{
-			newsInfoAdapter = new NewsArrayAdapter(this,friendsScans);
-		
-			lv.setAdapter(newsInfoAdapter);
+			SadSmile.setSadSmile(this, "К сожалению, на данный момент, вы в оффлайн режиме.");
 		}
-
 	}
 }

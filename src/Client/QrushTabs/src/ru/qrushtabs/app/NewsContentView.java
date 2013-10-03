@@ -1,6 +1,7 @@
 package ru.qrushtabs.app;
 
 import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.quests.QuestObject;
 import ru.qrushtabs.app.utils.ServerAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
 import android.content.Context;
@@ -56,7 +57,7 @@ public class NewsContentView extends LinearLayout {
 		this(context, null);
 	}
 
-	public void setNewsContent(ScanObject newContent) {
+	public void setNewsContent(ScanObject newContent,NewsArrayAdapter nar) {
 		this.newsContent = newContent;
 		TextView textView = (TextView) rowView.findViewById(R.id.news_place_name_tv);
  	        
@@ -68,15 +69,10 @@ public class NewsContentView extends LinearLayout {
 	        textView = (TextView) rowView.findViewById(R.id.news_place_city_tv);
 	        textView.setText(newContent.city);
 		if (ProfileInfo.haveScan(newContent.code)) {
-			// ImageView div = (ImageView)findViewById(R.id.button_divider);
-			// div.setVisibility(View.GONE);
-
+			rowView.setVisibility(View.GONE);
 			FrameLayout fl = (FrameLayout) findViewById(R.id.rescan_btn_layout);
 			fl.setVisibility(View.GONE);
-			// rescanButton.setEnabled(false);
-
-			// arrowsImg.setVisibility(View.GONE);
-			// rescanButton.setVisibility(View.GONE);
+		 
 		} else {
 			rescanButton.setOnClickListener(new OnClickListener() {
 
@@ -85,87 +81,50 @@ public class NewsContentView extends LinearLayout {
 					rescanButton.setVisibility(View.INVISIBLE);
 					arrowsImg
 							.setBackgroundResource(R.drawable.rescan_arrows_anim);
-
-					// Log.d(null, (String)
-					// ((TextView)rowView.findViewById(R.id.news_tv)).getText());
-					// Animation anim =
-					// AnimationUtils.loadAnimation(rowView.getContext(),
-					// R.anim.arrow_rotate_anim);
-
 					AnimationDrawable anim = (AnimationDrawable) arrowsImg
 							.getBackground();
 					anim.start();
 					(new AddScanTask()).execute();
 
-					// RotateAnimation anim = new RotateAnimation(0, 360,
-					// 0,(float)arrowsImg.getWidth()/2.0f, 0,
-					// (float)arrowsImg.getHeight()/2.0f);
-					// anim.setDuration(500);
-					// anim.
-					// anim.setAnimationListener(new AnimationListener()
-					// {
-					//
-					// @Override
-					// public void onAnimationEnd(Animation arg0) {
-					// rescanButton.setEnabled(false);
-					// arrowsImg.setVisibility(View.GONE);
-					// //newsContent.setScannable(false);
-					// ProfileInfo.addScan(NewsContentView.this.newsContent.code);
-					// Intent intent = new Intent(context,GamesActivity.class);
-					// context.startActivity(intent);
-					//
-					// }
-					//
-					// @Override
-					// public void onAnimationRepeat(Animation arg0) {
-					// // TODO Auto-generated method stub
-					//
-					// }
-					//
-					// @Override
-					// public void onAnimationStart(Animation arg0) {
-					// // TODO Auto-generated method stub
-					//
-					// }
-					//
-					// });
-					// arrowsImg.startAnimation(anim);
 
 				}
 
 			});
 		}
-		// newsTextView.setText(newsContent.getContent());
-		// TextView dateTV = (TextView)findViewById(R.id.news_date_tv);
-		// dateTV.setText(newContent.date);
-		// TextView wonTV = (TextView)findViewById(R.id.news_won_tv);
-		// wonTV.setText(newContent.won);
+
 		UserPhotosMap.setToImageView(newContent.username,
 				(ImageView) findViewById(R.id.news_user_icon));
-		// }
+		 
 
 		
 
 	}
-	private class AddScanTask extends AsyncTask<String, String, String> {
+	private class AddScanTask extends AsyncTask<String, String, PrizeObject> {
 
-		protected String doInBackground(String... args) {
-			return ServerAPI.tryAddScan(NewsContentView.this.newsContent.code,"rescan");
+		protected PrizeObject doInBackground(String... args) {
+			return ServerAPI.tryAddScanForMoney(NewsContentView.this.newsContent.code,"rescan");
 		}
 
-		protected void onPostExecute(String objResult) {
+		protected void onPostExecute(PrizeObject objResult) {
 
 			
 			AnimationDrawable anim = (AnimationDrawable) NewsContentView.this.arrowsImg
 					.getBackground();
 			anim.stop();
 			NewsContentView.this.arrowsImg.setVisibility(View.INVISIBLE);
-			if (objResult.equals("true")) {
+			if (objResult!=null) {
 				
 				
 				ProfileInfo.addScan(NewsContentView.this.newsContent.code);
 				Intent intent = new Intent(NewsContentView.this.context,
 						GamesActivity.class);
+				intent.putExtra("prize", objResult.prize);
+				intent.putExtra("currentScan", NewsContentView.this.newsContent.code);
+				intent.putExtra("isTwice", objResult.isTwice);
+				intent.putExtra("maxPrize", objResult.maxPrize);
+				QuestObject.checkRescanOnActiveQuests();
+				//rowView.setVisibility(View.GONE);
+				NewsContentView.this.newsContent.scanned = true;
 				NewsContentView.this.context.startActivity(intent);
 			} else {
 //				Intent intent = new Intent(NewsContentView.this.context,

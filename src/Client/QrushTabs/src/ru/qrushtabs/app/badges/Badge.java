@@ -7,6 +7,7 @@ import android.widget.ImageView;
  
 public class Badge {
 	public Drawable badgeIcon;
+	public Drawable smallBadgeIcon;
 	public boolean achieved = false;
 	public String name;
 	public Badge(Drawable bmp)

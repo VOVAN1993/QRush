@@ -40,6 +40,8 @@ public class FriendRequestView extends LinearLayout {
 		public void onClick(View arg0) {
 
 			Intent intent = new Intent(FriendRequestView.this.context, OtherProfileActivity.class);
+			intent.putExtra("username", rf.username);
+			intent.putExtra("city", rf.city);
 			FriendRequestView.this.context.startActivity(intent);
 		}
 
@@ -55,9 +57,7 @@ public class FriendRequestView extends LinearLayout {
 		// newsTextView = (TextView)rowView.findViewById(R.id.news_tv);
 		this.addView(rowView);
 		this.setOnClickListener(l);
-		// rescanButton = (Button)rowView.findViewById(R.id.rescan_btn);
-		// arrowsImg = (ImageView)rowView.findViewById(R.id.rescan_arrows_icon);
-		// imgPlace = (ImageView)rowView.findViewById(R.id.news_content_iv);
+
 	}
 
 	public FriendRequestView(Context context) {

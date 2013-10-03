@@ -14,6 +14,7 @@ import org.json.JSONObject;
 public class ScanTaskObject {
  	public TreeMap<String, String[]> concreteCodes;
 	public TreeMap<String, Boolean> usedConcreteCodes;
+	public int concreteCodesCount=0;
 	public int usedConcreteCodesCount=0;
 	
 	public String commonCodes[][];
@@ -37,6 +38,7 @@ public class ScanTaskObject {
 		if (scansJSONObject.has("concreteCodes")) {
 			rf.concreteCodes = new TreeMap<String, String[]>();
 			rf.usedConcreteCodes = new TreeMap<String, Boolean>();
+			rf.concreteCodesCount = scansJSONObject.optInt("concreteCodesCount");
 			rf.usedConcreteCodesCount = scansJSONObject.optInt("usedConcreteCodesCount");
 			JSONObject concreteCodesJSON = scansJSONObject.getJSONObject("concreteCodes");
 			Iterator<String> keys = concreteCodesJSON.keys();
@@ -151,7 +153,8 @@ public class ScanTaskObject {
 			        
  			    }	
 			    json.put("usedConcreteCodes", cc1);
-				json.put("usedConcreteCodesCount", task.usedConcreteCodesCount);
+			    json.put("concreteCodesCount", task.concreteCodesCount);
+ 				json.put("usedConcreteCodesCount", task.usedConcreteCodesCount);
 				
 			 
 			
@@ -192,7 +195,7 @@ public class ScanTaskObject {
 
 	public void putProgress(ArrayList<ProgressItem> progress) {
 	 
-		if(commonCodes.length>0)
+		if(commonCodes!=null && commonCodes.length>0)
 		{
 			int usedCodes = 0;
 			for(int i = 0;i < usedCommonCodes.length;i++)
@@ -204,7 +207,7 @@ public class ScanTaskObject {
 		}
 		
 		
-		if(concreteCodes.size()>0)
+		if(concreteCodes!=null && concreteCodes.size()>0)
 		{
 			int usedCodes = 0;
 			 Iterator it = usedConcreteCodes.entrySet().iterator();
@@ -230,7 +233,7 @@ public class ScanTaskObject {
 	public boolean checkScan(String code) 
 	{
 		boolean flag = true;
-		if(concreteCodes.size()>0)
+		if(concreteCodes!=null && concreteCodes.size()>0)
 		{
 			Iterator it = concreteCodes.entrySet().iterator();
 		    while (it.hasNext()) 
@@ -243,6 +246,7 @@ public class ScanTaskObject {
 		        	if(cc[i].equals(code) && !usedConcreteCodes.get(pairs.getKey()))
 		        	{
 		        		usedConcreteCodes.put((String) pairs.getKey(), true);
+		        		usedConcreteCodesCount++;
 		        		flag = true;
 		        	} 
 		        }
@@ -250,7 +254,7 @@ public class ScanTaskObject {
 			}			
 			 
 		}
-		if(commonCodes.length>0)
+		if(commonCodes!=null && commonCodes.length>0)
 		{
 			for(int i = 0;i < commonCodes.length; i++)
 			{

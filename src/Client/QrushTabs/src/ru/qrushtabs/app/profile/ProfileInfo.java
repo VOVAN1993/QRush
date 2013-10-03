@@ -19,6 +19,7 @@ public class ProfileInfo {
 	private static int moneyCount = 0 ; 
 	
 	private static boolean loaded = true;
+	public static boolean newsChanged = true;
 	public static String sex = "M";
 	public static String mail = "mail@mail.com";
 	public static String signInType = "def";
@@ -36,6 +37,7 @@ public class ProfileInfo {
  	public static List<String> scansList = new ArrayList<String>();
  	public static FriendField[] friendsList;;
  	public static boolean friendsChanged = true;
+ 	public static boolean profileChanged = true;
 
  	public static List<String> myFriendsReqList = new ArrayList<String>();
  	
@@ -91,7 +93,9 @@ public class ProfileInfo {
 	}
 	public static void addScan(String scanInfo)
 	{
+		newsChanged = true;
 		ProfileInfo.scansCount++;
+		scansList.add(scanInfo);
 		Badges.checkBadges();
 		//добавление на сервер и в склайт
 	}

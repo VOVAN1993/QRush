@@ -11,7 +11,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import ru.qrushtabs.app.dialogs.BlackAlertDialog;
+import ru.qrushtabs.app.profile.OtherProfileActivity;
 import ru.qrushtabs.app.profile.ProfileInfo;
+import ru.qrushtabs.app.utils.ServerAPI;
 
  
  
@@ -27,7 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class EnterActivity extends Activity {
+public class EnterActivity extends MyVungleActivity {
 	
 	private static EnterActivity instance;
 	OnClickListener l = new OnClickListener()
@@ -35,7 +38,21 @@ public class EnterActivity extends Activity {
 
 		@Override
 		public void onClick(View arg0) {
-			 
+			if(!ServerAPI.isOnline()) 
+			{
+				BlackAlertDialog newFragment;
+				newFragment = new BlackAlertDialog();
+				 
+					newFragment.setLabelText("Ошибка подключения");
+					newFragment.show(EnterActivity.this
+							.getSupportFragmentManager(), "missiles");
+				 
+					newFragment
+							.setDrawableBackground(EnterActivity.this
+									.getResources().getDrawable(
+											R.drawable.black_alert_error));
+					return;
+			}
 			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, RegistrationActivity.class);
 			//finish();
@@ -52,6 +69,21 @@ public class EnterActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			 
+			if(!ServerAPI.isOnline()) 
+			{
+				BlackAlertDialog newFragment;
+				newFragment = new BlackAlertDialog();
+				 
+					newFragment.setLabelText("Ошибка подключения");
+					newFragment.show(EnterActivity.this
+							.getSupportFragmentManager(), "missiles");
+				 
+					newFragment
+							.setDrawableBackground(EnterActivity.this
+									.getResources().getDrawable(
+											R.drawable.black_alert_error));
+					return;
+			}
 			ProfileInfo.signInType = "vk";
 			Intent intent = new Intent(EnterActivity.this, VkLoginActivity.class);
 			//finish();
@@ -67,6 +99,21 @@ public class EnterActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			 
+			if(!ServerAPI.isOnline()) 
+			{
+				BlackAlertDialog newFragment;
+				newFragment = new BlackAlertDialog();
+				 
+					newFragment.setLabelText("Ошибка подключения");
+					newFragment.show(EnterActivity.this
+							.getSupportFragmentManager(), "missiles");
+				 
+					newFragment
+							.setDrawableBackground(EnterActivity.this
+									.getResources().getDrawable(
+											R.drawable.black_alert_error));
+					return;
+			}
 			ProfileInfo.signInType = "def";
 			Intent intent = new Intent(EnterActivity.this, SignInActivity.class);
 			//finish();

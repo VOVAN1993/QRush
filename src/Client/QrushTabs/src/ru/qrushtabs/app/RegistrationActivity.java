@@ -29,7 +29,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class RegistrationActivity extends Activity 
+public class RegistrationActivity extends MyVungleActivity 
 {
 	 
 //	OnClickListener onSignIn = new OnClickListener()
@@ -182,6 +182,11 @@ public class RegistrationActivity extends Activity
 			ed.setVisibility(View.GONE);
 			ImageView iv = (ImageView)RegistrationActivity.this.findViewById(R.id.pass_iv);
 			iv.setVisibility(View.GONE);
+			
+			EditText ede = (EditText)RegistrationActivity.this.findViewById(R.id.signupRepass);
+			ede.setVisibility(View.GONE);
+			ImageView ive = (ImageView)RegistrationActivity.this.findViewById(R.id.repass_img);
+			ive.setVisibility(View.GONE);
 		}
 //		Button btn = (Button)findViewById(R.id.signinBtn);
 //		btn.setOnClickListener(onSignIn);

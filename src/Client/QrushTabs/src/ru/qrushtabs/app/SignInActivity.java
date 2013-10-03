@@ -23,7 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class SignInActivity extends Activity 
+public class SignInActivity extends MyVungleActivity 
 {
 	 
 	OnClickListener onSignIn = new OnClickListener()

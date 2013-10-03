@@ -5,6 +5,7 @@
     android:orientation="vertical" 
     android:background="@drawable/ratingsbkg">
 
+    
     <TabHost
         android:id="@+id/rating_type_tabhost"
         android:layout_width="match_parent"
@@ -36,18 +37,36 @@
                 android:padding="10dp"
                 android:background="@color/gray" >
 
-                <ListView
+                <LinearLayout 
+                    android:id="@+id/money_ratings_list1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" 
+                    android:orientation="vertical"
+                    >
+                    
+                </LinearLayout>
+<!--                 <ListView
                     android:id="@+id/money_ratings_list1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" 
                     android:scrollbars="none"
    	                android:dividerHeight="0dp"
   	                android:divider="@null"
+  	                
   	                android:cacheColorHint="@color/transparent"
   	                
                     >
-                </ListView>
-                <ListView
+                    </ListView> -->
+			<LinearLayout 
+                    android:id="@+id/money_ratings_list2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" 
+                    android:orientation="vertical"
+                    >
+			    
+			</LinearLayout>
+                
+<!--                 <ListView
                     android:id="@+id/money_ratings_list2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,9 +75,30 @@
                     android:divider="@null"
    	    			android:dividerHeight="0dp"
         			 >
-                </ListView>
+                </ListView> -->
             </FrameLayout>
         </RelativeLayout>
     </TabHost>
-
+	<RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rating_type_tabhost">
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/world_icon"/>
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="12,398,450,123"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+             />
+        
+    </RelativeLayout>
 </RelativeLayout>

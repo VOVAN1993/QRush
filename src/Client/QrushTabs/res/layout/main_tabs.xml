@@ -10,28 +10,31 @@
         android:layout_height="match_parent"
         android:layout_marginTop="0dp" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-            </FrameLayout>
 
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-8dp"
-                android:layout_marginTop="-12dp"
-                android:layout_weight="0"
-                android:tabStripEnabled="false" >
+                android:layout_alignParentBottom="true"
+                android:tabStripEnabled="false" 
+                android:fadeScrollbars="true"
+                android:layout_marginBottom="-12dp"
+                 >
             </TabWidget>
-        </LinearLayout>
+            
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@android:id/tabs">
+            </FrameLayout>
+
+            
+        </RelativeLayout>
     </TabHost>
 
 </LinearLayout>

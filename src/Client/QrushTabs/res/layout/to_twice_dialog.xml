@@ -7,10 +7,18 @@
     android:orientation="vertical"
      >
 
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:text="Вы получили"
+        android:textColor="@color/black" />
+    
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:layout_marginTop="20dp"
+         android:layout_marginTop="1dp"
         android:orientation="horizontal" >
 
         <ImageView
@@ -24,20 +32,14 @@
             android:id="@+id/to_twice_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1 курик"
+            android:text="50"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Хотите удвоить?"
-        android:textColor="@color/black" />
-
+  
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
             android:id="@+id/to_twice_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:background="@drawable/to_twicebtn"
             android:text="Удвоить" />
 
@@ -57,6 +60,8 @@
             android:id="@+id/not_twice_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
             android:background="@drawable/not_twicebtn"
             android:text="Забрать" />
     </LinearLayout>

@@ -30,38 +30,12 @@ public class RatingsArrayAdapter extends ArrayAdapter<RatingField> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
     	
+    	Log.d("ratings", position+"");
     	RatingFieldView rowView = new RatingFieldView(context);
+    	
+    	
     	rowView.setRatingInfo(values[position]);
-//        LayoutInflater inflater = (LayoutInflater) context
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View rowView = inflater.inflate(R.layout.rating_field, parent, false);
-//        TextView textView = (TextView) rowView.findViewById(R.id.label);
-//        ImageView imageView = (ImageView) rowView.findViewById(R.id.rating_icon);
-//        
-//        // Изменение иконки для Windows и iPhone
-//        
-//        String s = values[position];
-//        JSONObject jsonObj = null;
-//        try {
-//			jsonObj = new JSONObject(s);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        RatingField rf = null;
-//        try {
-//			rf = RatingField.parse(jsonObj);
-//		} catch (NumberFormatException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        textView.setText(rf.username);
-//        UserPhotosMap.setToImageView(rf.username, imageView);
 
-         
 
         return rowView;
     }

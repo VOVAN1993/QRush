@@ -3,9 +3,16 @@
     android:layout_height="wrap_content" 
     android:layout_gravity="fill_horizontal" 
     android:layout_width="fill_parent"
-    android:background="@drawable/title"
+    android:background="#40be81"
     android:orientation="horizontal">
 
+      <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/title_letter"
+            />
+        
 <!--         <Button  android:id="@+id/settings_btn"
             android:layout_width="25dp" 
              android:layout_height="25dp"

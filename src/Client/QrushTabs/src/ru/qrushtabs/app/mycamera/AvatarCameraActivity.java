@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
@@ -31,7 +32,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-public class AvatarCameraActivity extends Activity {
+public class AvatarCameraActivity extends MyVungleActivity {
 
     private static final int MEDIA_TYPE_IMAGE = 1;
 	private Camera mCamera;
@@ -169,7 +170,7 @@ public class AvatarCameraActivity extends Activity {
   
   
   @Override
-  protected void onPause() {
+  public void onPause() {
 	  Log.d("camera", "pause");
       super.onPause();
       releaseCamera();              // release the camera immediately on pause event

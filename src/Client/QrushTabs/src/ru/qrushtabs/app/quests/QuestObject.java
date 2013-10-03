@@ -29,6 +29,7 @@ public class QuestObject {
 	public String prize = "";
 	public int state = 0;
 	public boolean isDaily = false;
+	public int currentDay = 0;
 	private QuestContentView questContentView = null;
 	public static QuestObject currentQuestObject;
 	private static ArrayList<QuestObject> activeQuests = new ArrayList<QuestObject>();
@@ -47,6 +48,7 @@ public class QuestObject {
 		rf.questId = o.optString("questid");
 		rf.prize = o.optString("prize");
 		rf.deadline = o.optString("deadline");
+		rf.currentDay = o.optInt("currentDay");
 		return rf;
 	}
 	public void setQuestContentView(QuestContentView qcv)
@@ -81,6 +83,21 @@ public class QuestObject {
 		for(int i = 0;i<activeQuests.size();i++)
 		{
 			flag |=activeQuests.get(i).checkScan(code);
+			if(flag)
+			{
+				if(activeQuests.get(i).getQuestContentView()!=null)
+				activeQuests.get(i).getQuestContentView().refreshProgress();
+			}
+		}
+		return flag;
+			
+	}
+	
+	public static boolean checkRescanOnActiveQuests() {
+		boolean flag = false;
+		for(int i = 0;i<activeQuests.size();i++)
+		{
+			flag |=activeQuests.get(i).checkRescan();
 			if(flag)
 			{
 				if(activeQuests.get(i).getQuestContentView()!=null)
@@ -202,6 +219,10 @@ public class QuestObject {
 		}
 		return;
 		
+	}
+	public boolean canComplete() {
+		return tasksProgress.canComplete();
+	 
 	}
 
 }

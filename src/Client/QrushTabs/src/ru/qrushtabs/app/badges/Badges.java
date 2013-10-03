@@ -18,15 +18,15 @@ public class Badges
 	{
 		Resources res = c.getResources();
 		badges.clear();
-		Badge scan50 = new ScansBadge("scan50",res.getDrawable(R.drawable.bg_scan50_small),50);
-		Badge scan100 = new ScansBadge("scan100",res.getDrawable(R.drawable.bg_scan100_small),100);
-		Badge scan500 = new ScansBadge("scan500",res.getDrawable(R.drawable.bg_scan500_small),500);
-		Badge scan1000 = new ScansBadge("scan1000",res.getDrawable(R.drawable.bg_scan1000_small),1000);
+		Badge scan50 = new ScansBadge("scan50",res.getDrawable(R.drawable.bg_scan50_small),res.getDrawable(R.drawable.bg_scan50_small_1),50);
+		Badge scan100 = new ScansBadge("scan100",res.getDrawable(R.drawable.bg_scan100_small),res.getDrawable(R.drawable.bg_scan100_small_1),100);
+		Badge scan500 = new ScansBadge("scan500",res.getDrawable(R.drawable.bg_scan500_small),res.getDrawable(R.drawable.bg_scan500_small_1),500);
+		Badge scan1000 = new ScansBadge("scan1000",res.getDrawable(R.drawable.bg_scan1000_small),res.getDrawable(R.drawable.bg_scan1000_small_1),1000);
 		
-		Badge money50 = new MoneyBadge("money50",res.getDrawable(R.drawable.bg_50monet_small),50);
-		Badge money100 = new MoneyBadge("money100",res.getDrawable(R.drawable.bg_100monet_small),100);
-		Badge money500 = new MoneyBadge("money500",res.getDrawable(R.drawable.bg_500monet_small),500);
-		Badge money1000 = new MoneyBadge("money1000",res.getDrawable(R.drawable.bg_1000monet_small),1000);
+		Badge money50 = new MoneyBadge("money50",res.getDrawable(R.drawable.bg_50monet_small),res.getDrawable(R.drawable.bg_50monet_small_1),50);
+		Badge money100 = new MoneyBadge("money100",res.getDrawable(R.drawable.bg_100monet_small),res.getDrawable(R.drawable.bg_100monet_small_1),100);
+		Badge money500 = new MoneyBadge("money500",res.getDrawable(R.drawable.bg_500monet_small),res.getDrawable(R.drawable.bg_500monet_small_1),500);
+		Badge money1000 = new MoneyBadge("money1000",res.getDrawable(R.drawable.bg_1000monet_small),res.getDrawable(R.drawable.bg_1000monet_small_1),1000);
 		
 		badges.add(scan50);
 		badges.add(scan100);
@@ -71,7 +71,7 @@ public class Badges
 		for(int i = 0; i < l;i++)
 		{
 			if(badges.get(i).name.equals(badgeName))
-				return badges.get(i).badgeIcon;
+				return badges.get(i).smallBadgeIcon;
 		}
 		return null;
 	}

@@ -2,9 +2,13 @@ package ru.qrushtabs.app.quests;
 
 import java.util.ArrayList;
 
+import ru.qrushtabs.app.MyVungleActivity;
 import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.ScanBoxFieldView;
 import ru.qrushtabs.app.R.id;
 import ru.qrushtabs.app.R.layout;
+import ru.qrushtabs.app.dialogs.BlackAlertDialog;
+import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.SadSmile;
 import ru.qrushtabs.app.utils.ServerAPI;
 
@@ -13,6 +17,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,36 +27,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class QuestsActivity extends Activity 
+public class QuestsActivity extends MyVungleActivity 
 {
 	ArrayList<QuestObject> questsInfo;
 	QuestsArrayAdapter questsInfoAdapter;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
  		setContentView(R.layout.quests_tab);
-		 
-
-		 
-//		if(QuestObject.getAllQuests().size()==0)
-//		{
-//		 
-//	         	SadSmile.setSadSmile(this, "К сожалению, квесты закончились.");
-//	         	return;
-//		}
-//		ListView lv = (ListView) findViewById(R.id.quests_list);
-//		
-//
-// 		questsInfoAdapter = new QuestsArrayAdapter(this,QuestObject.getAllQuests());
-// 		
-//		lv.setAdapter(questsInfoAdapter);
-
-
 	}
-//	
+ 	
 	@Override
 	public void onResume()
 	{
 		super.onResume();
+		if(!ServerAPI.isOnline() || ServerAPI.offlineMod)
+		{
+			SadSmile.setSadSmile(this, "К сожалению, в оффлайн режиме не доступны квесты.");
+         	return;
+		}
 		ArrayList<QuestObject> quests = QuestObject.getAllQuests();
 		if(quests.size()==0)
 		{
@@ -65,6 +58,30 @@ public class QuestsActivity extends Activity
 			{
 				quests.remove(i);
 				i--;
+			}
+			else
+			{
+				if(quests.get(i).state==QuestObject.ACTIVE && quests.get(i).canComplete())
+				{
+					if (ServerAPI.changeQuestStatus(quests.get(i).name, quests.get(i).isDaily, "completed").equals("true")) {
+						
+						quests.get(i).state = QuestObject.COMPLETED;
+						ProfileInfo.newsChanged = true;
+						
+						BlackAlertDialog newFragment;
+						newFragment = new BlackAlertDialog();
+						 
+						newFragment.setLabelText("Квест "+quests.get(i).name+" выплонен");
+						newFragment.show(this.getSupportFragmentManager(),
+								"missiles");
+						newFragment.setDrawableBackground(this.getResources().getDrawable(R.drawable.black_alert_ok));
+						
+						quests.remove(i);
+						i--;
+ 
+					}
+					
+				}
 			}
 		}
 		ListView lv = (ListView) findViewById(R.id.quests_list);

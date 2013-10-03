@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ru.qrushtabs.app.dialogs.BlackAlertDialog;
+import ru.qrushtabs.app.quests.QuestObject;
 import ru.qrushtabs.app.utils.ServerAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
 import android.content.Context;
@@ -38,14 +39,32 @@ public class ScanBoxFieldView extends LinearLayout {
 		public void onClick(View arg0) {
 			if(ServerAPI.isOnline())
 			{
-				if(ServerAPI.tryAddScan(so.code,"scan").equals("true"))
+				PrizeObject po = ServerAPI.tryAddScanForMoney(so.code,"scan");
+				if(po!=null)
 				{
 					ScanBox.removeScan(so);
 					rowView.setVisibility(View.GONE);
 					
 					Intent intent = new Intent(ScanBoxFieldView.this.context,
 							GamesActivity.class);
+					intent.putExtra("prize", po.prize);
+					intent.putExtra("currentScan", so.code);
+					intent.putExtra("isTwice", po.isTwice);
+					intent.putExtra("maxPrize", po.maxPrize);
+					QuestObject.checkScanOnActiveQuests(so.code);
 					ScanBoxFieldView.this.context.startActivity(intent);
+				}
+				else
+				{
+					BlackAlertDialog newFragment;
+					newFragment = new BlackAlertDialog();
+					 
+					newFragment.setLabelText("В оффлайн режиме нельзя отправлять сканы.");
+					newFragment.show(((FragmentActivity) ScanBoxFieldView.this.context).getSupportFragmentManager(),
+							"missiles");
+					newFragment.setDrawableBackground(ScanBoxFieldView.this.context.getResources().getDrawable(R.drawable.black_alert_error));
+
+					 
 				}
 				
 				
