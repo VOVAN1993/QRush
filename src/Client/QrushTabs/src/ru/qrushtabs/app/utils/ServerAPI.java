@@ -32,12 +32,14 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.json.*;
 
+import ru.qrushtabs.app.GetMoneyActivity;
 import ru.qrushtabs.app.PrizeActivity;
 import ru.qrushtabs.app.PrizeObject;
 import ru.qrushtabs.app.QrushTabsApp;
 import ru.qrushtabs.app.RatingField;
 import ru.qrushtabs.app.RegistrationActivity;
 import ru.qrushtabs.app.ScanObject;
+import ru.qrushtabs.app.ads.VideoAdObject;
 import ru.qrushtabs.app.profile.OtherProfileInfo;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.quests.QuestObject;
@@ -214,11 +216,94 @@ public class ServerAPI {
 		}
 		Log.d("http on regist", success);
 		if (success.equals("success")) {
+			loadProfileInfo(ProfileInfo.username);
 			return "true";
 		} else
 			return "false";
 	}
 
+	public static String checkUser(String user) {
+
+		String req = "check";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+		nvps.add(new BasicNameValuePair("what", "checkUsernameExist"));
+		nvps.add(new BasicNameValuePair("otherUsername", user));
+		 
+		 
+
+		String resp = executeHttpPostResponse(req, nvps);
+		String report = "";
+		try {
+			Log.d("http", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			if(report.equals("success"))
+			{
+				return (String) jsonObj.get("match");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "true";
+	}
+	
+	public static String checkMail(String mail) {
+
+		String req = "check";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+		nvps.add(new BasicNameValuePair("what", "checkEmailExist"));
+		nvps.add(new BasicNameValuePair("email", mail));
+		 
+		 
+
+		String resp = executeHttpPostResponse(req, nvps);
+		String report = "";
+		try {
+			Log.d("http", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			if(report.equals("success"))
+			{
+				return (String) jsonObj.get("match");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "true";
+	}
+	public static String changePass(String oldPass,String newPass) 
+	{
+
+		String req = "change";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+		nvps.add(new BasicNameValuePair("what", "password"));
+		nvps.add(new BasicNameValuePair("oldPassword", oldPass));
+		nvps.add(new BasicNameValuePair("newPassword", newPass));
+		 
+
+		String resp = executeHttpPostResponse(req, nvps);
+		String report = "";
+		try {
+			Log.d("http", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			if(report.equals("success"))
+			{
+				ProfileInfo.userPass = newPass;
+				return "true";
+			}
+			 
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "false";
+	}
 	public static String signin() {
 
 		String req = "signin";
@@ -263,6 +348,7 @@ public class ServerAPI {
 		String money = "";
 		String scans = "";
 		String rescans = "";
+		String allMoney = "";
 
 		try {
 			Log.d("http load profile", resp);
@@ -272,18 +358,21 @@ public class ServerAPI {
 				money = (String) jsonObj.get("balance");
 				scans = (String) jsonObj.get("count_scan");
 				rescans = (String) jsonObj.get("count_rescan");
+				allMoney = (String)jsonObj.get("totalSumBalance");
 				ProfileInfo.setScansCount(Integer.valueOf(scans));
+				ProfileInfo.city = (String) jsonObj.get("city");
 				ProfileInfo.setMoneyCount(Integer.valueOf(money));
 				ProfileInfo.setRescansCount(Integer.valueOf(rescans));
-				ServerAPI.saveProfileInfo();
+				ProfileInfo.setTotalSum(Integer.valueOf(allMoney));
+				SharedPrefsAPI.saveProfileInfo();
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.d("http loadInfo", report);
+		//Log.d("http loadInfo", report);
 		if (report.equals("success")) {
-			Log.d("http money", money);
+			//Log.d("http money", money);
 			return "true";
 		} else
 			return "false";
@@ -302,10 +391,10 @@ public class ServerAPI {
 		String rescans = "";
 
 		try {
-			Log.d("http load other profile", resp);
+			//Log.d("http load other profile", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			report = (String) jsonObj.get("report");
-			Log.d("http loadOtherInfo", report);
+			//Log.d("http loadOtherInfo", report);
 
 			if (report.equals("success")) {
 				money = (String) jsonObj.get("balance");
@@ -336,14 +425,14 @@ public class ServerAPI {
 		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		try {
-			Log.d("http load resp", resp);
+			//Log.d("http load resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.d("http loadScan", success);
+		//Log.d("http loadScan", success);
 		if (success.equals("success")) {
 			return "true";
 		} else
@@ -357,29 +446,29 @@ public class ServerAPI {
             InputStream in = new java.net.URL(urldisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
+            //Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
         return mIcon11;
  	}
 	
-	public static String tryAddMoneyForScan(String scan) {
+	public static String tryAddMoneyForScan(String scan,String count) {
 		String req = "add";
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("what", "moneyForScan"));
 		nvps.add(new BasicNameValuePair("scan", scan));
- 
+		nvps.add(new BasicNameValuePair("count", count));
 		String resp = executeHttpPostResponse(req, nvps);
 		String success = "";
 		try {
-			Log.d("http load resp", resp);
+			//Log.d("http load resp", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			success = (String) jsonObj.get("report");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.d("http loadScan", success);
+		//Log.d("http loadScan", success);
 		if (success.equals("success")) {
 			return "true";
 		} else
@@ -400,7 +489,7 @@ public class ServerAPI {
 			success = (String) jsonObj.get("report");
 			if(success.equals("success"))
 			{
-				Log.d("http load resp", resp);
+				//Log.d("http load resp", resp);
 				
 				
 				PrizeObject po = PrizeObject.parse(jsonObj);
@@ -422,14 +511,14 @@ public class ServerAPI {
 //		String resp = executeHttpPostResponse(req, nvps);
 //		String success = "";
 //		try {
-//			Log.d("http   addmoney resp", resp);
+//			//Log.d("http   addmoney resp", resp);
 //			JSONObject jsonObj = new JSONObject(resp);
 //			success = (String) jsonObj.get("report");
 //
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		Log.d("http http addmony", success);
+//		//Log.d("http http addmony", success);
 //		if (success.equals("success")) {
 //			return "true";
 //		} else
@@ -443,12 +532,12 @@ public class ServerAPI {
 		String resp = executeHttpPostResponse(req, nvps);
 		String report = "";
 		try {
-			Log.d("http load profile", resp);
+			//Log.d("http load profile", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			report = (String) jsonObj.get("report");
 			if (report.equals("success")) {
 
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 			}
 
 		} catch (Exception e) {
@@ -467,7 +556,7 @@ public class ServerAPI {
 		String resp = executeHttpPostResponse(req, nvps);
 		String report = "";
 		try {
-			// Log.d("http load profile", resp);
+			//Log.d("http load profile", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			report = (String) jsonObj.get("report");
 			if (report.equals("success")) {
@@ -486,7 +575,7 @@ public class ServerAPI {
 					citiesMap.put(pair[0], pair[1]);
 				}
 
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return citiesMap;
 			}
@@ -517,7 +606,7 @@ public class ServerAPI {
 					 
 					 
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return ratings;
 			}
@@ -548,7 +637,7 @@ public class ServerAPI {
 					 
 					 
 				}
-				ServerAPI.saveProfileInfo();
+				//ServerAPI.saveProfileInfo();
 
 				return ratings;
 			}
@@ -578,7 +667,7 @@ public class ServerAPI {
 				for (int i = 0; i < array.length(); i++) {
 					users[i] = array.get(i).toString();
 				}
-				ServerAPI.saveProfileInfo();
+				//ServerAPI.saveProfileInfo();
 
 				return users;
 			} else {
@@ -630,7 +719,7 @@ public class ServerAPI {
 			for (int i = 0; i < array.length(); i++) {
 				users[i] = array.get(i).toString();
 			}
-			ServerAPI.saveProfileInfo();
+			//ServerAPI.saveProfileInfo();
 			return users;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -660,7 +749,7 @@ public class ServerAPI {
 				for (int i = 0; i < array.length(); i++) {
 					friends[i] = array.get(i).toString();
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return friends;
 			}
@@ -700,7 +789,7 @@ public class ServerAPI {
 						ProfileInfo.scansList.add(so.code);
 				 
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return scans;
 			}
@@ -739,7 +828,7 @@ public class ServerAPI {
 						friendsScans.add(so);
 					}
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return friendsScans;
 			}
@@ -794,6 +883,8 @@ public class ServerAPI {
 				JSONArray active = jsonObj.optJSONArray("activeSomeQuests");
 				JSONArray completed = jsonObj.optJSONArray("completedSomeQuests");
 				
+				 
+				
 				ArrayList<QuestObject> quests = new ArrayList<QuestObject>();
 
 				for (int i = 0; i < all.length(); i++) 
@@ -829,7 +920,7 @@ public class ServerAPI {
  					}
  					 
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return quests;
 			}
@@ -865,7 +956,7 @@ public class ServerAPI {
  					 ScanObject qo  = ScanObject.parseQuest(quest);
  					quests.add(qo);
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 
 				return quests;
 			}
@@ -886,7 +977,7 @@ public class ServerAPI {
 			// Log.d("http load profile", resp);
 			JSONObject jsonObj = new JSONObject(resp);
 			report = (String) jsonObj.get("report");
-			if (report.equals("success")) {
+			if (report.equals("success") && jsonObj.has("quest")) {
 				JSONObject quest = (JSONObject) jsonObj.get("quest");
 					QuestObject qo = QuestObject.parse(quest);
  					//QuestObject.addActiveQuest(qo);
@@ -894,6 +985,10 @@ public class ServerAPI {
 					qo.isDaily = true;
 					return qo;
 				
+			}
+			else
+			{
+				return null;
 			}
 
 		} catch (Exception e) {
@@ -1011,7 +1106,7 @@ public class ServerAPI {
 			JSONObject jsonObj = new JSONObject(resp);
 			report = (String) jsonObj.get("report");
 			if (report.equals("success")) {
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 				return "true";
 			}
 
@@ -1029,6 +1124,60 @@ public class ServerAPI {
 		return null;
 	}
 
+	public static String watchVideo(String videoUserID) 
+	{
+		String req = "watchVideo";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("videoUserID", videoUserID));
+		 
+		
+		String resp = executeHttpPostResponse(req, nvps);
+
+		String report = "";
+		try {
+			// Log.d("http load profile", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			
+			 
+			if (report.equals("success"))
+				return "true";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	public static VideoAdObject getAdvertising() 
+	{
+		String req = "getAdvertising";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+ 		
+		String resp = executeHttpPostResponse(req, nvps);
+
+		String report = "";
+		try {
+			// Log.d("http load profile", resp);
+ 
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			
+ 			  
+			 
+			if (report.equals("success") && jsonObj.has("video") )
+			
+				return VideoAdObject.parse((JSONObject)jsonObj.get("video"));
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	 
 	public static byte[] downloadProfilePhoto(String who) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httpost = new HttpPost(
@@ -1094,94 +1243,8 @@ public class ServerAPI {
 
 	
  
-	public static void saveProfileInfo() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
-		Editor editor = prefs.edit();
-		editor.putString("userPass", ProfileInfo.userPass);
-		editor.putString("userID", ProfileInfo.username);
-		editor.putString("userToken", ProfileInfo.userToken);
-		editor.putString("userVKID", ProfileInfo.userVKID);
-		editor.putString("userVKToken", ProfileInfo.userVKToken);
-		editor.putString("loginType", ProfileInfo.signInType);
 
-		editor.putInt("scansCount", ProfileInfo.getScansCount());
-		editor.putInt("rescansCount", ProfileInfo.getRescansCount());
-		editor.putInt("moneyCount", ProfileInfo.getMoneyCount());
 
-		editor.putString("avatarPath", ProfileInfo.avatarPath);
-		editor.putString("sex", ProfileInfo.sex);
-		editor.putString("email", ProfileInfo.mail);
-
-		editor.putString("city", ProfileInfo.city);
-		editor.commit();
-	}
-	
-	public static void loadProgress() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
-		String questsProgress = prefs.getString("questsProgress", "[]");
-		Log.d("quest","load "+ questsProgress);
-		JSONArray array;
-		try {
-			array = new JSONArray(questsProgress);
-			 
-			for(int i = 0;i<array.length();i++)
-			{
-				JSONObject jo = (JSONObject)array.get(i);
-			    QuestObject qo = QuestObject.getActiveQuest(jo.getString("questId"));
-			    if(qo!=null)
-			    	qo.tasksProgress = TasksObject.parse((JSONObject)jo.get("tasks"));;
- 					 
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	public static void saveProgress() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
-		Editor editor = prefs.edit();
-		JSONArray array = new JSONArray();
-		ArrayList<QuestObject> al = QuestObject.getActiveQuests();
-		for(int i = 0; i < al.size();i++)
-		{
-			 
-			try {
-				
-				if(al.get(i).tasksProgress==null)
-				{
-					 
-					try {
-						String s1 = ServerAPI.getServerURL();
-						String s2 = s1+al.get(i).url;
-						al.get(i).tasksProgress = ServerAPI.getQuestTasks( s2+"tasks.json");
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
- 				}
-				array.put(QuestObject.unparseProgress(al.get(i)));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		editor.putString("questsProgress", array.toString());
-		Log.d("quest","save "+ array.toString());
-//		try {
-//			JSONArray ar = new JSONArray(array.toString());
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		editor.commit();
-	}
 
 	public static boolean isOnline() {
 		Context c = QrushTabsApp.getAppContext();
@@ -1193,15 +1256,7 @@ public class ServerAPI {
 				&& cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 
-	public static void flushProfile() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(QrushTabsApp.getAppContext());
-		Editor editor = prefs.edit();
-		editor.clear();
-		editor.commit();
-		// TODO Auto-generated method stub
 
-	}
 	public static String addAchievment(String name) 
 	{
 		String req = "add";
@@ -1254,6 +1309,35 @@ public class ServerAPI {
 			e.printStackTrace();
 		}
 		return null;
+		
+	}
+	public static String  takeOutMoney(String type,String number, int count) {
+		String req = "takeOutMoney";
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("what", type));
+		nvps.add(new BasicNameValuePair("count", String.valueOf(count)));
+		if(type.equals(GetMoneyActivity.PHONE))
+			nvps.add(new BasicNameValuePair("phoneNumber", number));
+		else
+			nvps.add(new BasicNameValuePair("yandexMoneyAccountID", number));
+			
+		
+		String resp = executeHttpPostResponse(req, nvps);
+
+		String report = "";
+		try {
+			// Log.d("http load profile", resp);
+			JSONObject jsonObj = new JSONObject(resp);
+			report = (String) jsonObj.get("report");
+			 
+			if (report.equals("success"))
+				return "true";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return "false";
 		
 	}
 

@@ -30,7 +30,7 @@ public class NewsContentView extends LinearLayout {
 	private ImageView arrowsImg;
 	private ImageView imgPlace;
 	private TextView newsTextView;
-	private ScanObject newsContent;
+	private ScanObject scanObject;
 	
 	private Context context;
 
@@ -58,12 +58,12 @@ public class NewsContentView extends LinearLayout {
 	}
 
 	public void setNewsContent(ScanObject newContent,NewsArrayAdapter nar) {
-		this.newsContent = newContent;
+		this.scanObject = newContent;
 		TextView textView = (TextView) rowView.findViewById(R.id.news_place_name_tv);
  	        
 	        // Изменение иконки для Windows и iPhone
 	        
-	        this.newsContent = newContent;
+	        this.scanObject = newContent;
 	        textView.setText(newContent.username);
 		
 	        textView = (TextView) rowView.findViewById(R.id.news_place_city_tv);
@@ -84,7 +84,9 @@ public class NewsContentView extends LinearLayout {
 					AnimationDrawable anim = (AnimationDrawable) arrowsImg
 							.getBackground();
 					anim.start();
-					(new AddScanTask()).execute();
+					scanObject.scantype = ScanObject.RESCAN;
+					ScanBox.addScan(scanObject, (MyVungleActivity)context);
+					//(new AddScanTask()).execute();
 
 
 				}
@@ -99,39 +101,6 @@ public class NewsContentView extends LinearLayout {
 		
 
 	}
-	private class AddScanTask extends AsyncTask<String, String, PrizeObject> {
-
-		protected PrizeObject doInBackground(String... args) {
-			return ServerAPI.tryAddScanForMoney(NewsContentView.this.newsContent.code,"rescan");
-		}
-
-		protected void onPostExecute(PrizeObject objResult) {
-
-			
-			AnimationDrawable anim = (AnimationDrawable) NewsContentView.this.arrowsImg
-					.getBackground();
-			anim.stop();
-			NewsContentView.this.arrowsImg.setVisibility(View.INVISIBLE);
-			if (objResult!=null) {
-				
-				
-				ProfileInfo.addScan(NewsContentView.this.newsContent.code);
-				Intent intent = new Intent(NewsContentView.this.context,
-						GamesActivity.class);
-				intent.putExtra("prize", objResult.prize);
-				intent.putExtra("currentScan", NewsContentView.this.newsContent.code);
-				intent.putExtra("isTwice", objResult.isTwice);
-				intent.putExtra("maxPrize", objResult.maxPrize);
-				QuestObject.checkRescanOnActiveQuests();
-				//rowView.setVisibility(View.GONE);
-				NewsContentView.this.newsContent.scanned = true;
-				NewsContentView.this.context.startActivity(intent);
-			} else {
-//				Intent intent = new Intent(NewsContentView.this.context,
-//						EnterActivity.class);
-//				NewsContentView.this.context.startActivity(intent);
-			}
-		}
-	}
+	
 
 }

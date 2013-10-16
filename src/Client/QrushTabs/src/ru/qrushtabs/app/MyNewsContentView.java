@@ -25,30 +25,15 @@ import android.widget.TextView;
 public class MyNewsContentView extends LinearLayout {
 
 	private View rowView;
-	private Button rescanButton;
-	private ImageView arrowsImg;
-	private ImageView imgPlace;
-	private TextView newsTextView;
 	private ScanObject newsContent;
-	private Context context;
-
+ 
 	public MyNewsContentView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		this.context = context;
-		LayoutInflater inflater = (LayoutInflater) context
+ 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		rowView = inflater.inflate(R.layout.my_news_place, this, false);
-
-		// newsTextView = (TextView)rowView.findViewById(R.id.news_tv);
-		this.addView(rowView);
-
-		//rescanButton = (Button) rowView.findViewById(R.id.rescan_btn);
-		//arrowsImg = (ImageView) rowView.findViewById(R.id.rescan_arrows_icon);
-
-		//arrowsImg.setBackgroundResource(R.drawable.rescan_arrows);
-
-		//rescanButton.setVisibility(View.VISIBLE);
-		// imgPlace = (ImageView)rowView.findViewById(R.id.news_content_iv);
+ 		this.addView(rowView);
+ 
 	}
 
 	public MyNewsContentView(Context context) {
@@ -69,7 +54,7 @@ public class MyNewsContentView extends LinearLayout {
 		else
 		{
 		   if(newsContent.scantype.equals(ScanObject.QUEST))
-		   {
+		     {
 			   tv.setText("Получил за квест");
 			   iv.setImageDrawable(this.getResources().getDrawable(R.drawable.quest_icon));
 		   }
@@ -85,7 +70,7 @@ public class MyNewsContentView extends LinearLayout {
 		prizeTV.setText("+"+newsContent.prize);
 		
 		TextView dateTV = (TextView)findViewById(R.id.my_news_date_tv);
-		dateTV.setText("+"+newsContent.date);
+		dateTV.setText(newsContent.date);
 		// newsTextView.setText(newsContent.getContent());
 		// TextView dateTV = (TextView)findViewById(R.id.news_date_tv);
 		// dateTV.setText(newContent.date);

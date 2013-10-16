@@ -3,6 +3,7 @@ package ru.qrushtabs.app;
 import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -97,7 +98,7 @@ public class SettingsActivity extends MyVungleActivity {
 				MainActivity.getInstance().finish();
 				Intent intent = new Intent(SettingsActivity.this,EnterActivity.class);
 				
-				ServerAPI.flushProfile();
+				SharedPrefsAPI.flushProfile();
 				startActivity(intent);
 				finish();
 				

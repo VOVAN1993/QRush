@@ -45,9 +45,11 @@ public class UserPhotosMap {
 			return null;
 	}
 	 private static int MEDIA_TYPE_IMAGE = 1;
+	 
+	 
 	public static Bitmap saveAvatar(Bitmap bmp) {
-		
-		 
+		if(bmp==null)
+		bmp = BitmapFactory.decodeResource(MainActivity.getInstance().getResources(), R.drawable.qrcat);
     	int width = bmp.getWidth();
     	int height = bmp.getHeight();
 

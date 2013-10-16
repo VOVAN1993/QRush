@@ -7,12 +7,15 @@ import android.widget.ImageView;
  
 public class Badge {
 	public Drawable badgeIcon;
+	public Drawable dialogIcon;
 	public Drawable smallBadgeIcon;
 	public boolean achieved = false;
 	public String name;
+	public String description;
 	public Badge(Drawable bmp)
 	{
 		this.badgeIcon = bmp;
+		 
 	}
 	public Badge()
 	{
@@ -24,6 +27,7 @@ public class Badge {
 	}
 	public void draw(ImageView iv)
 	{
+		badgeIcon.setAlpha(255);
 		 iv.setImageDrawable(badgeIcon);
 		 if(achieved)
 				iv.setAlpha(255);

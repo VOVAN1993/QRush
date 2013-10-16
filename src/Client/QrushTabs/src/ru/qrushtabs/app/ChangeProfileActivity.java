@@ -32,6 +32,7 @@ import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SampleFileUpload;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -78,9 +79,18 @@ public class ChangeProfileActivity extends MyVungleActivity {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.change_profile);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.custom_title_empty);
+				R.layout.custom_title_back);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		
+		Button backButton = (Button) this.findViewById(R.id.header_back_btn);
+		backButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 
 		ImageView iv = (ImageView) findViewById(R.id.reg_avatar_iv);
 		iv.setOnClickListener(onAvatarClick);
@@ -189,7 +199,7 @@ public class ChangeProfileActivity extends MyVungleActivity {
 					Log.d("upload avatar", response);
 
 				}
-				ServerAPI.saveProfileInfo();
+				SharedPrefsAPI.saveProfileInfo();
 				reportView.setText("Данные сохранены!");
 
 			}

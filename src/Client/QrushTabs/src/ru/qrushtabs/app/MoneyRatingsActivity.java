@@ -1,5 +1,8 @@
 package ru.qrushtabs.app;
 
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SadSmile;
@@ -134,6 +137,13 @@ public class MoneyRatingsActivity extends MyVungleActivity {
 
 	 
 
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		QrushTabsApp.getGaTracker().set(Fields.SCREEN_NAME, "Ratings Screen");
+		QrushTabsApp.getGaTracker().send(MapBuilder.createAppView().build());
+	}
 	private View createLeftTabView(final Context context, final String text) {
 		View view = LayoutInflater.from(context).inflate(R.layout.left_tab_bg,
 				null);

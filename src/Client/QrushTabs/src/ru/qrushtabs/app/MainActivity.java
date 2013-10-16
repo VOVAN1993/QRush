@@ -4,6 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.vungle.sdk.VunglePub;
+
+import ru.qrushtabs.app.ads.VideoAdObject;
+import ru.qrushtabs.app.ads.VideoLoader;
 import ru.qrushtabs.app.badges.Badges;
 import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.friends.FriendField;
@@ -12,6 +15,7 @@ import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.quests.QuestObject;
 import ru.qrushtabs.app.quests.QuestsActivity;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,13 +54,27 @@ public class MainActivity extends TabActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		 VunglePub.onResume();
+		
+		int i = tabHost.getCurrentTab();
+		Button b = (Button) findViewById(R.id.title_right_button);
+ 
+		if (i == 2) {
+			b.setOnClickListener(onScanBoxButtonClickListener);
+			if (ScanBox.getScansInfo().size() == 0)
+				b.setBackgroundDrawable(MainActivity.this.getResources()
+						.getDrawable(R.drawable.scanboxbtn));
+			else
+				b.setBackgroundDrawable(MainActivity.this.getResources()
+						.getDrawable(R.drawable.scanboxbtnactive));
+
+		}
+		 //VunglePub.onResume();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		 VunglePub.onPause();
+		// VunglePub.onPause();
 	}
 
 	OnClickListener onScanBoxButtonClickListener = new OnClickListener() {
@@ -67,6 +85,17 @@ public class MainActivity extends TabActivity {
 			Intent intent = new Intent(MainActivity.this, ScanBoxActivity.class);
 			startActivity(intent);
 
+		}
+
+	};
+	private OnClickListener onGetMoneyButtonClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+							 
+				Intent intent = new Intent(MainActivity.this,
+						GetMoneyActivity.class);
+				startActivity(intent);				 
 		}
 
 	};
@@ -131,6 +160,16 @@ public class MainActivity extends TabActivity {
 
 	};
 
+	public void refreshBoxButton()
+	{
+		Button b = (Button) findViewById(R.id.title_right_button);
+		if (ScanBox.getScansInfo().size() == 0)
+			b.setBackgroundDrawable(MainActivity.this.getResources()
+					.getDrawable(R.drawable.scanboxbtn));
+		else
+			b.setBackgroundDrawable(MainActivity.this.getResources()
+					.getDrawable(R.drawable.scanboxbtnactive));
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		instance = this;
@@ -144,8 +183,10 @@ public class MainActivity extends TabActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		Button b = (Button) findViewById(R.id.title_right_button);
+		b.setBackgroundDrawable(MainActivity.this.getResources()
+				.getDrawable(R.drawable.getmoneybtn));
 		//
-		b.setOnClickListener(onScanBoxButtonClickListener);
+		b.setOnClickListener(onGetMoneyButtonClickListener);
 		//
 		b = (Button) findViewById(R.id.title_left_button);
 
@@ -153,19 +194,20 @@ public class MainActivity extends TabActivity {
 		// l.onTabChanged("h");
 		ScanBox.loadScans(this);
 		if (ServerAPI.isOnline()) {
+			VideoAdObject.prepareVideoAd();
 			Badges.initBadges(this);
 			QuestObject.setAllQuests(ServerAPI.getQuests());
-			QuestObject.addQuest(ServerAPI.getDailyQuest());
+			QuestObject dq = ServerAPI.getDailyQuest();
+			if(dq!=null)
+			QuestObject.addQuest(dq);
 		}
 
-		ServerAPI.loadProgress();
+		SharedPrefsAPI.loadProgress();
 		QuestObject.checkTasks();
 		b = (Button) findViewById(R.id.title_right_button);
-		if (ScanBox.getScansInfo().size() > 0)
-			b.setBackgroundDrawable(MainActivity.this.getResources()
-					.getDrawable(R.drawable.scanboxbtnactive));
 		initTabs();
 
+		
 		if (ServerAPI.isOnline()) {
 			String users[] = ServerAPI.getMyFriends(ProfileInfo.username, "",
 					0, 0);
@@ -189,13 +231,15 @@ public class MainActivity extends TabActivity {
 
 	@Override
 	public void onDestroy() {
+		Log.d("MainActivity", "ON DESTROOOOOOOOOOOY!!!!!!!!!!!!!!!!!!!!!");
 		super.onDestroy();
+		SharedPrefsAPI.saveProfileInfo();
 		ScanBox.saveScans();
-
-		ServerAPI.saveProgress();
+		SharedPrefsAPI.saveProgress();
 	}
 
 	private void initTabs() {
+ 
 		tabHost = getTabHost();
 		tabHost.setup();
 

@@ -164,7 +164,7 @@ public class OtherProfileActivity extends MyVungleActivity {
 										.getResources().getDrawable(
 												R.drawable.black_alert_error));
 					}
-					Button b = (Button) findViewById(R.id.title_left_button);
+					Button b = (Button) findViewById(R.id.title_right_button);
 					b.setVisibility(View.INVISIBLE);
 				}
 			});
@@ -194,7 +194,7 @@ public class OtherProfileActivity extends MyVungleActivity {
 										.getResources().getDrawable(
 												R.drawable.black_alert_error));
 					}
-					Button b = (Button) findViewById(R.id.title_left_button);
+					Button b = (Button) findViewById(R.id.title_right_button);
 					b.setVisibility(View.INVISIBLE);
 
 				}
@@ -240,6 +240,9 @@ public class OtherProfileActivity extends MyVungleActivity {
 				e.printStackTrace();
 			}
 		}
+		((ImageView) findViewById(R.id.fr_iv1)).setImageBitmap(null);
+		((ImageView) findViewById(R.id.fr_iv2)).setImageBitmap(null);
+		((ImageView) findViewById(R.id.fr_iv3)).setImageBitmap(null);
 		if (friends.length > 0)
 			UserPhotosMap.setToImageView(friends[0].username,
 					(ImageView) findViewById(R.id.fr_iv1));
@@ -306,11 +309,15 @@ public class OtherProfileActivity extends MyVungleActivity {
 			LinearLayout lv = (LinearLayout) findViewById(R.id.my_news_ll);
 			lv.removeAllViews();
 			lv.addView(newsLoadIV);
-			for (int i = 0; i < Math.min(newsInfo.size(), 20); i++) {
-				MyNewsContentView ncv = new MyNewsContentView(OtherProfileActivity.this);
-				ncv.setNewsContent(newsInfo.get(i));
-				
-				lv.addView(ncv);
+			int all = 0;
+			for (int i = 0; all < 20 && i < newsInfo.size(); i++) {
+				if (Integer.valueOf(newsInfo.get(i).prize) > 0) {
+					MyNewsContentView ncv = new MyNewsContentView(
+							OtherProfileActivity.this);
+					ncv.setNewsContent(newsInfo.get(i));
+					all++;
+					lv.addView(ncv);
+				}
 
 			}
 		}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.qrushtabs.app"
+    android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="1.0"
-    android:installLocation="preferExternal" >
+    android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
 
@@ -11,105 +11,113 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-     
-  	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
- 	
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <application android:name=".QrushTabsApp"
-        android:icon="@drawable/qrush_icon_96">
-          <activity
+    <application
+        android:name=".QrushTabsApp"
+        android:icon="@drawable/qrush_icon_96" >
+        <activity
             android:name="PreloadActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait">
-             <intent-filter>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"
-                     />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation"/>
+<activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation"/>
+<activity android:name="com.mopub.mobileads.MraidBrowser" android:configChanges="keyboardHidden|orientation"/>
+<activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
+<activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode" />
+<activity android:name="com.millennialmedia.android.MMActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:configChanges="keyboardHidden|orientation|keyboard" />
+<activity android:name="com.millennialmedia.android.VideoPlayer" android:configChanges="keyboardHidden|orientation|keyboard" />
         <activity
-		android:name="com.vungle.sdk.VungleAdvert"
-		android:configChanges="orientation|keyboardHidden|keyboard"
-		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-	/>
+            android:name="com.vungle.sdk.VungleAdvert"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-             android:theme="@style/MyTheme" 
-            >          
+            android:theme="@style/MyTheme" >
         </activity>
         <activity
             android:name="EnterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>      
-            
-         <activity
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
             android:name="InfoActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>   
-          <activity
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
             android:name="ru.qrushtabs.app.mycamera.AvatarCameraActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
-         <activity
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
             android:name="FormActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" />       
+            android:screenOrientation="portrait" />
         <activity
             android:name="VkLoginActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-             android:theme="@style/MyTheme" />
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ChangeProfileActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-             android:theme="@style/MyTheme" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.profile.OtherProfileActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name="ru.qrushtabs.app.ads.VideoAdActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name="RegistrationActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.badges.BadgesActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.friends.FriendsSearchActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.friends.FriendsActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.friends.OtherFriendsActivity"
-             android:configChanges="orientation|keyboardHidden|keyboard"
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-               android:theme="@style/MyTheme" />
+            android:theme="@style/MyTheme" />
         <activity
             android:name="SignInActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme" />
-         
         <activity
             android:name="CameraActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -120,7 +128,6 @@
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme" />
-        
         <activity
             android:name="RatingsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -143,26 +150,23 @@
         <activity
             android:name="NewsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait" 
-            android:theme="@style/MyTheme"/>
-         <activity
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme" />
+        <activity
             android:name="ru.qrushtabs.app.quests.QuestActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme">
-             
-             
+            android:theme="@style/MyTheme" >
         </activity>
         <activity
             android:name="ru.qrushtabs.app.quests.DailyQuestActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme"/>
+            android:theme="@style/MyTheme" />
         <activity
             android:name="ru.qrushtabs.app.quests.QuestsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name="GetMoneyActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -181,19 +185,18 @@
             android:name="ChangePassActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-             android:theme="@style/MyTheme" 
-            >          
+            android:theme="@style/MyTheme" >
         </activity>
         <activity
             android:name="PrizeActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />       
-        <activity 
+            android:theme="@style/MyTheme" />
+        <activity
             android:name="ru.qrushtabs.app.SecondFormActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:screenOrientation="portrait"
-            android:theme="@style/MyTheme">             
+            android:theme="@style/MyTheme" >
         </activity>
     </application>
 

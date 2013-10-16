@@ -3,6 +3,7 @@ package ru.qrushtabs.app;
  
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +54,7 @@ public class SignInActivity extends MyVungleActivity
 			if(objResult.equals("true"))
 			{
 			     Log.d("on signin", "true");
-		        ServerAPI.saveProfileInfo();
+			     SharedPrefsAPI.saveProfileInfo();
 		        
 		        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
 				finish();

@@ -5,14 +5,21 @@ import java.util.TreeMap;
 
 import org.apache.http.client.ClientProtocolException;
 
+import com.google.analytics.tracking.android.MapBuilder;
+
+import ru.qrushtabs.app.GoogleConsts;
 import ru.qrushtabs.app.MyVungleActivity;
+import ru.qrushtabs.app.QrushTabsApp;
 import ru.qrushtabs.app.R;
+import ru.qrushtabs.app.ScanBoxFieldView;
 import ru.qrushtabs.app.R.id;
 import ru.qrushtabs.app.R.layout;
+import ru.qrushtabs.app.dialogs.BlackAlertDialog;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -56,9 +63,30 @@ public class QuestActivity extends MyVungleActivity {
 						qo.state = QuestObject.COMPLETED;
 						//qo.getQuestContentView().refreshProgress();
 						ProfileInfo.newsChanged = true;//для обновления ленты
+						
+						
+						ProfileInfo.profileChanged = true;
+						ProfileInfo.addMoneyCount(Integer.valueOf(qo.prize));
+						
+						QrushTabsApp.getGaTracker().send(
+								MapBuilder.createEvent(GoogleConsts.QUEST_ACTION, // Event
+										// category
+										// (required)
+										GoogleConsts.COMPLETE, // Event action (required)
+										qo.name, // Event label
+										Long.valueOf(qo.prize)) // Event value
+										.build());
+						
+						BlackAlertDialog newFragment;
+						newFragment = new BlackAlertDialog(); 
+						newFragment.setLabelText("Квест сдан");
+						newFragment.show(QuestActivity.this.getSupportFragmentManager(),
+								"missiles");
+						newFragment.setDrawableBackground(QuestActivity.this.getResources().getDrawable(R.drawable.black_alert_ok));
 						//QuestObject.removeQuest(qo);
 
 					}
+					 
 				}
 			});
 		} else {
@@ -72,10 +100,49 @@ public class QuestActivity extends MyVungleActivity {
 							QuestObject.currentQuestObject.name).equals("true")) {
 						QuestObject qo = QuestObject.currentQuestObject;
 						if (QuestObject.getActiveQuest(qo.questId) == null) {
+							
+							qo.state = QuestObject.ACTIVE;
 							QuestObject.addQuest(qo);
 							QuestObject.checkTasks();
+							
+							QrushTabsApp.getGaTracker().send(
+									MapBuilder.createEvent(GoogleConsts.QUEST_ACTION, // Event
+											// category
+											// (required)
+											GoogleConsts.SUBSCRIBE, // Event action (required)
+											qo.name, // Event label
+											  0l) // Event value
+											.build());
+							
+							BlackAlertDialog newFragment;
+							newFragment = new BlackAlertDialog();
+							 
+							newFragment.setLabelText("Квест взят на выполнение");
+							newFragment.show(QuestActivity.this.getSupportFragmentManager(),
+									"missiles");
+							newFragment.setDrawableBackground(QuestActivity.this.getResources().getDrawable(R.drawable.black_alert_ok));
+						}
+						else
+						{
+							BlackAlertDialog newFragment;
+							newFragment = new BlackAlertDialog();
+							 
+							newFragment.setLabelText("Квест уже был взят");
+							newFragment.show(QuestActivity.this.getSupportFragmentManager(),
+									"missiles");
+							newFragment.setDrawableBackground(QuestActivity.this.getResources().getDrawable(R.drawable.black_alert_error));
 						}
 
+					}
+					else
+					{
+						BlackAlertDialog newFragment;
+						newFragment = new BlackAlertDialog();
+						 
+						newFragment.setLabelText("Не удалось взять квест (квест устарел)");
+						newFragment.show(QuestActivity.this.getSupportFragmentManager(),
+								"missiles");
+						newFragment.setDrawableBackground(QuestActivity.this.getResources().getDrawable(R.drawable.black_alert_error));
 					}
 				}
 			});

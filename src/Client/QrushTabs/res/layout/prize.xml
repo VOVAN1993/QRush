@@ -77,6 +77,12 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/white" >
+        
+        <!--  <com.mopub.mobileads.MoPubView
+             android:id="@+id/adview_prize"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" /> -->
+
     </FrameLayout>
 
 </RelativeLayout>

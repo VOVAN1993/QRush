@@ -66,6 +66,21 @@ public class ScanBoxActivity extends MyVungleActivity {
 
 	}
 	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		scansInfo = ScanBox.getScansInfo();
+		if(scansInfo.size()==0)
+		{
+			SadSmile.setSadSmile(this, "Нет доступных сканов для отправки");
+		}
+		else
+		{
+			scansInfoAdapter = new ScanBoxArrayAdapter(this,scansInfo);
+			lv.setAdapter(scansInfoAdapter);
+		}
+	}
 	public void addScan(ScanObject scanInfo)
 	{ 
 		scansInfoAdapter.add(scanInfo);

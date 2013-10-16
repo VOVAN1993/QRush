@@ -2,7 +2,12 @@ package ru.qrushtabs.app.quests;
 
 import java.util.ArrayList;
 
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+
+import ru.qrushtabs.app.GoogleConsts;
 import ru.qrushtabs.app.MyVungleActivity;
+import ru.qrushtabs.app.QrushTabsApp;
 import ru.qrushtabs.app.R;
 import ru.qrushtabs.app.ScanBoxFieldView;
 import ru.qrushtabs.app.R.id;
@@ -39,6 +44,10 @@ public class QuestsActivity extends MyVungleActivity
 	@Override
 	public void onResume()
 	{
+	 
+			QrushTabsApp.getGaTracker().set(Fields.SCREEN_NAME, "Ratings Screen");
+			QrushTabsApp.getGaTracker().send(MapBuilder.createAppView().build());
+		 
 		super.onResume();
 		if(!ServerAPI.isOnline() || ServerAPI.offlineMod)
 		{
@@ -67,11 +76,22 @@ public class QuestsActivity extends MyVungleActivity
 						
 						quests.get(i).state = QuestObject.COMPLETED;
 						ProfileInfo.newsChanged = true;
+						ProfileInfo.profileChanged = true;
+						ProfileInfo.addMoneyCount(Integer.valueOf(quests.get(i).prize));
+						
+						QrushTabsApp.getGaTracker().send(
+								MapBuilder.createEvent(GoogleConsts.QUEST_ACTION, // Event
+										// category
+										// (required)
+										GoogleConsts.COMPLETE, // Event action (required)
+										quests.get(i).name, // Event label
+										Long.valueOf(quests.get(i).prize)) // Event value
+										.build());
 						
 						BlackAlertDialog newFragment;
 						newFragment = new BlackAlertDialog();
 						 
-						newFragment.setLabelText("Љвест "+quests.get(i).name+" выплонен");
+						newFragment.setLabelText("Љвест "+quests.get(i).name+" выполнен");
 						newFragment.show(this.getSupportFragmentManager(),
 								"missiles");
 						newFragment.setDrawableBackground(this.getResources().getDrawable(R.drawable.black_alert_ok));

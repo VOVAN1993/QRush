@@ -14,8 +14,8 @@ public class PrizeObject {
 	 public Bitmap bitmap;
 	 public static PrizeObject parse(JSONObject o) throws NumberFormatException, JSONException{
 		 	PrizeObject rf = new PrizeObject();
- 	        rf.maxPrize = o.optString("code");
-  	        rf.isTwice = o.optString("time");
+ 	        rf.maxPrize = o.optString("maxPrize");
+  	        rf.isTwice = o.optString("isTwice");
   	        rf.prize = o.optString("prize");
  	        return rf;
 	    } 

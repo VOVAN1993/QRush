@@ -38,9 +38,10 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	private final int TWISTING_STATE = 1;
 	private final int STOPING_STATE = 2;
 	private final int END_STATE = 3;
-	private final int ORANGE_COLOR = 1;
-	private final int GREEN_COLOR = 0;
-
+	private final int ORANGE_COLOR = 0;
+	private final int GREEN_COLOR = 1;
+	
+	private boolean choosed = false;
 	private int currentState = OFF_STATE;
 
 	private int choosedColor = GREEN_COLOR;
@@ -120,13 +121,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	float currentPath = 0.0f;
 	float lastPath = 0.0f;
 
-	private Bitmap gameTitle;
-	private int gameTitleX;
-	private int gameTitleY;
-
-	private Bitmap coins;
-	private int coinsX;
-	private int coinsY;
+	 
 
 	private Paint textPaint;
 
@@ -174,19 +169,10 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 		mScreenHeight = display.getHeight();
 		mScreenWidth = display.getWidth();
 
-		gameTitle = BitmapFactory.decodeResource(getResources(),
-				R.drawable.gametitle);
-		gameTitleX = mScreenWidth / 2 - gameTitle.getWidth() / 2;
-		gameTitleY = 20;
-
-		coins = BitmapFactory.decodeResource(getResources(),
-				R.drawable.coins_icon);
-		coinsX = mScreenWidth / 2 - coins.getHeight();
-		coinsY = 20 + gameTitle.getHeight() / 2 - coins.getHeight() / 2
-				- gameTitle.getHeight() / 12;
+		 
 
 		rouletteX = mScreenWidth / 2 - roulette.getWidth() / 2;
-		rouletteY = mScreenHeight / 8 + gameTitle.getHeight();
+		rouletteY = mScreenHeight / 6 + 50;
 
 		roulArrowX = rouletteX + roulette.getWidth() / 2 - roulArrow.getWidth()
 				/ 2;
@@ -224,13 +210,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 
 		textPaint = new Paint();
 		textPaint.setTextAlign(Align.LEFT);
-		// Typeface tf =
-		// Typeface.createFromAsset(MainActivity.getInstance().getAssets(),
-		// "fonts/lobster.ttf");
-		// textPaint.setTypeface(tf);
-		textPaint.setTextSize(gameTitle.getHeight() - 16);
-		textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-		textPaint.setColor(0xffffffff);
+	 
 	}
 
 	public void setOnGameEndListener(OnGameEndListener l) {
@@ -257,8 +237,10 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 						choosedColor = GREEN_COLOR;
 					else
 						choosedColor = ORANGE_COLOR;
+					
+					rouletteColor = GREEN_COLOR;
 					currentState = TWISTING_STATE;
-
+					choosed = true;
 					currentTime = System.currentTimeMillis();
 					roulAngVel = roulAngPreVel;
 					Log.d(VIEW_LOG_TAG, "Twist");
@@ -274,8 +256,9 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 						choosedColor = ORANGE_COLOR;
 					else
 						choosedColor = GREEN_COLOR;
+					rouletteColor = ORANGE_COLOR;
 					currentState = TWISTING_STATE;
-
+					choosed = true;
 					currentTime = System.currentTimeMillis();
 					roulAngVel = roulAngPreVel;
 					Log.d(VIEW_LOG_TAG, "Twist");
@@ -343,6 +326,7 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 	public void resume() {
 
 		running = true;
+		choosed = false;
 		renderThread = new Thread(this);
 		renderThread.start();
 
@@ -426,27 +410,54 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 
 					if (roulAngVel < 0.0001) {
 						roulAngVel = 0;
-						 
-						// pause();
-						boolean r = ((int) ((currentRotation) / cellAngle) % 2) == choosedColor;
-						currentState = OFF_STATE;
 						audioPlayer.stop();
-						// if(r)
-						// {
-						// audioPlayer = MediaPlayer.create(getContext(),
-						// R.raw.win);
-						// }
-						// else
-						// {
-						// audioPlayer = MediaPlayer.create(getContext(),
-						// R.raw.fail);
-						// }
-						// audioPlayer.start();
-						this.onGameEndListener.onGameEnd(r);
+						// pause();
+ 						currentState = END_STATE;
+ 						
+						//this.onGameEndListener.onGameEnd(r);
 					}
 				}
 			}
 
+			if(currentState == END_STATE)
+			{
+				currentArrowRotation += roulArrowVel;
+				arrowRotateMatrix.preTranslate(0, 0);
+				arrowRotateMatrix.setRotate(currentArrowRotation, arrowCenterX,
+						arrowCenterY);
+				arrowRotateMatrix.postTranslate(roulArrowX, roulArrowY);
+				if (currentArrowRotation >= 0)
+				{
+					currentArrowRotation = 0;
+					//boolean r = ((int) ((currentRotation) / cellAngle) % 2) == choosedColor;
+					currentState = OFF_STATE;
+					
+					 if(isWin)
+					 {
+					 audioPlayer = MediaPlayer.create(getContext(),
+					 R.raw.win_gmae2);
+					 }
+					 else
+					 {
+					 audioPlayer = MediaPlayer.create(getContext(),
+					 R.raw.fail);
+					 }
+					 audioPlayer.start();
+					
+					// if(r)
+					// {
+					// audioPlayer = MediaPlayer.create(getContext(),
+					// R.raw.win);
+					// }
+					// else
+					// {
+					// audioPlayer = MediaPlayer.create(getContext(),
+					// R.raw.fail);
+					// }
+					// audioPlayer.start();
+					this.onGameEndListener.onGameEnd(isWin);
+				}
+			}
 			canvas.drawBitmap(roulette, rotateMatrix, antiAliasPaint);
 			canvas.drawBitmap(roulArrow, arrowRotateMatrix, antiAliasPaint);
 
@@ -455,17 +466,19 @@ public class RouletteRenderer extends GameRenderer implements Runnable {
 			} else {
 				canvas.drawBitmap(pushButtonOff, pushButtonX, pushButtonY, null);
 			}
-			if (currentState == TWISTING_STATE || currentState == STOPING_STATE) {
-				if (choosedColor == ORANGE_COLOR) {
-					canvas.drawBitmap(greenButtonNormal, greenButtonX,
-							greenButtonY, null);
-					canvas.drawBitmap(orangeButtonPressed, orangeButtonX,
-							orangeButtonY, alphaPaint);
-				} else {
+			if (currentState == TWISTING_STATE || currentState == STOPING_STATE || currentState == END_STATE || choosed) {
+				if (rouletteColor == ORANGE_COLOR) {
+					
+					
 					canvas.drawBitmap(greenButtonPressed, greenButtonX,
 							greenButtonY, alphaPaint);
 					canvas.drawBitmap(orangeButtonNormal, orangeButtonX,
 							orangeButtonY, null);
+				} else {
+					canvas.drawBitmap(greenButtonNormal, greenButtonX,
+							greenButtonY, null);
+					canvas.drawBitmap(orangeButtonPressed, orangeButtonX,
+							orangeButtonY, alphaPaint);
 				}
 			} else {
 				canvas.drawBitmap(greenButtonNormal, greenButtonX,

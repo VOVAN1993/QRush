@@ -79,8 +79,7 @@ public class Coin extends View {
 				}
 			}
 		
-			Log.d("coin","drawing");
-		canvas.drawBitmap(coin, x , y - currentFrame*2, null);
+ 		canvas.drawBitmap(coin, x , y - currentFrame*2, null);
 	}
 
 

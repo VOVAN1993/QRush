@@ -25,6 +25,7 @@ public class ScanBoxArrayAdapter extends ArrayAdapter<ScanObject> {
     public View getView(int position, View convertView, ViewGroup parent) {
     	ScanBoxFieldView rowView = new ScanBoxFieldView(context);
     	
+    	 
     	rowView.setScanInfo(values.get(position));
        // LayoutInflater inflater = (LayoutInflater) context
        //         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

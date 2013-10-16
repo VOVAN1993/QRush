@@ -7,10 +7,10 @@
     android:orientation="horizontal">
 
         <Button  android:id="@+id/title_left_button"
-            android:layout_width="25dp" 
-             android:layout_height="25dp"
+            android:layout_width="44dp" 
+             android:layout_height="44dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp" 
+            android:layout_marginLeft="5dp" 
              android:layout_centerVertical="true"
              android:background="@drawable/settingsbtn"
              android:textColor="#000000"/>
@@ -37,10 +37,10 @@
             android:singleLine="true" /> -->
             
         <Button  android:id="@+id/title_right_button"
-            android:layout_width="25dp" 
-             android:layout_height="25dp"
+            android:layout_width="44dp" 
+             android:layout_height="44dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp" 
+            android:layout_marginRight="5dp" 
              android:layout_centerVertical="true"
             android:background="@drawable/scanboxbtn"   
              android:textColor="#000000"/>

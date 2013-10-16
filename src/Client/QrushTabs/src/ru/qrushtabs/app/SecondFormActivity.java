@@ -31,6 +31,7 @@ import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SampleFileUpload;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -200,7 +201,7 @@ public class SecondFormActivity extends MyVungleActivity {
 											ProfileInfo.avatarFile.getName(),
 											"File Upload test Hydrangeas.jpg description");
 							Log.d("upload avatar", response);
-							ServerAPI.saveProfileInfo();
+							SharedPrefsAPI.saveProfileInfo();
 						}
 					}).start();
 				}
@@ -340,7 +341,7 @@ public class SecondFormActivity extends MyVungleActivity {
 					imageStream = getContentResolver().openInputStream(
 							selectedImage);
 					avatar = BitmapFactory.decodeStream(imageStream);
-					ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar_iv);
+					ImageView avatarView = (ImageView) findViewById(R.id.reg_avatar);
 					avatarView.setImageBitmap(BitmapCropper.pxcrop(avatar,
 							avatarView.getWidth(), avatarView.getWidth()));
 				} catch (FileNotFoundException e) {

@@ -13,9 +13,13 @@ import android.graphics.Bitmap;
 public class ScanObject 
 {
 	
-	 public static String SCAN = "scan";
-	 public static String RESCAN = "rescan";
-	 public static String QUEST = "quest";
+	 public final static String SCAN = "scan";
+	 public final static String RESCAN = "rescan";
+	 public final static String QUEST = "quest";
+	 
+	 public final static String SCAN_ACTION = "scan action";
+ 
+	 public final static String FAILED_SCAN = "failed scan";
 	
 	 public boolean scanned = false;
 	 public String username = "";

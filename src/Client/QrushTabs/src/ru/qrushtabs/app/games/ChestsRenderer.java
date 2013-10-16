@@ -31,16 +31,16 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 	private Chest chests[];
 	private int chestX;
 	private int chestY;
+	
+	private Bitmap table;
+	private int tableX;
+	private int tableY;
 
 	private int curChestsCount = 3;
 	private static ChestsRenderer instance;
-	private Bitmap gameTitle;
-	private int gameTitleX;
-	private int gameTitleY;
+	 
 
-	private Bitmap coins;
-	private int coinsX;
-	private int coinsY;
+	 
 
 	private Paint textPaint;
 	private OnGameEndListener onGameEndListener;
@@ -88,17 +88,10 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 		chestX = mScreenWidth / 2 - frames[0].getWidth() / 2
 				- frames[0].getWidth() - r;
 		chestY = mScreenHeight / 2 - frames[0].getHeight();
-		gameTitle = BitmapFactory.decodeResource(getResources(),
-				R.drawable.gametitle);
-		gameTitleX = mScreenWidth / 2 - gameTitle.getWidth() / 2;
-		gameTitleY = 20;
-
-		coins = BitmapFactory.decodeResource(getResources(),
-				R.drawable.coins_icon);
-		coinsX = mScreenWidth / 2 - coins.getHeight();
-		coinsY = 20 + gameTitle.getHeight() / 2 - coins.getHeight() / 2
-				- gameTitle.getHeight() / 12;
-
+		 
+		table = BitmapFactory.decodeResource(getResources(), R.drawable.table);
+		tableX = mScreenWidth / 2 - table.getWidth()/2;
+		
 		coin = new Coin(this.getContext());
 		smoke = new Smoke(this.getContext());
 
@@ -107,16 +100,13 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 			chests[i].setX(chestX + r + frames[0].getWidth() * i);
 			chests[i].setY(chestY);
 		}
-
+		tableY = chests[0].y + frames[0].getHeight();
 		textPaint = new Paint();
 		textPaint.setTextAlign(Align.LEFT);
 		// Typeface tf =
 		// Typeface.createFromAsset(MainActivity.getInstance().getAssets(),
 		// "fonts/lobster.ttf");
-		// textPaint.setTypeface(tf);
-		textPaint.setTextSize(gameTitle.getHeight() - 16);
-		textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-		textPaint.setColor(0xffffffff);
+	 
 
 		audioPlayer = MediaPlayer.create(ChestsRenderer.this.getContext(),
 				R.raw.chest_open);
@@ -188,6 +178,7 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 
 			if (!ft) {
 				LinearLayout a = ((LinearLayout) this.getParent());
+				 
 				Log.d("games",
 						"measuredHeight of gamesLayout "
 								+ a.getMeasuredHeight());
@@ -204,7 +195,7 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 				chests[i].draw(canvas, deltaTime);
 				if (chests[i].isOpened) {
 
-					if (i == 0) {
+					if (!isWin) {
 						smoke.draw(canvas, deltaTime);
 						if (smoke.isFlyed)
 							isEnd = true;
@@ -218,7 +209,7 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 
 				}
 			}
-			// canvas.drawBitmap(gameTitle, gameTitleX, gameTitleY, null);
+			 canvas.drawBitmap(table, tableX, tableY - displayOffset, null);
 			// canvas.drawBitmap(coins, coinsX - 20, coinsY, null);
 			// canvas.drawText(prize,gameTitleX+gameTitle.getWidth()/2 - 20 ,
 			// gameTitleY+gameTitle.getHeight()/2 + gameTitle.getHeight()/4 ,
@@ -228,7 +219,7 @@ public class ChestsRenderer extends GameRenderer implements Runnable {
 				if (isWin)
 					this.onGameEndListener.onGameEnd(true);
 				else
-					this.onGameEndListener.onGameEnd(true);
+					this.onGameEndListener.onGameEnd(false);
 			}
 
 		}

@@ -2,6 +2,9 @@ package ru.qrushtabs.app;
 
 import java.util.ArrayList;
 
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.QRLoading;
 import ru.qrushtabs.app.utils.SadSmile;
@@ -49,12 +52,15 @@ public class NewsActivity extends MyVungleActivity
 			else
 			{
 				newsContent = objResult;
+				
 				for(int i = 0;i<newsContent.size();i++)
 				{
 					if (ProfileInfo.haveScan(newsContent.get(i).code)) 
 					{
+						
 						newsContent.get(i).scanned = true;
 					}
+					 
 				}
 				cleanScans();
 				if(newsContent.size()>0)
@@ -77,12 +83,17 @@ public class NewsActivity extends MyVungleActivity
 	private void cleanScans()
 	{
 		Log.d("news", "cleanScans");
+		int all = 0;
 		for(int i = 0;i<newsContent.size();i++)
 		{
-			if (newsContent.get(i).scanned) 
+			if (newsContent.get(i).scanned || all>10) 
 			{
 				newsContent.remove(i);
 				i--;
+			}
+			else
+			{
+				all++;
 			}
 		}
 	}
@@ -92,8 +103,14 @@ public class NewsActivity extends MyVungleActivity
 		super.onResume();
 		if(ServerAPI.isOnline() && !ServerAPI.offlineMod)
 		{
+		 
+				QrushTabsApp.getGaTracker().set(Fields.SCREEN_NAME, "Rescans Screen");
+				QrushTabsApp.getGaTracker().send(MapBuilder.createAppView().build());
+			 
 			QRLoading.setLoading(this);
 			(new LoadRatingsTask()).execute();
+			
+			
  
 		}
 		else

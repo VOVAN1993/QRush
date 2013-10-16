@@ -1,4 +1,6 @@
 package ru.qrushtabs.app;
+import ru.qrushtabs.app.dialogs.OnDialogClickListener;
+
 import com.vungle.sdk.VunglePub;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
@@ -16,4 +18,5 @@ public class MyVungleActivity extends FragmentActivity
 		super.onPause();
 		//VunglePub.onPause();
 	}
+	OnDialogClickListener onDialogClick;
 }

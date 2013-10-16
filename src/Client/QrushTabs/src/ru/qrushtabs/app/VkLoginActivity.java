@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 
 import com.perm.kate.api.Api;
 import com.perm.kate.api.Auth;
@@ -83,7 +84,7 @@ public class VkLoginActivity extends MyVungleActivity {
                     ProfileInfo.signInType="vk";
                     Log.d("vk", "user_id "+ Long.parseLong(auth[1]));
                     
-                    ServerAPI.saveProfileInfo();
+                    SharedPrefsAPI.saveProfileInfo();
     		        
 //                  Intent intent = new Intent(this, RegistrationActivity.class);
 //        			finish();

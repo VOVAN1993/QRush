@@ -5,6 +5,7 @@ import ru.qrushtabs.app.mycamera.AvatarCameraActivity;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,51 +33,7 @@ import android.widget.TextView;
 public class ChangePassActivity extends MyVungleActivity 
 {
 	 
-//	OnClickListener onSignIn = new OnClickListener()
-//	{
-//
-//		@Override
-//		public void onClick(View arg0) {
-//			
-//			EditText ed = (EditText)RegistrationActivity.this.findViewById(R.id.signinAcc);
-//			ProfileInfo.userID = ed.getText().toString();
-//			ed = (EditText)RegistrationActivity.this.findViewById(R.id.signinPass);
-//			ProfileInfo.userPass = ed.getText().toString();
-//			(new CheckTask()).execute();
-//			 
-//			
-//		}
-//		
-//		
-//	};
-//	private class CheckTask extends AsyncTask<String,String,String> {
-//
-//		protected String doInBackground(String... args) {
-//			return ServerAPI.loadProfileInfo();
-//		}
-//
-//		protected void onPostExecute(String objResult) 
-//		{
-//
-//			if(objResult.equals("true"))
-//			{
-//			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-//			    tv.setText("Вы успешно вошли");
-//		        ServerAPI.saveProfileInfo();
-//		        
-//		        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
-//				finish();
-//				startActivity(intent);				 
-//			}
-//			else
-//			{
-//				TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
-//			    tv.setText("Не получилось войти");
-//			}
-//		
-//		}
-//
-//	}
+
 	 
 	private void alert(String message)
 	{
@@ -96,7 +53,7 @@ public class ChangePassActivity extends MyVungleActivity
 			oldPass=ed.getText().toString();
 			if(!ProfileInfo.userPass.equals(oldPass))
 			{
-				alert("Пароль не верен!");
+				alert("Старый пароль не верен!");
 				return;
 			}
  			ed = (EditText)ChangePassActivity.this.findViewById(R.id.new_pass_te);
@@ -122,16 +79,16 @@ public class ChangePassActivity extends MyVungleActivity
 			//ProfileInfo.username = ed.getText().toString();
 			
 			
-  			//(new SignUpTask()).execute();
+  			(new ChangePassTask()).execute(oldPass,newPass);
 			
 		}
 		
 	};
 	
-	private class SignUpTask extends AsyncTask<String,String,String> {
+	private class ChangePassTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
-			return ServerAPI.signUp();
+			return ServerAPI.changePass(args[0],args[1]);
 		}
 
 		protected void onPostExecute(String objResult) {
@@ -139,16 +96,15 @@ public class ChangePassActivity extends MyVungleActivity
  			if(objResult.equals("true"))
 			{
 			    TextView tv = (TextView)ChangePassActivity.this.findViewById(R.id.reportView);
-			    //tv.setText("Вы успешно зарегистрировались");
-		        ServerAPI.saveProfileInfo();
+			    tv.setText("Пароль поменялся");
+			    SharedPrefsAPI.saveProfileInfo();
 		        
-		        Intent intent = new Intent(ChangePassActivity.this, SecondFormActivity.class);
-				finish();
-				startActivity(intent);
+		         
 			}
 			else
 			{
 				TextView tv = (TextView)ChangePassActivity.this.findViewById(R.id.reportView);
+				tv.setText("Пароль не поменялся");
 			    tv.setText(objResult);
 			}
 		}
@@ -158,10 +114,18 @@ public class ChangePassActivity extends MyVungleActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.change_pass);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_empty);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_back);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		 
 	 
+        Button backButton = (Button) this.findViewById(R.id.header_back_btn);
+		backButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+
  
 		
 		Button btn = (Button)findViewById(R.id.change_pass_btn);

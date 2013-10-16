@@ -5,6 +5,7 @@ import ru.qrushtabs.app.mycamera.AvatarCameraActivity;
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -113,9 +114,9 @@ public class RegistrationActivity extends MyVungleActivity
 				alert("Все поля должны быть заплнены!");
 				return;
 			}
-			if(ed.getText().toString().length()<4 && ProfileInfo.signInType.equals("def"))
+			if(ed.getText().toString().length()<6 && ProfileInfo.signInType.equals("def"))
 			{
-				alert("Должно быть более трех символов в пароле");
+				alert("Должно быть более пяти символов в пароле");
 				return;
 			}	
 			ProfileInfo.userPass = ed.getText().toString();
@@ -132,8 +133,18 @@ public class RegistrationActivity extends MyVungleActivity
 			}	
 			ProfileInfo.username = ed.getText().toString();
 			
+			if(!ServerAPI.checkUser(ProfileInfo.username).equals("false"))
+			{
+				alert("Такой пользователь уже существует");
+				return;
+			}
 			
-  			//(new SignUpTask()).execute();
+			if(!ServerAPI.checkMail(ProfileInfo.mail).equals("false"))
+			{
+				alert("Пользователь с такой почтой уже существует");
+				return;
+			}
+  			//(new CheckTask()).execute(ProfileInfo.username,ProfileInfo.mail);
 			Intent intent = new Intent(RegistrationActivity.this, SecondFormActivity.class);
 			finish();
 			startActivity(intent);
@@ -142,7 +153,7 @@ public class RegistrationActivity extends MyVungleActivity
 		
 	};
 	
-	private class SignUpTask extends AsyncTask<String,String,String> {
+	private class CheckTask extends AsyncTask<String,String,String> {
 
 		protected String doInBackground(String... args) {
 			return ServerAPI.signUp();
@@ -154,7 +165,7 @@ public class RegistrationActivity extends MyVungleActivity
 			{
 			    TextView tv = (TextView)RegistrationActivity.this.findViewById(R.id.reportView);
 			    //tv.setText("Вы успешно зарегистрировались");
-		        ServerAPI.saveProfileInfo();
+			    SharedPrefsAPI.saveProfileInfo();
 		        
 		        Intent intent = new Intent(RegistrationActivity.this, SecondFormActivity.class);
 				finish();

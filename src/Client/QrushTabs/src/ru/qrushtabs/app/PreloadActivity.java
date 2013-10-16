@@ -3,11 +3,17 @@ package ru.qrushtabs.app;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.mopub.mobileads.MoPubView;
 import com.vungle.sdk.VunglePub;
 
 import ru.qrushtabs.app.profile.ProfileInfo;
 import ru.qrushtabs.app.utils.BitmapCropper;
 import ru.qrushtabs.app.utils.ServerAPI;
+import ru.qrushtabs.app.utils.SharedPrefsAPI;
 import ru.qrushtabs.app.utils.UserPhotosMap;
 import android.app.Activity;
 import android.content.Context;
@@ -27,51 +33,66 @@ import android.widget.ImageView;
 
 public class PreloadActivity extends MyVungleActivity {
 
+	//private MoPubView moPubView;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.preloader);
 		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		ProfileInfo.deviceID = tm.getDeviceId();
+//		moPubView = (MoPubView) findViewById(R.id.adview_prize);
+//	    moPubView.setAdUnitId("028e5e162f714c5d9c9224e2ccb3ebea");
+//	    moPubView.loadAd();
+		
+		
+		//ServerAPI.flushProfile();
 		if (ServerAPI.isOnline()) {
 			
-			VunglePub.init(getApplication(), "ru.qrushtabs.app");
+			//VunglePub.init(getApplication(), "ru.qrushtabs.app");
+			
 			// Log.d("http", "isOnline");
 			ServerAPI.offlineMod = false;
 
 			Intent intent = new Intent(this, InfoActivity.class);
 			startActivityForResult(intent, 1);
 
-			// Animation rotation = AnimationUtils.loadAnimation(this,
-			// R.anim.arrow_rotate_anim);
-			// ImageView myView = (ImageView)findViewById(R.id.preload_arrows);
-			// myView.startAnimation(rotation);
+//			 Animation rotation = AnimationUtils.loadAnimation(this,
+//			 R.anim.arrow_rotate_anim);
+//			 ImageView myView = (ImageView)findViewById(R.id.preload_arrows);
+//			 myView.startAnimation(rotation);
 
-			// if(auth())
-			// {
-			// (new CheckTask()).execute();
-			// }
-			// else
-			// {
-			// Intent intent = new Intent(PreloadActivity.this,
-			// SignInActivity.class);
-			// finish();
-			// startActivity(intent);
-			// }
+//			 if(auth())
+//			 {
+//			 (new CheckTask()).execute();
+//			 }
+//			 else
+//			 {
+//			 Intent intent1 = new Intent(PreloadActivity.this,
+//			 SignInActivity.class);
+//			 finish();
+//			 startActivity(intent1);
+//			 }
 
 		} else {
-			Log.d("http", "isNotOnline");
+//			Log.d("http", "isNotOnline");
 			ServerAPI.offlineMod = true;
 			Intent intent = new Intent(this, InfoActivity.class);
 			startActivityForResult(intent, 1);
-			// if(auth())
-			// {
-			// Intent intent = new Intent(this, MainActivity.class);
-			// finish();
-			// startActivity(intent);
-			// }
+//			 if(auth())
+//			 {
+//			 Intent intent1 = new Intent(this, MainActivity.class);
+//			 finish();
+//			 startActivity(intent1);
+//			 }
 		}
 	}
 
+	@Override
+	public void onDestroy()
+	{
+		// moPubView.destroy();
+		//mInterstitial.destroy();
+	    super.onDestroy();
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent imageReturnedIntent) {
@@ -83,7 +104,7 @@ public class PreloadActivity extends MyVungleActivity {
 		myView.startAnimation(rotation);
 		
 		if (ServerAPI.isOnline()) {
-			if (auth()) {
+			if (SharedPrefsAPI.auth()) {
 				(new CheckTask()).execute();
 			} else {
 				Intent intent = new Intent(PreloadActivity.this,
@@ -95,7 +116,7 @@ public class PreloadActivity extends MyVungleActivity {
 		} else {
 			Log.d("http", "isNotOnline");
 			ServerAPI.offlineMod = true;
-			if (auth()) {
+			if (SharedPrefsAPI.auth()) {
 				Intent intent = new Intent(this, MainActivity.class);
 				finish();
 				startActivity(intent);
@@ -109,35 +130,7 @@ public class PreloadActivity extends MyVungleActivity {
 
 	}
 
-	private boolean auth() {
-
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
-		ProfileInfo.username = prefs.getString("userID", "Анонимус");
-		ProfileInfo.userToken = prefs.getString("userToken", null);
-		ProfileInfo.userVKID = prefs.getString("userVKID", null);
-		ProfileInfo.signInType = prefs.getString("loginType", "def");
-		ProfileInfo.userVKToken = prefs.getString("userVKToken", null);
-		ProfileInfo.userPass = prefs.getString("userPass", null);
-
-		ProfileInfo.setScansCount(prefs.getInt("scansCount", 0));
-		ProfileInfo.setMoneyCount(prefs.getInt("moneyCount", 0));
-		ProfileInfo.setRescansCount(prefs.getInt("rescansCount", 0));
-
-		ProfileInfo.avatarPath = prefs.getString("avatarPath", "0");
-		ProfileInfo.sex = prefs.getString("sex", "М");
-		ProfileInfo.mail = prefs.getString("email", "mail@mail.ru");
-
-		ProfileInfo.city = prefs.getString("city", "Репрежевальск");
-
-		if (ProfileInfo.username != null) {
-			Log.d("http", "onAuth yes");
-			return true;
-		} else {
-			Log.d("http", "onAuth no");
-			return false;
-		}
-	}
+	
 
 	private class CheckTask extends AsyncTask<String, String, String> {
 

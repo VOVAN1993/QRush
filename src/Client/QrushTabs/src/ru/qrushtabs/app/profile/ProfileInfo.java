@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Bitmap;
+import ru.qrushtabs.app.ScanObject;
 import ru.qrushtabs.app.badges.Badges;
 import ru.qrushtabs.app.friends.FriendField;
 import ru.qrushtabs.app.utils.OnInfoLoadListener;
@@ -13,25 +14,26 @@ public class ProfileInfo {
 
 	public static final int maxPhotoWidth = 200;
 	public static final int maxPhotoHeight = 200;
-	
+	public static boolean needToWatchAd = false;
 	private static int scansCount = 0;
 	private static int rescansCount = 0;
 	private static int moneyCount = 0 ; 
+	private static int allMoneyCount = 0 ; 
 	
 	private static boolean loaded = true;
 	public static boolean newsChanged = true;
 	public static String sex = "M";
-	public static String mail = "mail@mail.com";
-	public static String signInType = "def";
-	public static String username = "0";
-	public static String userPass = "0";
-	public static String userToken = "0";
-	public static String userVKID = "0";
- 	public static String userVKToken = "0";
- 	public static String deviceID = "0";
- 	public static String birthday = "0";
+	public static String mail = null;
+	public static String signInType = null;
+	public static String username = null;
+	public static String userPass = null;
+	public static String userToken = null;
+	public static String userVKID = null;
+ 	public static String userVKToken = null;
+ 	public static String deviceID = null;
+ 	public static String birthday = null;
  	public static Bitmap avatarBitmap = null;
- 	public static String avatarPath = "0";
+ 	public static String avatarPath = null;
  	public static File avatarFile = null;
  	
  	public static List<String> scansList = new ArrayList<String>();
@@ -46,6 +48,8 @@ public class ProfileInfo {
  	
  	public static boolean haveScan(String scan)
  	{
+ 		if(scansList==null)
+ 			return false;
  		for(int i = 0;i<scansList.size();i++)
  			if(scansList.get(i).equals(scan))
  				return true;
@@ -60,7 +64,14 @@ public class ProfileInfo {
  				return false;
  		return true;
  	}
- 	
+ 	public static void syncScans(ArrayList<ScanObject> scans)
+ 	{
+ 		scansList.clear();
+ 		for(int i = 0;i<scans.size();i++)
+ 		{
+ 			scansList.add(scans.get(i).code);
+ 		}
+ 	}
  	public static void removeFriend(String name)
  	{
  		for(int i = 0;i<friendsList.length;i++)
@@ -91,10 +102,13 @@ public class ProfileInfo {
 		else
 			return 0;
 	}
-	public static void addScan(String scanInfo)
+	public static void addScan(String scanInfo, String type)
 	{
 		newsChanged = true;
-		ProfileInfo.scansCount++;
+		if(type.equals(ScanObject.SCAN))
+			ProfileInfo.scansCount++;
+		else
+			ProfileInfo.rescansCount++;
 		scansList.add(scanInfo);
 		Badges.checkBadges();
 		//добавление на сервер и в склайт
@@ -117,10 +131,14 @@ public class ProfileInfo {
 	public static void addMoneyCount(int moneyCount)
 	{
 		ProfileInfo.moneyCount += moneyCount;
+		ProfileInfo.allMoneyCount = Math.max(moneyCount, allMoneyCount);
 		Badges.checkBadges();
 		//добавление на сервер и в склайт
 	}
-	
+	public static void setTotalSum(int total)
+	{
+		allMoneyCount = total;
+	}
 	public static void saveInfo(OnInfoLoadListener l)
 	{
 		

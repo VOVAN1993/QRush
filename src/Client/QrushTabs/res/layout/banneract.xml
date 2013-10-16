@@ -8,4 +8,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/banner" />
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_x="28dp"
+        android:layout_y="166dp" />
+
 </AbsoluteLayout>

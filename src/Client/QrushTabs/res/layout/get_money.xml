@@ -1,38 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray" >
-    
-    <FrameLayout 
+    android:background="@color/gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/money_place_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
-        <ImageView 
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/gradient_shadow" >
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/money_place"/>
-    </FrameLayout>
-    
-    <Button 
-        android:id="@+id/get_money_to_phone_btn"
-        android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/to_phonebtn"
-        android:text="Вывести на телефон"/>
-    
-    <Button 
-        android:id="@+id/get_money_to_ym_btn"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/to_ymbtn"
-        android:layout_gravity="center_horizontal"
-        android:text="Вывести на Яндекс.Деньги"/>
-    
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/coins_icon" />
+
+            <TextView
+                android:id="@+id/money_place_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:text="230"
+                android:textColor="@color/black"
+                android:textSize="52sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/chest_coin" />
+
+            <TextView
+                android:id="@+id/phone_money_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                
+                android:enabled="true"
+                android:text="100 "
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text=" = 1 рубль"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/get_money_to_phone_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/to_phonebtn"
+        android:text="Вывести на телефон" />
+
+    <Button
+        android:id="@+id/get_money_to_ym_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/get_money_to_phone_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/to_ymbtn"
+        android:text="Вывести на Яндекс.Деньги" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/to_ym_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/get_money_to_ym_btn"
+        android:layout_below="@id/money_place_rl"
+        android:layout_margin="10dp"
+        android:background="#bee8a4" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Введите номер кошелька"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/to_ym_money_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/to_ym_money_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/entermoney_img" />
+
+           
+            <EditText
+                android:id="@+id/ym_money_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:background="@color/white"
+                android:hint="1111222233334444"
+                 android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:textSize="18sp" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ym_number_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/ym_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/yandexmoney_img" />
+
+           
+            <EditText
+                android:id="@+id/ym_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:background="@color/white"
+                android:hint="1111222233334444"
+                 android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:textSize="18sp" >
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/greenbtn"
+            android:text="Вывести" />
+    </RelativeLayout>
+    
+     <RelativeLayout
+        android:id="@+id/to_phone_rl"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/get_money_to_ym_btn"
+        android:layout_below="@id/money_place_rl"
+        android:layout_margin="10dp"
+        android:background="#bee8a4" >
+
+        <TextView
+            android:id="@+id/enter_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Введите номер телефона"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+           <LinearLayout
+            android:id="@+id/phone_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/enter_phone_tv"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/phone_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone_img" />
+
+            <EditText
+                 
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                
+                android:inputType="textCapWords"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="8"
+                android:enabled="false"
+                android:textSize="18sp" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/phone_code_et"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:background="@color/white"
+                android:hint="911"
+                android:maxLength="3"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="18sp" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:background="@color/white"
+                android:hint="9998866"
+                android:maxLength="7"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:textSize="18sp" >
+            </EditText>
+        </LinearLayout>
+       
+        <TextView
+            android:id="@+id/enter_money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:layout_below="@id/phone_ll"
+            android:text="Введите сумму"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+     
+        <LinearLayout
+            android:id="@+id/phone_money_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/enter_money_tv"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/phone_money_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/entermoney_img" />
+
+           
+            <EditText
+                android:id="@+id/phone_money_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:background="@color/white"
+                android:inputType="phone"
+                android:hint="100"
+                 android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:textSize="18sp" >
+            </EditText>
+        </LinearLayout>
+        
+       
+
+        <Button
+            android:id="@+id/get_money_to_phone_btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/greenbtn"
+            android:text="Вывести" />
+    </RelativeLayout>
+
+</RelativeLayout>

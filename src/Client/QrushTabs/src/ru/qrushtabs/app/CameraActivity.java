@@ -65,6 +65,7 @@ public class CameraActivity extends MyVungleActivity {
 		}
 	};
 
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
  		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -86,8 +87,9 @@ public class CameraActivity extends MyVungleActivity {
 
 	public void onPause() {
 		Log.d(TAG, "MainActivity: onPause()");
-		super.onPause();
 		stopScan();
+		super.onPause();
+		
 	}
 
 	@Override
@@ -137,8 +139,9 @@ public class CameraActivity extends MyVungleActivity {
 		if (camIsNotBusy) {
 
 			mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
+			
 			preview.addView(mPreview);
-			aimImage.bringToFront();
+			
 			Log.d(TAG, "InitCamera");
 			camIsNotBusy = false;
 			mCamera = getCameraInstance();
@@ -147,6 +150,7 @@ public class CameraActivity extends MyVungleActivity {
 			mCamera.startPreview();
 			previewing = true;
 
+			aimImage.bringToFront();
 		}
 	}
 
